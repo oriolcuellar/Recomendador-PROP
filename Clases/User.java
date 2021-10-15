@@ -1,4 +1,4 @@
-public class User {
+public class User { 
     //atributes
     private String userID;
     private String password;
@@ -14,13 +14,13 @@ public class User {
         return admin;
     }
     //setters
-    public String setUserID(String userID) {
+    public void setUserID(String userID) {
         this.userID = userID;
     }
-    public String setPassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
-    public boolean setAdmin(boolean admin) {
+    public void setAdmin(boolean admin) {
         this.admin = admin;
     }
     //constructores
