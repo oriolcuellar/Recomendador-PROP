@@ -14,4 +14,5 @@ public class Atribute {
         this.name = name;
         this.type = type;
     }
+    public Atribute() {}
 }
