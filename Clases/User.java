@@ -2,7 +2,7 @@ public class User {
     //atributes
     private String userID;
     private String password;
-    private boolean admin;
+    private TipusRol Rol;
     //getters
     public String getUserID() {
         return userID;
@@ -10,9 +10,9 @@ public class User {
     public String getPassword() {
         return password;
     }
-    public boolean getAdmin() {
-        return admin;
-    }
+    public TipusRol getRol() { return Rol; }
+
+
     //setters
     public void setUserID(String userID) {
         this.userID = userID;
@@ -20,14 +20,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
-    }
+    public void setRol(TipusRol rol) { Rol = rol; }
+
     //constructores
-    public User(String userID, String password, boolean admin) {
+    public User(String userID, String password, TipusRol Rol) {
         this.userID = userID;
         this.password = password;
-        this.admin = admin;
+        this.Rol = Rol;
     }
     public User() {}
 }
