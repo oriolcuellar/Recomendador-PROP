@@ -6,6 +6,8 @@ public class Item_Usat {
     private Item ItemUsat;
     private User Usuari;
 
+    //Creadores
+
     public Item_Usat(Item  ItemUsat, User Usuari) {
         this.ItemUsat = ItemUsat;
         this.Usuari = Usuari;
@@ -16,20 +18,23 @@ public class Item_Usat {
         Valoracio = 0;
     }
 
+    //Getters
+
     public int getQuality() {
         return Valoracio;
     }
-
     public User getUsuari() {
         return Usuari;
     }
     public Item getItemUsat() {
         return ItemUsat;
     }
+
+    //Setters
+
     public void setQuality(int Valor) {
         Valoracio = Valor;
     }
-
     public void setUsuari(User Usuari) {
         this.Usuari = Usuari;
     }
