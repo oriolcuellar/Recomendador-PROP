@@ -7,7 +7,7 @@ public class ItemRecomanat {
     private User usuari;
     //getters
     public int getQuality() {
-        return quality;
+        return qualitat;
     }
     public ArrayList<Item> getItemsRecomanats() {
         return itemsRecomanats;
@@ -16,8 +16,8 @@ public class ItemRecomanat {
         return usuari;
     }
     //setters
-    public void setQuality(int quality) {
-        this.quality = quality;
+    public void setQualitat(int quality) {
+        this.qualitat = quality;
     }
     public void setItemsRecomanats(ArrayList<Item> itemsRecomanats) {
         this.itemsRecomanats = itemsRecomanats;
