@@ -1,8 +1,11 @@
-public class User { 
+import java.util.ArrayList;
+
+public class User {
     //atributes
     private String userID;
     private String password;
     private TipusRol Rol;
+    private ArrayList<Item_Usat> itemsUsats;
     //getters
     public String getUserID() {
         return userID;
@@ -11,7 +14,7 @@ public class User {
         return password;
     }
     public TipusRol getRol() { return Rol; }
-
+    public ArrayList<Item_Usat> getItemsUsats() { return itemsUsats; }
 
     //setters
     public void setUserID(String userID) {
@@ -21,6 +24,10 @@ public class User {
         this.password = password;
     }
     public void setRol(TipusRol rol) { Rol = rol; }
+    public void setItemsUsats(ArrayList<Item_Usat> usats) { itemsUsats = usats; }
+
+    //modifiers
+    public void addItemUsat(Item_Usat usat) { itemsUsats.add(usat); }
 
     //constructores
     public User(String userID, String password, TipusRol Rol) {
