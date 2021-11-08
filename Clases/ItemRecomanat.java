@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class ItemRecomanat {
     //atributes
     private int qualitat;
-    private ArrayList<Item> itemsRecomanats;
+    private ArrayList<Item> itemsRecomanats; //pair item valoracion para valorar individualmente
     private User usuari;
     //getters
     public int getQuality() {
