@@ -9,6 +9,7 @@ public class CtrlDomini {
     private User actualUser;
     private static CtrlDomini   dominiSingelton;
     private Vector <User> usersList;
+    private Vector <User> valorationsList;
 
 //constructor
     public static CtrlDomini getInstance(){
@@ -17,6 +18,15 @@ public class CtrlDomini {
             dominiSingelton = new CtrlDomini() {};
         }
         return dominiSingelton;
+    }
+
+    private void iniCtrlDomini()
+    {
+        usersList = new Vector<>();
+    }
+
+    public CtrlDomini(){
+        iniCtrlDomini();
     }
 
     public static void register(){}
