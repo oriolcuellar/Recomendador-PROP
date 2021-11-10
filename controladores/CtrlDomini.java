@@ -1,9 +1,22 @@
 
-
+@Author Oriol Cuellar
 
 public class CtrlDomini {
 
     public CtrlDomini() {
+    }
+// Atributes
+    private User actualUser;
+    private static CtrlDomini   dominiSingelton;
+    private Vector <User> usersList;
+
+//constructor
+    public static CtrlDomini getInstance(){
+        if (dominiSingelton == null)
+        {
+            dominiSingelton = new CtrlDomini() {};
+        }
+        return dominiSingelton;
     }
 
     public static void register(){}
@@ -18,8 +31,8 @@ public class CtrlDomini {
     public static void getValoredItems(){}
     public static void selectItem(){}
     public static void valoreItem(){}
-    public static void save(){} //capa de dades??
-    public static void closee(){} // dan error
+    public static void save(){} /
+    public static void exit(){}
     public static void createItem(){}
     public static void deleteItem(){}
     public static void modItem(){}
