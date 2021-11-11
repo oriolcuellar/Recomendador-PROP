@@ -4,15 +4,15 @@ public class DriverKmeans {
 
     public DriverKmeans() {}
 
-    public void readRatingsExecuteKmeans() {
+    public void readRatingsExecuteKmeans(int k) {
         Usuarios u = new Usuarios();
         LectorCSV lectorCSV = new LectorCSV(u);
         lectorCSV.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
 
         ArrayList<User> us = u.getUsuarios();
 
-        Kmeans k = new Kmeans(6, us);
-        k.printAllClusters();
+        Kmeans kmeans = new Kmeans(k, us);
+        kmeans.printAllClusters();
     }
     /*
     public void readCSVRatings() {
