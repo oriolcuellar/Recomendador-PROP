@@ -6,7 +6,7 @@ public class ItemRecomanat {
     private ArrayList<Item> itemsRecomanats; //pair item valoracion para valorar individualmente
     private User usuari;
     //getters
-    public int getQuality() {
+    public int getQualitat() {
         return qualitat;
     }
     public ArrayList<Item> getItemsRecomanats() {
@@ -16,8 +16,8 @@ public class ItemRecomanat {
         return usuari;
     }
     //setters
-    public void setQualitat(int quality) {
-        this.qualitat = quality;
+    public void setQualitat(int qualitat) {
+        this.qualitat = qualitat;
     }
     public void setItemsRecomanats(ArrayList<Item> itemsRecomanats) {
         this.itemsRecomanats = itemsRecomanats;
