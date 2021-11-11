@@ -1,3 +1,4 @@
+
 public class Atribute {
     //atributes
     private String name;

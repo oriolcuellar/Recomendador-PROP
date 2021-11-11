@@ -1,5 +1,12 @@
-import ./
-@Author Oriol Cuellar
+
+//@Author Oriol Cuellar
+
+package src.domini.model;
+
+import domini.model.*;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 public class CtrlDomini {
 
@@ -10,9 +17,9 @@ public class CtrlDomini {
 
     private User actualUser;
     private Item selectedItem;
-    private Map <String, User> usersList;
-    private map <String, ItemUsat> ratesList;
-    private ArrayList <Item> itemList;
+    private Map <int, User> usersList;
+    private ArrayList <ItemUsat> ratesList;
+    private ArrayList<Item> itemList;
 
 //constructor
     public static CtrlDomini getInstance(){
@@ -26,7 +33,7 @@ public class CtrlDomini {
     private void iniCtrlDomini(){
         usersList = new HashMap<>();
         actualUser = null;
-        ratesList = new HashMap<>();
+        ratesList = new ArrayList<>();
         itemList = new ArrayList<>();
     }
 
@@ -36,10 +43,10 @@ public class CtrlDomini {
 
 //Profile controller
 
-    public static void register(string userId, string password){
+    public static void register(int userId, String password){
         //pre: Usuari actiu null, userId not exists, userId and password not null
         //post: es crea un usuari i es posa d'usuari actiu.
-        if (usersList.containsKey(userId) or actualUser!=null or userId==null or userId=="" or password==null or password==""){
+        if (usersList.containsKey(userId) || actualUser!=null || userId==null || password==null || password==""){
             System.out.println("\n error al registrar \n");
         }
         else{
@@ -48,7 +55,7 @@ public class CtrlDomini {
             usersList.put(userId, actualUser);
         }
     }
-    public static void login(string userId, string password){
+    public static void login(int userId, String password){
         //pre: Usuari actiu null, User amb userId i password existeix
         //post: es crea un usuari i es posa d'usuari actiu.
         if (actualUser!=null) {
@@ -94,7 +101,7 @@ public class CtrlDomini {
     public static void rateItem(){}
     public static void showAllItems(){}
     public static void ShowRatedItems(){}
-    public static void save(){} /
+    public static void save(){}
     public static void exit(){}
     public static void createItem(){}
     public static void deleteItem(){}
@@ -102,8 +109,13 @@ public class CtrlDomini {
     public static void loadItems(){
 
     }//to do------------------------------------
-    public static void loadUsers(){}//to do------------------------------------
-    public static void loadRates(){}//to do------------------------------------
+    public static void loadUsers(){
+
+    }//to do------------------------------------
+    public static void loadRates(){
+        LectorCSV reader= new LectorCSV(usersList);
+        reader.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
+    }//to do------------------------------------
     public static void deleteUser(){}
     public static void createUser(){}
 
