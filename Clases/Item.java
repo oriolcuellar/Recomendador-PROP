@@ -15,12 +15,16 @@ public class Item {
     public ArrayList getValors() {
         return valors;
     }
+    //setters
+    public void setID(int ID) {
+        this.ID = ID;
+    }
     //constructores
     public Item(int ID, TipusItem tipus, ArrayList valors) {
         this.ID = ID;
         this.tipus= tipus;
         this.valors = valors;
     }
+    public Item(int ID) {this.ID = ID;}
     public Item(){}
 }
-

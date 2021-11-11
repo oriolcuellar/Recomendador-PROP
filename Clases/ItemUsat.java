@@ -14,6 +14,11 @@ public class ItemUsat {
         this.valoracio = valoracio;
     }
 
+    public ItemUsat(Item item, float valoracio) {
+        this.item = item;
+        this.valoracio = valoracio;
+    }
+
     public ItemUsat() {
         valoracio = -1;
     }

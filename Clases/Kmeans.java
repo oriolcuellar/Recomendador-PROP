@@ -2,13 +2,19 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Kmeans {
+
+    // Atributes
+    /* Lista de todos los clústers*/
     private ArrayList<Cluster> clusters;
+    /* Lista de todos los usuarios */
     private ArrayList<User> users;
     private int k;
 
     // Auxiliares
 
-    // Asignar k centroids random sin que se repitan
+    /*
+    Asignar k centroids random sin que se repitan
+     */
     private void assignKCentroids(){
         Random myRandom = new Random();
         ArrayList<User> nuevoscentroids = new ArrayList<User>();
@@ -18,32 +24,38 @@ public class Kmeans {
             User aux;
             Cluster c = new Cluster();
             do{
-                indiceNuevocentroid = myRandom.nextInt(users.size() - 1);
+                indiceNuevocentroid = myRandom.nextInt(users.size());
                 aux = users.get(indiceNuevocentroid);
             }while (nuevoscentroids.contains(aux));
             c.setCentroid(aux);
             c.addUser(aux);
             clusters.add(c);
             nuevoscentroids.add(aux);
+            System.out.println("CENTROIDE INICIAL: " + clusters.get(i).getcentroid().getUserID());
         }
     }
-
-    private void asignaUsuarioACluster(User usuario) {
+    /*
+        Asigna un usuario al centroide de menos distancia
+     */
+    private void asignUserToCluster(User user) {
         float dMin = Float.POSITIVE_INFINITY;
         int iMin = 0;
         for(int i = 0; i < k; ++i) {
             User centroidActual = clusters.get(i).getcentroid();
-            float distanciaActual = usuario.calculaDistancias(centroidActual);
+            float distanciaActual = user.calculateDistances(centroidActual);
             if(distanciaActual < dMin) {
                 dMin = distanciaActual;
                 iMin = i;
             }
         }
-        usuario.setNumCluster(iMin);
-        clusters.get(iMin).addUser(usuario);
+        user.setNumCluster(iMin);
+        clusters.get(iMin).addUser(user);
         clusters.get(iMin).recalculateCentroid();
     }
 
+    /*
+        Elimina un usuario del cluster al que pertenece
+     */
     private void deleteUserFromCluster(User user) {
         int indexCluster = user.getNumCluster();
         clusters.get(indexCluster).deleteUser(user);
@@ -52,22 +64,33 @@ public class Kmeans {
     }
 
     // Constructora
-    public Kmeans(int k) {
+    /*
+        Crea un conjunto con k clústers
+     */
+    public Kmeans(int k, ArrayList<User> u) {
         this.k = k;
         clusters = new ArrayList<Cluster>();
-        Usuarios u = new Usuarios();
-        users = u.getUsuarios();
+        users = u;
         // Asignar k centroids random sin que se repitan
         assignKCentroids();
         // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
         for(int i  = 0; i < users.size(); ++i) {
-            asignaUsuarioACluster(users.get(i));
+            asignUserToCluster(users.get(i));
         }
     }
 
     // Functions
+
     public void newValoration(User user) {
         deleteUserFromCluster(user);
-        asignaUsuarioACluster(user);
+        asignUserToCluster(user);
+    }
+
+    // PRINTS
+
+    public void printAllClusters() {
+        for(int i = 0; i < clusters.size(); ++i) {
+            clusters.get(i).printCluster();
+        }
     }
 }

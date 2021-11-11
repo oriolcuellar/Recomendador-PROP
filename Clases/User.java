@@ -1,15 +1,17 @@
 import java.util.ArrayList;
 
+import static java.lang.Math.sqrt;
+
 public class User {
     //atributes
-    private String userID;
+    private int userID;
     private String password;
     private TipusRol Rol;
     private ArrayList<ItemUsat> itemsUsats;
     private int numCluster;
 
     //getters
-    public String getUserID() {
+    public int getUserID() {
         return userID;
     }
     public String getPassword() {
@@ -22,7 +24,7 @@ public class User {
     }
 
     //setters
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
     public void setPassword(String password) {
@@ -38,19 +40,28 @@ public class User {
     public void addItemUsat(ItemUsat usat) { itemsUsats.add(usat); }
 
     //constructores
-    public User(String userID, String password, TipusRol Rol) {
+    public User(int userID, String password, TipusRol Rol) {
         this.userID = userID;
         this.password = password;
         this.Rol = Rol;
+        this.itemsUsats = new ArrayList<ItemUsat>();
         this.numCluster = -1;
     }
     public User() {
+        this.itemsUsats = new ArrayList<ItemUsat>();
         this.numCluster = -1;
     }
 
     // Functions
 
-    public float calculaDistancias(User usuario2) {
+    public void addItemUsat(int itemID, float valoration) {
+        Item i = new Item(itemID);
+        ItemUsat usedItem = new ItemUsat(i, valoration);
+        //falta comprobar que no se repitan
+        itemsUsats.add(usedItem);
+    }
+
+    public float calculateDistances(User usuario2) {
         ArrayList<ItemUsat> valoracionesUsuario2 = usuario2.getItemsUsats();
         float sumaTotal = 0;
 
@@ -66,7 +77,6 @@ public class User {
                 }
             }
         }
-        return sumaTotal;
+        return (float) sqrt(sumaTotal);
     }
 }
-
