@@ -8,19 +8,21 @@ import java.util.Collections;
 public class KND {
 
     private int k;
-    private int pos;
-    private Item item;
+    private ArrayList<int> pos;
+    private ArrayList<Item> items;
     private ArrayList<Item> itemsUsats;
     private Conjunt_Items C_Items;
     private K_Neareast_Neightbour K_NN;
 
-    public KND(int k, Item a, ArrayList<Item> itemsUsats) {
+    public KND(int k, ArrayList<Item> a, ArrayList<Item> itemsUsats) {
         this.k = k;
         this.itemsUsats = itemsUsats;
         item = a;
-        itemsUsats.add(a);
+        for (int i = 0; i < a.size(); ++i)
+            itemsUsats.add(a.get(i));
         C_Items = new Conjunt_Items(itemsUsats);
-        pos = C_Items.get_posiion(a);
+        for (int i = 0; i < a.size(); ++i)
+            pos.add(i, C_Items.get_posiion(a.get(i)));
         K_NN = new K_Neareast_Neightbour(C_Items);
     }
 
