@@ -1,3 +1,6 @@
+package src.domini.model;
+
+import src.domini.model.*;
 import java.util.ArrayList;
 import static java.lang.Integer.max;
 import static java.lang.Integer.min;

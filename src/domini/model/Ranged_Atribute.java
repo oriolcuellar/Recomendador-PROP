@@ -1,3 +1,6 @@
+package src.domini.model;
+
+import src.domini.model.*;
 public class Ranged_Atribute  extends Atribute{
 
     private Double lower, upper;

@@ -1,9 +1,12 @@
+package src.domini.model;
+
+import src.domini.model.*;
 import java.io.*;
 import java.util.Map;
 
 // @Author Marc Camarillas, Roberto Amat
 public class LectorCSV2 {
-
+/*
     //private Usuarios u;
     private Map<int, User> usersList;
 
@@ -52,5 +55,5 @@ public class LectorCSV2 {
                 }
             }
         }
-    }
+    }*/
 }

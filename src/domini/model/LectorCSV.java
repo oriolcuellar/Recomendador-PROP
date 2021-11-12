@@ -1,3 +1,6 @@
+package src.domini.model;
+
+import src.domini.model.*;
 import java.io.*;
 
 // @Author Marc Camarillas, Roberto Amat

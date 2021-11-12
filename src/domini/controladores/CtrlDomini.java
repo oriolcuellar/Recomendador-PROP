@@ -1,15 +1,13 @@
 
 //@Author Oriol Cuellar
 
-package src.domini.model;
-
-import domini.model.*;
+package src.domini.controladores;
 
 import java.util.ArrayList;
 import java.util.Map;
 
 public class CtrlDomini {
-
+/*
 
 // Atributes
 
@@ -118,7 +116,7 @@ public class CtrlDomini {
     }//to do------------------------------------
     public static void deleteUser(){}
     public static void createUser(){}
-
+*/
 }
 //driver stubs por cada clase
 //juegos de prueba
