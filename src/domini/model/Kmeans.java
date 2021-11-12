@@ -3,8 +3,9 @@ package src.domini.model;
 import src.domini.model.*;
 import java.util.ArrayList;
 import java.util.Random;
-import src.domini.model.*;
 
+
+// @Author Roberto Amat, Marc Camarillas
 public class Kmeans {
     // Atributes
     /* Lista de todos los clústers*/

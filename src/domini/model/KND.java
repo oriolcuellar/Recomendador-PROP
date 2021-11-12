@@ -8,7 +8,7 @@ import java.util.Collections;
 public class KND {
 
     private int k;
-    private ArrayList<int> pos;
+    private ArrayList<Integer> pos;
     private ArrayList<Item> items;
     private ArrayList<Item> itemsUsats;
     private Conjunt_Items C_Items;
@@ -17,7 +17,7 @@ public class KND {
     public KND(int k, ArrayList<Item> a, ArrayList<Item> itemsUsats) {
         this.k = k;
         this.itemsUsats = itemsUsats;
-        item = a;
+        items = a;
         for (int i = 0; i < a.size(); ++i)
             itemsUsats.add(a.get(i));
         C_Items = new Conjunt_Items(itemsUsats);
@@ -25,7 +25,7 @@ public class KND {
             pos.add(i, C_Items.get_posiion(a.get(i)));
         K_NN = new K_Neareast_Neightbour(C_Items);
     }
-
+/*
     public ArrayList<Item> Algorithm() {
 
         ArrayList <Double> distancies = K_NN.Distancies_i(pos);
@@ -37,7 +37,7 @@ public class KND {
 
         return I_de_a;
     }
-
+*/
     private void ordenar_Items(ArrayList <Double> distancies, ArrayList<Item> Items, int l, int r) {
 
         if (l < r) {

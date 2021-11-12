@@ -82,4 +82,10 @@ public class User {
         }
         return (float) sqrt(sumaTotal);
     }
+    public ItemUsat searchUsedItem(int itemID) {
+        for(int i = 0; i < itemsUsats.size(); ++i) {
+            if (itemsUsats.get(i).getItem().getID() == itemID) return itemsUsats.get(i);
+        }
+        return null;
+    }
 }

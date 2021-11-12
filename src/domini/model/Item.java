@@ -2,6 +2,7 @@ package src.domini.model;
 
 import src.domini.model.*;
 import java.util.ArrayList;
+import java.util.Vector;
 
 //Author Jordi Olmo
 public class Item {

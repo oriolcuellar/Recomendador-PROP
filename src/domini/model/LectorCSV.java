@@ -12,7 +12,6 @@ public class LectorCSV {
         TipusRol t = TipusRol.Usuari;
         User user = u.getUsuarioById(userID);
         user.addItemUsat(itemID, valoration);
-
     }
 
     public LectorCSV(Usuarios u){
