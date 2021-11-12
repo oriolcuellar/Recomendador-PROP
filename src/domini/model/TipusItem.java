@@ -10,6 +10,28 @@ public class TipusItem {
     private String ID;
     private ArrayList<Atribute> atributes;
 
+    //contructores
+    public TipusItem( ArrayList<Atribute> atributes) {
+
+        Vector <String> v = new Vector<String> (atributes.size());
+
+        for (int i = 0; i < v.size(); ++i) {
+
+            v.set(i, atributes.get(i).getName());
+        }
+
+        Collections.sort(atributes, new Comparator<Atribute>() {
+            @Override
+            public int compare(Atribute a, Atribute b) {
+                return a.getName().compareTo(b.getName());
+            }
+
+        });
+
+        this.ID = v.toString();
+        this.atributes = atributes;
+    }
+
     //getters
     public String getID() {
         return ID;
@@ -44,27 +66,7 @@ public class TipusItem {
         binary_insertion(atributes, a, 0 , atributes.size());
         return true;
     }
-    //contructores
-    public TipusItem( ArrayList<Atribute> atributes) {
 
-        Vector <String> v = new Vector<String> (atributes.size());
-
-        for (int i = 0; i < v.size(); ++i) {
-
-            v.set(i, atributes.get(i).getName());
-        }
-
-        Collections.sort(atributes, new Comparator<Atribute>() {
-            @Override
-            public int compare(Atribute a, Atribute b) {
-                return a.getName().compareTo(b.getName());
-            }
-
-        });
-
-        this.ID = v.toString();
-        this.atributes = atributes;
-    }
 
     //operacions auxiliars
     public void binary_insertion(ArrayList<Atribute> atributes, Atribute a, int l, int r){

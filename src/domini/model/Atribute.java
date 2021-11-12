@@ -3,6 +3,7 @@ package src.domini.model;
 import src.domini.model.*;
 import java.util.Vector;
 
+//Author Jordi Olmo
 public class Atribute {
     //atributes
     private String nom;

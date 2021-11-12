@@ -12,10 +12,7 @@ public class Conjunt_Items {
         return Items;
     }
 
-    public boolean setItems(ArrayList<Item> items) {
-        Items = items;
-        return true;
-    }
+    //Creadora
 
     public Conjunt_Items(ArrayList<Item> items) {
         Items = items;
@@ -30,7 +27,14 @@ public class Conjunt_Items {
         });
     }
 
-    public Conjunt_Items() {
+    public  boolean existeix_item(int id) {
+
+        return binarySearch(Items, 0, Items.size()-1, id);
+    }
+
+    public boolean setItems(ArrayList<Item> items) {
+        Items = items;
+        return true;
     }
 
     public boolean anyadir_item(Item a)  {
@@ -40,11 +44,6 @@ public class Conjunt_Items {
             return true;
         }
         else return false;//falta exception creo
-    }
-
-    public  boolean existeix_item(int id) {
-
-        return binarySearch(Items, 0, Items.size()-1, id);
     }
 
     public int get_posiion (Item a) {

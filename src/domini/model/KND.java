@@ -29,11 +29,6 @@ public class KND {
         ArrayList <Double> distancies = K_NN.Distancies_i(pos);
         ArrayList<Item> I_de_a = C_Items.getItems();
         ordenar_Items(distancies, I_de_a, 0, distancies.size());
-        if(distancies.get(0) == 0) {
-
-            distancies.remove(0);
-            I_de_a.remove(0);
-        }
 
         for (int i = k; i < I_de_a.size();++i)
             I_de_a.remove(i);
@@ -90,7 +85,7 @@ public class KND {
         // Initial index of merged subarray array
         int k = l;
         while (i < n1 && j < n2) {
-            if (L[i] <= R[j]) {
+            if (L[i] >= R[j]) {
                 distancies.add(k, L[i]);
                 Items.add(k, LI[i]);
                 i++;
