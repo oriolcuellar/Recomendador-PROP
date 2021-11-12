@@ -1,13 +1,15 @@
 
 //@Author Oriol Cuellar
-
+/*
 package src.domini.controladores;
 
+import src.domini.model.*;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class CtrlDomini {
-/*
 
 // Atributes
 
@@ -15,10 +17,11 @@ public class CtrlDomini {
 
     private User actualUser;
     private Item selectedItem;
-    private Map <int, User> usersList;
-    private ArrayList <ItemUsat> ratesList;
-    private ArrayList<Item> itemList;
-
+    private static Map <Integer, User> usersList;
+    private static ArrayList <ItemUsat> ratesList;
+    private static ArrayList<Item> itemList;
+//CtrlDomini control= CtrlDomini.getInstance();
+//control.getAllUsers();
 //constructor
     public static CtrlDomini getInstance(){
         if (dominiSingelton == null)
@@ -35,13 +38,13 @@ public class CtrlDomini {
         itemList = new ArrayList<>();
     }
 
-    public CtrlDomini(){
+    private CtrlDomini(){
         iniCtrlDomini();
     }
 
 //Profile controller
 
-    public static void register(int userId, String password){
+    public static void register(Integer userId, String password){
         //pre: Usuari actiu null, userId not exists, userId and password not null
         //post: es crea un usuari i es posa d'usuari actiu.
         if (usersList.containsKey(userId) || actualUser!=null || userId==null || password==null || password==""){
@@ -116,8 +119,8 @@ public class CtrlDomini {
     }//to do------------------------------------
     public static void deleteUser(){}
     public static void createUser(){}
-*/
-}
+
+}*/
 //driver stubs por cada clase
 //juegos de prueba
 //excepciones
