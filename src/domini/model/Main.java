@@ -12,6 +12,7 @@ public class Main {
 
         CtrlDomini c= CtrlDomini.getInstance();
        c.loadRates();
-       CtrlDomini.showRecommendedItems(6);
+       //c.showRecommendedItems(1);
+        c.ShowRatedItems();
     }
 }
