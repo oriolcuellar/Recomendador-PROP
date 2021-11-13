@@ -3,7 +3,7 @@ package src.domini.model;
 import src.domini.model.*;
 import java.util.*;
 
-//Author Jordi Olmo
+//@Author Jordi Olmo
 public class TipusItem {
 
     //atributes

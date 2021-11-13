@@ -3,7 +3,7 @@ package src.domini.model;
 import src.domini.model.*;
 import java.util.*;
 
-//Author Jordi Olmo
+//@Author Jordi Olmo
 public class Conjunt_Items {
 
     private ArrayList<Item> Items;
@@ -40,7 +40,8 @@ public class Conjunt_Items {
     public boolean anyadir_item(Item a)  {
 
         if (!existeix_item(a.getID())) {
-            Items.add(a);
+            int i = binarySearchPosition(Items, 0, Items.size(), a.getID());
+            Items.add(i, a);
             return true;
         }
         else return false;//falta exception creo

@@ -4,7 +4,15 @@ import src.domini.model.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-//Author Jordi Olmo
+//@Author Jordi Olmo
+
+/*
+    Para leer items, tienes que leer la primera fila, devolver un vector de string con cada atribute (que estan separados por ,), el id sera ese vector.toString()
+    i cada posicion del vector sera el nombre del atributo. Para mirar el tipo y el rango tendras que esperar a los valores. Si es rellevant o no ns hacerlo automaticamente.
+    Luego cada fila sera un item , pasas es string de la fila a vectores i la primera posicion serà el id y el resto los valores. Para el rang del atributo, tendras que recorer
+    todos los items que tengan ese atributo i mirar la posicion de ese atributo en el vector de valores y conseguir el màximo y el minimo de todos esos.
+
+ */
 public class Item {
     //atributs
     private int ID;

@@ -4,7 +4,7 @@ import src.domini.model.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-//Author Jordi Olmo
+//@Author Jordi Olmo
 public class K_Neareast_Neightbour {
 
         private Conjunt_Items C_Items;

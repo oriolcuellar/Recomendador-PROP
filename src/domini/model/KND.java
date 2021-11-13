@@ -4,7 +4,7 @@ import src.domini.model.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-//Author Jordi Olmo
+//@Author Jordi Olmo
 public class KND {
 
     private int k;
@@ -25,19 +25,24 @@ public class KND {
             pos.add(i, C_Items.get_posiion(a.get(i)));
         K_NN = new K_Neareast_Neightbour(C_Items);
     }
-/*
+
     public ArrayList<Item> Algorithm() {
 
-        ArrayList <Double> distancies = K_NN.Distancies_i(pos);
-        ArrayList<Item> I_de_a = C_Items.getItems();
-        ordenar_Items(distancies, I_de_a, 0, distancies.size());
+        ArrayList <ArrayList<Item>> M_de_Items = new ArrayList<ArrayList<Item>>();
+        ArrayList<ArrayList<Double>> Distances = new ArrayList<ArrayList<Double>>();
+        for (int j = 0; j < pos.size(); ++j) {
+            Distances.add(j, K_NN.Distancies_i(pos.get(j)));
+            M_de_Items.add(j, C_Items.getItems());
+            ordenar_Items(Distances.get(j), M_de_Items.get(j), 0, Distances.get(j).size());
 
-        for (int i = k; i < I_de_a.size();++i)
-            I_de_a.remove(i);
+            for (int i = k; i < M_de_Items.get(j).size(); ++i)
+                M_de_Items.get(j).remove(i);
+        }
 
-        return I_de_a;
+        ArrayList<Item> Items_a_devolver = new ArrayList<>(k);
+        return Items_a_devolver;
     }
-*/
+
     private void ordenar_Items(ArrayList <Double> distancies, ArrayList<Item> Items, int l, int r) {
 
         if (l < r) {
