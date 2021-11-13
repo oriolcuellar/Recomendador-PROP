@@ -1,6 +1,6 @@
 
 //@Author Oriol Cuellar
-/*
+
 package src.domini.controladores;
 
 import src.domini.model.*;
@@ -44,7 +44,7 @@ public class CtrlDomini {
 
 //Profile controller
 
-    public static void register(Integer userId, String password){
+    public void register(Integer userId, String password){
         //pre: Usuari actiu null, userId not exists, userId and password not null
         //post: es crea un usuari i es posa d'usuari actiu.
         if (usersList.containsKey(userId) || actualUser!=null || userId==null || password==null || password==""){
@@ -56,7 +56,7 @@ public class CtrlDomini {
             usersList.put(userId, actualUser);
         }
     }
-    public static void login(int userId, String password){
+    public void login(int userId, String password){
         //pre: Usuari actiu null, User amb userId i password existeix
         //post: es crea un usuari i es posa d'usuari actiu.
         if (actualUser!=null) {
@@ -72,55 +72,61 @@ public class CtrlDomini {
             }
         }
     }
-    public static void logout(){
+    public  void logout(){
         //pre: usuari actiu es null
         if (actualUser==null) System.out.println("\n No hi ha usuari loggejat \n");
-        else System.out.println("\n Logged Out \n");
+        else{
+            actualUser=null;
+            System.out.println("\n Logged Out \n");
+        }
 
     }
     public static void editProfile(){}
     public static void deleteProfile(){}
     public static void showRecommendedItems(int k){// to do------------------
         //kmeans
-    Usuarios u = new Usuarios();
-    LectorCSV lectorCSV = new LectorCSV(u);
-        lectorCSV.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
+        //Usuarios u = new Usuarios();
+        //LectorCSV lectorCSV = new LectorCSV(u);
+        //lectorCSV.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
 
-    ArrayList<User> us = u.getUsuarios();
+        ArrayList<User> us= new ArrayList<User>();
+        for (Integer key: usersList.keySet()) {
+            us.add(usersList.get(key));
+        }
+        Kmeans kmeans = new Kmeans(k, us);
+        kmeans.printAllClusters();
 
-    Kmeans kmeans = new Kmeans(k, us);
-    kmeans.printAllClusters();
+        //slope one
 
-    //slope one
-
-    //k-neighbours
+            //map id item, users que lo tienen valorado
+        //k-neighbours
 
 
     }
-    public static void rateRecommendation(){}//to do----------------------
-    public static void selectItem(){}
-    public static void rateItem(){}
-    public static void showAllItems(){}
-    public static void ShowRatedItems(){}
-    public static void save(){}
-    public static void exit(){}
-    public static void createItem(){}
-    public static void deleteItem(){}
-    public static void modifyItem(){}
-    public static void loadItems(){
+    public void rateRecommendation(){}//to do----------------------
+    public void selectItem(){}
+    public void rateItem(){}
+    public void showAllItems(){}
+    public void ShowRatedItems(){}
+    public void save(){}
+    public void exit(){}
+    public void createItem(){}
+    public void deleteItem(){}
+    public void modifyItem(){}
+    public void loadItems(){
 
     }//to do------------------------------------
-    public static void loadUsers(){
+    public void loadUsers(){
 
     }//to do------------------------------------
-    public static void loadRates(){
-        LectorCSV reader= new LectorCSV(usersList);
+    public void loadRates(){
+        LectorCSV2 reader= new LectorCSV2(usersList, itemList, ratesList);
         reader.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
     }//to do------------------------------------
-    public static void deleteUser(){}
-    public static void createUser(){}
+    public void deleteUser(){}
+    public void createUser(){}
 
-}*/
+}
 //driver stubs por cada clase
 //juegos de prueba
 //excepciones
