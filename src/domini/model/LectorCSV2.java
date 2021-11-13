@@ -13,7 +13,7 @@ public class LectorCSV2 {
     //private Usuarios u;
 
     private ArrayList <Vector<String>> ratings;
-    private Vector <Vector<String>> items;
+    private Vector <String> items;
 
         /*
         TipusRol t = TipusRol.Usuari;
@@ -32,26 +32,25 @@ public class LectorCSV2 {
 
     public LectorCSV2(){
     }
-    public Vector <Vector<String>> Lector_Items(String csvFile){
-        items=new Vector<Vector<String>>();
+    public Vector <String> Lector_Items(String csvFile){
+        //post: return un vector de les files del csv
 
+        items=new Vector<String>();
         BufferedReader br = null;
         String line = "";
-        //Se define separador ","
-        String cvsSplitBy = ",";
         try {
             br = new BufferedReader(new FileReader(csvFile));
             boolean first = true;
             int num_atributes=0;
             while ((line = br.readLine()) != null) {
-                String[] datos = line.split(cvsSplitBy);
+                /*String[] datos = line.split(cvsSplitBy);
                 //Imprime datos.
                 Vector <String> v = new Vector<>();
                 for (int i = 0; i <datos.length; ++i) {
                     //System.out.print(datos[i] + ", ");
                     v.add(datos[i]);
-                }
-                items.add(v);
+                }*/
+                items.add(line);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

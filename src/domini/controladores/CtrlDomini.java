@@ -120,15 +120,58 @@ public class CtrlDomini {
     }
     public void save(){}
     public void exit(){}
-    public void createItem(){
+    public void createItem(String atributs, String valors){
 
+        String[] datos = atributs.split(",");
+        Vector <String> vsa = new Vector<>();
+        for (int i = 0; i <datos.length; ++i) {
+            vsa.add(datos[i]);
+        }
+        Vector<Atribute> va = new Vector<>();
+        for (String i : vsa) {
+            Atribute a = new Atribute();
+            a.setNom(i);
+            if (i.equals("False") || i.equals("True")) a.setTipus("Boolean");
+            else if(i.contains(";")){
+                a.setTipus("Vector de String");
+            }
+            else if(i.length()==10 && i.charAt(0)<='9' && i.charAt(0)>='0' && i.charAt(1)<='9' && i.charAt(1)>='0' && i.charAt(2)<='9' && i.charAt(2)>='0'
+                    && i.charAt(3)<='9' && i.charAt(3)>='0' && i.charAt(4)=='-' && i.charAt(5)<='9' && i.charAt(5)>='0' && i.charAt(6)<='9' && i.charAt(6)>='0'
+                    && i.charAt(7)=='-' && i.charAt(8)>='0' && i.charAt(8)<='9' && i.charAt(9)<='9' && i.charAt(9)>='0' ){
+                a.setTipus("Data");
+            }
+
+            else {
+                Boolean es=True;
+                for (int p=0;p<i.length();++p){
+                    if (!((i.charAt(p)>='0' && i.charAt(p)>='0') || i.charAt(p)=='.')) es=False;
+                }
+                if(es){
+                    Ranged_Atribute ra = new Ranged_Atribute();
+                    ra.setNom(i);
+                    ra.setTipus("Rang");
+
+                }
+                else a.setTipus("String");
+            }
+        }
     }
     public void deleteItem(){}
     public void modifyItem(){}
     public void loadItems(){
-        LectorCSV2 reader = new LectorCSV2();
-        reader.Lector_Items("Entradas_CSV/items.csv");
-    }//to do------------------------------------
+        //pre: actualUser es admin
+        if (actualUser!=null && usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador))) {
+            Vector<String> mat_items = new Vector<String>();
+            LectorCSV2 reader = new LectorCSV2();
+            mat_items = reader.Lector_Items("Entradas_CSV/items.csv");
+
+            for(int i=1;i<mat_items.size();++i) {
+                dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
+            }
+
+        }
+
+    }
     public void loadRates(){//falta añadir item usado a la lista de items usados
         //pre: actualUser es admin
         if (actualUser!=null && usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador))){
