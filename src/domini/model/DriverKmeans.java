@@ -10,8 +10,8 @@ public class DriverKmeans {
 
     public void readRatingsExecuteKmeans(int k) {
         /*Usuarios u = new Usuarios();
-        LectorCSV lectorCSV = new LectorCSV(u);
-        lectorCSV.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
+        //LectorCSV lectorCSV = new LectorCSV(u);
+        //lectorCSV.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
 
         ArrayList<User> us = u.getUsuarios();
         CtrlDomini c= CtrlDomini.getInstance();
