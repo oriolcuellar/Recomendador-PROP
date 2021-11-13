@@ -126,11 +126,12 @@ public class CtrlDomini {
     public void deleteItem(){}
     public void modifyItem(){}
     public void loadItems(){
-
+        LectorCSV2 reader = new LectorCSV2();
+        reader.Lector_Items("Entradas_CSV/items.csv");
     }//to do------------------------------------
     public void loadRates(){//falta añadir item usado a la lista de items usados
         //pre: actualUser es admin
-        if (usersList.get(actualUser).getRol().equals((TipusRol.Administrador))){
+        if (actualUser!=null && usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador))){
 
             ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 
