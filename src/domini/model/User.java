@@ -54,6 +54,13 @@ public class User {
         this.itemsUsats = new ArrayList<ItemUsat>();
         this.numCluster = -1;
     }
+    public User(int userID) {
+        this.userID = userID;
+        this.password = String.valueOf(userID);
+        this.Rol = TipusRol.Usuari;
+        this.itemsUsats = new ArrayList<ItemUsat>();
+        this.numCluster = -1;
+    }
 
     // Functions
 

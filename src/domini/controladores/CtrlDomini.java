@@ -1,6 +1,6 @@
 
 //@Author Oriol Cuellar
-/*
+
 package src.domini.controladores;
 
 import src.domini.model.*;
@@ -8,6 +8,7 @@ import src.domini.model.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 public class CtrlDomini {
 
@@ -44,10 +45,11 @@ public class CtrlDomini {
 
 //Profile controller
 
-    public static void register(Integer userId, String password){
+    public void register(Integer userId, String password){
         //pre: Usuari actiu null, userId not exists, userId and password not null
         //post: es crea un usuari i es posa d'usuari actiu.
-        if (usersList.containsKey(userId) || actualUser!=null || userId==null || password==null || password==""){
+        if (usersList.containsKey(userId) || actualUser!=null || userId==null || password==null || password.equals("")){
+
             System.out.println("\n error al registrar \n");
         }
         else{
@@ -56,7 +58,7 @@ public class CtrlDomini {
             usersList.put(userId, actualUser);
         }
     }
-    public static void login(int userId, String password){
+    public void login(int userId, String password){
         //pre: Usuari actiu null, User amb userId i password existeix
         //post: es crea un usuari i es posa d'usuari actiu.
         if (actualUser!=null) {
@@ -64,7 +66,7 @@ public class CtrlDomini {
         }
         else if (usersList.containsKey(userId)) {
             actualUser=usersList.get(userId);
-            if (actualUser.getPassword()==password) {//logged
+            if (actualUser.getPassword().equals(password)) {//logged
                 System.out.println("\n Sessió iniciada \n");
             }
             else {
@@ -72,55 +74,87 @@ public class CtrlDomini {
             }
         }
     }
-    public static void logout(){
+    public  void logout(){
         //pre: usuari actiu es null
         if (actualUser==null) System.out.println("\n No hi ha usuari loggejat \n");
-        else System.out.println("\n Logged Out \n");
+        else{
+            actualUser=null;
+            System.out.println("\n Logged Out \n");
+        }
 
     }
     public static void editProfile(){}
     public static void deleteProfile(){}
     public static void showRecommendedItems(int k){// to do------------------
         //kmeans
-    Usuarios u = new Usuarios();
-    LectorCSV lectorCSV = new LectorCSV(u);
-        lectorCSV.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
+        //Usuarios u = new Usuarios();
+        //LectorCSV lectorCSV = new LectorCSV(u);
+        //lectorCSV.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
 
-    ArrayList<User> us = u.getUsuarios();
 
-    Kmeans kmeans = new Kmeans(k, us);
-    kmeans.printAllClusters();
+        Kmeans kmeans = new Kmeans(k, usersList);
+        kmeans.printAllClusters();
 
-    //slope one
+        //slope one
 
-    //k-neighbours
+            //map id item, users que lo tienen valorado
+        //k-neighbours
 
 
     }
-    public static void rateRecommendation(){}//to do----------------------
-    public static void selectItem(){}
-    public static void rateItem(){}
-    public static void showAllItems(){}
-    public static void ShowRatedItems(){}
-    public static void save(){}
-    public static void exit(){}
-    public static void createItem(){}
-    public static void deleteItem(){}
-    public static void modifyItem(){}
-    public static void loadItems(){
+    public void rateRecommendation(){}//to do----------------------
+    public void selectItem(){}
+    public void rateItem(){}
+    public void showAllItems(){
+        for(Item i: itemList){
+            System.out.println("\n" + i.getID() + "\n");
+        }
+    }
+    public void ShowRatedItems(){
+
+        //System.out.println(ratesList.size());
+       /* for(ItemUsat i: usersList.get(actualUser).getItemsUsats()){
+            System.out.println("\n" + i.getUsuari()+ " "+ i.getItem()+" "+ i.getValoracio() + "\n");
+        }*/
+
+    }
+    public void save(){}
+    public void exit(){}
+    public void createItem(){}
+    public void deleteItem(){}
+    public void modifyItem(){}
+    public void loadItems(){
 
     }//to do------------------------------------
-    public static void loadUsers(){
+    public void loadUsers(){//no hay
 
     }//to do------------------------------------
-    public static void loadRates(){
-        LectorCSV reader= new LectorCSV(usersList);
-        reader.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
-    }//to do------------------------------------
-    public static void deleteUser(){}
-    public static void createUser(){}
+    public void loadRates(){//falta añadir item usado a la lista de items usados
+        ArrayList <Vector<String>> readed_ratings =new ArrayList<Vector<String>>();
 
-}*/
+        LectorCSV2 reader= new LectorCSV2();
+        readed_ratings=reader.Lector_Ratings("Entradas_CSV/ratings.db.csv", "Ratings");
+
+        TipusRol t = TipusRol.Usuari;
+        for (Vector<String> vs: readed_ratings){
+            if (usersList.containsKey(Integer.valueOf(vs.get(0)))){//existeix
+                User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null){//no existe el item en sus valoraciones
+                    usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(0)));
+
+                }
+            }
+            else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
+                User usuari = new User(Integer.valueOf(vs.get(0)));
+                usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+                usersList.put(Integer.valueOf(vs.get(0)), usuari);
+            }
+        }
+    }//to do------------------------------------
+    public void deleteUser(){}
+    public void createUser(){}
+
+}
 //driver stubs por cada clase
 //juegos de prueba
 //excepciones
