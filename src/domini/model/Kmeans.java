@@ -2,6 +2,7 @@ package src.domini.model;
 
 import src.domini.model.*;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 
@@ -11,7 +12,7 @@ public class Kmeans {
     /* Lista de todos los clústers*/
     private ArrayList<Cluster> clusters;
     /* Lista de todos los usuarios */
-    private ArrayList<User> users;
+    private Map<Integer, User> users;
     private int k;
 
     // Auxiliares
@@ -27,9 +28,10 @@ public class Kmeans {
         for(int i = 0; i < k; ++i) {
             User aux;
             Cluster c = new Cluster();
+            ArrayList<Integer> keysAsArray = new ArrayList<Integer>(users.keySet());
             do{
                 indiceNuevocentroid = myRandom.nextInt(users.size());
-                aux = users.get(indiceNuevocentroid);
+                aux = users.get(keysAsArray.get(myRandom.nextInt(keysAsArray.size())));
             }while (nuevoscentroids.contains(aux));
             c.setCentroid(aux);
             c.addUser(aux);
@@ -71,15 +73,15 @@ public class Kmeans {
     /*
         Crea un conjunto con k clústers
      */
-    public Kmeans(int k, ArrayList<User> u) {
+    public Kmeans(int k, Map <Integer, User> u) {
         this.k = k;
         clusters = new ArrayList<Cluster>();
         users = u;
         // Asignar k centroids random sin que se repitan
         assignKCentroids();
         // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
-        for(int i  = 0; i < users.size(); ++i) {
-            asignUserToCluster(users.get(i));
+        for(Map.Entry<Integer, User> entry : users.entrySet()) {
+            asignUserToCluster(entry.getValue());
         }
     }
 

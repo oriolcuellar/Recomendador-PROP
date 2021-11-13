@@ -89,11 +89,8 @@ public class CtrlDomini {
         //LectorCSV lectorCSV = new LectorCSV(u);
         //lectorCSV.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
 
-        ArrayList<User> us= new ArrayList<User>();
-        for (Integer key: usersList.keySet()) {
-            us.add(usersList.get(key));
-        }
-        Kmeans kmeans = new Kmeans(k, us);
+
+        Kmeans kmeans = new Kmeans(k, usersList);
         kmeans.printAllClusters();
 
         //slope one
