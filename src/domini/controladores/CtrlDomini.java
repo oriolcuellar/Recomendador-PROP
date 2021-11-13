@@ -21,6 +21,8 @@ public class CtrlDomini {
     private static Map <Integer, User> usersList;
     private static ArrayList <ItemUsat> ratesList;
     private static ArrayList<Item> itemList;
+
+    private static Map <String, TipusItem> itemTypeList;
 //CtrlDomini control= CtrlDomini.getInstance();
 //control.getAllUsers();
 //constructor
@@ -33,11 +35,12 @@ public class CtrlDomini {
     }
 
     private void iniCtrlDomini(){
-        usersList = new HashMap<>();
+        usersList = new HashMap<Integer, User>();
         actualUser = null;
         selectedItem = null;
-        ratesList = new ArrayList<>();
-        itemList = new ArrayList<>();
+        ratesList = new ArrayList<ItemUsat>();
+        itemList = new ArrayList<Item>();
+        itemTypeList = new HashMap<String, TipusItem>();
         User admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
         usersList.put(-1, admin);
@@ -122,14 +125,40 @@ public class CtrlDomini {
     public void exit(){}
     public void createItem(String atributs, String valors){
 
+
+
+        //cremos vector atributos
+
         String[] datos = atributs.split(",");
-        Vector <String> vsa = new Vector<>();
+        ArrayList <Atribute> va = new ArrayList<Atribute>();
+        ArrayList <String> vsa = new ArrayList<String>();//solo para definir el tipo de item
+        int pos_id=0;
         for (int i = 0; i <datos.length; ++i) {
-            vsa.add(datos[i]);
+            if(datos[i]=="id") pos_id=i;
+            else{
+                Atribute aux = new Atribute(datos[i]);
+                va.add(aux);
+                vsa.add(datos[i]);
+            }
         }
-        Vector<Atribute> va = new Vector<>();
-        for (String i : vsa) {
-            Atribute a = new Atribute();
+        //creamos tipus item
+        String ID_ti=vsa.toString();
+        TipusItem ti = new TipusItem(va);
+
+        //DEFINIR TIPO ATRIBUTO
+            //string de valores to vector
+        String[] datos2 = valors.split(",");
+        ArrayList <String> vsv= new ArrayList<String>();
+        for (int i = 0; i <vsa.size(); ++i) {
+            if(i!=pos_id){
+                Atribute aux = new Atribute(datos[i]);
+                vsv.add(datos[i]);
+            }
+        }
+        ArrayList<Atribute> va = new ArrayList<>();
+        for (String i : vsv) {
+            Boolean ranged=True;
+            Atribute a = vsa.get();
             a.setNom(i);
             if (i.equals("False") || i.equals("True")) a.setTipus("Boolean");
             else if(i.contains(";")){
@@ -142,19 +171,32 @@ public class CtrlDomini {
             }
 
             else {
-                Boolean es=True;
                 for (int p=0;p<i.length();++p){
-                    if (!((i.charAt(p)>='0' && i.charAt(p)>='0') || i.charAt(p)=='.')) es=False;
+                    if (!((i.charAt(p)>='0' && i.charAt(p)>='0') || i.charAt(p)=='.')) ranged=False;
                 }
-                if(es){
+                if(ranged){
                     Ranged_Atribute ra = new Ranged_Atribute();
                     ra.setNom(i);
                     ra.setTipus("Rang");
+                    va.add(ra);
 
                 }
                 else a.setTipus("String");
             }
+            if(!(ranged)) va.add(a);
         }
+
+        //creamos tipus item
+
+        String key=va.toString();
+        if (!(itemTypeList.containsKey(key))){
+            itemTypeList.put(key, ti);
+        }
+
+        //creamos item
+
+
+
     }
     public void deleteItem(){}
     public void modifyItem(){}

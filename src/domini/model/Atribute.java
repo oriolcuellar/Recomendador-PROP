@@ -38,6 +38,10 @@ public class Atribute {
         tipus = type;
         rellevant=True;
     }
+    public Atribute(String name) {
+        nom = name;
+        rellevant=True;
+    }
     public Atribute() {
         rellevant=True;
     }
