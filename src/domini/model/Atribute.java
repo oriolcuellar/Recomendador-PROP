@@ -7,7 +7,7 @@ import java.util.Vector;
 public class Atribute {
     //atributes
     private String nom;
-    private String tipus;
+    private String tipus; //Boolean, String, Vector de String, Data, Rang
     private boolean rellevant;
 
     //getters
@@ -36,8 +36,15 @@ public class Atribute {
     public Atribute(String name, String type) {
         nom = name;
         tipus = type;
+        rellevant=True;
     }
-    public Atribute() {}
+    public Atribute(String name) {
+        nom = name;
+        rellevant=True;
+    }
+    public Atribute() {
+        rellevant=True;
+    }
 
     //operaciones varias
     public Vector<String> Construc_vector(String s) {

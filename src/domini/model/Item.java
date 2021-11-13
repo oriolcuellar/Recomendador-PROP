@@ -17,10 +17,10 @@ public class Item {
     //atributs
     private int ID;
     private TipusItem tipus;
-    private ArrayList<String> valors;
+    private ArrayList <String> valors;
 
     /* El indice del valor debe coincidir con el indice del atributo para funcionar*/
-    public Item(int ID, TipusItem tipus, ArrayList valors) {
+    public Item(int ID, TipusItem tipus, ArrayList <String> valors) {
         //    if (!Conjunt_Items.existeix_item(ID)) {
         this.ID = ID;
         this.tipus = tipus;

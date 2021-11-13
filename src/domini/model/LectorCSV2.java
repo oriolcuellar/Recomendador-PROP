@@ -3,6 +3,7 @@ package src.domini.model;
 import src.domini.model.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Vector;
 
@@ -12,7 +13,7 @@ public class LectorCSV2 {
     //private Usuarios u;
 
     private ArrayList <Vector<String>> ratings;
-
+    private Vector <String> items;
 
         /*
         TipusRol t = TipusRol.Usuari;
@@ -30,6 +31,41 @@ public class LectorCSV2 {
 
 
     public LectorCSV2(){
+    }
+    public Vector <String> Lector_Items(String csvFile){
+        //post: return un vector de les files del csv
+
+        items=new Vector<String>();
+        BufferedReader br = null;
+        String line = "";
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            boolean first = true;
+            int num_atributes=0;
+            while ((line = br.readLine()) != null) {
+                /*String[] datos = line.split(cvsSplitBy);
+                //Imprime datos.
+                Vector <String> v = new Vector<>();
+                for (int i = 0; i <datos.length; ++i) {
+                    //System.out.print(datos[i] + ", ");
+                    v.add(datos[i]);
+                }*/
+                items.add(line);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return items;
     }
 
     public ArrayList<Vector<String>> Lector_Ratings(String csvFile, String dataType) {
