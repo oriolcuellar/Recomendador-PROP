@@ -33,7 +33,7 @@ public class LectorCSV2 {
     public LectorCSV2(){
     }
     public Vector <Vector<String>> Lector_Items(String csvFile){
-        items=new Vector<Vector<String>();
+        items=new Vector<Vector<String>>();
 
         BufferedReader br = null;
         String line = "";
