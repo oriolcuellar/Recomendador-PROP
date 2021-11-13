@@ -28,13 +28,19 @@ public class Item {
         //   }
     }
 
+    //mirar desacoplament de Atribute
     public Double Distance (Item b) {
 
-        ArrayList<Atribute>  V_A = tipus.Atributs_rellevants();
-        ArrayList<Atribute>  V_B = b.getTipus().Atributs_rellevants();
+        ArrayList<Atribute>  V_A = new ArrayList<Atribute>();
+        ArrayList<Atribute>  V_B = new ArrayList<Atribute>();
 
-        ArrayList Valors_A = valors;
-        ArrayList Valors_B = b.getValors();
+        ArrayList <String> Valors_A = new ArrayList<String>();
+        ArrayList <String> Valors_B = new ArrayList<String>();
+
+        clonador_ArrayList(V_A, tipus.Atributs_rellevants());
+        clonador_ArrayList(V_B, b.getTipus().Atributs_rellevants());
+        clonador_ArrayList(Valors_A, valors);
+        clonador_ArrayList(Valors_B, b.getValors());
 
         if (!tipus.equals(b.getTipus())) {
 
@@ -67,7 +73,7 @@ public class Item {
     }
 
     /* Es presoposa que que totels les ArrayList son de la mateixa mida = n_d, ja que tan sols funciona si els dos items tenen els mateixos atributs*/
-    private Double comparador_tipus_iguals (ArrayList<Atribute>  V_A, ArrayList<Atribute>  V_B, ArrayList Valors_A, ArrayList Valors_B, int n_d) {
+    private Double comparador_tipus_iguals (ArrayList<Atribute>  V_A, ArrayList<Atribute>  V_B, ArrayList <String> Valors_A, ArrayList <String> Valors_B, int n_d) {
 
         Double distance = 0.0;
         for (int i = 0; i < n_d; ++i){
@@ -84,8 +90,8 @@ public class Item {
 
                 else if(V_A.get(i).getType().equals("Vector de String")) {
 
-                    Vector<String> S_A = (Vector<String>) Valors_A.get(i);
-                    Vector<String> S_B = (Vector<String>) Valors_B.get(i);
+                    Vector<String> S_A = Construc_Vector(Valors_A.get(i), ';') ;
+                    Vector<String> S_B = Construc_Vector(Valors_B.get(i), ';');
 
                     int n_string = Math.max(S_A.size(), S_B.size());
                     Double coeficient = 1/(double)n_string;
@@ -107,11 +113,11 @@ public class Item {
                 // es considera que any pelicula > 1900
                 else if(V_A.get(i).getType().equals("Data")) {
 
-                    String s_a = (String) Valors_A.get(i);
-                    String s_b = (String) Valors_B.get(i);
+                    String s_a =  Valors_A.get(i);
+                    String s_b =  Valors_B.get(i);
 
-                    Vector <String> D_A = Construc_data(s_a);
-                    Vector <String> D_B = Construc_data(s_b);
+                    Vector <String> D_A = Construc_Vector(s_a, '-');
+                    Vector <String> D_B = Construc_Vector(s_b, '-');
 
                     int dia_a, dia_b, mes_a, mes_b, any_a, any_b;
 
@@ -123,9 +129,9 @@ public class Item {
                     mes_b = Integer.valueOf(D_B.get(1));
                     any_b = Integer.valueOf(D_B.get(0)) - 1900;
 
-                    int total_a = dia_a + (mes_a/2 * 31 + any_a * 6 * 30) + (mes_a/2 * 30 + any_a * 6 * 31);
-                    int total_b = dia_b + (mes_b/2 * 31 + any_b * 6 * 30) + (mes_b/2 * 30 + any_b * 6 * 31);
-                    Double max = Double.valueOf((50 * 6 * 30) + (50 * 6 * 31));
+                    int total_a = dia_a + (mes_a/2 * 31 + any_a * 4 * 30) + (mes_a/2 * 30 + any_a * 7 * 31) + (any_a * 28);
+                    int total_b = dia_b + (mes_b/2 * 31 + any_b * 4 * 30) + (mes_b/2 * 30 + any_b * 7 * 31) + (any_b * 28);
+                    Double max = Double.valueOf((50 * 4 * 30) + (50 * 7 * 31) + (50 * 28));
 
                     Double coeficient = ((Math.max(total_a, total_b))- Math.min(total_a, total_b)) / max;
                     distance += Math.pow(coeficient, 2);
@@ -133,8 +139,8 @@ public class Item {
 
                 else if(V_A.get(i).getType().equals("Rang")) {
 
-                    Double valor_a = (Double) Valors_A.get(i);
-                    Double valor_b = (Double) Valors_B.get(i);
+                    Double valor_a = Double.valueOf(Valors_A.get(i));
+                    Double valor_b = Double.valueOf(Valors_B.get(i));
 
                     Ranged_Atribute R_a =(Ranged_Atribute) (V_A.get(i));
                     Double max = R_a.getUpper();
@@ -149,11 +155,11 @@ public class Item {
     }
 
     //retorna el string amb la data YYYY-MM-DD , en un vector de string (3), on [0] == YYYY, [1] = MM, [2] = DD
-    public Vector<String> Construc_data(String s) {
+    public Vector<String> Construc_Vector(String s, char c) {
 
         Vector<String> v = new Vector<String>(0);
         for (int i = 0;i < s.length(); i++ ){
-            if (s.charAt(i) == '-') {
+            if (s.charAt(i) == c) {
 
                 v.add(s.substring(0, i));
                 s = s.substring(i+1, s.length());
@@ -163,6 +169,13 @@ public class Item {
 
         v.add(s);
         return v;
+    }
+
+    //copia la Arraylist B en A (han de ser els dos del mateix tipus
+    private void clonador_ArrayList (ArrayList  A, ArrayList  B) {
+
+            for(int i = 0; i< B.size(); ++i)
+                A.add(i, B.get(i));
     }
 
     //getters
