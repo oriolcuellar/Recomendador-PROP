@@ -17,7 +17,7 @@ public class Item {
     //atributs
     private int ID;
     private TipusItem tipus;
-    private ArrayList valors;
+    private ArrayList<String> valors;
 
     /* El indice del valor debe coincidir con el indice del atributo para funcionar*/
     public Item(int ID, TipusItem tipus, ArrayList valors) {
