@@ -91,10 +91,6 @@ public class CtrlDomini {
     public static void deleteProfile(){}
     public static void showRecommendedItems(int k){// to do------------------
         //kmeans
-        //Usuarios u = new Usuarios();
-        //LectorCSV lectorCSV = new LectorCSV(u);
-        //lectorCSV.Lector("Entradas_CSV/ratings.db.csv", "Ratings");
-
 
         Kmeans kmeans = new Kmeans(k, usersList);
         kmeans.printAllClusters();
@@ -134,10 +130,8 @@ public class CtrlDomini {
     }//to do------------------------------------
     public void loadRates(){//falta añadir item usado a la lista de items usados
         //pre: actualUser es admin
-        if (usersList.get(actualUser).getRol()!=TipusRol.Administrado){
-            System.out.println("\n" + "usuari no es aministrador" + "\n");
-        }
-        else {
+        if (usersList.get(actualUser).getRol().equals((TipusRol.Administrador))){
+
             ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 
             LectorCSV2 reader = new LectorCSV2();
@@ -158,10 +152,15 @@ public class CtrlDomini {
                 }
             }
         }
+        else{
+            System.out.println("\n" + "usuari no es aministrador" + "\n");
+        }
     }//to do------------------------------------
     public void deleteUser(){
         //pre: actualUser admin
-        if(actualUser)
+        if(actualUser.getRol().equals(TipusRol.Administrador)){
+
+        }
     }
     public void createUser(){}
 
