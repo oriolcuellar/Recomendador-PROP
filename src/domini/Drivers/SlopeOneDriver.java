@@ -10,9 +10,9 @@ public class SlopeOneDriver extends SlopeOne {
     private static ArrayList<User> usersItem2;
     private static ArrayList<User> intersectionUsers;
 
-    public SlopeOneDriver(User u) {
+    /*public SlopeOneDriver(User u) {
         super(u);
-    }
+    }*/
 
 
     private static void printUsers(ArrayList<User> users) {
