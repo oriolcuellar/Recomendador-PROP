@@ -1,20 +1,19 @@
 package src.domini.model;
 import src.domini.model.*;
-
 import java.util.ArrayList;
 import java.util.Map;
 
 public class SlopeOne {
     private User user;
-    private Map<Integer,ArrayList<User>> itemValorateBy;
+    private Map<Integer,ArrayList<User>> itemValoratedBy;
 
     protected static ArrayList<User> intersection(ArrayList<User> l1, ArrayList<User> l2, int numCluster) {
         ArrayList<User> l3 = new ArrayList<User>();
-        for(int i = 0; i < l1.size(); ++i) {
-            if(l1.get(i).getNumCluster() == numCluster) {
-                for (int j = 0; j < l2.size(); ++j) {
-                    if (l1.get(i).getUserID() == l2.get(j).getUserID() && l2.get(j).getNumCluster() == numCluster) {
-                        l3.add(l1.get(i));
+        for (User user1 : l1) {
+            if (user1.getNumCluster() == numCluster) {
+                for (User user2 : l2) {
+                    if (user1.getUserID() == user2.getUserID() && user2.getNumCluster() == numCluster) {
+                        l3.add(user1);
                     }
                 }
             }
@@ -24,10 +23,10 @@ public class SlopeOne {
 
     protected static float calculateDesviation(int IDitemI, int IDitemJ, ArrayList<User> usersIJ) {
         float sumTotal = 0;
-        for(int i = 0; i < usersIJ.size(); ++i) {
-            float valorationUserI = usersIJ.get(i).searchUsedItem(IDitemI).getValoracio();
-            float valorationUserJ = usersIJ.get(i).searchUsedItem(IDitemJ).getValoracio();
-            sumTotal += valorationUserJ - valorationUserI;
+        for (User user : usersIJ) {
+            float valorationUserI = user.searchUsedItem(IDitemI).getValoracio();
+            float valorationUserJ = user.searchUsedItem(IDitemJ).getValoracio();
+            sumTotal += (valorationUserJ - valorationUserI);
         }
         return sumTotal/usersIJ.size();
     }
@@ -39,23 +38,23 @@ public class SlopeOne {
         return sum/usedItems.size();
     }
 
-    private float calculatDesviationMean(User user) {
+    // suma media de las desviaciones de todos los items I respecto del item J, ambos puntuados por el usuario user
+    private float calculateDesviationMean(User user, int IDitemJ) {
         ArrayList<ItemUsat> usedItems = user.getItemsUsats();
-        float sum = 0;
-        for(int i = 0; i < usedItems.size(); ++i) {
-            int IDitemI = usedItems.get(i).getItem().getID();
-            for(int j = i + 1; j < usedItems.size(); ++j) {
-                int IDitemJ = usedItems.get(j).getItem().getID();
+        float num = 0;
+        for(ItemUsat itemI : usedItems) {
+            int IDitemI =  itemI.getItem().getID();
+            if(IDitemI != IDitemJ) {
                 ArrayList<User> usersIJ = getIntersaction(IDitemI,IDitemJ);
-                sum += calculateDesviation(IDitemI,IDitemJ,usersIJ);
+                num += calculateDesviation(IDitemI,IDitemJ,usersIJ);
             }
         }
-        return sum/usedItems.size();
+        return num/usedItems.size();
     }
 
     private ArrayList<User> getIntersaction(int IDitemI, int IDitemJ) {
-        ArrayList<User> usersI = itemValorateBy.get(IDitemI);
-        ArrayList<User> usersJ = itemValorateBy.get(IDitemJ);
+        ArrayList<User> usersI = itemValoratedBy.get(IDitemI);
+        ArrayList<User> usersJ = itemValoratedBy.get(IDitemJ);
 
        return intersection(usersI, usersJ, user.getNumCluster());
     }
@@ -63,16 +62,28 @@ public class SlopeOne {
 
 
     public void slopeOneAlgorithm(User user, Map<Integer,ArrayList<User>> itemValorateBy) {
-        this.itemValorateBy = itemValorateBy;
+        this.itemValoratedBy = itemValorateBy;
         this.user = user;
-        Item ui = new Item(1);
-        Item uj = new Item(1);
 
-        int IDitemI = ui.getID();
-        int IDitemJ = uj.getID();
+        float meanValoration = calculateValorationMean(user);
+        ArrayList<Integer> predictionsID = new ArrayList<>();
+        ArrayList<Float> predictionsValoration = new ArrayList<>();
+        //predecir todos los que no tiene valoracion
+        for(Map.Entry<Integer, ArrayList<User>> item : itemValoratedBy.entrySet()) {
+            //si el item no esta valorado por el usuario ejecutar predicción
+            if(!item.getValue().contains(user)) {
+                float valoration = meanValoration + calculateDesviationMean(user, item.getKey());
 
-        ArrayList<User> usersIJ = getIntersaction(IDitemI,IDitemJ);
-        float devIJ = calculateDesviation(IDitemI,IDitemJ, usersIJ);
+                /* si tuvieramos el tiem
+                ItemUsat iu = new ItemUsat(item, user, valoration);
+                user.addItemUsat(iu);
+                 */
+                predictionsID.add(item.getKey());
+                predictionsValoration.add(valoration);
+            }
+        }
     }
-    public SlopeOne() {}
+    public SlopeOne(User u) {
+
+    }
 }

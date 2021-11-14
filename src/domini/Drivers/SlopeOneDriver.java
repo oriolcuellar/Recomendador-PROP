@@ -10,10 +10,14 @@ public class SlopeOneDriver extends SlopeOne {
     private static ArrayList<User> usersItem2;
     private static ArrayList<User> intersectionUsers;
 
+    public SlopeOneDriver(User u) {
+        super(u);
+    }
+
 
     private static void printUsers(ArrayList<User> users) {
-        for(int i = 0; i < users.size(); ++i) {
-            System.out.print(users.get(i).getUserID() + " ");
+        for (User user : users) {
+            System.out.print(user.getUserID() + " ");
         }
     }
 
