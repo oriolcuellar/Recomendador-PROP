@@ -16,7 +16,6 @@ public class TipusItem {
 
     public TipusItem (ArrayList<Atribute> atributes) {
 
-
         Vector <String> v = new Vector<String> (atributes.size());
 
         for (int i = 0; i < v.size(); ++i) {

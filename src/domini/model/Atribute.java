@@ -5,12 +5,13 @@ import java.util.Vector;
 
 //Author Jordi Olmo
 public class Atribute {
-    //atributes
+
+    //Atributes
     private String nom;
     private String tipus; //Boolean, String, Vector de String, Data, Rang
     private boolean rellevant;
 
-    //constructors
+    //Constructors
     public Atribute(String name, String type) {
         nom = name;
         tipus = type;
@@ -24,7 +25,7 @@ public class Atribute {
         rellevant = true;
     }
 
-    //getters
+    //Getters
     public boolean isRellevant() {
         return rellevant;
     }
@@ -35,19 +36,19 @@ public class Atribute {
         return tipus;
     }
 
-    //setters
-    public void setTipus(String tipus) {
+    //Setters
+    public void setTipus (String tipus) {
         this.tipus = tipus;
     }
-    public void setNom(String nom) {
+    public void setNom (String nom) {
         this.nom = nom;
     }
-    public void setRellevant(boolean rellevant) {
+    public void setRellevant (boolean rellevant) {
         this.rellevant = rellevant;
     }
 
-    //operaciones varias
-    public Vector<String> Construc_vector(String s) {
+    //operacione
+    public Vector<String> Construc_vector (String s) {
 
         Vector<String> v = new Vector<String>(0);
         for (int i = 0;i < s.length(); i++ ){
