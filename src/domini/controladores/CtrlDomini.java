@@ -20,7 +20,7 @@ public class CtrlDomini {
     private Item selectedItem;
     private static Map <Integer, User> usersList;
     private static ArrayList <ItemUsat> ratesList;
-    private static ArrayList<Item> itemList;
+    private static Conjunt_Items itemList;
     private static Map <String, TipusItem> itemTypeList;
 
 //CtrlDomini control= CtrlDomini.getInstance();
@@ -39,7 +39,7 @@ public class CtrlDomini {
         actualUser = null;
         selectedItem = null;
         ratesList = new ArrayList<ItemUsat>();
-        itemList = new ArrayList<Item>();
+        itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
         User admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
@@ -109,7 +109,7 @@ public class CtrlDomini {
     public void selectItem(){}
     public void rateItem(){}
     public void showAllItems(){
-        for(Item i: itemList){
+        for(Item i: itemList.getItems()){
             System.out.println("\n" + i.getID() + "\n");
         }
     }
@@ -126,7 +126,6 @@ public class CtrlDomini {
     public void createItem(String atributs, String valors){
 
 
-
         //cremos vector atributos
 
         String[] datos = atributs.split(",");
@@ -134,7 +133,7 @@ public class CtrlDomini {
         ArrayList <String> vsa = new ArrayList<String>();//solo para definir el tipo de item
         int pos_id=0;
         for (int i = 0; i <datos.length; ++i) {
-            if(datos[i]=="id") pos_id=i;
+            if(datos[i].equals("id")) pos_id=i;
             else{
                 Atribute aux = new Atribute(datos[i]);
                 va.add(aux);
@@ -142,7 +141,15 @@ public class CtrlDomini {
             }
         }
 
+        //miramos si no existe item
+        String[] datos3 = valors.split(",");
+        int comp = Integer.valueOf(datos3[pos_id]);
+        if (itemList.existeix_item(comp)){
+            System.out.println("ja existeix id");
+            //acabar la funcion-----------------------------------------------------------------------------
+        }
         //creamos tipus item si NO EXISTE
+        boolean new_type_item=false;
         String ID_ti=vsa.toString();
         TipusItem ti;
         if (itemTypeList.containsKey(ID_ti)){//existe
@@ -152,6 +159,7 @@ public class CtrlDomini {
         else{//no existe
             ti = new TipusItem(va);
             itemTypeList.put(ID_ti, ti);
+            new_type_item=true;
         }
 
         //DEFINIR TIPO ATRIBUTO
@@ -167,43 +175,68 @@ public class CtrlDomini {
             String i = vsv.get(pos);
             Boolean ranged = true;
             Atribute a = va.get(pos);
-            if (i.equals("False") || i.equals("True")) a.setTipus("Boolean");
+            if (i.equals("False") || i.equals("True")){
+                a.setTipus("Boolean");
+                a.setRellevant(true);
+            }
             else if(i.contains(";")){
                 a.setTipus("Vector de String");
+                a.setRellevant(true);
             }
             else if(i.length()==10 && i.charAt(0)<='9' && i.charAt(0)>='0' && i.charAt(1)<='9' && i.charAt(1)>='0' && i.charAt(2)<='9' && i.charAt(2)>='0'
                     && i.charAt(3)<='9' && i.charAt(3)>='0' && i.charAt(4)=='-' && i.charAt(5)<='9' && i.charAt(5)>='0' && i.charAt(6)<='9' && i.charAt(6)>='0'
                     && i.charAt(7)=='-' && i.charAt(8)>='0' && i.charAt(8)<='9' && i.charAt(9)<='9' && i.charAt(9)>='0' ){
                 a.setTipus("Data");
+                a.setRellevant(true);
             }
-
+            else if(i.equals("")){
+                if (a.getType().equals("")){
+                    a.setTipus("Buit");
+                    a.setRellevant(false);
+                }
+            }
             else {
                 for (int p=0;p<i.length();++p){
                     if (!((i.charAt(p)>='0' && i.charAt(p)<='9') || i.charAt(p)=='.')) ranged = false;
                 }
                 if(ranged){
-                    Ranged_Atribute ra = new Ranged_Atribute();
-                    ra.setNom(i);
-                    ra.setTipus("Rang");
-                    va.add(ra);
+                    if (new_type_item) {
+                        double min=Double.valueOf(vsv.get(pos));
+                        double max=Double.valueOf(vsv.get(pos));
+                        a.setTipus("Rang");
+                        a.setRellevant(true);
+                        Ranged_Atribute ra = new Ranged_Atribute(a,min, max );
+                        va.set(pos, ra);
+                    }
+                    else{
+                        if (a.getType().equals("Rang")){
+                            double aux = Double.valueOf(vsv.get(pos));
+                            if (a.getUpper()<aux) a.setUpper(aux);
+                            if (a.getLower()>aux) a.setLower(aux);
+                        }
+                        else{
+                            double min=Double.valueOf(vsv.get(pos));
+                            double max=Double.valueOf(vsv.get(pos));
+                            a.setTipus("Rang");
+                            a.setRellevant(true);
+                            Ranged_Atribute ra = new Ranged_Atribute(a,min, max );
+                            va.set(pos, ra);
+                        }
+                    }
 
                 }
-                else if (a.getType().equals("")){//si la estaba creado y no tenia valor de string
+                else {//si la estaba creado y no tenia valor de string
                     a.setTipus("String");
+                    a.setRellevant(true);
                 }
             }
-            if(!(ranged)) va.add(a);
         }
 
-        //creamos tipus item
-
-        String key=va.toString();
-        if (!(itemTypeList.containsKey(key))){
-            itemTypeList.put(key, ti);
-        }
-
+        System.out.println("llego");
         //creamos item
-
+        int id = Integer.valueOf(datos[pos_id]);
+        Item i =new Item(id, ti, vsv);
+        if (!(itemList.existeix_item(id))) itemList.anyadir_item(i);
 
 
     }

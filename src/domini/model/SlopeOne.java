@@ -91,7 +91,7 @@ public class SlopeOne {
 
     //crea un SlopeOne únicamente con el mapa de items y quien los valora
     public SlopeOne() {
-        this.itemValoratedBy = CtrlDomini.getInstance().elMapita;
+        //this.itemValoratedBy = CtrlDomini.getInstance().elMapita;
     }
 
     //retorna las predicciones para el usuario u

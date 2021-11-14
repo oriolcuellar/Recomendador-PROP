@@ -26,6 +26,9 @@ public class Conjunt_Items {
             }
         });
     }
+    public Conjunt_Items() {
+        Items = new ArrayList<Item>();
+    }
 
     public  boolean existeix_item(int id) {
 

@@ -10,6 +10,11 @@ public class Ranged_Atribute  extends Atribute{
         lower = min;
         upper = max;
     }
+    public Ranged_Atribute(Atribute a, double min, double max) {
+        super(a);
+        lower = min;
+        upper = max;
+    }
 
     //Getters
     public Double getLower() {

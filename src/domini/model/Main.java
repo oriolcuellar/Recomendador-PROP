@@ -13,8 +13,10 @@ public class Main {
         CtrlDomini c= CtrlDomini.getInstance();
         c.login(-1, "-1");
        c.loadRates();
-      // c.showRecommendedItems(5);
-       c.loadItems();
+        c.loadItems();
+        //c.showAllItems();
+        // c.showRecommendedItems(5);
+       //c.loadItems();
         //c.ShowRatedItems();
     }
 }

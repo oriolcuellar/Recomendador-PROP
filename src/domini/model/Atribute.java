@@ -7,7 +7,7 @@ import java.util.Vector;
 public class Atribute {
     //atributes
     private String nom;
-    private String tipus; //Boolean, String, Vector de String, Data, Rang
+    private String tipus; //Boolean, String, Vector de String, Data, Rang, Buit
     private boolean rellevant;
 
     //getters
@@ -20,6 +20,15 @@ public class Atribute {
     public String getType() {
         return tipus;
     }
+    public Double getLower() {
+        return 0.0;
+    }
+
+    public Double getUpper() {
+        return 0.0;
+    }
+    public void setLower(Double lower) { }
+    public void setUpper(Double upper) { }
 
     //setters
     public void setTipus(String tipus) {
@@ -36,17 +45,22 @@ public class Atribute {
     public Atribute(String name, String type) {
         nom = name;
         tipus = type;
-        rellevant=True;
+        rellevant=true;
     }
     public Atribute(String name) {
         nom = name;
-        rellevant=True;
+        rellevant=true;
         tipus="";
     }
     public Atribute() {
-        rellevant=True;
+        rellevant=true;
         tipus="";
         nom="";
+    }
+    public Atribute(Atribute a) {
+        rellevant=a.rellevant;
+        tipus=a.tipus;
+        nom=a.nom;
     }
 
     //operaciones varias
