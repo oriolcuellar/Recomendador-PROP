@@ -8,9 +8,9 @@ public class Conjunt_Items {
 
     //Atributes
     private ArrayList<Item> Items;
-
-    //Getters
-
+    public ArrayList<Item> getItems() {
+        return Items;
+    }
 
     //Creadora
     public Conjunt_Items(ArrayList<Item> items) {
@@ -26,15 +26,10 @@ public class Conjunt_Items {
     }
 
     //Getters
-    public ArrayList<Item> getItems() {
-            return Items;
-        }
-
     public  boolean existeix_item(int id) {
 
         return binarySearch(Items, 0, Items.size()-1, id);
     }
-
     public int get_posiion (Item a) {
 
         return binarySearchPosition(Items, 0, Items.size(), a.getID());
@@ -53,22 +48,12 @@ public class Conjunt_Items {
 
     public boolean anyadir_item(Item a)  {
 
-        //if (!existeix_item(a.getID())) {
+        if (!existeix_item(a.getID())) {
             int i = binarySearchPosition(Items, 0, Items.size(), a.getID());
             Items.add(i, a);
             return true;
-        //}
-        //else return false;//falta exception creo
-    }
-
-    public boolean borrar_item(Item a)  {
-
-        //if (existeix_item(a.getID())) {
-            int i = get_posiion(a);
-            Items.remove(i);
-            return true;
-       // }
-        //else return false;//falta exception creo
+        }
+        else return false;//falta exception creo
     }
 
     //Operacions Auxiliars

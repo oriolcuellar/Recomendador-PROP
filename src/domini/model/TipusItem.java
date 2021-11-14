@@ -11,10 +11,7 @@ public class TipusItem {
     private ArrayList<Atribute> atributes;
 
     //contructores
-
-    public TipusItem(){}
-
-    public TipusItem (ArrayList<Atribute> atributes) {
+    public TipusItem( ArrayList<Atribute> atributes) {
 
         Vector <String> v = new Vector<String> (atributes.size());
 
@@ -70,6 +67,7 @@ public class TipusItem {
         return true;
     }
 
+
     //operacions auxiliars
     public void binary_insertion(ArrayList<Atribute> atributes, Atribute a, int l, int r){
 
@@ -91,5 +89,5 @@ public class TipusItem {
 
         }
     }
-
+    public TipusItem(){}
 }

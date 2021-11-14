@@ -5,27 +5,34 @@ import java.util.Vector;
 
 //Author Jordi Olmo
 public class Atribute {
-
-    //Atributes
+    //atributes
     private String nom;
     private String tipus; //Boolean, String, Vector de String, Data, Rang
     private boolean rellevant;
 
-    //Constructors
+    //constructors
     public Atribute(String name, String type) {
         nom = name;
         tipus = type;
-        rellevant = true;
+        rellevant=true;
     }
     public Atribute(String name) {
         nom = name;
-        rellevant = true;
+        rellevant=true;
+        tipus="";
     }
     public Atribute() {
-        rellevant = true;
+        rellevant=true;
+        tipus="";
+        nom="";
+    }
+    public Atribute(Atribute a) {
+        rellevant=a.rellevant;
+        tipus=a.tipus;
+        nom=a.nom;
     }
 
-    //Getters
+    //getters
     public boolean isRellevant() {
         return rellevant;
     }
@@ -36,19 +43,19 @@ public class Atribute {
         return tipus;
     }
 
-    //Setters
-    public void setTipus (String tipus) {
+    //setters
+    public void setTipus(String tipus) {
         this.tipus = tipus;
     }
-    public void setNom (String nom) {
+    public void setNom(String nom) {
         this.nom = nom;
     }
-    public void setRellevant (boolean rellevant) {
+    public void setRellevant(boolean rellevant) {
         this.rellevant = rellevant;
     }
 
-    //operacions
-    public Vector<String> Construc_vector (String s) {
+    //operaciones
+    public Vector<String> Construc_vector(String s) {
 
         Vector<String> v = new Vector<String>(0);
         for (int i = 0;i < s.length(); i++ ){
