@@ -40,7 +40,7 @@ public class KND {
             ordenar_Items(Distances.get(j), M_de_Items.get(j), Valoracio.get(j),  0, Distances.get(j).size());
 
             //borra los que son mas que k
-            for (int i = k; i < M_de_Items.get(j).size(); ++i)
+            for (int i = M_de_Items.get(j).size() -1; i >= k ; --i)
                 M_de_Items.get(j).remove(i);
         }
 
@@ -134,7 +134,7 @@ public class KND {
         while (j < n2) {
             distancies.add(k, R[j]);
             Items.add(k, RI[j]);
-            Val.add(k, RV[i]);
+            Val.add(k, RV[j]);
             j++;
             k++;
         }

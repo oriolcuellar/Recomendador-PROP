@@ -39,7 +39,7 @@ public class CtrlDomini {
         actualUser = null;
         selectedItem = null;
         ratesList = new ArrayList<ItemUsat>();
-        itemList = new Conjunt_Items();
+       // itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
         User admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
@@ -211,8 +211,8 @@ public class CtrlDomini {
                     else{
                         if (a.getType().equals("Rang")){
                             double aux = Double.valueOf(vsv.get(pos));
-                            if (a.getUpper()<aux) a.setUpper(aux);
-                            if (a.getLower()>aux) a.setLower(aux);
+      //                      if (a.getUpper()<aux) a.setUpper(aux);
+  //                          if (a.getLower()>aux) a.setLower(aux);
                         }
                         else{
                             double min=Double.valueOf(vsv.get(pos));

@@ -21,7 +21,7 @@ public class K_Neareast_Neightbour {
 
         ArrayList<Double>  Distancias = new ArrayList<Double>();
 
-        for (int i = 0; i < Distances.length; ++i)
+        for (int i = 0; i < Distances[pos].length; ++i)
             Distancias.add(Distances[pos][i]);
         return Distancias;
     }

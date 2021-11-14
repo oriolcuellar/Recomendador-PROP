@@ -38,14 +38,14 @@ public class Main {
         ArrayList<String> Valors9 =  new ArrayList<String>(Arrays.asList("60", "Espa", "1999-00-00","true"));
 
         Item a2 = new Item(2, T1, Valors2);
-        Item a3 = new Item(2, T1, Valors3);
-        Item a4 = new Item(2, T1, Valors4);
-        Item a5 = new Item(2, T1, Valors5);
+        Item a3 = new Item(3, T1, Valors3);
+        Item a4 = new Item(4, T1, Valors4);
+        Item a5 = new Item(5, T1, Valors5);
 
-        Item a6 = new Item(2, T2, Valors6);
-        Item a7 = new Item(2, T2, Valors7);
-        Item a8 = new Item(2, T2, Valors8);
-        Item a9 = new Item(2, T2, Valors9);
+        Item a6 = new Item(6, T2, Valors6);
+        Item a7 = new Item(7, T2, Valors7);
+        Item a8 = new Item(8, T2, Valors8);
+        Item a9 = new Item(9, T2, Valors9);
 
         ArrayList<Item> Items = new ArrayList<Item>(Arrays.asList(a2, a3,a4, a5));
 
@@ -54,8 +54,14 @@ public class Main {
         ArrayList<Double> Valoracions = new ArrayList<Double>(Arrays.asList(3.2, 4.1,1.0, 2.1));
 
         KND prueba =new KND(3 ,Ct, ItemsUsats, Valoracions);
+        ArrayList<Item> Resultado= prueba.Algorithm();
 
-//el administrador es el num -1, hay que logearse con el antes de hacer nada. id= -1 passw = -1
+        for (int i = 0; i < Resultado.size(); ++i){
+
+            System.out.println(Resultado.get(i).getID());
+        }
+
+/*el administrador es el num -1, hay que logearse con el antes de hacer nada. id= -1 passw = -1
         CtrlDomini c= CtrlDomini.getInstance();
         c.login(-1, "-1");
        c.loadRates();
@@ -63,6 +69,6 @@ public class Main {
         //c.showAllItems();
         // c.showRecommendedItems(5);
        //c.loadItems();
-        //c.ShowRatedItems();
+        //c.ShowRatedItems();*/
     }
 }
