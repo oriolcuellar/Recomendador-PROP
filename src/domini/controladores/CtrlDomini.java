@@ -155,11 +155,12 @@ public class CtrlDomini {
                 vsv.add(datos[i]);
             }
         }
-        ArrayList<Atribute> va = new ArrayList<>();
+        ArrayList<Atribute> va = new ArrayList<>(); //ya has definido antes va
         for (String i : vsv) {
             Boolean ranged = true;
-            Atribute a = vsa.get();
-            a.setNom(i);
+            Atribute a = new Atribute(i); //ns si esta era lo que querias hacer
+            //Atribute a =  vsa.get();
+            //a.setNom(i);
             if (i.equals("False") || i.equals("True")) a.setTipus("Boolean");
             else if(i.contains(";")){
                 a.setTipus("Vector de String");

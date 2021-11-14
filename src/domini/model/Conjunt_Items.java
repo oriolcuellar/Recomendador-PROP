@@ -6,20 +6,18 @@ import java.util.*;
 //@Author Jordi Olmo
 public class Conjunt_Items {
 
+    //Atributes
     private ArrayList<Item> Items;
-
     public ArrayList<Item> getItems() {
         return Items;
     }
 
     //Creadora
-
     public Conjunt_Items(ArrayList<Item> items) {
         Items = items;
         Collections.sort(Items, new Comparator<Item> () {
 
-            // Used for sorting in ascending order of
-            // roll number
+            // Used for sorting in ascending order of Item.ID
             public int compare(Item a, Item b)
             {
                 return a.getID() - b.getID();
@@ -27,15 +25,26 @@ public class Conjunt_Items {
         });
     }
 
+    //Getters
     public  boolean existeix_item(int id) {
 
         return binarySearch(Items, 0, Items.size()-1, id);
     }
+    public int get_posiion (Item a) {
+
+        return binarySearchPosition(Items, 0, Items.size(), a.getID());
+    }
+
+    public int n_Items() { return Items.size();}
+
+    //Setters
 
     public boolean setItems(ArrayList<Item> items) {
         Items = items;
         return true;
     }
+
+    //Operacions
 
     public boolean anyadir_item(Item a)  {
 
@@ -47,12 +56,7 @@ public class Conjunt_Items {
         else return false;//falta exception creo
     }
 
-    public int get_posiion (Item a) {
-
-        return binarySearchPosition(Items, 0, Items.size(), a.getID());
-    }
-
-    public int n_Items() { return Items.size();}
+    //Operacions Auxiliars
 
     private boolean binarySearch(ArrayList<Item> Items, int l, int r, int ID) {
 
@@ -85,7 +89,4 @@ public class Conjunt_Items {
         }
         else return -1; //en teoria exception
     }
-
-
-
 }

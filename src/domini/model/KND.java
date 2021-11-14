@@ -7,6 +7,7 @@ import java.util.Collections;
 //@Author Jordi Olmo
 public class KND {
 
+    //Atributes
     private int k;
     private ArrayList<Integer> pos;
     private ArrayList<Item> items;
@@ -14,6 +15,7 @@ public class KND {
     private Conjunt_Items C_Items;
     private K_Neareast_Neightbour K_NN;
 
+    //Constructura
     public KND(int k, ArrayList<Item> a, ArrayList<ItemUsat> itemsUsats) {
         this.k = k;
         items = a;
@@ -24,6 +26,8 @@ public class KND {
             pos.add(i, C_Items.get_posiion(a.get(i)));
         K_NN = new K_Neareast_Neightbour(C_Items);
     }
+
+    //Operacions
 
     public ArrayList<Item> Algorithm() {
 
@@ -47,6 +51,8 @@ public class KND {
 
         return Items_a_devolver;
     }
+
+    //Operacions Auxiliars
 
     private void ordenar_Items(ArrayList <Double> distancies, ArrayList<Item> Items, ArrayList<Float> Val, int l, int r) {
 
@@ -135,8 +141,8 @@ public class KND {
             k++;
         }
     }
-    //Sent les matrius en ordre del parametres Y, Z, X -> per uns Item i, j qualsevols I_Finals = Sumatori(Zi*Yi) | Xi == Xj
 
+    //Sent les matrius en ordre del parametres Y, Z, X -> per uns Item i, j qualsevols I_Finals = Sumatori(Zi*Yi) | Xi == Xj
     private void comparar_conjunts (ArrayList<ArrayList<Float>> Val, ArrayList<Item> I_Finals, ArrayList<ArrayList<Double>> Distances,
                                     ArrayList <ArrayList<Item>> M_de_Items, int k) {
 
@@ -250,4 +256,5 @@ public class KND {
             for (int j = 0; j <M_de_Item.size(); ++j )
                 Val.set(j, M_de_Item.get(j).getValoracio());
     }
+
 }

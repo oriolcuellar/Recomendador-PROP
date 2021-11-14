@@ -19,6 +19,10 @@ public class Item {
     private TipusItem tipus;
     private ArrayList <String> valors;
 
+    //constructores
+
+    public Item(int ID) {this.ID = ID;}
+
     /* El indice del valor debe coincidir con el indice del atributo para funcionar*/
     public Item(int ID, TipusItem tipus, ArrayList <String> valors) {
         //    if (!Conjunt_Items.existeix_item(ID)) {
@@ -27,6 +31,26 @@ public class Item {
         valors = valors;
         //   }
     }
+
+    //getters
+
+    public int getID() {
+        return ID;
+    }
+    public TipusItem getTipus() {
+        return tipus;
+    }
+    public ArrayList getValors() {
+        return valors;
+    }
+
+    //setters
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    //operacions
 
     //mirar desacoplament de Atribute
     public Double Distance (Item b) {
@@ -72,7 +96,9 @@ public class Item {
         return Distancia;
     }
 
-    /* Es presoposa que que totels les ArrayList son de la mateixa mida = n_d, ja que tan sols funciona si els dos items tenen els mateixos atributs*/
+    //operacions auxiliars
+
+    /* Es presoposa que que tots els les ArrayList son de la mateixa mida = n_d, ja que tan sols funciona si els dos items tenen els mateixos atributs*/
     private Double comparador_tipus_iguals (ArrayList<Atribute>  V_A, ArrayList<Atribute>  V_B, ArrayList <String> Valors_A, ArrayList <String> Valors_B, int n_d) {
 
         Double distance = 0.0;
@@ -178,23 +204,4 @@ public class Item {
                 A.add(i, B.get(i));
     }
 
-    //getters
-    public int getID() {
-        return ID;
-    }
-    public TipusItem getTipus() {
-        return tipus;
-    }
-    public ArrayList getValors() {
-        return valors;
-    }
-    //setters
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    //constructores
-
-
-    public Item(int ID) {this.ID = ID;}
 }

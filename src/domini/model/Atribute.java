@@ -10,6 +10,20 @@ public class Atribute {
     private String tipus; //Boolean, String, Vector de String, Data, Rang
     private boolean rellevant;
 
+    //constructors
+    public Atribute(String name, String type) {
+        nom = name;
+        tipus = type;
+        rellevant = true;
+    }
+    public Atribute(String name) {
+        nom = name;
+        rellevant = true;
+    }
+    public Atribute() {
+        rellevant = true;
+    }
+
     //getters
     public boolean isRellevant() {
         return rellevant;
@@ -30,20 +44,6 @@ public class Atribute {
     }
     public void setRellevant(boolean rellevant) {
         this.rellevant = rellevant;
-    }
-
-    //constructores
-    public Atribute(String name, String type) {
-        nom = name;
-        tipus = type;
-        rellevant=True;
-    }
-    public Atribute(String name) {
-        nom = name;
-        rellevant=True;
-    }
-    public Atribute() {
-        rellevant=True;
     }
 
     //operaciones varias
