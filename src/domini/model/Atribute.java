@@ -42,6 +42,12 @@ public class Atribute {
     public String getType() {
         return tipus;
     }
+    public Double getLower() {
+        return 0.0;
+    }
+    public Double getUpper() {
+        return 0.0;
+    }
 
     //setters
     public void setTipus(String tipus) {
@@ -52,6 +58,10 @@ public class Atribute {
     }
     public void setRellevant(boolean rellevant) {
         this.rellevant = rellevant;
+    }
+    public void setLower(double low) {
+    }
+    public void setUpper(double up) {
     }
 
     //operaciones
