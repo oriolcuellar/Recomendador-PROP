@@ -157,7 +157,7 @@ public class CtrlDomini {
         }
         ArrayList<Atribute> va = new ArrayList<>();
         for (String i : vsv) {
-            Boolean ranged=True;
+            Boolean ranged = true;
             Atribute a = vsa.get();
             a.setNom(i);
             if (i.equals("False") || i.equals("True")) a.setTipus("Boolean");
@@ -172,7 +172,7 @@ public class CtrlDomini {
 
             else {
                 for (int p=0;p<i.length();++p){
-                    if (!((i.charAt(p)>='0' && i.charAt(p)>='0') || i.charAt(p)=='.')) ranged=False;
+                    if (!((i.charAt(p)>='0' && i.charAt(p)>='0') || i.charAt(p)=='.')) ranged = false;
                 }
                 if(ranged){
                     Ranged_Atribute ra = new Ranged_Atribute();
