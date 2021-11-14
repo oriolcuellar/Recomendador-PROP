@@ -1,4 +1,5 @@
 package src.domini.model;
+import src.domini.controladores.CtrlDomini;
 import src.domini.model.*;
 import java.util.ArrayList;
 import java.util.Map;
@@ -59,12 +60,7 @@ public class SlopeOne {
        return intersection(usersI, usersJ, user.getNumCluster());
     }
 
-
-
-    public void slopeOneAlgorithm(User user, Map<Integer,ArrayList<User>> itemValorateBy) {
-        this.itemValoratedBy = itemValorateBy;
-        this.user = user;
-
+    private void slopeOneAlgorithm(User user) {
         float meanValoration = calculateValorationMean(user);
         ArrayList<Integer> predictionsID = new ArrayList<>();
         ArrayList<Float> predictionsValoration = new ArrayList<>();
@@ -74,7 +70,7 @@ public class SlopeOne {
             if(!item.getValue().contains(user)) {
                 float valoration = meanValoration + calculateDesviationMean(user, item.getKey());
 
-                /* si tuvieramos el tiem
+                /* si tuvieramos el item
                 ItemUsat iu = new ItemUsat(item, user, valoration);
                 user.addItemUsat(iu);
                  */
@@ -82,8 +78,24 @@ public class SlopeOne {
                 predictionsValoration.add(valoration);
             }
         }
-    }
-    public SlopeOne(User u) {
+        printResults(predictionsID,predictionsValoration);
 
+    }
+
+    private void printResults(ArrayList<Integer> predictionsID, ArrayList<Float> predictionsValoration) {
+        for(int i = 0; i < predictionsID.size(); ++i) {
+            System.out.println("Valoracion estimada para el item " + predictionsID.get(i) +
+                    ": " + predictionsValoration.get(i));
+        }
+    }
+
+    //crea un SlopeOne únicamente con el mapa de items y quien los valora
+    public SlopeOne() {
+        this.itemValoratedBy = CtrlDomini.getInstance().elMapita;
+    }
+
+    //retorna las predicciones para el usuario u
+    public void getPredictions(User u){
+        slopeOneAlgorithm(user);
     }
 }
