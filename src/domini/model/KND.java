@@ -18,6 +18,7 @@ public class KND {
     public KND(int k, Conjunt_Items C, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
         this.k = k;
         this.Valoracions = Valoracions;
+        this.itemsUsats = itemsUsats;
         C_Items = C;
         for (int i = 0; i < itemsUsats.size(); ++i)
             C_Items.anyadir_item(itemsUsats.get(i));

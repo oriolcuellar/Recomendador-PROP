@@ -47,7 +47,7 @@ public class Atribute {
         this.rellevant = rellevant;
     }
 
-    //operacione
+    //operacions
     public Vector<String> Construc_vector (String s) {
 
         Vector<String> v = new Vector<String>(0);

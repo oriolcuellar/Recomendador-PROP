@@ -28,7 +28,7 @@ public class Item {
         //    if (!Conjunt_Items.existeix_item(ID)) {
         this.ID = ID;
         this.tipus = tipus;
-        valors = valors;
+        this.valors = valors;
         //   }
     }
 
@@ -135,7 +135,7 @@ public class Item {
 
                 }
 
-                //es considerarà que a partir de 50 anys de diferencia la distncia es 0
+                //es considerarà que a partir de 50 anys de diferencia la distancia es 0
                 // es considera que any pelicula > 1900
                 else if(V_A.get(i).getType().equals("Data")) {
 
