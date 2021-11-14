@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
        //DriverKmeans dr = new DriverKmeans();
        //dr.readRatingsExecuteKmeans(7);
-        Atribute AT = new Atribute("Peso", "Rang");
+        /*Atribute AT = new Atribute("Peso", "Rang");
         Atribute AT2 = new Atribute("Color", "String");
         Atribute AT3 = new Atribute("Fecha", "Data");
         Atribute AT4 = new Atribute("Disponible", "Boolean");
@@ -60,15 +60,17 @@ public class Main {
 
             System.out.println(Resultado.get(i).getID());
         }
-
-/*el administrador es el num -1, hay que logearse con el antes de hacer nada. id= -1 passw = -1
+*/
+//el administrador es el num -1, hay que logearse con el antes de hacer nada. id= -1 passw = -1
         CtrlDomini c= CtrlDomini.getInstance();
         c.login(-1, "-1");
        c.loadRates();
-        //c.loadItems();
-        //c.showAllItems();
+        c.loadItems();
+
+
+        c.showAllItems();
         // c.showRecommendedItems(5);
        //c.loadItems();
-        //c.ShowRatedItems();*/
+        //c.ShowRatedItems();
     }
 }

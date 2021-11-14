@@ -39,7 +39,7 @@ public class CtrlDomini {
         actualUser = null;
         selectedItem = null;
         ratesList = new ArrayList<ItemUsat>();
-       // itemList = new Conjunt_Items();
+        itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
         User admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
@@ -110,7 +110,7 @@ public class CtrlDomini {
     public void rateItem(){}
     public void showAllItems(){
         for(Item i: itemList.getItems()){
-            System.out.println("\n" + i.getID() + "\n");
+            System.out.println(i.getID());
         }
     }
     public void ShowRatedItems(){
@@ -125,10 +125,34 @@ public class CtrlDomini {
     public void exit(){}
     public void createItem(String atributs, String valors){
 
+        //string to arraylist de valors
+        ArrayList<String> datos_valors = new ArrayList<String>();
+        String pal="";
+        boolean frase=false;
+        for (int iterat=0;iterat<valors.length();++iterat){
+            if(valors.charAt(iterat)=='"'){
+                frase=!frase;
+            }
+            if(valors.charAt(iterat)!=',' || frase){
+                pal+=valors.charAt(iterat);
+            }
+            if(valors.charAt(iterat)==',' && !frase){
+                if (pal.length()==0) pal="";
+                datos_valors.add(pal);
+                //System.out.println(pal);
+                pal="";
+
+            }
+        }
+        if (valors.charAt(valors.length()-1)==','){
+            datos_valors.add("");
+        }
+        else datos_valors.add(pal);
 
         //cremos vector atributos
 
         String[] datos = atributs.split(",");
+        //System.out.println(datos.length);
         ArrayList <Atribute> va = new ArrayList<Atribute>();
         ArrayList <String> vsa = new ArrayList<String>();//solo para definir el tipo de item
         int pos_id=0;
@@ -138,12 +162,13 @@ public class CtrlDomini {
                 Atribute aux = new Atribute(datos[i]);
                 va.add(aux);
                 vsa.add(datos[i]);
+
             }
         }
 
         //miramos si no existe item
-        String[] datos3 = valors.split(",");
-        int comp = Integer.valueOf(datos3[pos_id]);
+
+        int comp = Integer.valueOf(datos_valors.get(pos_id));
         if (itemList.existeix_item(comp)){
             System.out.println("ja existeix id");
             //acabar la funcion-----------------------------------------------------------------------------
@@ -164,11 +189,17 @@ public class CtrlDomini {
 
         //DEFINIR TIPO ATRIBUTO
             //string de valores to vector
-        String[] datos2 = valors.split(",");
+
+        //if (valors[valors.length()].equals(","))
+        System.out.println(vsa.size());
+        System.out.println(datos_valors.size());
         ArrayList <String> vsv= new ArrayList<String>();
         for (int i = 0; i <vsa.size()+1; ++i) {
+            //System.out.println(datos_valors.get(i));
             if(i!=pos_id){
-                vsv.add(datos2[i]);
+                //System.out.println(vsa.get(i));
+
+                vsv.add(datos_valors.get(i));
             }
         }
         for (int pos=0;pos<vsv.size();pos++) {
@@ -232,9 +263,9 @@ public class CtrlDomini {
             }
         }
 
-        System.out.println("llego");
+
         //creamos item
-        int id = Integer.valueOf(datos[pos_id]);
+        int id = Integer.valueOf(datos_valors.get(pos_id));
         Item i =new Item(id, ti, vsv);
         if (!(itemList.existeix_item(id))) itemList.anyadir_item(i);
 
@@ -290,7 +321,9 @@ public class CtrlDomini {
 
         }
     }
-    public void createUser(){}
+    public void createUser( ){
+
+    }
 
 }
 //driver stubs por cada clase
