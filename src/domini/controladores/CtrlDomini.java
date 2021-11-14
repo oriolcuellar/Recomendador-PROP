@@ -21,8 +21,8 @@ public class CtrlDomini {
     private static Map <Integer, User> usersList;
     private static ArrayList <ItemUsat> ratesList;
     private static ArrayList<Item> itemList;
-
     private static Map <String, TipusItem> itemTypeList;
+
 //CtrlDomini control= CtrlDomini.getInstance();
 //control.getAllUsers();
 //constructor
@@ -141,25 +141,32 @@ public class CtrlDomini {
                 vsa.add(datos[i]);
             }
         }
-        //creamos tipus item
+
+        //creamos tipus item si NO EXISTE
         String ID_ti=vsa.toString();
-        TipusItem ti = new TipusItem(va);
+        TipusItem ti;
+        if (itemTypeList.containsKey(ID_ti)){//existe
+            ti=itemTypeList.get(ID_ti);
+            va=ti.getAtributes();
+        }
+        else{//no existe
+            ti = new TipusItem(va);
+            itemTypeList.put(ID_ti, ti);
+        }
 
         //DEFINIR TIPO ATRIBUTO
             //string de valores to vector
         String[] datos2 = valors.split(",");
         ArrayList <String> vsv= new ArrayList<String>();
-        for (int i = 0; i <vsa.size(); ++i) {
+        for (int i = 0; i <vsa.size()+1; ++i) {
             if(i!=pos_id){
-                Atribute aux = new Atribute(datos[i]);
-                vsv.add(datos[i]);
+                vsv.add(datos2[i]);
             }
         }
-        ArrayList<Atribute> va = new ArrayList<>();
-        for (String i : vsv) {
+        for (int pos=0;pos<vsv.size();pos++) {
+            String i = vsv.get(pos);
             Boolean ranged = true;
-            Atribute a = vsa.get();
-            a.setNom(i);
+            Atribute a = va.get(pos);
             if (i.equals("False") || i.equals("True")) a.setTipus("Boolean");
             else if(i.contains(";")){
                 a.setTipus("Vector de String");
@@ -172,7 +179,7 @@ public class CtrlDomini {
 
             else {
                 for (int p=0;p<i.length();++p){
-                    if (!((i.charAt(p)>='0' && i.charAt(p)>='0') || i.charAt(p)=='.')) ranged = false;
+                    if (!((i.charAt(p)>='0' && i.charAt(p)<='9') || i.charAt(p)=='.')) ranged = false;
                 }
                 if(ranged){
                     Ranged_Atribute ra = new Ranged_Atribute();
@@ -181,7 +188,9 @@ public class CtrlDomini {
                     va.add(ra);
 
                 }
-                else a.setTipus("String");
+                else if (a.getType().equals("")){//si la estaba creado y no tenia valor de string
+                    a.setTipus("String");
+                }
             }
             if(!(ranged)) va.add(a);
         }
@@ -242,9 +251,9 @@ public class CtrlDomini {
             System.out.println("\n" + "usuari no es aministrador" + "\n");
         }
     }//to do------------------------------------
-    public void deleteUser(){
+    public void deleteUser(String delete_me){
         //pre: actualUser admin
-        if(actualUser.getRol().equals(TipusRol.Administrador)){
+        if(actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1")){//no esborres l'admin
 
         }
     }

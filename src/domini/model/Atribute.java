@@ -41,9 +41,12 @@ public class Atribute {
     public Atribute(String name) {
         nom = name;
         rellevant=True;
+        tipus="";
     }
     public Atribute() {
         rellevant=True;
+        tipus="";
+        nom="";
     }
 
     //operaciones varias
