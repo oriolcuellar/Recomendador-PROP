@@ -3,8 +3,10 @@ package src.domini.model;
 import src.domini.model.*;
 public class Ranged_Atribute  extends Atribute{
 
+    //Atributes
     private Double lower, upper;
 
+    //Constructor
     public Ranged_Atribute(String name, String type, Double min, Double max) {
         super(name, type);
         lower = min;
@@ -20,7 +22,6 @@ public class Ranged_Atribute  extends Atribute{
     public Double getLower() {
         return lower;
     }
-
     public Double getUpper() {
         return upper;
     }

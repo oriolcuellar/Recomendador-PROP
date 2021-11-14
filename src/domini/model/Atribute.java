@@ -7,41 +7,10 @@ import java.util.Vector;
 public class Atribute {
     //atributes
     private String nom;
-    private String tipus; //Boolean, String, Vector de String, Data, Rang, Buit
+    private String tipus; //Boolean, String, Vector de String, Data, Rang
     private boolean rellevant;
 
-    //getters
-    public boolean isRellevant() {
-        return rellevant;
-    }
-    public String getName() {
-        return nom;
-    }
-    public String getType() {
-        return tipus;
-    }
-    public Double getLower() {
-        return 0.0;
-    }
-
-    public Double getUpper() {
-        return 0.0;
-    }
-    public void setLower(Double lower) { }
-    public void setUpper(Double upper) { }
-
-    //setters
-    public void setTipus(String tipus) {
-        this.tipus = tipus;
-    }
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-    public void setRellevant(boolean rellevant) {
-        this.rellevant = rellevant;
-    }
-
-    //constructores
+    //constructors
     public Atribute(String name, String type) {
         nom = name;
         tipus = type;
@@ -63,7 +32,29 @@ public class Atribute {
         nom=a.nom;
     }
 
-    //operaciones varias
+    //getters
+    public boolean isRellevant() {
+        return rellevant;
+    }
+    public String getName() {
+        return nom;
+    }
+    public String getType() {
+        return tipus;
+    }
+
+    //setters
+    public void setTipus(String tipus) {
+        this.tipus = tipus;
+    }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    public void setRellevant(boolean rellevant) {
+        this.rellevant = rellevant;
+    }
+
+    //operaciones
     public Vector<String> Construc_vector(String s) {
 
         Vector<String> v = new Vector<String>(0);

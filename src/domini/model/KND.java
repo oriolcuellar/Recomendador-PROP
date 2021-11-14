@@ -7,34 +7,36 @@ import java.util.Collections;
 //@Author Jordi Olmo
 public class KND {
 
+    //Atributes
     private int k;
-    private ArrayList<Integer> pos;
-    private ArrayList<Item> items;
-    private ArrayList<ItemUsat> itemsUsats;
+    private ArrayList<Item> itemsUsats;
+    private ArrayList<Double> Valoracions;
     private Conjunt_Items C_Items;
     private K_Neareast_Neightbour K_NN;
 
-    public KND(int k, ArrayList<Item> a, ArrayList<ItemUsat> itemsUsats) {
+    //Constructura
+    public KND(int k, Conjunt_Items C, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
         this.k = k;
-        items = a;
-        for (int i = 0; i < a.size(); ++i)
-            a.add(i, itemsUsats.get(i).getItem());
-        C_Items = new Conjunt_Items(a);
-        for (int i = 0; i < a.size(); ++i)
-            pos.add(i, C_Items.get_posiion(a.get(i)));
+        this.Valoracions = Valoracions;
+        this.itemsUsats = itemsUsats;
+        C_Items = C;
+        for (int i = 0; i < itemsUsats.size(); ++i)
+            C_Items.anyadir_item(itemsUsats.get(i));
         K_NN = new K_Neareast_Neightbour(C_Items);
     }
+
+    //Operacions
 
     public ArrayList<Item> Algorithm() {
 
         ArrayList <ArrayList<Item>> M_de_Items = new ArrayList<ArrayList<Item>>();
         ArrayList<ArrayList<Double>> Distances = new ArrayList<ArrayList<Double>>();
-        ArrayList <ArrayList<Float>> Valoracio = new ArrayList<ArrayList<Float>>();
-        for (int j = 0; j < pos.size(); ++j) {
+        ArrayList <ArrayList<Double>> Valoracio = new ArrayList<ArrayList<Double>>();
+        for (int j = 0; j < C_Items.n_Items(); ++j) {
 
-            Distances.add(j, K_NN.Distancies_i(pos.get(j)));
+            Distances.add(j, K_NN.Distancies_i(j));
             M_de_Items.add(j, C_Items.getItems());
-            passar_valoraciones(itemsUsats, Valoracio.get(j));
+            Valoracio.add(j, Valoracions);
             ordenar_Items(Distances.get(j), M_de_Items.get(j), Valoracio.get(j),  0, Distances.get(j).size());
 
             //borra los que son mas que k
@@ -48,7 +50,9 @@ public class KND {
         return Items_a_devolver;
     }
 
-    private void ordenar_Items(ArrayList <Double> distancies, ArrayList<Item> Items, ArrayList<Float> Val, int l, int r) {
+    //Operacions Auxiliars
+
+    private void ordenar_Items(ArrayList <Double> distancies, ArrayList<Item> Items, ArrayList<Double> Val, int l, int r) {
 
         if (l < r) {
             // Troba el punt del mig
@@ -63,7 +67,7 @@ public class KND {
         }
     }
 
-    private void merge(ArrayList <Double> distancies,ArrayList<Item> Items, ArrayList<Float> Val, int l, int m, int r)
+    private void merge(ArrayList <Double> distancies,ArrayList<Item> Items, ArrayList<Double> Val, int l, int m, int r)
     {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
@@ -76,8 +80,8 @@ public class KND {
         Item LI[] = new Item[n1];
         Item RI[] = new Item[n2];
 
-        Float LV[] = new Float[n1];
-        Float RV[] = new Float[n2];
+        Double LV[] = new Double[n1];
+        Double RV[] = new Double[n2];
 
         /*Copy data to temp arrays*/
         for (int i = 0; i < n1; ++i) {
@@ -134,35 +138,6 @@ public class KND {
             j++;
             k++;
         }
-    }
-    //Sent les matrius en ordre del parametres Y, Z, X -> per uns Item i, j qualsevols I_Finals = Sumatori(Zi*Yi) | Xi == Xj
-
-    private void comparar_conjunts (ArrayList<ArrayList<Float>> Val, ArrayList<Item> I_Finals, ArrayList<ArrayList<Double>> Distances,
-                                    ArrayList <ArrayList<Item>> M_de_Items, int k) {
-
-        ArrayList <Double> Valors = new ArrayList<Double>();
-        for (int i = 0; i < M_de_Items.size(); ++i)
-            for (int j = 0; j < M_de_Items.get(i).size(); ++j) {
-
-                if (!I_Finals.contains(M_de_Items.get(i).get(j))) {
-
-                    I_Finals.add(i, M_de_Items.get(i).get(j));
-                    Double multiplicacio =  Distances.get(i).get(j) * Val.get(i).get(j);
-                    Valors.set(i, multiplicacio);
-                }
-                else {
-
-                    int p = I_Finals.indexOf(M_de_Items.get(i).get(j));
-                    Double multiplicacio =  Distances.get(i).get(j) * Val.get(i).get(j);
-                    Double nou = Valors.get(p) + multiplicacio;
-                    Valors.set(p, nou);
-                }
-            }
-
-        ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size());
-
-        for (int i = k; i < I_Finals.size(); ++i)
-            I_Finals.remove(i);
     }
 
     private void ordenar_simplificado(ArrayList<Item> Items, ArrayList<Double> Val, int l, int r) {
@@ -245,9 +220,33 @@ public class KND {
         }
     }
 
-    private void passar_valoraciones(ArrayList <ItemUsat> M_de_Item, ArrayList <Float> Val) {
+    //Sent les matrius en ordre del parametres Y, Z, X -> per uns Item i, j qualsevols I_Finals = Sumatori(Zi*Yi) | Xi == Xj
+    private void comparar_conjunts (ArrayList<ArrayList<Double>> Val, ArrayList<Item> I_Finals, ArrayList<ArrayList<Double>> Distances,
+                                    ArrayList <ArrayList<Item>> M_de_Items, int k) {
 
-            for (int j = 0; j <M_de_Item.size(); ++j )
-                Val.set(j, M_de_Item.get(j).getValoracio());
+        ArrayList <Double> Valors = new ArrayList<Double>();
+        for (int i = 0; i < M_de_Items.size(); ++i)
+            for (int j = 0; j < M_de_Items.get(i).size(); ++j) {
+
+                if (!I_Finals.contains(M_de_Items.get(i).get(j))) {
+
+                    I_Finals.add(i, M_de_Items.get(i).get(j));
+                    Double multiplicacio =  Distances.get(i).get(j) * Val.get(i).get(j);
+                    Valors.set(i, multiplicacio);
+                }
+                else {
+
+                    int p = I_Finals.indexOf(M_de_Items.get(i).get(j));
+                    Double multiplicacio =  Distances.get(i).get(j) * Val.get(i).get(j);
+                    Double nou = Valors.get(p) + multiplicacio;
+                    Valors.set(p, nou);
+                }
+            }
+
+        ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size());
+
+        for (int i = k; i < I_Finals.size(); ++i)
+            I_Finals.remove(i);
     }
+
 }
