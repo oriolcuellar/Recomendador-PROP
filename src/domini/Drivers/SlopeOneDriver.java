@@ -4,7 +4,7 @@ import src.domini.model.*;
 
 import java.util.*;
 
-public class SlopeOneDriver extends SlopeOne {
+public class SlopeOneDriver{
     /*private static void printUsers(ArrayList<User> users) {
         for (User user : users) {
             System.out.print(user.getUserID() + " ");
@@ -51,33 +51,45 @@ public class SlopeOneDriver extends SlopeOne {
         User user6 = new User(6,"1234", null,2);
         User user7 = new User(7,"1234", null,1);
 
-
         usersItem1.add(user0);
         usersItem1.add(user1);
         usersItem1.add(user4);
         usersItem1.add(user7);
 
-        user0.addItemUsat(1, 2.);
-        user1.addItemUsat(1, 2.);
-        user4.addItemUsat(1, 2.);
-        user7.addItemUsat(1, 2.);
-
-
+        user0.addItemUsat(1, 2);
+        user1.addItemUsat(1, 5);
+        user4.addItemUsat(1, (float)1.5);
+        user7.addItemUsat(1, 2);
 
         usersItem2.add(user3);
         usersItem2.add(user2);
         usersItem2.add(user4);
         usersItem2.add(user6);
 
+        user3.addItemUsat(2, 3);
+        user2.addItemUsat(2, (float)4.5);
+        user4.addItemUsat(2, (float)0.5);
+        user6.addItemUsat(2, 5);
+
         usersItem3.add(user5);
         usersItem3.add(user1);
         usersItem3.add(user6);
         usersItem3.add(user2);
 
+        user5.addItemUsat(3, 1);
+        user1.addItemUsat(3, (float)2.5);
+        user6.addItemUsat(3, (float)0.5);
+        user2.addItemUsat(3, 4);
+
         usersItem4.add(user3);
         usersItem4.add(user1);
         usersItem4.add(user0);
         usersItem4.add(user7);
+
+        user3.addItemUsat(4, 3);
+        user1.addItemUsat(4, 0);
+        user0.addItemUsat(4, (float)2.5);
+        user7.addItemUsat(4, 3);
 
         Map<Integer,ArrayList<User>> items = new HashMap<Integer,ArrayList<User>>();
         items.put(1, usersItem1);
@@ -85,9 +97,10 @@ public class SlopeOneDriver extends SlopeOne {
         items.put(3, usersItem3);
         items.put(4, usersItem4);
 
+        SlopeOne So = new SlopeOne(items);
 
-
-
-
+        So.getPredictions(user1);
+        System.out.println(user1.getItemsUsats());
+        So.printResults();
     }
 }

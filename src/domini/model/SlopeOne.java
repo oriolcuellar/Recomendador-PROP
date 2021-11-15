@@ -10,7 +10,7 @@ public class SlopeOne {
     private Map<Integer,ArrayList<User>> itemValoratedBy;
     private ArrayList<myPair> predictions;
 
-    protected static ArrayList<User> intersection(ArrayList<User> l1, ArrayList<User> l2, int numCluster) {
+    private ArrayList<User> intersection(ArrayList<User> l1, ArrayList<User> l2, int numCluster) {
         ArrayList<User> l3 = new ArrayList<User>();
         for (User user1 : l1) {
             if (user1.getNumCluster() == numCluster) {
@@ -24,7 +24,7 @@ public class SlopeOne {
         return l3;
     }
 
-    protected static float calculateDesviation(int IDitemI, int IDitemJ, ArrayList<User> usersIJ) {
+    private float calculateDesviation(int IDitemI, int IDitemJ, ArrayList<User> usersIJ) {
         float sumTotal = 0;
         for (User user : usersIJ) {
             float valorationUserI = user.searchUsedItem(IDitemI).getValoracio();
@@ -80,17 +80,11 @@ public class SlopeOne {
         }
     }
 
-    private void printResults(ArrayList<Integer> predictionsID, ArrayList<Float> predictionsValoration) {
-        for(int i = 0; i < predictionsID.size(); ++i) {
-            System.out.println("Valoracion estimada para el item " + predictionsID.get(i) +
-                    ": " + predictionsValoration.get(i));
+    public void printResults() {
+        for(int i = 0; i < predictions.size(); ++i) {
+            System.out.println("Valoracion estimada para el item " + predictions.get(i).getItemID() +
+                    ": " + predictions.get(i).getValoration());
         }
-    }
-
-    //crea un SlopeOne únicamente con el mapa de items y quien los valora
-    public SlopeOne() {
-        //this.itemValoratedBy = CtrlDomini.getInstance().elMapita;
-        this.predictions = new ArrayList<myPair>();
     }
 
     public SlopeOne(Map<Integer,ArrayList<User>> itemValoratedBy) {
@@ -98,7 +92,8 @@ public class SlopeOne {
     }
 
     //retorna las predicciones para el usuario u
-    public ArrayList<myPair> getPredictions(User u){
+    public ArrayList<myPair> getPredictions(User user){
+        this.user = user;
         slopeOneAlgorithm(user);
         return predictions;
     }

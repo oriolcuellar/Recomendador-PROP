@@ -85,6 +85,10 @@ public class Kmeans {
         }
     }
 
+    public ArrayList<Cluster> getClusters() {
+        return clusters;
+    }
+
     // Functions
 
     public void newValoration(User user) {
