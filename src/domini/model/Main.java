@@ -63,12 +63,11 @@ public class Main {
 */
 //el administrador es el num -1, hay que logearse con el antes de hacer nada. id= -1 passw = -1
         CtrlDomini c= CtrlDomini.getInstance();
-        c.login(-1, "-1");
-       c.loadRates();
-        c.loadItems();
+        c.login("-1", "-1");
+       //c.loadRates();
+        //c.loadItems();
 
-
-        c.showAllItems();
+        //c.showAllItems();
         // c.showRecommendedItems(5);
        //c.loadItems();
         //c.ShowRatedItems();

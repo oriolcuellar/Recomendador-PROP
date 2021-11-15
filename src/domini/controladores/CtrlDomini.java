@@ -52,10 +52,12 @@ public class CtrlDomini {
 
 //Profile controller
 
-    public void register(Integer userId, String password){
-        //pre: Usuari actiu null, userId not exists, userId and password not null
+    public void register(String struserId, String password){
+        //pre: Los strings no son null,
         //post: es crea un usuari i es posa d'usuari actiu.
-        if (usersList.containsKey(userId) || actualUser!=null || userId==null || password==null || password.equals("")){
+        //err: Usuari actiu null, userId not exists, userId and password not null
+        int userId=Integer.valueOf(struserId);
+        if (usersList.containsKey(userId) || actualUser!=null || struserId.equals("") || password.equals("")){
 
             System.out.println("\n error al registrar \n");
         }
@@ -65,9 +67,10 @@ public class CtrlDomini {
             usersList.put(userId, actualUser);
         }
     }
-    public void login(int userId, String password){
+    public void login(String struserId, String password){
         //pre: Usuari actiu null, User amb userId i password existeix
         //post: es crea un usuari i es posa d'usuari actiu.
+        int userId=Integer.valueOf((struserId));
         if (actualUser!=null) {
             System.out.println("\n tanca sessio primer \n");
         }
