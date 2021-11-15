@@ -3,6 +3,7 @@ import src.domini.controladores.CtrlDomini;
 import src.domini.model.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import static java.lang.Math.max;
@@ -58,7 +59,7 @@ public class SlopeOne {
                 }
             }
         }
-        if(count != 0) return max(num/count,0);
+        if(count != 0) return num/count;
         return -1;
     }
 
