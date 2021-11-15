@@ -334,11 +334,16 @@ public class CtrlDomini {
     }
     public void createUser( String create_me){
         if(actualUser.getRol().equals(TipusRol.Administrador) ){//no esborres l'admin
-            /*if (!usersList.exixsts(create_me)){
-              User nou = new User(Integer.ValueOf(create_me));
-                usersList.put(Integer.ValueOf(create_me), u);
-            }*/
+            if (!usersList.containsKey(create_me)){
+              User nou = new User(Integer.valueOf(create_me));
+                usersList.put(Integer.valueOf(create_me), nou);
+            }
 
+        }
+    }
+    public void showAllUsers( ){
+        for (User u: usersList.values()){
+            System.out.println(u.getUserID());
         }
     }
 
