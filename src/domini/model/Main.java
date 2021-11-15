@@ -10,13 +10,13 @@ public class Main {
     public static void main(String[] args) {
        //DriverKmeans dr = new DriverKmeans();
        //dr.readRatingsExecuteKmeans(7);
-        Ranged_Atribute AT = new Ranged_Atribute("Peso", "Rang", 32.4, 75.8);
+        /*Atribute AT = new Atribute("Peso", "Rang");
         Atribute AT2 = new Atribute("Color", "String");
         Atribute AT3 = new Atribute("Fecha", "Data");
         Atribute AT4 = new Atribute("Disponible", "Boolean");
         Atribute AT5 = new Atribute("KeyWords", "Vector de String");
 
-        Ranged_Atribute AU = new Ranged_Atribute("Duracion", "Rang", 60.0, 240.0);
+        Atribute AU = new Atribute("Duracion", "Rang");
         Atribute AU2 = new Atribute("Idioma", "String");
         Atribute AU4 = new Atribute("Disponible", "Boolean");
         Atribute AU3 = new Atribute("Estreno", "Data");
@@ -27,15 +27,15 @@ public class Main {
         TipusItem T1 = new TipusItem (Tipus1);
         TipusItem T2 = new TipusItem (Tipus2);
 
-        ArrayList<String> Valors2 =  new ArrayList<String>(Arrays.asList("Verde", "true", "1992-04-12", "hola;que;tal", "32.4"));
-        ArrayList<String> Valors3 =  new ArrayList<String>(Arrays.asList("Verde", "false", "1960-05-03","Burnos;dias;siñorina", "75.8"));
-        ArrayList<String> Valors4 =  new ArrayList<String>(Arrays.asList("Rojo", "false", "2000-12-04", "Habia;una;vez;un;varquito;chuiquito;dias", "32.4"));
-        ArrayList<String> Valors5 =  new ArrayList<String>(Arrays.asList("Azul", "", "1999-00-00", "hola;que;tal", "46.8"));
+        ArrayList<String> Valors2 =  new ArrayList<String>(Arrays.asList("32.4", "Verde", "1992-04-12","true", "hola;que;tal"));
+        ArrayList<String> Valors3 =  new ArrayList<String>(Arrays.asList("75.8", "Verde", "1960-05-03","false", "Burnos;dias;siñorina"));
+        ArrayList<String> Valors4 =  new ArrayList<String>(Arrays.asList("32.4", "Rojo", "2000-12-04","false", "Habia;una;vex;una;varquito;chuiquito;dias"));
+        ArrayList<String> Valors5 =  new ArrayList<String>(Arrays.asList("32.4", "Azul", "1999-00-00","", "hola;que;tal"));
 
-        ArrayList<String> Valors6 =  new ArrayList<String>(Arrays.asList("true", "120","1992-04-12", "Ingles" ));
-        ArrayList<String> Valors7 =  new ArrayList<String>(Arrays.asList("false", "712", "1960-05-03", "Españolo"));
-        ArrayList<String> Valors8 =  new ArrayList<String>(Arrays.asList("", "240", "2000-12-04", "Ingles"));
-        ArrayList<String> Valors9 =  new ArrayList<String>(Arrays.asList("true", "60", "1999-00-00", "Espa"));
+        ArrayList<String> Valors6 =  new ArrayList<String>(Arrays.asList("120", "Ingles", "1992-04-12","true"));
+        ArrayList<String> Valors7 =  new ArrayList<String>(Arrays.asList("712", "Españolo", "1960-05-03","false"));
+        ArrayList<String> Valors8 =  new ArrayList<String>(Arrays.asList("240", "Ingles", "2000-12-04",""));
+        ArrayList<String> Valors9 =  new ArrayList<String>(Arrays.asList("60", "Espa", "1999-00-00","true"));
 
         Item a2 = new Item(2, T1, Valors2);
         Item a3 = new Item(3, T1, Valors3);
@@ -60,15 +60,17 @@ public class Main {
 
             System.out.println(Resultado.get(i).getID());
         }
-
-/*el administrador es el num -1, hay que logearse con el antes de hacer nada. id= -1 passw = -1
+*/
+//el administrador es el num -1, hay que logearse con el antes de hacer nada. id= -1 passw = -1
         CtrlDomini c= CtrlDomini.getInstance();
         c.login(-1, "-1");
        c.loadRates();
-        //c.loadItems();
-        //c.showAllItems();
+        c.loadItems();
+
+
+        c.showAllItems();
         // c.showRecommendedItems(5);
        //c.loadItems();
-        //c.ShowRatedItems();*/
+        //c.ShowRatedItems();
     }
 }
