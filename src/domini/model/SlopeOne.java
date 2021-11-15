@@ -102,6 +102,7 @@ public class SlopeOne {
     public ArrayList<myPair> getPredictions(User user){
         this.user = user;
         slopeOneAlgorithm(user);
+        // Hay que ordenarlos
         return predictions;
     }
 }
