@@ -16,8 +16,8 @@ public class CtrlDomini {
 
     private static CtrlDomini   dominiSingelton = null;
 
-    private User actualUser;
-    private Item selectedItem;
+    private static User actualUser;
+    private static Item selectedItem;
     private static Map <Integer, User> usersList;
     private static ArrayList <ItemUsat> ratesList;
     private static Conjunt_Items itemList;
@@ -53,9 +53,9 @@ public class CtrlDomini {
 //Profile controller
 
     public void register(String struserId, String password){
-        //pre: Los strings no son null,
+        //pre: Los strings no son null
         //post: es crea un usuari i es posa d'usuari actiu.
-        //err: Usuari actiu null, userId not exists, userId and password not null
+        //err: Usuari actiu null, userId not exists, id o passw son strings buits
         int userId=Integer.valueOf(struserId);
         if (usersList.containsKey(userId) || actualUser!=null || struserId.equals("") || password.equals("")){
 
@@ -108,7 +108,7 @@ public class CtrlDomini {
 
 
     }
-    public void rateRecommendation(){}//to do----------------------
+
     public void selectItem(){}
     public void rateItem(){}
     public void showAllItems(){
@@ -194,8 +194,8 @@ public class CtrlDomini {
             //string de valores to vector
 
         //if (valors[valors.length()].equals(","))
-        System.out.println(vsa.size());
-        System.out.println(datos_valors.size());
+        //System.out.println(vsa.size());
+        //System.out.println(datos_valors.size());
         ArrayList <String> vsv= new ArrayList<String>();
         for (int i = 0; i <vsa.size()+1; ++i) {
             //System.out.println(datos_valors.get(i));
