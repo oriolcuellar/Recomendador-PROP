@@ -36,9 +36,15 @@ public class KND {
         ArrayList <ArrayList<Double>> Valoracio = new ArrayList<ArrayList<Double>>();
         for (int j = 0; j < C_Items.n_Items(); ++j) {
 
+            ArrayList<Item> Items_Aux = new ArrayList<Item>();
+            ArrayList<Double> Val_Aux = new ArrayList<Double>();
+
+            clonador_ArrayList(Items_Aux, C_Items.getItems());
+            clonador_ArrayList(Val_Aux, Valoracions);
+
             Distances.add(j, K_NN.Distancies_i(j));
-            M_de_Items.add(j, C_Items.getItems());
-            Valoracio.add(j, Valoracions);
+            M_de_Items.add(j, Items_Aux);
+            Valoracio.add(j, Val_Aux);
             ordenar_Items(Distances.get(j), M_de_Items.get(j), Valoracio.get(j),  0, Distances.get(j).size()-1);
 
             /*//borra los que son mas que k
@@ -54,6 +60,34 @@ public class KND {
 
     //Operacions Auxiliars
 
+    //Sent les matrius en ordre del parametres Y, Z, X -> per uns Item i, j qualsevols I_Finals = Sumatori(Zi*Yi) | Xi == Xj
+    private void comparar_conjunts (ArrayList<ArrayList<Double>> Val, ArrayList<Item> I_Finals, ArrayList<ArrayList<Double>> Distances,
+                                    ArrayList <ArrayList<Item>> M_de_Items, int k) {
+
+        ArrayList <Double> Valors = new ArrayList<Double>();
+        for (int i = 0; i < M_de_Items.size(); ++i)
+            for (int j = 0; j < M_de_Items.get(i).size(); ++j) {
+
+                if (!I_Finals.contains(M_de_Items.get(i).get(j))) {
+
+                    I_Finals.add(i, M_de_Items.get(i).get(j));
+                    Double multiplicacio =  Distances.get(i).get(j) * Val.get(i).get(j);
+                    Valors.add(i, multiplicacio);
+                }
+                else {
+
+                    int p = I_Finals.indexOf(M_de_Items.get(i).get(j));
+                    Double multiplicacio =  Distances.get(i).get(j) * Val.get(i).get(j);
+                    Double nou = Valors.get(p) + multiplicacio;
+                    Valors.set(p, nou);
+                }
+            }
+
+        ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size()-1);
+
+        for (int i = I_Finals.size()-1; i >= k ; --i)
+            I_Finals.remove(i);
+    }
     private void ordenar_Items(ArrayList <Double> distancies, ArrayList<Item> Items, ArrayList<Double> Val, int l, int r) {
 
         if (l < r) {
@@ -222,33 +256,9 @@ public class KND {
         }
     }
 
-    //Sent les matrius en ordre del parametres Y, Z, X -> per uns Item i, j qualsevols I_Finals = Sumatori(Zi*Yi) | Xi == Xj
-    private void comparar_conjunts (ArrayList<ArrayList<Double>> Val, ArrayList<Item> I_Finals, ArrayList<ArrayList<Double>> Distances,
-                                    ArrayList <ArrayList<Item>> M_de_Items, int k) {
+    private void clonador_ArrayList (ArrayList  A, ArrayList  B) {
 
-        ArrayList <Double> Valors = new ArrayList<Double>();
-        for (int i = 0; i < M_de_Items.size(); ++i)
-            for (int j = 0; j < M_de_Items.get(i).size(); ++j) {
-
-                if (!I_Finals.contains(M_de_Items.get(i).get(j))) {
-
-                    I_Finals.add(i, M_de_Items.get(i).get(j));
-                    Double multiplicacio =  Distances.get(i).get(j) * Val.get(i).get(j);
-                    Valors.add(i, multiplicacio);
-                }
-                else {
-
-                    int p = I_Finals.indexOf(M_de_Items.get(i).get(j));
-                    Double multiplicacio =  Distances.get(i).get(j) * Val.get(i).get(j);
-                    Double nou = Valors.get(p) + multiplicacio;
-                    Valors.set(p, nou);
-                }
-            }
-
-        ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size()-1);
-
-        for (int i = I_Finals.size()-1; i >= k ; --i)
-            I_Finals.remove(i);
+        for(int i = 0; i< B.size(); ++i)
+            A.add(i, B.get(i));
     }
-
 }
