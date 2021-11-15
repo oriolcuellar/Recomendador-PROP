@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Math.max;
+
 public class SlopeOne {
     private User user;
     private Map<Integer,ArrayList<User>> itemValoratedBy;
@@ -56,7 +58,8 @@ public class SlopeOne {
                 }
             }
         }
-        return num/count;
+        if(count != 0) return max(num/count,0);
+        return -1;
     }
 
     private ArrayList<User> getIntersaction(int IDitemI, int IDitemJ) {
