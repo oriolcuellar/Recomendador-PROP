@@ -19,6 +19,8 @@ public class KND {
         this.k = k;
         this.Valoracions = Valoracions;
         this.itemsUsats = itemsUsats;
+        for(int i = 0; i < itemsUsats.size(); ++i)
+            Valoracions.add(i, 0.);
         C_Items = C;
         for (int i = 0; i < itemsUsats.size(); ++i)
             C_Items.anyadir_item(itemsUsats.get(i));
@@ -37,11 +39,11 @@ public class KND {
             Distances.add(j, K_NN.Distancies_i(j));
             M_de_Items.add(j, C_Items.getItems());
             Valoracio.add(j, Valoracions);
-            ordenar_Items(Distances.get(j), M_de_Items.get(j), Valoracio.get(j),  0, Distances.get(j).size());
+            ordenar_Items(Distances.get(j), M_de_Items.get(j), Valoracio.get(j),  0, Distances.get(j).size()-1);
 
-            //borra los que son mas que k
+            /*//borra los que son mas que k
             for (int i = M_de_Items.get(j).size() -1; i >= k ; --i)
-                M_de_Items.get(j).remove(i);
+                M_de_Items.get(j).remove(i);*/
         }
 
         ArrayList<Item> Items_a_devolver = new ArrayList<>(k);
@@ -86,9 +88,9 @@ public class KND {
         /*Copy data to temp arrays*/
         for (int i = 0; i < n1; ++i) {
 
-            L[i] = distancies.get(l+1);
-            LI[i] = Items.get(l+1);
-            LV[i] = Val.get(l+1);
+            L[i] = distancies.get(l+i);
+            LI[i] = Items.get(l+i);
+            LV[i] = Val.get(l+i);
         }
 
         for (int j = 0; j < n2; ++j) {
@@ -107,15 +109,15 @@ public class KND {
         int k = l;
         while (i < n1 && j < n2) {
             if (L[i] >= R[j]) {
-                distancies.add(k, L[i]);
-                Items.add(k, LI[i]);
-                Val.add(k, LV[i]);
+                distancies.set(k, L[i]);
+                Items.set(k, LI[i]);
+                Val.set(k, LV[i]);
                 i++;
             }
             else {
-                distancies.add(k, R[j]);
-                Items.add(k, RI[j]);
-                Val.add(k, RV[i]);
+                distancies.set(k, R[j]);
+                Items.set(k, RI[j]);
+                Val.set(k, RV[i]);
                 j++;
             }
             k++;
@@ -123,18 +125,18 @@ public class KND {
 
         /* Copy remaining elements of L[] if any */
         while (i < n1) {
-            distancies.add(k, L[i]);
-            Items.add(k, LI[i]);
-            Val.add(k, LV[i]);
+            distancies.set(k, L[i]);
+            Items.set(k, LI[i]);
+            Val.set(k, LV[i]);
             i++;
             k++;
         }
 
         /* Copy remaining elements of R[] if any */
         while (j < n2) {
-            distancies.add(k, R[j]);
-            Items.add(k, RI[j]);
-            Val.add(k, RV[j]);
+            distancies.set(k, R[j]);
+            Items.set(k, RI[j]);
+            Val.set(k, RV[j]);
             j++;
             k++;
         }
@@ -172,8 +174,8 @@ public class KND {
         /*Copy data to temp arrays*/
         for (int i = 0; i < n1; ++i) {
 
-            L[i] = Val.get(l+1);
-            LI[i] = Items.get(l+1);
+            L[i] = Val.get(l+i);
+            LI[i] = Items.get(l+i);
         }
 
         for (int j = 0; j < n2; ++j) {
@@ -191,13 +193,13 @@ public class KND {
         int k = l;
         while (i < n1 && j < n2) {
             if (L[i] >= R[j]) {
-                Val.add(k, L[i]);
-                Items.add(k, LI[i]);
+                Val.set(k, L[i]);
+                Items.set(k, LI[i]);
                 i++;
             }
             else {
-                Val.add(k, R[j]);
-                Items.add(k, RI[j]);
+                Val.set(k, R[j]);
+                Items.set(k, RI[j]);
                 j++;
             }
             k++;
@@ -205,16 +207,16 @@ public class KND {
 
         /* Copy remaining elements of L[] if any */
         while (i < n1) {
-            Val.add(k, L[i]);
-            Items.add(k, LI[i]);
+            Val.set(k, L[i]);
+            Items.set(k, LI[i]);
             i++;
             k++;
         }
 
         /* Copy remaining elements of R[] if any */
         while (j < n2) {
-            Val.add(k, R[j]);
-            Items.add(k, RI[j]);
+            Val.set(k, R[j]);
+            Items.set(k, RI[j]);
             j++;
             k++;
         }
@@ -232,7 +234,7 @@ public class KND {
 
                     I_Finals.add(i, M_de_Items.get(i).get(j));
                     Double multiplicacio =  Distances.get(i).get(j) * Val.get(i).get(j);
-                    Valors.set(i, multiplicacio);
+                    Valors.add(i, multiplicacio);
                 }
                 else {
 
@@ -243,7 +245,7 @@ public class KND {
                 }
             }
 
-        ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size());
+        ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size()-1);
 
         for (int i = k; i < I_Finals.size(); ++i)
             I_Finals.remove(i);

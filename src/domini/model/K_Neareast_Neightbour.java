@@ -33,7 +33,7 @@ public class K_Neareast_Neightbour {
 
                 if (i == j)
                 Distances[i][j] =  0.0;
-                else if(Distances[i][j] != -1.) {
+                else if((Distances[i][j] == -1.) && (Distances[j][i] == -1.)) {
 
                     Double aux = C_Items.getItems().get(i).Distance(C_Items.getItems().get(j));
                     Distances[i][j] =  aux;

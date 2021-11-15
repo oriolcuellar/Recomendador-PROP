@@ -45,7 +45,7 @@ public class Item {
         if (!tipus.equals(b.getTipus())) {
 
             /*Transformar 2 Atributes de dos tipus diferents en dos del mateix tipus*/
-            for (int i = 0; i < V_A.size();)
+            for (int i = 0; i < V_A.size();) {
                 for (int j = 0; j < V_B.size();) {
 
                     if (!V_A.get(i).equals(V_B.get(j))) {
@@ -53,23 +53,27 @@ public class Item {
 
                             V_A.remove(i);
                             Valors_A.remove(i);
-                        }
-                        else {
+                        } else {
 
                             V_B.remove(j);
                             Valors_B.remove(j);
                         }
-                    }
-                    else {
+                    } else {
 
                         ++i;
                         ++j;
                     }
                 }
+                ++i;
+            }
         }
         int n_dimensions = V_A.size();
-        Double Distancia  = comparador_tipus_iguals(V_A, V_B, Valors_A, Valors_B, n_dimensions);
-        return Distancia;
+        if(V_A.size() > 0 && V_B.size() > 0) {
+
+            Double Distancia  = comparador_tipus_iguals(V_A, V_B, Valors_A, Valors_B, n_dimensions);
+            return  Distancia;
+        }
+        return 0.0;
     }
 
     /* Es presoposa que que totels les ArrayList son de la mateixa mida = n_d, ja que tan sols funciona si els dos items tenen els mateixos atributs*/
@@ -98,8 +102,8 @@ public class Item {
                         Double coeficient = 1 / (double) n_string;
                         Double Sum = 0.0;
 
-                        for (int j = 0; j < S_A.size(); i++) {
-                            for (int k = 0; k < S_B.size(); i++) {
+                        for (int j = 0; j < S_A.size(); j++) {
+                            for (int k = 0; k < S_B.size(); k++) {
 
                                 if (S_A.get(j).equals(S_B.get(k)))
                                     Sum += coeficient;
@@ -118,38 +122,34 @@ public class Item {
                         String s_a = Valors_A.get(i);
                         String s_b = Valors_B.get(i);
 
-                        if (!s_a.equals("") && !s_b.equals("")) {
+                        Vector<String> D_A = Construc_Vector(s_a, '-');
+                        Vector<String> D_B = Construc_Vector(s_b, '-');
 
-                            Vector<String> D_A = Construc_Vector(s_a, '-');
-                            Vector<String> D_B = Construc_Vector(s_b, '-');
+                        int dia_a, dia_b, mes_a, mes_b, any_a, any_b;
 
-                            int dia_a, dia_b, mes_a, mes_b, any_a, any_b;
+                        dia_a = Integer.valueOf(D_A.get(2));
+                        mes_a = Integer.valueOf(D_A.get(1));
+                        any_a = Integer.valueOf(D_A.get(0)) - 1900;
 
-                            dia_a = Integer.valueOf(D_A.get(2));
-                            mes_a = Integer.valueOf(D_A.get(1));
-                            any_a = Integer.valueOf(D_A.get(0)) - 1900;
+                        dia_b = Integer.valueOf(D_B.get(2));
+                        mes_b = Integer.valueOf(D_B.get(1));
+                        any_b = Integer.valueOf(D_B.get(0)) - 1900;
 
-                            dia_b = Integer.valueOf(D_B.get(2));
-                            mes_b = Integer.valueOf(D_B.get(1));
-                            any_b = Integer.valueOf(D_B.get(0)) - 1900;
+                        int total_a = dia_a + (mes_a / 2 * 31 + any_a * 4 * 30) + (mes_a / 2 * 30 + any_a * 7 * 31) + (any_a * 28);
+                        int total_b = dia_b + (mes_b / 2 * 31 + any_b * 4 * 30) + (mes_b / 2 * 30 + any_b * 7 * 31) + (any_b * 28);
+                        Double max = Double.valueOf((50 * 4 * 30) + (50 * 7 * 31) + (50 * 28));
 
-                            int total_a = dia_a + (mes_a / 2 * 31 + any_a * 4 * 30) + (mes_a / 2 * 30 + any_a * 7 * 31) + (any_a * 28);
-                            int total_b = dia_b + (mes_b / 2 * 31 + any_b * 4 * 30) + (mes_b / 2 * 30 + any_b * 7 * 31) + (any_b * 28);
-                            Double max = Double.valueOf((50 * 4 * 30) + (50 * 7 * 31) + (50 * 28));
-
-                            Double coeficient = ((Math.max(total_a, total_b)) - Math.min(total_a, total_b)) / max;
-                            distance += Math.pow(coeficient, 2);
-                        }
+                        Double coeficient = 1.0 - (((Math.max(total_a, total_b)) - Math.min(total_a, total_b)) / max);
+                        distance += Math.pow(coeficient, 2);
 
                     } else if (V_A.get(i).getType().equals("Rang")) {
 
                         Double valor_a = Double.valueOf(Valors_A.get(i));
                         Double valor_b = Double.valueOf(Valors_B.get(i));
 
-                        Ranged_Atribute R_a = (Ranged_Atribute) (V_A.get(i));
-                        Double max = R_a.getUpper();
-                        Double min = R_a.getLower();
-                        Double coeficient = (valor_a - valor_b) / (max - min);
+                        Double max = V_A.get(i).getUpper();
+                        Double min = V_A.get(i).getLower();
+                        Double coeficient = 1.0 - ((Math.max(valor_a, valor_b) - Math.min(valor_a, valor_b)) / (max - min));
                         distance += Math.pow(coeficient, 2);
 
                     }
