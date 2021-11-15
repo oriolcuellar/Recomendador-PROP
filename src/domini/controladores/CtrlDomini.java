@@ -299,7 +299,7 @@ public class CtrlDomini {
             ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 
             LectorCSV2 reader = new LectorCSV2();
-            readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.db.csv", "Ratings");
+            readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.db.csv");
 
             TipusRol t = TipusRol.Usuari;
             for (Vector<String> vs : readed_ratings) {
