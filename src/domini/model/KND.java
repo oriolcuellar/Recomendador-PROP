@@ -247,7 +247,7 @@ public class KND {
 
         ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size()-1);
 
-        for (int i = k; i < I_Finals.size(); ++i)
+        for (int i = I_Finals.size()-1; i >= k ; --i)
             I_Finals.remove(i);
     }
 
