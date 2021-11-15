@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class RateRecomendation {
 
-    private static ArrayList<myPair> arr
+    private static ArrayList<myPair> arr;
 
     public  RateRecomendation(ArrayList<myPair> arr2 ){
         this.arr=arr2;
