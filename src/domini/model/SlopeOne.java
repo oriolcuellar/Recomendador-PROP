@@ -59,8 +59,7 @@ public class SlopeOne {
                 }
             }
         }
-        if(count != 0) return num/count;
-        return -1;
+        return num/count;
     }
 
     private ArrayList<User> getIntersaction(int IDitemI, int IDitemJ) {
