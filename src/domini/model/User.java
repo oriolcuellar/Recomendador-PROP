@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import static java.lang.Math.sqrt;
 
+// @Marc y Roberto
+
 public class User {
     //atributes
     private int userID;
@@ -43,6 +45,11 @@ public class User {
     public void addItemUsat(ItemUsat usat) { itemsUsats.add(usat); }
 
     //constructores
+    public User() {
+        this.itemsUsats = new ArrayList<ItemUsat>();
+        this.numCluster = -1;
+    }
+
     public User(int userID, String password, TipusRol Rol) {
         this.userID = userID;
         this.password = password;
@@ -50,9 +57,12 @@ public class User {
         this.itemsUsats = new ArrayList<ItemUsat>();
         this.numCluster = -1;
     }
-    public User() {
+    public User(int userID, String password, TipusRol Rol, int numCluster) {
+        this.userID = userID;
+        this.password = password;
+        this.Rol = Rol;
         this.itemsUsats = new ArrayList<ItemUsat>();
-        this.numCluster = -1;
+        this.numCluster = numCluster;
     }
     public User(int userID) {
         this.userID = userID;

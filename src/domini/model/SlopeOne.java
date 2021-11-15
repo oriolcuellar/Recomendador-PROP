@@ -2,11 +2,13 @@ package src.domini.model;
 import src.domini.controladores.CtrlDomini;
 import src.domini.model.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class SlopeOne {
     private User user;
     private Map<Integer,ArrayList<User>> itemValoratedBy;
+    private ArrayList<myPair> predictions;
 
     protected static ArrayList<User> intersection(ArrayList<User> l1, ArrayList<User> l2, int numCluster) {
         ArrayList<User> l3 = new ArrayList<User>();
@@ -62,8 +64,7 @@ public class SlopeOne {
 
     private void slopeOneAlgorithm(User user) {
         float meanValoration = calculateValorationMean(user);
-        ArrayList<Integer> predictionsID = new ArrayList<>();
-        ArrayList<Float> predictionsValoration = new ArrayList<>();
+        this.predictions = new ArrayList<myPair>();
         //predecir todos los que no tiene valoracion
         for(Map.Entry<Integer, ArrayList<User>> item : itemValoratedBy.entrySet()) {
             //si el item no esta valorado por el usuario ejecutar predicción
@@ -74,12 +75,9 @@ public class SlopeOne {
                 ItemUsat iu = new ItemUsat(item, user, valoration);
                 user.addItemUsat(iu);
                  */
-                predictionsID.add(item.getKey());
-                predictionsValoration.add(valoration);
+                predictions.add(new myPair(item.getKey(), valoration));
             }
         }
-        printResults(predictionsID,predictionsValoration);
-
     }
 
     private void printResults(ArrayList<Integer> predictionsID, ArrayList<Float> predictionsValoration) {
@@ -92,10 +90,16 @@ public class SlopeOne {
     //crea un SlopeOne únicamente con el mapa de items y quien los valora
     public SlopeOne() {
         //this.itemValoratedBy = CtrlDomini.getInstance().elMapita;
+        this.predictions = new ArrayList<myPair>();
+    }
+
+    public SlopeOne(Map<Integer,ArrayList<User>> itemValoratedBy) {
+        this.itemValoratedBy = itemValoratedBy;
     }
 
     //retorna las predicciones para el usuario u
-    public void getPredictions(User u){
+    public ArrayList<myPair> getPredictions(User u){
         slopeOneAlgorithm(user);
+        return predictions;
     }
 }
