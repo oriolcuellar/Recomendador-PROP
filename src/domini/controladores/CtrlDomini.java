@@ -317,12 +317,26 @@ public class CtrlDomini {
     }//to do------------------------------------
     public void deleteUser(String delete_me){
         //pre: actualUser admin
-        if(actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1")){//no esborres l'admin
+        if(actualUser!=null && actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1")){//no esborres l'admin
 
+
+            /*
+
+            for (ItemUsat i: ratesList){
+                if ( delete_me.equals(StringValueOf(i.getUsuari().getUserID())) ratesList.delete(i);
+            }
+            usersList.delete(delete_me);
+             */
         }
     }
-    public void createUser( ){
+    public void createUser( String create_me){
+        if(actualUser.getRol().equals(TipusRol.Administrador) ){//no esborres l'admin
+            /*if (!usersList.exixsts(create_me)){
+              User nou = new User(Integer.ValueOf(create_me));
+                usersList.put(Integer.ValueOf(create_me), u);
+            }*/
 
+        }
     }
 
 }
