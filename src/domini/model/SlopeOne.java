@@ -45,14 +45,18 @@ public class SlopeOne {
     private float calculateDesviationMean(User user, int IDitemJ) {
         ArrayList<ItemUsat> usedItems = user.getItemsUsats();
         float num = 0;
+        int count = 0;
         for(ItemUsat itemI : usedItems) {
             int IDitemI =  itemI.getItem().getID();
             if(IDitemI != IDitemJ) {
                 ArrayList<User> usersIJ = getIntersaction(IDitemI,IDitemJ);
-                num += calculateDesviation(IDitemI,IDitemJ,usersIJ);
+                if(usersIJ.size() != 0) {
+                    num += calculateDesviation(IDitemI, IDitemJ, usersIJ);
+                    count++;
+                }
             }
         }
-        return num/usedItems.size();
+        return num/count;
     }
 
     private ArrayList<User> getIntersaction(int IDitemI, int IDitemJ) {

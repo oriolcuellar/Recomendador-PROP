@@ -41,15 +41,24 @@ public class SlopeOneDriver{
         ArrayList<User> usersItem2 = new ArrayList<User>();
         ArrayList<User> usersItem3 = new ArrayList<User>();
         ArrayList<User> usersItem4 = new ArrayList<User>();
+        ArrayList<User> users = new ArrayList<User>();
 
         User user0 = new User(0,"1234", null,1);
+        users.add(user0);
         User user1 = new User(1,"1234", null,1);
+        users.add(user1);
         User user2 = new User(2, "1234", null,2);
+        users.add(user2);
         User user3 = new User(3,"1234", null,2);
+        users.add(user3);
         User user4 = new User(4,"1234", null,1);
+        users.add(user4);
         User user5 = new User(5,"1234", null,1);
+        users.add(user5);
         User user6 = new User(6,"1234", null,2);
+        users.add(user6);
         User user7 = new User(7,"1234", null,1);
+        users.add(user7);
 
         usersItem1.add(user0);
         usersItem1.add(user1);
@@ -98,9 +107,15 @@ public class SlopeOneDriver{
         items.put(4, usersItem4);
 
         SlopeOne So = new SlopeOne(items);
+        for(int i = 0; i < users.size(); ++i) {
+            System.out.println("USER: " + users.get(i).getUserID());
+            So.getPredictions(users.get(i));
+            System.out.println();
+            users.get(i).printUsedItems();
+            System.out.println();
+            So.printResults();
+            System.out.println();
+        }
 
-        So.getPredictions(user1);
-        System.out.println(user1.getItemsUsats());
-        So.printResults();
     }
 }

@@ -105,4 +105,12 @@ public class User {
         }
         return null;
     }
+
+    // Prints
+
+    public void printUsedItems() {
+        for(int i = 0; i < itemsUsats.size(); ++i) {
+            System.out.println("Item " + itemsUsats.get(i).getItem().getID() + " valorated with " + itemsUsats.get(i).getValoracio());
+        }
+    }
 }
