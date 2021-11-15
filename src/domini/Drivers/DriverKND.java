@@ -52,8 +52,8 @@ public class DriverKND {
         ArrayList<Item> ItemsUsats = new ArrayList<Item>(Arrays.asList(a6, a7, a8, a9));
         ArrayList<Double> Valoracions = new ArrayList<Double>(Arrays.asList(3.2, 4.1, 1.0, 2.1));
 
-        KND prueba = new KND(3, Ct, ItemsUsats, Valoracions);
-        ArrayList<Item> Resultado = prueba.Algorithm();
+        KND prueba = new KND( Ct, ItemsUsats, Valoracions);
+        ArrayList<Item> Resultado = prueba.Algorithm(3);
 
         for (int i = 0; i < Resultado.size(); ++i) {
 

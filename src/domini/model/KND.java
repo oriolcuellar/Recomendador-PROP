@@ -8,15 +8,13 @@ import java.util.Collections;
 public class KND {
 
     //Atributes
-    private int k;
     private ArrayList<Item> itemsUsats;
     private ArrayList<Double> Valoracions;
     private Conjunt_Items C_Items;
     private K_Neareast_Neightbour K_NN;
 
     //Constructura
-    public KND(int k, Conjunt_Items C, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
-        this.k = k;
+    public KND(Conjunt_Items C, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
         this.Valoracions = Valoracions;
         this.itemsUsats = itemsUsats;
         for(int i = 0; i < itemsUsats.size(); ++i)
@@ -29,7 +27,7 @@ public class KND {
 
     //Operacions
 
-    public ArrayList<Item> Algorithm() {
+    public ArrayList<Item> Algorithm(int k) {
 
         ArrayList <ArrayList<Item>> M_de_Items = new ArrayList<ArrayList<Item>>();
         ArrayList<ArrayList<Double>> Distances = new ArrayList<ArrayList<Double>>();
