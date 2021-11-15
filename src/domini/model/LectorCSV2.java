@@ -68,7 +68,7 @@ public class LectorCSV2 {
         return items;
     }
 
-    public ArrayList<Vector<String>> Lector_Ratings(String csvFile, String dataType) {
+    public ArrayList<Vector<String>> Lector_Ratings(String csvFile ) {
         ratings=new ArrayList<Vector<String>>();
         BufferedReader br = null;
         String line = "";
