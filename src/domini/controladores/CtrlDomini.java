@@ -104,10 +104,12 @@ public class CtrlDomini {
         //slope one
 
             //map id item, users que lo tienen valorado
+        //MAP INTEGER Y ARRAYLIST DE USUARIOS QUE LO HAN VALORADO
         //k-neighbours
 
 
     }
+
 
     public void selectItem(){}
     public void rateItem(){}
