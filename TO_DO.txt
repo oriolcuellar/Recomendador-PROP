@@ -1,0 +1,19 @@
+
+-Cada uno poner sus clases en el diagrama de clases
+
+-Diagrama estàtic complet del model conceptual de dades en versió disseny (fet
+amb Rational Rose o eina similar) ) i breu descripció d’atributs i mètodes de cada
+classe (setters i getters es poden obviar)
+
+-Relació de les classes implementades per cada membre de l’equip.
+
+-Breu descripció de les estructures de dades i algorismes utilitzats per a
+implementar les funcionalitats principals d’aquesta entrega. 
+
+-Executables que permetin provar totes les classes implementades, mitjançant
+stubs i drivers. 
+
+-Tot directori contindrà un fitxer de nom index.txt (format text pla i sense accentuar) o
+index.htm o index.html amb la descripció del directori i de tots els seus fitxers –un per
+un– on podeu afegir les observacions especials que vulgueu per facilitar-ne la comprensió
+o l'ús. (NO USAR ACCENTOS)
