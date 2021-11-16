@@ -21,11 +21,4 @@ public class myPair {
     public int getItemID() {
         return itemID;
     }
-
-    public class CustomComparator {
-        public boolean compare(myPair object1, myPair object2) {
-            return object1.getValoration() > (object2.getValoration());
-        }
-    }
-
 }

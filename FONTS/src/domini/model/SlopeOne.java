@@ -67,7 +67,7 @@ public class SlopeOne {
                 }
             }
         }
-        if(count == 0) return 0;
+        if(count == 0) return Float.NEGATIVE_INFINITY;
         return num/count;
     }
 
@@ -96,7 +96,7 @@ public class SlopeOne {
         }
     }
 
-    public void printResults(ArrayList<myPair> predictions) {
+    public void printResults() {
         for (myPair prediction : predictions) {
             System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
                     ": " + prediction.getValoration());
@@ -119,32 +119,31 @@ public class SlopeOne {
     public static void quicksort(ArrayList<myPair> A, int izq, int der) {
 
         float pivote = A.get(izq).getValoration();
-        int pivoteID = A.get(izq).getItemID();// tomamos primer elemento como pivote
-        int i=izq;         // i realiza la búsqueda de izquierda a derecha
-        int j=der;         // j realiza la búsqueda de derecha a izquierda
+        int pivoteID = A.get(izq).getItemID();
+        int i=izq;
+        int j=der;
         float auxV;
         int auxID;
-        while(i < j){                          // mientras no se crucen las búsquedas
-            while( A.get(i).getValoration() >= pivote && i < j) i++; // busca elemento mayor que pivote
-            while( A.get(j).getValoration() < pivote) j--;           // busca elemento menor que pivote
-            if (i < j) {                        // si no se han cruzado
+        while(i < j){
+            while( A.get(i).getValoration() >= pivote && i < j) i++;
+            while( A.get(j).getValoration() < pivote) j--;
+            if (i < j) {
                 auxV = A.get(i).getValoration();
                 auxID = A.get(i).getItemID();
-                myPair mp = new myPair(A.get(j).getItemID(),A.get(j).getValoration());// los intercambia
+                myPair mp = new myPair(A.get(j).getItemID(),A.get(j).getValoration());
                 A.set(i,mp);
                 myPair mp1 = new myPair(auxID,auxV);
                 A.set(j,mp1);
             }
         }
-        myPair mp = new myPair(A.get(j).getItemID(),A.get(j).getValoration());// los intercambia
+        myPair mp = new myPair(A.get(j).getItemID(),A.get(j).getValoration());
         A.set(izq,mp);
         myPair piv = new myPair(pivoteID,pivote);
-        A.set(j,piv);  // los menores a su izquierda y los mayores a su derecha
+        A.set(j,piv);
 
         if(izq < j-1)
-            quicksort(A,izq,j-1);          // ordenamos subarray izquierdo
+            quicksort(A,izq,j-1);
         if(j+1 < der)
-            quicksort(A,j+1,der);          // ordenamos subarray derecho
-
+            quicksort(A,j+1,der);
     }
 }

@@ -51,7 +51,7 @@ public class DriverRateRecomendation {
         SlopeOne So = new SlopeOne(item_valorated_by);
         ArrayList<myPair> predictions= So.getPredictions(usersList.get(35368));
 
-        So.printResults(predictions);
+        So.printResults();
 
         RateRecomendation recomendation = new RateRecomendation(predictions);
         recomendation.execute();
