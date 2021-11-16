@@ -96,10 +96,10 @@ public class SlopeOne {
         }
     }
 
-    public void printResults() {
-        for(int i = 0; i < predictions.size(); ++i) {
-            System.out.println("Valoracion estimada para el item " + predictions.get(i).getItemID() +
-                    ": " + predictions.get(i).getValoration());
+    public void printResults(ArrayList<myPair> predictions) {
+        for (myPair prediction : predictions) {
+            System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
+                    ": " + prediction.getValoration());
         }
     }
 
@@ -111,15 +111,24 @@ public class SlopeOne {
     public ArrayList<myPair> getPredictions(User user){
         this.user = user;
         slopeOneAlgorithm(user);
-        //Collections.sort(predictions);
-        Collections.sort(predictions, new Comparator<myPair>() {
-            @Override
-            public int compare(final myPair o1, final myPair o2) {
-                if(o1.getValoration() > o2.getValoration()) return 1;
-                else return 0;
+        float max;
+        int idmax;
+        ArrayList<myPair> orderedPredictions = new ArrayList<>();
+        for(int i = 0; i < predictions.size(); ++i) {
+            max = predictions.get(i).getValoration();
+            idmax = predictions.get(i).getItemID();
+            for (int j = 0; j < predictions.size(); ++j) {
+                if(predictions.get(j).getValoration() > max) {
+                    max = predictions.get(j).getValoration();
+                    idmax = predictions.get(j).getItemID();
+                }
             }
-        });
-        printResults();
-        return predictions;
+            myPair mp = new myPair(idmax, max);
+            orderedPredictions.add(mp);
+        }
+        printResults(orderedPredictions);
+        return orderedPredictions;
     }
+
+
 }

@@ -113,7 +113,7 @@ public class SlopeOneDriver{
             System.out.println();
             users.get(i).printUsedItems();
             System.out.println();
-            So.printResults();
+            So.printResults(So.getPredictions(users.get(i)));
             System.out.println();
         }
 
