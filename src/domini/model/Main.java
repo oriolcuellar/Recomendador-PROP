@@ -65,11 +65,10 @@ public class Main {
         CtrlDomini c= CtrlDomini.getInstance();
         c.login("-1", "-1");
         //c.showAllUsers();
-       c.loadRates();
-        c.loadItems();
-
+        c.loadRates();
+        //c.loadItems();
         //c.showAllItems();
-         c.showRecommendedItems(3);
+         c.showRecommendedItems(6);
 
     }
 }

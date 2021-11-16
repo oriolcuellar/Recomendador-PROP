@@ -3,6 +3,8 @@ package src.domini.model;
 import src.domini.model.*;
 import java.util.ArrayList;
 
+//@Author Marc y Roberto
+
 public class ItemUsat {
 
     private float valoracio;

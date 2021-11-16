@@ -1,12 +1,13 @@
 package src.domini.model;
 import src.domini.controladores.CtrlDomini;
 import src.domini.model.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+
+import java.util.*;
 
 import static java.lang.Math.max;
+
+
+// Hay que hacer una excepción para comprobar que existe el user
 
 public class SlopeOne {
     private User user;
@@ -30,10 +31,17 @@ public class SlopeOne {
     private float calculateDesviation(int IDitemI, int IDitemJ, ArrayList<User> usersIJ) {
         float sumTotal = 0;
         for (User user : usersIJ) {
+            /*System.out.println("ID user " + user.getUserID());
+            System.out.println("ID J " + user.searchUsedItem(IDitemJ).getItem().getID() + " " + IDitemJ +
+                    " ID I " + IDitemI +  " " + user.searchUsedItem(IDitemI).getItem().getID());*/
             float valorationUserI = user.searchUsedItem(IDitemI).getValoracio();
             float valorationUserJ = user.searchUsedItem(IDitemJ).getValoracio();
+            /*System.out.println("Valoración J " + valorationUserJ);
+            System.out.println("Valoración I " + valorationUserI);*/
+
             sumTotal += (valorationUserJ - valorationUserI);
         }
+        //System.out.println("SUMA: " + sumTotal + " Tamaño: " + usersIJ.size());
         return sumTotal/usersIJ.size();
     }
 
@@ -59,6 +67,7 @@ public class SlopeOne {
                 }
             }
         }
+        if(count == 0) return 0;
         return num/count;
     }
 
@@ -82,7 +91,7 @@ public class SlopeOne {
                 ItemUsat iu = new ItemUsat(item, user, valoration);
                 user.addItemUsat(iu);
                  */
-                predictions.add(new myPair(item.getKey(), valoration));
+                predictions.add(new myPair(item.getKey(), max(0, valoration)));
             }
         }
     }
@@ -102,6 +111,15 @@ public class SlopeOne {
     public ArrayList<myPair> getPredictions(User user){
         this.user = user;
         slopeOneAlgorithm(user);
+        //Collections.sort(predictions);
+        Collections.sort(predictions, new Comparator<myPair>() {
+            @Override
+            public int compare(final myPair o1, final myPair o2) {
+                if(o1.getValoration() > o2.getValoration()) return 1;
+                else return 0;
+            }
+        });
+        printResults();
         return predictions;
     }
 }

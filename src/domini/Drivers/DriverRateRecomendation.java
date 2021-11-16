@@ -16,19 +16,19 @@ public class DriverRateRecomendation {
 
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
         LectorCSV2 reader = new LectorCSV2();
-        readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.db.csv");
+        readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.test.known.csv");
 
         TipusRol t = TipusRol.Usuari;
         for (Vector<String> vs : readed_ratings) {
             if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
                 User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
-                    usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(0)));
+                if (usuari.searchUsedItem(Integer.parseInt(vs.get(1))) == null) {//no existe el item en sus valoraciones
+                    usuari.addItemUsat(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
 
                 }
             } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
-                User usuari = new User(Integer.valueOf(vs.get(0)));
-                usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+                User usuari = new User(Integer.parseInt(vs.get(0)));
+                usuari.addItemUsat(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
                 usersList.put(Integer.valueOf(vs.get(0)), usuari);
             }
             //parte del item
@@ -47,15 +47,14 @@ public class DriverRateRecomendation {
         //kmeans
         Kmeans kmeans = new Kmeans(6, usersList);
         ArrayList <Cluster> ac=kmeans.getClusters();
-//slope one
+        //slope one
         SlopeOne So = new SlopeOne(item_valorated_by);
-        ArrayList<myPair> predictions= So.getPredictions(usersList.get(0));
+        ArrayList<myPair> predictions= So.getPredictions(usersList.get(35368));
+
+        So.printResults();
 
         RateRecomendation recomendation = new RateRecomendation(predictions);
-
-
-
-
+        recomendation.execute();
 
     }
 
