@@ -1,5 +1,6 @@
-package src.domini.model;
+package FONTS.src.domini.model;
 
+import FONTS.src.domini.model.*;
 public class myPair implements  Comparable<myPair> {
     private int itemID;
     private float valoration;

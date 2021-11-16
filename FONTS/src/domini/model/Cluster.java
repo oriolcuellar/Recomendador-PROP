@@ -1,6 +1,6 @@
-package src.domini.model;
+package FONTS.src.domini.model;
 
-import src.domini.model.*;
+import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 import static java.lang.Integer.max;
 import static java.lang.Integer.min;
