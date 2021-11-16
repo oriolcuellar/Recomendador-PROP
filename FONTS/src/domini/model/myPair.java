@@ -1,7 +1,7 @@
 package FONTS.src.domini.model;
 
 import FONTS.src.domini.model.*;
-public class myPair implements  Comparable<myPair> {
+public class myPair {
     private int itemID;
     private float valoration;
 
@@ -22,9 +22,9 @@ public class myPair implements  Comparable<myPair> {
         return itemID;
     }
 
-    @Override
-    public int compareTo(myPair otherPair) {
-        if(! (this.valoration > otherPair.getValoration())) return 1;
+
+    public int compareTo(myPair otherPair, myPair otherPair2) {
+        if(otherPair2.getValoration() < otherPair.getValoration()) return 1;
         return 0;
     }
 }
