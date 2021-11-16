@@ -22,6 +22,7 @@ public class CtrlDomini {
     private static ArrayList <ItemUsat> ratesList;
     private static Conjunt_Items itemList;
     private static Map <String, TipusItem> itemTypeList;
+    private static Map<Integer,ArrayList<User>> itemValoratedBy;
 
 //CtrlDomini control= CtrlDomini.getInstance();
 //control.getAllUsers();
@@ -41,6 +42,7 @@ public class CtrlDomini {
         ratesList = new ArrayList<ItemUsat>();
         itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
+        itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
         User admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
         usersList.put(-1, admin);
@@ -103,8 +105,11 @@ public class CtrlDomini {
 
         //slope one
 
-            //map id item, users que lo tienen valorado
-        //MAP INTEGER Y ARRAYLIST DE USUARIOS QUE LO HAN VALORADO
+        SlopeOne slopeOne = new SlopeOne(itemValoratedBy);
+        //cambiar por actual user
+        slopeOne.getPredictions(usersList.get(7));
+        slopeOne.printResults();
+
         //k-neighbours
 
 
@@ -313,6 +318,17 @@ public class CtrlDomini {
                     User usuari = new User(Integer.valueOf(vs.get(0)));
                     usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
                     usersList.put(Integer.valueOf(vs.get(0)), usuari);
+                }
+                //parte del item
+                if (itemValoratedBy.containsKey(Integer.valueOf(vs.get(1)))){//existeix item al map
+                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                    itemValoratedBy.get(Integer.valueOf(vs.get(1))).add(usuari);
+                }
+                else{//NO existeix item al map
+                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                    ArrayList <User> au = new ArrayList<User>();
+                    au.add(usuari);
+                    itemValoratedBy.put( Integer.valueOf(vs.get(1)), au);
                 }
             }
         }

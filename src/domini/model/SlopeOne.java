@@ -8,6 +8,9 @@ import java.util.Map;
 
 import static java.lang.Math.max;
 
+
+// Hay que hacer una excepción para comprobar que existe el user
+
 public class SlopeOne {
     private User user;
     private Map<Integer,ArrayList<User>> itemValoratedBy;
@@ -33,7 +36,10 @@ public class SlopeOne {
             float valorationUserI = user.searchUsedItem(IDitemI).getValoracio();
             float valorationUserJ = user.searchUsedItem(IDitemJ).getValoracio();
             sumTotal += (valorationUserJ - valorationUserI);
+            System.out.println("ID user " + user.getUserID());
+            System.out.println("HE ENTRADOOOOOO " + user.searchUsedItem(IDitemJ).getItem().getID() + " " + IDitemJ + " " + IDitemI + " " + user.searchUsedItem(IDitemI).getItem().getID());
         }
+        System.out.println("SUMA: " + sumTotal + " Tamaño: " + usersIJ.size());
         return sumTotal/usersIJ.size();
     }
 
