@@ -31,17 +31,17 @@ public class SlopeOne {
     private float calculateDesviation(int IDitemI, int IDitemJ, ArrayList<User> usersIJ) {
         float sumTotal = 0;
         for (User user : usersIJ) {
-            System.out.println("ID user " + user.getUserID());
+            /*System.out.println("ID user " + user.getUserID());
             System.out.println("ID J " + user.searchUsedItem(IDitemJ).getItem().getID() + " " + IDitemJ +
-                    " ID I " + IDitemI +  " " + user.searchUsedItem(IDitemI).getItem().getID());
+                    " ID I " + IDitemI +  " " + user.searchUsedItem(IDitemI).getItem().getID());*/
             float valorationUserI = user.searchUsedItem(IDitemI).getValoracio();
             float valorationUserJ = user.searchUsedItem(IDitemJ).getValoracio();
-            System.out.println("Valoración J " + valorationUserJ);
-            System.out.println("Valoración I " + valorationUserI);
+            /*System.out.println("Valoración J " + valorationUserJ);
+            System.out.println("Valoración I " + valorationUserI);*/
 
             sumTotal += (valorationUserJ - valorationUserI);
         }
-        System.out.println("SUMA: " + sumTotal + " Tamaño: " + usersIJ.size());
+        //System.out.println("SUMA: " + sumTotal + " Tamaño: " + usersIJ.size());
         return sumTotal/usersIJ.size();
     }
 
@@ -111,7 +111,14 @@ public class SlopeOne {
     public ArrayList<myPair> getPredictions(User user){
         this.user = user;
         slopeOneAlgorithm(user);
-        Collections.sort(predictions);
+        //Collections.sort(predictions);
+        Collections.sort(predictions, new Comparator<myPair>() {
+            @Override
+            public int compare(final myPair o1, final myPair o2) {
+                if(o1.getValoration() > o2.getValoration()) return 1;
+                else return 0;
+            }
+        });
         printResults();
         return predictions;
     }

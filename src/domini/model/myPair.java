@@ -9,6 +9,10 @@ public class myPair implements  Comparable<myPair> {
         this.valoration = valoration;
     }
 
+    public myPair() {
+
+    }
+
     public float getValoration() {
         return valoration;
     }
@@ -19,7 +23,7 @@ public class myPair implements  Comparable<myPair> {
 
     @Override
     public int compareTo(myPair otherPair) {
-        if(this.valoration > otherPair.getValoration()) return 1;
+        if(! (this.valoration > otherPair.getValoration())) return 1;
         return 0;
     }
 }
