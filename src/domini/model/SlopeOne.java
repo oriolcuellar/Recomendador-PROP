@@ -1,10 +1,8 @@
 package src.domini.model;
 import src.domini.controladores.CtrlDomini;
 import src.domini.model.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+
+import java.util.*;
 
 import static java.lang.Math.max;
 
@@ -33,11 +31,15 @@ public class SlopeOne {
     private float calculateDesviation(int IDitemI, int IDitemJ, ArrayList<User> usersIJ) {
         float sumTotal = 0;
         for (User user : usersIJ) {
+            System.out.println("ID user " + user.getUserID());
+            System.out.println("ID J " + user.searchUsedItem(IDitemJ).getItem().getID() + " " + IDitemJ +
+                    " ID I " + IDitemI +  " " + user.searchUsedItem(IDitemI).getItem().getID());
             float valorationUserI = user.searchUsedItem(IDitemI).getValoracio();
             float valorationUserJ = user.searchUsedItem(IDitemJ).getValoracio();
+            System.out.println("Valoración J " + valorationUserJ);
+            System.out.println("Valoración I " + valorationUserI);
+
             sumTotal += (valorationUserJ - valorationUserI);
-            System.out.println("ID user " + user.getUserID());
-            System.out.println("HE ENTRADOOOOOO " + user.searchUsedItem(IDitemJ).getItem().getID() + " " + IDitemJ + " " + IDitemI + " " + user.searchUsedItem(IDitemI).getItem().getID());
         }
         System.out.println("SUMA: " + sumTotal + " Tamaño: " + usersIJ.size());
         return sumTotal/usersIJ.size();
@@ -109,7 +111,8 @@ public class SlopeOne {
     public ArrayList<myPair> getPredictions(User user){
         this.user = user;
         slopeOneAlgorithm(user);
-        // Hay que ordenarlos
+        Collections.sort(predictions);
+        printResults();
         return predictions;
     }
 }

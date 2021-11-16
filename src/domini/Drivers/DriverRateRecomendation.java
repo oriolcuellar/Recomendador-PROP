@@ -22,13 +22,13 @@ public class DriverRateRecomendation {
         for (Vector<String> vs : readed_ratings) {
             if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
                 User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
-                    usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(0)));
+                if (usuari.searchUsedItem(Integer.parseInt(vs.get(1))) == null) {//no existe el item en sus valoraciones
+                    usuari.addItemUsat(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
 
                 }
             } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
-                User usuari = new User(Integer.valueOf(vs.get(0)));
-                usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+                User usuari = new User(Integer.parseInt(vs.get(0)));
+                usuari.addItemUsat(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
                 usersList.put(Integer.valueOf(vs.get(0)), usuari);
             }
             //parte del item
@@ -45,20 +45,15 @@ public class DriverRateRecomendation {
         }
 
         //kmeans
-        Kmeans kmeans = new Kmeans(1, usersList);
+        Kmeans kmeans = new Kmeans(6, usersList);
         ArrayList <Cluster> ac=kmeans.getClusters();
         //slope one
         SlopeOne So = new SlopeOne(item_valorated_by);
         ArrayList<myPair> predictions= So.getPredictions(usersList.get(Integer.valueOf(35368)));
 
-        //So.printResults();
+        So.printResults();
 
         RateRecomendation recomendation = new RateRecomendation(predictions);
-
-
-
-
-
 
     }
 

@@ -311,7 +311,7 @@ public class CtrlDomini {
                 if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
                     User usuari = usersList.get(Integer.valueOf(vs.get(0)));
                     if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
-                        usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(0)));
+                        usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
 
                     }
                 } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
