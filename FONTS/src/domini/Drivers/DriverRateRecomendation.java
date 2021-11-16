@@ -48,7 +48,7 @@ public class DriverRateRecomendation {
         Kmeans kmeans = new Kmeans(6, usersList);
         ArrayList <Cluster> ac=kmeans.getClusters();
         //slope one
-        SlopeOne So = new SlopeOne(item_valorated_by);
+        SlopeOne So = new SlopeOne(item_valorated_by,5);
         ArrayList<myPair> predictions= So.getPredictions(usersList.get(35368));
 
         So.printResults();

@@ -105,7 +105,7 @@ public class CtrlDomini {
 
         //slope one
 
-        SlopeOne slopeOne = new SlopeOne(itemValoratedBy);
+        SlopeOne slopeOne = new SlopeOne(itemValoratedBy, 5);
         //cambiar por actual user
         slopeOne.getPredictions(usersList.get(7));
         slopeOne.printResults();

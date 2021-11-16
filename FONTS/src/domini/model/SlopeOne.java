@@ -5,12 +5,14 @@ import FONTS.src.domini.model.*;
 import java.util.*;
 
 import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 
 // Hay que hacer una excepción para comprobar que existe el user
 
 public class SlopeOne {
     private User user;
+    private float maxValue;
     private Map<Integer,ArrayList<User>> itemValoratedBy;
     private ArrayList<myPair> predictions;
 
@@ -85,7 +87,7 @@ public class SlopeOne {
         for(Map.Entry<Integer, ArrayList<User>> item : itemValoratedBy.entrySet()) {
             //si el item no esta valorado por el usuario ejecutar predicción
             if(!item.getValue().contains(user)) {
-                float valoration = meanValoration + calculateDesviationMean(user, item.getKey());
+                float valoration = min(maxValue,meanValoration + calculateDesviationMean(user, item.getKey()));
 
                 /* si tuvieramos el item
                 ItemUsat iu = new ItemUsat(item, user, valoration);
@@ -103,7 +105,8 @@ public class SlopeOne {
         }
     }
 
-    public SlopeOne(Map<Integer,ArrayList<User>> itemValoratedBy) {
+    public SlopeOne(Map<Integer,ArrayList<User>> itemValoratedBy, float maxValue) {
+        this.maxValue = maxValue;
         this.itemValoratedBy = itemValoratedBy;
     }
 
