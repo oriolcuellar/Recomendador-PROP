@@ -31,17 +31,22 @@ public class K_Neareast_Neightbour {
 
         ArrayList <ArrayList<Item>> M_de_Items = new ArrayList<ArrayList<Item>>();
         ArrayList <ArrayList<Double>> Valoracio = new ArrayList<ArrayList<Double>>();
+        ArrayList <ArrayList<Double>> Dis = new ArrayList<ArrayList<Double>>();
         for (int j = 0; j < C_Items.n_Items(); ++j) {
 
             ArrayList<Item> Items_Aux = new ArrayList<Item>();
             ArrayList<Double> Val_Aux = new ArrayList<Double>();
+            ArrayList<Double> Dis_Aux = new ArrayList<Double>();
 
             clonador_ArrayList(Items_Aux, C_Items.getItems());
             clonador_ArrayList(Val_Aux, Valoracions);
+            clonador_ArrayList(Dis_Aux, Distances.get(j));
 
             M_de_Items.add(j, Items_Aux);
             Valoracio.add(j, Val_Aux);
-            ordenar_Items(Distances.get(j), M_de_Items.get(j), Valoracio.get(j),  0, Distances.get(j).size()-1);
+            Dis.add(j, Dis_Aux);
+
+            ordenar_Items(Dis.get(j), M_de_Items.get(j), Valoracio.get(j),  0, Dis.get(j).size()-1);
 
             /*//borra los que son mas que k
             for (int i = M_de_Items.get(j).size() -1; i >= k ; --i)
@@ -49,7 +54,7 @@ public class K_Neareast_Neightbour {
         }
 
         ArrayList<Item> Items_a_devolver = new ArrayList<>(k);
-        comparar_conjunts(Valoracio,Items_a_devolver, Distances, M_de_Items, k);
+        comparar_conjunts(Valoracio,Items_a_devolver, Dis, M_de_Items, k);
 
         return Items_a_devolver;
     }
