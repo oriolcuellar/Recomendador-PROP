@@ -59,6 +59,7 @@ public class SlopeOne {
                 }
             }
         }
+        if(count == 0) return 0;
         return num/count;
     }
 
@@ -82,7 +83,7 @@ public class SlopeOne {
                 ItemUsat iu = new ItemUsat(item, user, valoration);
                 user.addItemUsat(iu);
                  */
-                predictions.add(new myPair(item.getKey(), valoration));
+                predictions.add(new myPair(item.getKey(), max(0, valoration)));
             }
         }
     }
