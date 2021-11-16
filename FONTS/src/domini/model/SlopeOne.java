@@ -1,6 +1,6 @@
-package src.domini.model;
-import src.domini.controladores.CtrlDomini;
-import src.domini.model.*;
+package FONTS.src.domini.model;
+
+import FONTS.src.domini.model.*;
 
 import java.util.*;
 
@@ -111,22 +111,25 @@ public class SlopeOne {
     public ArrayList<myPair> getPredictions(User user){
         this.user = user;
         slopeOneAlgorithm(user);
-        float max;
-        int idmax;
-        ArrayList<myPair> orderedPredictions = new ArrayList<>();
+        float min;
+        int idmin;
+        int imin;
+        ArrayList<myPair> orderedPredictions = new ArrayList<myPair>();
         for(int i = 0; i < predictions.size(); ++i) {
-            max = predictions.get(i).getValoration();
-            idmax = predictions.get(i).getItemID();
-            for (int j = 0; j < predictions.size(); ++j) {
-                if(predictions.get(j).getValoration() > max) {
-                    max = predictions.get(j).getValoration();
-                    idmax = predictions.get(j).getItemID();
+            min = predictions.get(i).getValoration();
+            imin =  i;
+            idmin = predictions.get(i).getItemID();
+            for(int j = 0; j < predictions.size(); ++j) {
+                if(predictions.get(j).getValoration() < min) {
+                    min = predictions.get(j).getValoration();
+                    imin = j;
+                    idmin = predictions.get(j).getItemID();
                 }
             }
-            myPair mp = new myPair(idmax, max);
+            myPair mp = new myPair(idmin, min);
             orderedPredictions.add(mp);
+            predictions.remove(imin);
         }
-        printResults(orderedPredictions);
         return orderedPredictions;
     }
 

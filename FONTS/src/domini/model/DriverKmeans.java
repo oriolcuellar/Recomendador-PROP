@@ -1,7 +1,7 @@
-package src.domini.model;
+package FONTS.src.domini.model;
 
-import src.domini.controladores.CtrlDomini;
-import src.domini.model.*;
+import FONTS.src.domini.controladores.CtrlDomini;
+import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 
 public class DriverKmeans {

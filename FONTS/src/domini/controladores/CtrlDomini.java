@@ -1,9 +1,9 @@
 
 //@Author Oriol Cuellar
 
-package src.domini.controladores;
+package FONTS.src.domini.controladores;
 
-import src.domini.model.*;
+import FONTS.src.domini.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -108,7 +108,7 @@ public class CtrlDomini {
         SlopeOne slopeOne = new SlopeOne(itemValoratedBy);
         //cambiar por actual user
         slopeOne.getPredictions(usersList.get(7));
-        slopeOne.printResults();
+        //slopeOne.printResults();
 
         //k-neighbours
 

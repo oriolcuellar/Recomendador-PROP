@@ -1,7 +1,7 @@
-package src.domini.model;
+package FONTS.src.domini.model;
 
-import src.domini.model.*;
-import src.domini.controladores.*;
+import FONTS.src.domini.model.*;
+import FONTS.src.domini.controladores.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
