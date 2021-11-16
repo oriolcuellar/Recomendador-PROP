@@ -1,0 +1,48 @@
+
+-Cada uno poner sus clases en el diagrama de clases
+
+-Diagrama estàtic complet del model conceptual de dades en versió disseny (fet
+amb Rational Rose o eina similar) ) i breu descripció d’atributs i mètodes de cada
+classe (setters i getters es poden obviar)
+
+-Relació de les classes implementades per cada membre de l’equip.
+
+-Breu descripció de les estructures de dades i algorismes utilitzats per a
+implementar les funcionalitats principals d’aquesta entrega. 
+
+-Executables que permetin provar totes les classes implementades, mitjançant
+stubs i drivers. 
+
+-Tot directori contindrà un fitxer de nom index.txt (format text pla i sense accentuar) o
+index.htm o index.html amb la descripció del directori i de tots els seus fitxers –un per
+un– on podeu afegir les observacions especials que vulgueu per facilitar-ne la comprensió
+o l'ús. (NO USAR ACCENTOS)
+
+--------------------------------------------------------------------------------------
+
+EXE: Executables per provar les classes o funcionalitats implementades i jocs
+d’assaig. Hi haurà un subdirectori per cada classe a provar, amb els executables
+necessaris, les dades del joc d’assaig i la descripció d’aquest (veure l’apartat de
+descripció dels jocs de proves). 
+
+
+
+Descripció dels jocs de proves
+Cada fitxer executable del primer lliurament ha d’anar acompanyat d’un text que descrigui:
+ Objecte de la prova: casos d'ús i classes, o integració de conjunts, provats
+anteriorment, que es proven
+ Altres elements integrats a la prova: classes ja provades o que s'han provat
+d'alguna altra manera –reutilitzats, etc.– integrades en aquest executable (si n'hi ha)
+ Drivers construïts per aquesta prova i integrats en l'executable, amb descripció de
+la seva missió (si n'hi ha)
+ Stubs construïts per aquesta prova i integrats en l'executable, amb descripció de la
+seva missió (si n'hi ha)
+ Fitxers de dades necessaris: nom dels fitxers de dades, si n'hi ha, i en tal cas les 
+classes que s'emmagatzemen en cadascun
+ Valors estudiats: amb quins valors es prova i quina missió tenen, aquí és on
+s'hauria de parlar de caixa blanca o negra, conjunts de dades de comportament homogeni,
+etc.
+ Efectes estudiats: funcionalitats com ara vistes, moviments per la pantalla,
+selecció en llistes, etc. que no són dades concretes
+ Operativa: petit manual o descripció del funcionament de l'executable, molt
+bàsica 
