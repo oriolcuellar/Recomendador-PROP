@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/domini/controladores" isTestSource="false" packagePrefix="src.domini.controladores" />
+      <sourceFolder url="file://$MODULE_DIR$/src/domini/model" isTestSource="false" packagePrefix="src.domini.model" />
+      <sourceFolder url="file://$MODULE_DIR$/src/domini/Drivers" isTestSource="false" packagePrefix="src.domini.drivers" />
+      <sourceFolder url="file://$MODULE_DIR$/FONTS/src/domini/Drivers" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/FONTS/src/domini/controladores" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/FONTS/src/domini/model" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
