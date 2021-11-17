@@ -49,7 +49,7 @@ public class DriverRateRecomendation {
         ArrayList <Cluster> ac=kmeans.getClusters();
         //slope one
         SlopeOne So = new SlopeOne(item_valorated_by,5);
-        ArrayList<myPair> predictions= So.getPredictions(usersList.get(35368));
+        ArrayList<myPair> predictions= So.getPredictions(usersList.get(3));
 
         So.printResults();
 

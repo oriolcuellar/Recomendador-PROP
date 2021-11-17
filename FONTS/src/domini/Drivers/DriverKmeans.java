@@ -1,8 +1,5 @@
 package FONTS.src.domini.drivers;
-
 import FONTS.src.domini.model.*;
-
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,13 +8,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+/*! \brief Driver de la clase Kmeans.
+ */
 public class DriverKmeans {
-    static Map<Integer, User> usersList = new HashMap<>();
-    static Map<Integer, User> usersList2 = new HashMap<>();
-    static ArrayList<Vector<String>> ratings;
 
+    /** Mapa que contiene como llave el ID de un usuario y com valor dicho usuario.
+     *  Se utiliza para relizar las pruebas con los datos recibidos a través del fichero.
+     */
+    static Map<Integer, User> usersList = new HashMap<>();
+    /** Mapa que permanecera vacio y se utiliza para tratar una excepción.
+     */
+    static Map<Integer, User> usersList2 = new HashMap<>();
+
+
+    /** Función que lee el archivo que contiene los datos a probar.
+     * @param csvFile Dirección del archivo que contiene los datos-
+     * @return Vector que almacena los datos leídos.
+     */
     public static ArrayList<Vector<String>> Lector_Ratings(String csvFile) {
-        ratings= new ArrayList<>();
+        ArrayList<Vector<String>> ratings = new ArrayList<>();
         BufferedReader br = null;
         String line = "";
         //Se define separador ","
@@ -51,6 +60,8 @@ public class DriverKmeans {
 
     }
 
+    /** Función que se encarga de leer los datos y almacenarlos en su lugar correspondiente.
+     */
     public static void readData() {
 
         LectorCSV2 l = new LectorCSV2();
@@ -71,7 +82,13 @@ public class DriverKmeans {
         }
     }
 
-
+    /** Main del driver.
+     *  Prueba 4 casos:
+     *      - Llamar al algoritmo con más clusters que usuarios.
+     *      - Llamar al algoritmo pasandole 0 usuarios.
+     *      - Llamar al algoritmo con k = 0 (0 clusters).
+     *      - Llamar al algoritmo con un fichero de datos real.
+     */
     public static void main(String[] args) {
         readData();
         Kmeans kmeans = new Kmeans(63423432, usersList);
