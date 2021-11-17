@@ -1,4 +1,8 @@
 
+- Nombre de funciones en ingles.
+
+- comentarios y textos en castellano
+
 -Cada uno poner sus clases en el diagrama de clases
 
 -Diagrama estàtic complet del model conceptual de dades en versió disseny (fet

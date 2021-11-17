@@ -3,10 +3,16 @@ package FONTS.src.domini.model;
 import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 
-// @Author Oriol Cuellar
+/** \brief Clase que implementa RateRecomendation.
+ *  @author Oriol Cuellar
+ */
 
 public class RateRecomendation {
-
+    /** Mapa que contiene como llave el ID de un Item y com valor los usuarios que lo han valorado.
+     *  Se utiliza como parametro para el algoritmo Slope-One
+     *  @see Item
+     *  @see Item
+     */
     private static ArrayList<myPair> arr;
 
     private static float result;

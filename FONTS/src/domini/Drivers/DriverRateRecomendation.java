@@ -12,13 +12,19 @@ import java.util.Vector;
  */
 
 public class DriverRateRecomendation {
-    /** Mapa que contiene como llave el ID de un Item y com valor los usuarios que lo han valorado.
+    /** Mapa que contiene como llave el ID de un @si Item y com valor los usuarios que lo han valorado.
      *  Se utiliza como parametro para el algoritmo Slope-One
+     *  @see Item
+     *  @see User
+     *  @see SlopeOne
      */
     static Map<Integer, ArrayList<User>> item_valorated_by= new HashMap<Integer, ArrayList<User>>();
 
     /** Mapa que contiene como llave el ID de un User y com valor el objeto User.
      *  Se utiliza como parametro para el algoritmo K-Means y Slope-One
+     *  @see User
+     *  @see Kmeans
+     *  @see SlopeOne
      */
     static Map<Integer, User> usersList= new HashMap<Integer, User>();
 

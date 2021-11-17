@@ -95,7 +95,13 @@ public class CtrlDomini {
         }
 
     }
-    public static void editProfile(){}
+    public static void editProfile(String newPass){
+        if (actualUser==null) System.out.println("\n No hi ha usuari loggejat \n");
+        else{
+            actualUser.setPassword(newPass);
+            System.out.println("\n Password changed Out \n");
+        }
+    }
     public static void deleteProfile(){}
     public static void showRecommendedItems(int k, int maxValue){// to do------------------
         //kmeans
