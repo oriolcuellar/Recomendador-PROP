@@ -49,18 +49,18 @@ public class SlopeOne {
     }
 
     private float calculateValorationMean(User user) {
-        ArrayList<ItemUsat> usedItems = user.getItemsUsats();
+        ArrayList<valoratedItem> usedItems = user.getItemsUsats();
         float sum = 0;
-        for(ItemUsat u: usedItems) sum += u.getValoracio();
+        for(valoratedItem u: usedItems) sum += u.getValoracio();
         return sum/usedItems.size();
     }
 
     // suma media de las desviaciones de todos los items I respecto del item J, ambos puntuados por el usuario user
     private float calculateDesviationMean(User user, int IDitemJ) {
-        ArrayList<ItemUsat> usedItems = user.getItemsUsats();
+        ArrayList<valoratedItem> usedItems = user.getItemsUsats();
         float num = 0;
         int count = 0;
-        for(ItemUsat itemI : usedItems) {
+        for(valoratedItem itemI : usedItems) {
             int IDitemI =  itemI.getItem().getID();
             if(IDitemI != IDitemJ) {
                 ArrayList<User> usersIJ = getIntersaction(IDitemI,IDitemJ);
@@ -92,8 +92,8 @@ public class SlopeOne {
                 float valoration = min(maxValue, meanValoration + calculateDesviationMean(user, item.getKey()));
 
                 /* si tuvieramos el item
-                ItemUsat iu = new ItemUsat(item, user, valoration);
-                user.addItemUsat(iu);
+                valoratedItem iu = new valoratedItem(item, user, valoration);
+                user.addvaloratedItem(iu);
                  */
                 predictions.add(new myPair(item.getKey(), max(0, valoration)));
             }

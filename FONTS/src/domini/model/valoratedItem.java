@@ -3,9 +3,10 @@ package FONTS.src.domini.model;
 import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 
-//@Author Marc y Roberto
-
-public class ItemUsat {
+/** \brief Clase que representa un item valorado
+ *  @author Roberto Amat & Marc Camarillas
+ */
+public class valoratedItem {
 
     private float valoracio;
     private Item item;
@@ -13,18 +14,18 @@ public class ItemUsat {
 
     //Creadores
 
-    public ItemUsat(Item  item, User usuari, float valoracio) {
+    public valoratedItem(Item  item, User usuari, float valoracio) {
         this.item = item;
         this.usuari = usuari;
         this.valoracio = valoracio;
     }
 
-    public ItemUsat(Item item, float valoracio) {
+    public valoratedItem(Item item, float valoracio) {
         this.item = item;
         this.valoracio = valoracio;
     }
 
-    public ItemUsat() {
+    public valoratedItem() {
         valoracio = -1;
     }
 
@@ -48,7 +49,7 @@ public class ItemUsat {
     public void setUsuari(User Usuari) {
         this.usuari = Usuari;
     }
-    public void setItemUsat(Item item) {
+    public void setvaloratedItem(Item item) {
         this.item = item;
     }
 }

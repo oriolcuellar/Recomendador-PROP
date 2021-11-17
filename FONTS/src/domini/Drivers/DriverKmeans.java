@@ -72,12 +72,12 @@ public class DriverKmeans {
             if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
                 User usuari = usersList.get(Integer.valueOf(vs.get(0)));
                 if (usuari.searchUsedItem(Integer.parseInt(vs.get(1))) == null) {//no existe el item en sus valoraciones
-                    usuari.addItemUsat(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
+                    usuari.addvaloratedItem(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
 
                 }
             } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
                 User usuari = new User(Integer.parseInt(vs.get(0)));
-                usuari.addItemUsat(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
+                usuari.addvaloratedItem(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
                 usersList.put(Integer.valueOf(vs.get(0)), usuari);
             }
         }

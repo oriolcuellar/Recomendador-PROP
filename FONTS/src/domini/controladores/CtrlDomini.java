@@ -19,7 +19,7 @@ public class CtrlDomini {
     private static User actualUser;
     private static Item selectedItem;
     private static Map <Integer, User> usersList;
-    private static ArrayList <ItemUsat> ratesList;
+    private static ArrayList <valoratedItem> ratesList;
     private static Conjunt_Items itemList;
     private static Map <String, TipusItem> itemTypeList;
     private static Map<Integer,ArrayList<User>> itemValoratedBy;
@@ -39,7 +39,7 @@ public class CtrlDomini {
         usersList = new HashMap<Integer, User>();
         actualUser = null;
         selectedItem = null;
-        ratesList = new ArrayList<ItemUsat>();
+        ratesList = new ArrayList<valoratedItem>();
         itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
         itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
@@ -318,12 +318,12 @@ public class CtrlDomini {
                 if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
                     User usuari = usersList.get(Integer.valueOf(vs.get(0)));
                     if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
-                        usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+                        usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
 
                     }
                 } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
                     User usuari = new User(Integer.valueOf(vs.get(0)));
-                    usuari.addItemUsat(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+                    usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
                     usersList.put(Integer.valueOf(vs.get(0)), usuari);
                 }
                 //parte del item
