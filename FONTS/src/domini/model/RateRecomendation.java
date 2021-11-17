@@ -9,7 +9,7 @@ public class RateRecomendation {
 
     private static ArrayList<myPair> arr;
 
-    private static int result;
+    private static float result;
     public  RateRecomendation(ArrayList<myPair> arr2 ){
         this.arr=arr2;
         result=-1;
@@ -24,7 +24,7 @@ public class RateRecomendation {
         }
         result=res;
     }
-    public int getResult(){
+    public float getResult(){
         return result;
     }
 }

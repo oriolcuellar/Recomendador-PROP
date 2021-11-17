@@ -100,7 +100,8 @@ public class CtrlDomini {
     public static void showRecommendedItems(int k, int maxValue){// to do------------------
         //kmeans
 
-        Kmeans kmeans = new Kmeans(k, usersList);
+        Kmeans kmeans = new Kmeans(usersList);
+        kmeans.run(k);
         kmeans.printAllClusters();
 
         //slope one

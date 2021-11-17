@@ -49,7 +49,7 @@ public class Cluster {
        - Sumas la distancia a cada usuario y al que añades
     */
     public void addUser(User user) {
-        if(cluster.contains(user)) System.out.println("El usuario " + user.getUserID() + " ya forma parte del driver.");
+        if(cluster.contains(user)) System.out.println("El usuario " + user.getUserID() + " ya forma parte del cluster.");
         else {
             cluster.add(user);
             float f = 0;

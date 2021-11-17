@@ -22,10 +22,8 @@ public class Kmeans {
      */
     private int k;
 
-    // Auxiliares
-
-    /*
-    Asignar k centroids random sin que se repitan
+     /** Función que crea aleatoriamente los k clusters iniciales con los que parte
+      *  el algoritmo.
      */
     private void assignKCentroids(){
         Random myRandom = new Random();
@@ -40,15 +38,18 @@ public class Kmeans {
                 indiceNuevocentroid = myRandom.nextInt(users.size());
                 aux = users.get(keysAsArray.get(myRandom.nextInt(keysAsArray.size())));
             }while (nuevoscentroids.contains(aux));
-            c.setCentroid(aux);
             c.addUser(aux);
+            c.setCentroid(aux);
             clusters.add(c);
             nuevoscentroids.add(aux);
             System.out.println("CENTROIDE INICIAL: " + clusters.get(i).getcentroid().getUserID());
         }
     }
-    /*
-        Asigna un usuario al centroide de menos distancia
+
+
+    /** Función que asigna un nuevo usuario al cluster con el centroide más
+     * cercano a él.
+     * @param user Usuario a asignar.
      */
     private void asignUserToCluster(User user) {
         float dMin = Float.POSITIVE_INFINITY;
@@ -66,8 +67,8 @@ public class Kmeans {
         clusters.get(iMin).recalculateCentroid();
     }
 
-    /*
-        Elimina un usuario del cluster al que pertenece
+    /** Elimina un usuario del cluster al que pertenezca.
+     * @param user Usuario a eliminar.
      */
     private void deleteUserFromCluster(User user) {
         int indexCluster = user.getNumCluster();
@@ -76,41 +77,43 @@ public class Kmeans {
 
     }
 
-    // Constructora
-    /*
-        Crea un conjunto con k clústers
+    /** Función que ejecuta el algoritmo.
+     * @param k Numero de clusters que tendra el algoritmo.
      */
-    public Kmeans(int k, Map <Integer, User> u) {
+    public void run(int k) {
         this.k = k;
-        clusters = new ArrayList<Cluster>();
-        users = u;
-        if(u.size() == 0) System.out.println("El numero de usuarios tiene que ser superior a 0.");
-        else if(k > u.size()) System.out.println("El numero de clusters tiene que ser menor al numero de usuarios.");
+        if(users.size() == 0) System.out.println("El numero de usuarios tiene que ser superior a 0.");
+        else if(k > users.size()) System.out.println("El numero de clusters tiene que ser menor al numero de usuarios.");
         else if(k == 0) System.out.println("El numero de clusters tiene que ser mayor que 0.");
         else {
-            // Asignar k centroids random sin que se repitan
             assignKCentroids();
             // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
             for(Map.Entry<Integer, User> entry : users.entrySet()) {
                 asignUserToCluster(entry.getValue());
             }
         }
-
     }
 
+    /** Constructora de la clase.
+     * @param users Usuarios sobre los que se ejecutará el algoritmo.
+     */
+    public Kmeans(Map <Integer, User> users) {
+        this.k = -1;
+        clusters = new ArrayList<Cluster>();
+        this.users = users;
+    }
+
+    /** Función que devuelve los clusters.
+     * @return Clusters generados por el algoritmo.
+     */
     public ArrayList<Cluster> getClusters() {
         return clusters;
     }
 
-    // Functions
 
-    public void newValoration(User user) {
-        deleteUserFromCluster(user);
-        asignUserToCluster(user);
-    }
-
-    // PRINTS
-
+    /** Función que imprime todos los clusters generados por el algoritmo.
+     * @see Cluster
+     */
     public void printAllClusters() {
         for (Cluster cluster : clusters) {
             cluster.printCluster();
