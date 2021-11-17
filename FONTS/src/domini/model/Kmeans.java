@@ -105,8 +105,8 @@ public class Kmeans {
     // PRINTS
 
     public void printAllClusters() {
-        for(int i = 0; i < clusters.size(); ++i) {
-            clusters.get(i).printCluster();
+        for (Cluster cluster : clusters) {
+            cluster.printCluster();
         }
     }
 }

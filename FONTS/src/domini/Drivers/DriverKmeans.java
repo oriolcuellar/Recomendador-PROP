@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-/*! \brief Driver de la clase Kmeans.
+/** \brief Driver de la clase Kmeans.
+ *  @author Roberto Amat
  */
 public class DriverKmeans {
 

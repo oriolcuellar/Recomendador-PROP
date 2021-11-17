@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import static java.lang.Integer.max;
 import static java.lang.Integer.min;
 
-// @Author Marc Camarillas, Roberto Amat
+// @author Marc Camarillas, Roberto Amat
 public class Cluster {
     // Atributes
     private User centroid;
@@ -66,15 +66,18 @@ public class Cluster {
        - Eliminas el usuario
     */
     public void deleteUser(User user) {
-        for(int i = 0; i < cluster.size(); ++i) {
-            float actualDistance = user.calculateDistances(cluster.get(i));
-            float d1 = sumDistances.get(i) - actualDistance;
-            sumDistances.set(i,d1);
+        if(cluster.contains(user)) {
+            for (int i = 0; i < cluster.size(); ++i) {
+                float actualDistance = user.calculateDistances(cluster.get(i));
+                float d1 = sumDistances.get(i) - actualDistance;
+                sumDistances.set(i, d1);
+            }
+            int indexUserRemoved = cluster.indexOf(user);
+            cluster.remove(user);
+            sumDistances.remove(indexUserRemoved);
+            user.setNumCluster(-1);
         }
-        int indexUserRemoved = cluster.indexOf(user);
-        cluster.remove(user);
-        sumDistances.remove(indexUserRemoved);
-        user.setNumCluster(-1);
+        else System.out.println("El usuario: " + user.getUserID() + " no existe en el cluster.");
     }
 
     /*

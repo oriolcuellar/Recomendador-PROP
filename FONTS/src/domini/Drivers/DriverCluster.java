@@ -1,11 +1,24 @@
 package FONTS.src.domini.drivers;
 
 import FONTS.src.domini.model.Cluster;
+import FONTS.src.domini.model.User;
 
-/*! \brief Driver de la Clase Cluster.
+/** Driver de la Clase Cluster.
+ *  @author Roberto Amat
  */
-
 public class DriverCluster {
 
-    Cluster c = new Cluster();
+
+
+    /** Main del driver.
+     *
+     */
+    public static void main(String[] args) {
+        Cluster c = new Cluster();
+
+
+        User u = new User(1);
+        c.deleteUser(u);
+    }
+
 }
