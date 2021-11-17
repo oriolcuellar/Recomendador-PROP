@@ -3,6 +3,8 @@ package FONTS.src.domini.model;
 import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 
+// @Author Oriol Cuellar
+
 public class RateRecomendation {
 
     private static ArrayList<myPair> arr;
