@@ -31,7 +31,11 @@ public class Cluster {
 
     // Setters
     public void setCentroid(User centroid) {
-        this.centroid = centroid;
+        if(cluster.contains(centroid)) {
+            this.centroid = centroid;
+        }
+        else System.out.println("No se puede asignar " + centroid.getUserID() + " como centroide" +
+                " dado que no forma parte del cluster.");
     }
 
     public void setCluster(ArrayList<User> cluster) {
@@ -45,19 +49,22 @@ public class Cluster {
        - Sumas la distancia a cada usuario y al que añades
     */
     public void addUser(User user) {
-        cluster.add(user);
-        float f = 0;
-        sumDistances.add(f);
-        float d = 0;
-        for(int i = 0; i < cluster.size(); ++i) {
-            if(user != null) {
-                float actualDistance = user.calculateDistances(cluster.get(i));
-                d += actualDistance;
-                float d1 = sumDistances.get(i) + actualDistance;
-                sumDistances.set(i, d1);
+        if(cluster.contains(user)) System.out.println("El usuario " + user.getUserID() + " ya forma parte del driver.");
+        else {
+            cluster.add(user);
+            float f = 0;
+            sumDistances.add(f);
+            float d = 0;
+            for(int i = 0; i < cluster.size(); ++i) {
+                if(user != null) {
+                    float actualDistance = user.calculateDistances(cluster.get(i));
+                    d += actualDistance;
+                    float d1 = sumDistances.get(i) + actualDistance;
+                    sumDistances.set(i, d1);
+                }
             }
+            sumDistances.set(cluster.size() - 1, d);
         }
-        sumDistances.set(cluster.size() - 1, d);
     }
 
     /*
