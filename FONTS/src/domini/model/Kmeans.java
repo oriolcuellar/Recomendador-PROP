@@ -77,12 +77,18 @@ public class Kmeans {
         this.k = k;
         clusters = new ArrayList<Cluster>();
         users = u;
-        // Asignar k centroids random sin que se repitan
-        assignKCentroids();
-        // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
-        for(Map.Entry<Integer, User> entry : users.entrySet()) {
-            asignUserToCluster(entry.getValue());
+        if(u.size() == 0) System.out.println("El numero de usuarios tiene que ser superior a 0.");
+        else if(k > u.size()) System.out.println("El numero de clusters tiene que ser menor al numero de usuarios.");
+        else if(k == 0) System.out.println("El numero de clusters tiene que ser mayor que 0.");
+        else {
+            // Asignar k centroids random sin que se repitan
+            assignKCentroids();
+            // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
+            for(Map.Entry<Integer, User> entry : users.entrySet()) {
+                asignUserToCluster(entry.getValue());
+            }
         }
+
     }
 
     public ArrayList<Cluster> getClusters() {

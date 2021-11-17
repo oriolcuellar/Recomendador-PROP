@@ -74,9 +74,13 @@ public class DriverKmeans {
 
     public static void main(String[] args) {
         readData();
-        User u = new User(23213);
-        usersList2.put(23213,u);
-        Kmeans kmeans = new Kmeans(6, usersList2);
+        Kmeans kmeans = new Kmeans(63423432, usersList);
         kmeans.printAllClusters();
+        Kmeans kmeans2 = new Kmeans(6, usersList2);
+        kmeans2.printAllClusters();
+        Kmeans kmeans3 = new Kmeans(0, usersList);
+        kmeans3.printAllClusters();
+        Kmeans kmeans4 = new Kmeans(6, usersList);
+        kmeans4.printAllClusters();
     }
 }

@@ -95,10 +95,15 @@ public class Cluster {
 
     // Print
     public void printCluster() {
-        System.out.println("CENTROID: " + centroid.getUserID());
-        for(int i = 0; i < cluster.size(); ++i) {
-            System.out.println("USER: " + cluster.get(i).getUserID());
+        System.out.println("Centroide: " + centroid.getUserID());
+        System.out.print("Usuarios:");
+        boolean first = true;
+        for (User user : cluster) {
+            if(first) first = false;
+            else System.out.print(", ");
+            System.out.print(user.getUserID());
         }
+        System.out.println("\n");
     }
 }
 
