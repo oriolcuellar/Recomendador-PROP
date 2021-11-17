@@ -9,10 +9,11 @@ import java.util.ArrayList;
 public class valoratedItem {
 
     private float valoracio;
+
     private Item item;
+
     private User usuari;
 
-    //Creadores
 
     public valoratedItem(Item  item, User usuari, float valoracio) {
         this.item = item;
