@@ -65,12 +65,12 @@ public class DriverRateRecomendation {
 
         //kmeans
         Kmeans kmeans = new Kmeans(usersList);
-        kmeans.run(6);
+        kmeans.run(300);
         ArrayList <Cluster> ac=kmeans.getClusters();
         //slope one
         SlopeOne So = new SlopeOne(item_valorated_by, usersList,10);
         ArrayList<myPair> predictions= So.getPredictions(usersList.get(1575));
-        //Rate Recomendation algorithm
+        //Algortimo de valorar recomendaciones
         RateRecomendation recomendation = new RateRecomendation(predictions);
         recomendation.execute();
         System.out.println(recomendation.getResult());

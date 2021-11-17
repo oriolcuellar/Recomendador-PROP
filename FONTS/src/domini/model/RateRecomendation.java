@@ -8,10 +8,9 @@ import java.util.ArrayList;
  */
 
 public class RateRecomendation {
-    /** Mapa que contiene como llave el ID de un Item y com valor los usuarios que lo han valorado.
+    /** ArrayList de myPair que contiene como llave el ID de un Item y com valor los usuarios que lo han valorado.
      *  Se utiliza como parametro para el algoritmo Slope-One
-     *  @see Item
-     *  @see Item
+     *  @see myPair
      */
     private static ArrayList<myPair> arr;
 
