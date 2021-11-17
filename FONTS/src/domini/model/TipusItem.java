@@ -32,6 +32,8 @@ public class TipusItem {
         this.atributes = atributes;
     }
 
+    public TipusItem(){}
+
     //getters
     public String getID() {
         return ID;
@@ -89,5 +91,5 @@ public class TipusItem {
 
         }
     }
-    public TipusItem(){}
+
 }
