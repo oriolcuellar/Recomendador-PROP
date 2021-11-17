@@ -97,7 +97,7 @@ public class CtrlDomini {
     }
     public static void editProfile(){}
     public static void deleteProfile(){}
-    public static void showRecommendedItems(int k){// to do------------------
+    public static void showRecommendedItems(int k, int maxValue){// to do------------------
         //kmeans
 
         Kmeans kmeans = new Kmeans(k, usersList);
@@ -105,7 +105,7 @@ public class CtrlDomini {
 
         //slope one
 
-        SlopeOne slopeOne = new SlopeOne(itemValoratedBy, 5);
+        SlopeOne slopeOne = new SlopeOne(itemValoratedBy, usersList, maxValue);
         //cambiar por actual user
         slopeOne.getPredictions(usersList.get(7));
         slopeOne.printResults();

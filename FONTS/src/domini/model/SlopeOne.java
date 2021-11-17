@@ -15,6 +15,7 @@ public class SlopeOne {
     private float maxValue;
     private Map<Integer,ArrayList<User>> itemValoratedBy;
     private ArrayList<myPair> predictions;
+    private Map<Integer,User> usersList;
 
     private ArrayList<User> intersection(ArrayList<User> l1, ArrayList<User> l2, int numCluster) {
         ArrayList<User> l3 = new ArrayList<User>();
@@ -81,6 +82,7 @@ public class SlopeOne {
     }
 
     private void slopeOneAlgorithm(User user) {
+        if(!usersList.containsValue(user)) System.out.println("El usuario no existe");
         float meanValoration = calculateValorationMean(user);
         this.predictions = new ArrayList<myPair>();
         //predecir todos los que no tiene valoracion
@@ -105,9 +107,10 @@ public class SlopeOne {
         }
     }
 
-    public SlopeOne(Map<Integer,ArrayList<User>> itemValoratedBy, float maxValue) {
+    public SlopeOne(Map<Integer,ArrayList<User>> itemValoratedBy, Map<Integer,User> usersList, float maxValue) {
         this.maxValue = maxValue;
         this.itemValoratedBy = itemValoratedBy;
+        this.usersList = usersList;
     }
 
     //retorna las predicciones para el usuario u

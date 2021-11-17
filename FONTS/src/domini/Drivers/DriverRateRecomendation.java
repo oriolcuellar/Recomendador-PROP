@@ -1,4 +1,4 @@
-package FONTS.src.domini.Drivers;
+package FONTS.src.domini.drivers;
 import FONTS.src.domini.model.*;
 
 
@@ -49,7 +49,7 @@ public class DriverRateRecomendation {
         Kmeans kmeans = new Kmeans(6, usersList);
         ArrayList <Cluster> ac=kmeans.getClusters();
         //slope one
-        SlopeOne So = new SlopeOne(item_valorated_by,5);
+        SlopeOne So = new SlopeOne(item_valorated_by, usersList,5);
         ArrayList<myPair> predictions= So.getPredictions(usersList.get(3));
 
         So.printResults();

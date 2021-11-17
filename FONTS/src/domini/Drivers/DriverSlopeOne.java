@@ -88,15 +88,13 @@ public class DriverSlopeOne{
 
    public static void main(String[] args) {
         readData();
-       SlopeOne So = new SlopeOne(itemValoratedBy,5);
-       for(int i = 0; i < usersList.size(); ++i) {
-           System.out.println("USER: " + usersList.get(i).getUserID());
-           So.getPredictions(usersList.get(i));
-           System.out.println();
-           usersList.get(i).printUsedItems();
-           System.out.println();
-           So.printResults();
-           System.out.println();
-       }
+       SlopeOne So = new SlopeOne(itemValoratedBy, usersList,200);
+       System.out.println("USER: " + usersList.get(3).getUserID());
+       So.getPredictions(usersList.get(3));
+       System.out.println();
+       usersList.get(3).printUsedItems();
+       System.out.println();
+       So.printResults();
+       System.out.println();
     }
 }
