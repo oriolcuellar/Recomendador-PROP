@@ -1,6 +1,7 @@
 package FONTS.src.domini.model;
-
 import FONTS.src.domini.model.*;
+
+//@Author Jordi Olmo
 public class Ranged_Atribute  extends Atribute{
 
     //Atributes

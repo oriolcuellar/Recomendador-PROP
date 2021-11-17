@@ -5,6 +5,7 @@ import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//@Author Jordi Olmo
 public class DriverKND {
     public static void main(String[] args) {
         //DriverKmeans dr = new DriverKmeans();

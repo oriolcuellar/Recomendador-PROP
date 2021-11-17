@@ -8,10 +8,12 @@ import java.util.Vector;
 public class K_Neareast_Neightbour {
 
     //Atributes
+
     private Conjunt_Items C_Items;
     private ArrayList<ArrayList<Double> > Distances;
 
     //Constructora
+
     public K_Neareast_Neightbour(Conjunt_Items c_Items) {
         C_Items = c_Items;
         Distances = new ArrayList<ArrayList<Double> >();
@@ -20,9 +22,11 @@ public class K_Neareast_Neightbour {
     }
 
     //Getters
+
     public Double Distance (Item a , Item b) {return  a.Distance(b);}
 
     //Algorisme
+
     public ArrayList<Item> Algorithm(int k, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
 
         ArrayList<Double> Valors = new ArrayList<Double>();

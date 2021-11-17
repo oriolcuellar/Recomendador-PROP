@@ -5,42 +5,50 @@ import java.util.Vector;
 
 //Author Jordi Olmo
 public class Atribute {
-    //atributes
-    private String nom;
-    private String tipus; //Boolean, String, Vector de String, Data, Rang
-    private boolean rellevant;
 
-    //constructors
+    //atributes
+
+    private String Nom;
+    private String Tipus; //Boolean, String, Vector de String, Data, Rang
+    private boolean Rellevant;
+
+    //Constructors
+
     public Atribute(String name, String type) {
-        nom = name;
-        tipus = type;
-        rellevant=true;
+
+        Nom = name;
+        Tipus = type;
+        Rellevant = true;
     }
     public Atribute(String name) {
-        nom = name;
-        rellevant=true;
-        tipus="";
+
+        Nom = name;
+        Tipus = "";
+        Rellevant = true;
     }
     public Atribute() {
-        rellevant=true;
-        tipus="";
-        nom="";
+
+        Nom = "";
+        Tipus = "";
+        Rellevant = true;
     }
     public Atribute(Atribute a) {
-        rellevant=a.rellevant;
-        tipus=a.tipus;
-        nom=a.nom;
+
+        Nom = a.Nom;
+        Tipus = a.Tipus;
+        Rellevant = a.Rellevant;
     }
 
-    //getters
+    //Getters
+
     public boolean isRellevant() {
-        return rellevant;
+        return Rellevant;
     }
     public String getName() {
-        return nom;
+        return Nom;
     }
     public String getType() {
-        return tipus;
+        return Tipus;
     }
     public Double getLower() {
         return 0.0;
@@ -49,22 +57,22 @@ public class Atribute {
         return 0.0;
     }
 
-    //setters
+    //Setters
+
     public void setTipus(String tipus) {
-        this.tipus = tipus;
+        this.Tipus = tipus;
     }
     public void setNom(String nom) {
-        this.nom = nom;
+        this.Nom = nom;
     }
     public void setRellevant(boolean rellevant) {
-        this.rellevant = rellevant;
+        this.Rellevant = rellevant;
     }
-    public void setLower(double low) {
-    }
-    public void setUpper(double up) {
-    }
+    public void setLower(double low) {    }
+    public void setUpper(double up) {   }
 
-    //operaciones
+    //Operacions
+
     public Vector<String> Construc_vector(String s) {
 
         Vector<String> v = new Vector<String>(0);

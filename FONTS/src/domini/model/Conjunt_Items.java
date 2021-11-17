@@ -8,9 +8,6 @@ public class Conjunt_Items {
 
     //Atributes
     private ArrayList<Item> Items;
-    public ArrayList<Item> getItems() {
-        return Items;
-    }
 
     //Creadora
     public Conjunt_Items(ArrayList<Item> items) {
@@ -39,6 +36,9 @@ public class Conjunt_Items {
     }
 
     public int n_Items() { return Items.size();}
+    public ArrayList<Item> getItems() {
+        return Items;
+    }
 
     //Setters
 
