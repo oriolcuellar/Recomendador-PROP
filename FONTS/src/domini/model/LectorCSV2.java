@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Vector;
 
-// @Author Marc Camarillas, Roberto Amat
+// @Author Oriol Cuellar
 public class LectorCSV2 {
 
     //private Usuarios u;
