@@ -7,9 +7,11 @@ import java.util.Vector;
 //@Author Jordi Olmo
 public class K_Neareast_Neightbour {
 
-        private Conjunt_Items C_Items;
-        private ArrayList<ArrayList<Double> > Distances;
+    //Atributes
+    private Conjunt_Items C_Items;
+    private ArrayList<ArrayList<Double> > Distances;
 
+    //Constructora
     public K_Neareast_Neightbour(Conjunt_Items c_Items) {
         C_Items = c_Items;
         Distances = new ArrayList<ArrayList<Double> >();
@@ -17,14 +19,23 @@ public class K_Neareast_Neightbour {
         omplir_matriu();
     }
 
+    //Getters
+    public Double Distance (Item a , Item b) {return  a.Distance(b);}
 
+    //Algorisme
     public ArrayList<Item> Algorithm(int k, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
+
+        ArrayList<Double> Valors = new ArrayList<Double>();
+
+        for(int i = 0; i < C_Items.n_Items(); ++i)
+            Valors.add(i, 0.);
 
         for (int i = 0; i < itemsUsats.size(); ++i)
             C_Items.anyadir_item(itemsUsats.get(i));
 
+
         for(int i = 0; i < itemsUsats.size(); ++i)
-            Valoracions.add(C_Items.get_posiion(itemsUsats.get(i)), 0.);
+            Valors.add(C_Items.get_posiion(itemsUsats.get(i)), Valoracions.get(i));
 
         anyadir_elements(itemsUsats.size());
         omplir_matriu();
@@ -39,7 +50,7 @@ public class K_Neareast_Neightbour {
             ArrayList<Double> Dis_Aux = new ArrayList<Double>();
 
             clonador_ArrayList(Items_Aux, C_Items.getItems());
-            clonador_ArrayList(Val_Aux, Valoracions);
+            clonador_ArrayList(Val_Aux, Valors);
             clonador_ArrayList(Dis_Aux, Distances.get(j));
 
             M_de_Items.add(j, Items_Aux);
@@ -59,7 +70,7 @@ public class K_Neareast_Neightbour {
         return Items_a_devolver;
     }
 
-    //Operacions Auxiliars
+    //Operacions Auxiliars del algorisme
 
     //Sent les matrius en ordre del parametres Y, Z, X -> per uns Item i, j qualsevols I_Finals = Sumatori(Zi*Yi) | Xi == Xj
     private void comparar_conjunts (ArrayList<ArrayList<Double>> Val, ArrayList<Item> I_Finals, ArrayList<ArrayList<Double>> Distances,
@@ -89,6 +100,53 @@ public class K_Neareast_Neightbour {
         for (int i = I_Finals.size()-1; i >= k ; --i)
             I_Finals.remove(i);
     }
+
+    //la matriz ya debe ser del tamaño del conjunt d'items
+    private void omplir_matriu() {
+
+        for (int i = 0; i < C_Items.n_Items(); ++i)
+            for(int j = 0; j < C_Items.n_Items(); ++j){
+
+                if (i == j)
+                    Distances.get(i).set(j, 0.0);
+
+                else if((Distances.get(i).get(j) == -1.) && (Distances.get(i).get(j) == -1.)) {
+
+                    Double aux = C_Items.getItems().get(i).Distance(C_Items.getItems().get(j));
+                    Distances.get(i).set(j, aux);
+                    Distances.get(j).set(i, aux);
+                }
+            }
+    }
+
+    private void initzialitzar_matriu() {
+
+        for (int i = 0; i < C_Items.n_Items(); ++i) {
+
+            ArrayList<Double> Aux = new ArrayList<Double>();
+            for (int j = 0; j < C_Items.n_Items(); ++j)
+                Aux.add(-1.0);
+            Distances.add(Aux);
+        }
+
+    }
+
+    private void anyadir_elements(int n) {
+
+        for (int i = 0; i < n; ++i) {
+
+            ArrayList<Double> Aux = new ArrayList<Double>();
+            for (int j = 0; j < C_Items.n_Items(); ++j)
+                Aux.add(-1.0);
+            Distances.add(Aux);
+        }
+
+        for (int i = 0; i < n; ++i)
+            for (int j = 0; j < n; ++j )
+                Distances.get(i).add(-1.0);
+
+    }
+
     private void ordenar_Items(ArrayList <Double> distancies, ArrayList<Item> Items, ArrayList<Double> Val, int l, int r) {
 
         if (l < r) {
@@ -104,7 +162,9 @@ public class K_Neareast_Neightbour {
         }
     }
 
-    private void merge(ArrayList <Double> distancies,ArrayList<Item> Items, ArrayList<Double> Val, int l, int m, int r)
+    //Operacions auxiliars per ordenar
+
+    private void merge (ArrayList <Double> distancies,ArrayList<Item> Items, ArrayList<Double> Val, int l, int m, int r)
     {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
@@ -257,58 +317,12 @@ public class K_Neareast_Neightbour {
         }
     }
 
+    //Operacions Auxiliars varies
+
     private void clonador_ArrayList (ArrayList  A, ArrayList  B) {
 
         for(int i = 0; i< B.size(); ++i)
             A.add(i, B.get(i));
     }
 
-    //la matriz ya debe ser del tamaño del conjunt d'items
-    private void omplir_matriu() {
-
-        for (int i = 0; i < C_Items.n_Items(); ++i)
-            for(int j = 0; j < C_Items.n_Items(); ++j){
-
-                if (i == j)
-                    Distances.get(i).set(j, 0.0);
-
-                else if((Distances.get(i).get(j) == -1.) && (Distances.get(i).get(j) == -1.)) {
-
-                    Double aux = C_Items.getItems().get(i).Distance(C_Items.getItems().get(j));
-                    Distances.get(i).set(j, aux);
-                    Distances.get(j).set(i, aux);
-                }
-            }
-    }
-
-    private void initzialitzar_matriu() {
-
-        for (int i = 0; i < C_Items.n_Items(); ++i) {
-
-            ArrayList<Double> Aux = new ArrayList<Double>();
-            for (int j = 0; j < C_Items.n_Items(); ++j)
-                Aux.add(-1.0);
-            Distances.add(Aux);
-        }
-
-    }
-
-    private void anyadir_elements(int n) {
-
-        for (int i = 0; i < n; ++i) {
-
-            ArrayList<Double> Aux = new ArrayList<Double>();
-            for (int j = 0; j < C_Items.n_Items(); ++j)
-                Aux.add(-1.0);
-            Distances.add(Aux);
-        }
-
-        for (int i = 0; i < n; ++i)
-            for (int j = 0; j < n; ++j )
-                Distances.get(i).add(-1.0);
-
-    }
-
-
-    public Double Distance (Item a , Item b) {return  a.Distance(b);}
 }
