@@ -7,13 +7,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+/** \brief Driver de la clase DriverRateRecomendation.
+ *  @author Oriol Cuellar
+ */
+
 public class DriverRateRecomendation {
+    /** Mapa que contiene como llave el ID de un Item y com valor los usuarios que lo han valorado.
+     *  Se utiliza como parametro para el algoritmo Slope-One
+     */
+    static Map<Integer, ArrayList<User>> item_valorated_by= new HashMap<Integer, ArrayList<User>>();
 
+    /** Mapa que contiene como llave el ID de un User y com valor el objeto User.
+     *  Se utiliza como parametro para el algoritmo K-Means y Slope-One
+     */
+    static Map<Integer, User> usersList= new HashMap<Integer, User>();
 
+    /** Main del Driver.
+     *  Lee recomendaciones de un fichero CSV. Crea en los maps correspondientes los usuarios i los items que ha leido.
+     */
     public static void main(String[] args) {
-        Map<Integer, ArrayList<User>> item_valorated_by= new HashMap<Integer, ArrayList<User>>();
-//crear
-        Map<Integer, User> usersList= new HashMap<Integer, User>();
 
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
         LectorCSV2 reader = new LectorCSV2();
@@ -49,13 +61,12 @@ public class DriverRateRecomendation {
         Kmeans kmeans = new Kmeans(6, usersList);
         ArrayList <Cluster> ac=kmeans.getClusters();
         //slope one
-        SlopeOne So = new SlopeOne(item_valorated_by, usersList,5);
-        ArrayList<myPair> predictions= So.getPredictions(usersList.get(3));
-
-        So.printResults();
-
+        SlopeOne So = new SlopeOne(item_valorated_by, usersList,10);
+        ArrayList<myPair> predictions= So.getPredictions(usersList.get(1575));
+        //Rate Recomendation algorithm
         RateRecomendation recomendation = new RateRecomendation(predictions);
         recomendation.execute();
+        System.out.println(recomendation.getResult());
 
     }
 

@@ -9,8 +9,10 @@ public class RateRecomendation {
 
     private static ArrayList<myPair> arr;
 
+    private static int result;
     public  RateRecomendation(ArrayList<myPair> arr2 ){
         this.arr=arr2;
+        result=-1;
     }
     public void execute(){
         float res=0;
@@ -20,6 +22,9 @@ public class RateRecomendation {
             top=top/down;
             res+=top;
         }
-        System.out.println(res);
+        result=res;
+    }
+    public int getResult(){
+        return result;
     }
 }
