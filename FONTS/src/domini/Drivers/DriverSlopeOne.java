@@ -56,7 +56,7 @@ public class DriverSlopeOne{
     }
 
     public static void readData() {
-        ArrayList<Vector<String>> readed_ratings = Lector_SlopeOne_Test("Entradas_CSV/Test/SlopeOneTest.csv");
+        ArrayList<Vector<String>> readed_ratings = Lector_SlopeOne_Test("Entradas_CSV/SlopeOneTest.csv");
 
         TipusRol t = TipusRol.Usuari;
         for (Vector<String> vs : readed_ratings) {
