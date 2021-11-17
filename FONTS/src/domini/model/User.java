@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import static java.lang.Math.sqrt;
 
-// @Marc y Roberto
+// @Marc Camarillas
 
 public class User {
     //atributes

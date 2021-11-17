@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 /** \brief Clase que implementa el algoritmo Kmeans.
- *  @author Roberto Amat & Marc Camarillas
+ *  @author Roberto Amat
  */
 public class Kmeans {
     /** ArrayList que contiene todos los clusters.

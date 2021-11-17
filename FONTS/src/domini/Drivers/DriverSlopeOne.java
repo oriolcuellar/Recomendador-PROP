@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+//@Author Marc Camarillas
 public class DriverSlopeOne{
     static Map<Integer,User> usersList = new HashMap<Integer,User> ();
     static Map<Integer,ArrayList<User>> itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
@@ -87,7 +88,7 @@ public class DriverSlopeOne{
     }
 
    public static void main(String[] args) {
-        readData();
+       readData();
        SlopeOne So = new SlopeOne(itemValoratedBy, usersList,5);
        System.out.println("USER: " + usersList.get(3).getUserID());
        So.getPredictions(usersList.get(3));

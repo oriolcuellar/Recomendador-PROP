@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import static java.lang.Integer.max;
 import static java.lang.Integer.min;
 
-// @author Marc Camarillas, Roberto Amat
+// @author Roberto Amat
 public class Cluster {
     // Atributes
     private User centroid;

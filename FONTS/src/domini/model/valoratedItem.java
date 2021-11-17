@@ -4,7 +4,7 @@ import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 
 /** \brief Clase que representa un item valorado
- *  @author Roberto Amat & Marc Camarillas
+ *  @author Marc Camarillas
  */
 public class valoratedItem {
 

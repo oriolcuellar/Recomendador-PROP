@@ -9,7 +9,7 @@ import static java.lang.Math.min;
 
 
 // Hay que hacer una excepción para comprobar que existe el user
-
+// @Author Marc Camarillas
 public class SlopeOne {
     private User user;
     private float maxValue;
