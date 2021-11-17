@@ -20,11 +20,17 @@ public class K_Neareast_Neightbour {
 
     public ArrayList<Item> Algorithm(int k, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
 
+        ArrayList<Double> Valors = new ArrayList<Double>();
+
+        for(int i = 0; i < C_Items.n_Items(); ++i)
+            Valors.add(i, 0.);
+
         for (int i = 0; i < itemsUsats.size(); ++i)
             C_Items.anyadir_item(itemsUsats.get(i));
 
+
         for(int i = 0; i < itemsUsats.size(); ++i)
-            Valoracions.add(C_Items.get_posiion(itemsUsats.get(i)), 0.);
+            Valors.add(C_Items.get_posiion(itemsUsats.get(i)), Valoracions.get(i));
 
         anyadir_elements(itemsUsats.size());
         omplir_matriu();
@@ -39,7 +45,7 @@ public class K_Neareast_Neightbour {
             ArrayList<Double> Dis_Aux = new ArrayList<Double>();
 
             clonador_ArrayList(Items_Aux, C_Items.getItems());
-            clonador_ArrayList(Val_Aux, Valoracions);
+            clonador_ArrayList(Val_Aux, Valors);
             clonador_ArrayList(Dis_Aux, Distances.get(j));
 
             M_de_Items.add(j, Items_Aux);

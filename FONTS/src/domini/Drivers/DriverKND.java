@@ -1,4 +1,4 @@
-package FONTS.src.domini.Drivers;
+package FONTS.src.domini.drivers;
 
 import FONTS.src.domini.model.*;
 
