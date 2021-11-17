@@ -77,9 +77,9 @@ public class LectorCSV2 {
                 }// userId, itemId, rating
                 if(!first) {
                     Vector<String> dentro = new Vector<String>();
-                    dentro.add(datos[0]);
-                    dentro.add(datos[1]);
-                    dentro.add(datos[2]);
+                    dentro.add(datos[user]);
+                    dentro.add(datos[item]);
+                    dentro.add(datos[rating]);
                     ratings.add(dentro);
                 }
                 first = false;
