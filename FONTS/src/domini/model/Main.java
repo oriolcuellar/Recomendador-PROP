@@ -68,7 +68,7 @@ public class Main {
         c.loadRates();
         //c.loadItems();
         //c.showAllItems();
-         c.showRecommendedItems(6);
+         c.showRecommendedItems(6,10);
 
     }
 }
