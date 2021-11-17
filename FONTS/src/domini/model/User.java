@@ -81,7 +81,31 @@ public class User {
         itemsUsats.add(usedItem);
     }
 
-    public float calculateDistances(User usuario2) {
+    public float calculateDistances(User user2) {
+        ArrayList<ItemUsat> itemsUsats2 = user2.getItemsUsats();
+        ArrayList<Integer> intersectionItems = intersection(itemsUsats,itemsUsats2);
+        float sumProdValorations = 0;
+
+        for(int i = 0; i < intersectionItems.size(); ++i) {
+            int itemID = intersectionItems.get(i);
+            float valoration1 = searchUsedItem(itemID).getValoracio();
+            float valoration2 = user2.searchUsedItem(itemID).getValoracio();
+            sumProdValorations += valoration1*valoration2;
+        }
+        float sumSquareValoration1 = 0;
+        float sumSquareValoration2 = 0;
+        for(int i = 0; i < itemsUsats.size(); ++i) {
+            float valoration1 = itemsUsats.get(i).getValoracio();
+            sumSquareValoration1 += valoration1*valoration1;
+        }
+        for(int i = 0; i < itemsUsats2.size(); ++i) {
+            float valoration2 = itemsUsats2.get(i).getValoracio();
+            sumSquareValoration2 += valoration2*valoration2;
+        }
+        return sumProdValorations/(float)(sqrt(sumSquareValoration1)*sqrt(sumSquareValoration2));
+    }
+
+    public float calculateDistances2(User usuario2) {
         ArrayList<ItemUsat> valoracionesUsuario2 = usuario2.getItemsUsats();
         float sumaTotal = 0;
         int count = 0;
@@ -115,4 +139,17 @@ public class User {
             System.out.println("Item " + itemsUsats.get(i).getItem().getID() + " valorated with " + itemsUsats.get(i).getValoracio());
         }
     }
+
+    private ArrayList<Integer> intersection(ArrayList<ItemUsat> l1, ArrayList<ItemUsat> l2) {
+        ArrayList<Integer> l3 = new ArrayList<Integer>();
+        for (ItemUsat itemUsat1 : l1) {
+            for (ItemUsat itemUsat2 : l2) {
+                if (itemUsat1.getItem().getID() == itemUsat2.getItem().getID()) {
+                    l3.add(itemUsat1.getItem().getID());
+                }
+            }
+        }
+        return l3;
+    }
+
 }
