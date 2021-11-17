@@ -42,7 +42,6 @@ public class Kmeans {
             c.setCentroid(aux);
             clusters.add(c);
             nuevoscentroids.add(aux);
-            System.out.println("CENTROIDE INICIAL: " + clusters.get(i).getcentroid().getUserID());
         }
     }
 
@@ -52,12 +51,12 @@ public class Kmeans {
      * @param user Usuario a asignar.
      */
     private void asignUserToCluster(User user) {
-        float dMin = Float.POSITIVE_INFINITY;
+        float dMin = 0;
         int iMin = 0;
         for(int i = 0; i < k; ++i) {
             User centroidActual = clusters.get(i).getcentroid();
             float distanciaActual = user.calculateDistances(centroidActual);
-            if(distanciaActual < dMin) {
+            if(distanciaActual > dMin) {
                 dMin = distanciaActual;
                 iMin = i;
             }

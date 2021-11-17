@@ -54,19 +54,32 @@ public class LectorCSV2 {
         String line = "";
         //Se define separador ","
         String cvsSplitBy = ",";
+        int user=0;
+        int item=1;
+        int rating=2;
         try {
             br = new BufferedReader(new FileReader(csvFile));
             boolean first = true;
             while ((line = br.readLine()) != null) {
                 String[] datos = line.split(cvsSplitBy);
-                for(int i = 0; i < datos.length; ++i) {
+                if (first){//colamos orden. User, item, valoracion
+                    if (datos[0].equals("userId")) user=0;
+                    if (datos[1].equals("userId")) user=1;
+                    if (datos[2].equals("userId")) user=2;
+                    if (datos[0].equals("itemId")) item=0;
+                    if (datos[1].equals("itemId")) item=1;
+                    if (datos[2].equals("itemId")) item=2;
+                    if (datos[0].equals("rating")) rating=0;
+                    if (datos[1].equals("rating")) rating=1;
+                    if (datos[2].equals("rating")) rating=2;
                 }
-                System.out.println();
+                for(int i = 0; i < datos.length; ++i) {
+                }// userId, itemId, rating
                 if(!first) {
                     Vector<String> dentro = new Vector<String>();
-                    dentro.add(datos[0]);
-                    dentro.add(datos[1]);
-                    dentro.add(datos[2]);
+                    dentro.add(datos[user]);
+                    dentro.add(datos[item]);
+                    dentro.add(datos[rating]);
                     ratings.add(dentro);
                 }
                 first = false;
