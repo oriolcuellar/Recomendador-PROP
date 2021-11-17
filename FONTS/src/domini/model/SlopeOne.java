@@ -82,14 +82,14 @@ public class SlopeOne {
     }
 
     private void slopeOneAlgorithm(User user) {
-        if(!usersList.containsValue(user)) System.out.println("El usuario no existe");
         float meanValoration = calculateValorationMean(user);
+
         this.predictions = new ArrayList<myPair>();
         //predecir todos los que no tiene valoracion
-        for(Map.Entry<Integer, ArrayList<User>> item : itemValoratedBy.entrySet()) {
+        for (Map.Entry<Integer, ArrayList<User>> item : itemValoratedBy.entrySet()) {
             //si el item no esta valorado por el usuario ejecutar predicción
-            if(!item.getValue().contains(user)) {
-                float valoration = min(maxValue,meanValoration + calculateDesviationMean(user, item.getKey()));
+            if (!item.getValue().contains(user)) {
+                float valoration = min(maxValue, meanValoration + calculateDesviationMean(user, item.getKey()));
 
                 /* si tuvieramos el item
                 ItemUsat iu = new ItemUsat(item, user, valoration);
@@ -101,9 +101,12 @@ public class SlopeOne {
     }
 
     public void printResults() {
-        for (myPair prediction : predictions) {
-            System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
-                    ": " + prediction.getValoration());
+        if (predictions.size() == 0) System.out.println("No hay Predicciones");
+        else {
+            for (myPair prediction : predictions) {
+                System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
+                        ": " + prediction.getValoration());
+            }
         }
     }
 
@@ -111,14 +114,17 @@ public class SlopeOne {
         this.maxValue = maxValue;
         this.itemValoratedBy = itemValoratedBy;
         this.usersList = usersList;
+        this.predictions = new ArrayList<>();
     }
 
     //retorna las predicciones para el usuario u
     public ArrayList<myPair> getPredictions(User user){
         this.user = user;
-        int a = 1, b = 0;
-        slopeOneAlgorithm(user);
-        quicksort(predictions,0,predictions.size() - 1);
+        if(!usersList.containsValue(user)) System.out.println("El usuario no existe");
+        else {
+            slopeOneAlgorithm(user);
+            quicksort(predictions, 0, predictions.size() - 1);
+        }
         return predictions;
     }
 

@@ -88,7 +88,7 @@ public class DriverSlopeOne{
 
    public static void main(String[] args) {
         readData();
-       SlopeOne So = new SlopeOne(itemValoratedBy, usersList,200);
+       SlopeOne So = new SlopeOne(itemValoratedBy, usersList,5);
        System.out.println("USER: " + usersList.get(3).getUserID());
        So.getPredictions(usersList.get(3));
        System.out.println();
