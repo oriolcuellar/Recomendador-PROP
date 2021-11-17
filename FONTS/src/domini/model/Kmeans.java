@@ -5,14 +5,21 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
-
-// @Author Roberto Amat, Marc Camarillas
+/** \brief Clase que implementa el algoritmo Kmeans.
+ *  @author Roberto Amat & Marc Camarillas
+ */
 public class Kmeans {
-    // Atributes
-    /* Lista de todos los clústers*/
+    /** ArrayList que contiene todos los clusters.
+     * @see Cluster
+     */
     private ArrayList<Cluster> clusters;
-    /* Lista de todos los usuarios */
+    /** Mapa con el ID de un usuario como Key y dicho usuario como value.
+     * Contiene todos los usuarios sobre los que se aplica el algoritmo.
+     * @see User
+     */
     private Map<Integer, User> users;
+    /** Parámetro que determina el número de clusters que va a generar el algoritmo.
+     */
     private int k;
 
     // Auxiliares
