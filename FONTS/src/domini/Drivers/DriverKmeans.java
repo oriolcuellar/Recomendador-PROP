@@ -58,7 +58,6 @@ public class DriverKmeans {
             }
         }
         return ratings;
-
     }
 
     /** Función que se encarga de leer los datos y almacenarlos en su lugar correspondiente.

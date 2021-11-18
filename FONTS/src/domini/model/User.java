@@ -5,141 +5,78 @@ import java.util.ArrayList;
 
 import static java.lang.Math.sqrt;
 
-// @Marc Camarillas
-
+/** \brief Clase que implementa un usuario.
+ *  @author  Marc Camarillas
+ */
 public class User {
-    //atributes
+    // Atributos
+    /**
+     * ID del usuario
+     */
     private int userID;
+    /**
+     * Contraseña del usuario
+     */
     private String password;
+    /**
+     * Rol del usuario
+     * @see TipusRol
+     */
     private TipusRol Rol;
-    private ArrayList<valoratedItem> itemsUsats;
+    /**
+     * Items que ha valorado el usuario
+     * @see valoratedItem
+     */
+    private ArrayList<valoratedItem> valoratedItems;
+    /**
+     * Cluster al que pertenece el usuario
+     */
     private int numCluster;
 
-    //getters
-    public int getUserID() {
-        return userID;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public TipusRol getRol() { return Rol; }
-    public ArrayList<valoratedItem> getItemsUsats() { return itemsUsats; }
-    public int getNumCluster() {
-        return numCluster;
-    }
+    // Constructoras
 
-    //setters
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public void setRol(TipusRol rol) { Rol = rol; }
-    public void setItemsUsats(ArrayList<valoratedItem> usats) { itemsUsats = usats; }
-    public void setNumCluster(int numCluster) {
-        this.numCluster = numCluster;
-    }
-
-    //modifiers
-    public void addvaloratedItem(valoratedItem usat) { itemsUsats.add(usat); }
-
-    //constructores
+    /**
+     * Crea un usuario vacio
+     */
     public User() {
-        this.itemsUsats = new ArrayList<valoratedItem>();
+        this.valoratedItems = new ArrayList<valoratedItem>();
         this.numCluster = -1;
     }
 
+    /**
+     * Crea un usario con un userID, una password y un Rol
+     * @param userID  UserID con el que lo queremos inicializar
+     * @param password pasword con el que lo queremos inicializar
+     * @param Rol rol con el que lo queremos inicializar
+     */
     public User(int userID, String password, TipusRol Rol) {
         this.userID = userID;
         this.password = password;
         this.Rol = Rol;
-        this.itemsUsats = new ArrayList<valoratedItem>();
+        this.valoratedItems = new ArrayList<valoratedItem>();
         this.numCluster = -1;
     }
-    public User(int userID, String password, TipusRol Rol, int numCluster) {
-        this.userID = userID;
-        this.password = password;
-        this.Rol = Rol;
-        this.itemsUsats = new ArrayList<valoratedItem>();
-        this.numCluster = numCluster;
-    }
+
+    /**
+     * Crea un usaurio con un userID, con un password por defecto y rol de usuario
+     * @param userID
+     */
     public User(int userID) {
         this.userID = userID;
         this.password = String.valueOf(userID);
         this.Rol = TipusRol.Usuari;
-        this.itemsUsats = new ArrayList<valoratedItem>();
+        this.valoratedItems = new ArrayList<valoratedItem>();
         this.numCluster = -1;
     }
 
-    // Functions
+    // Métodos Privados
 
-    public void addvaloratedItem(int itemID, float valoration) {
-        Item i = new Item(itemID);
-        valoratedItem usedItem = new valoratedItem(i, valoration);
-        //falta comprobar que no se repitan
-        itemsUsats.add(usedItem);
-    }
-
-    public float calculateDistances(User user2) {
-        ArrayList<valoratedItem> itemsUsats2 = user2.getItemsUsats();
-        ArrayList<Integer> intersectionItems = intersection(itemsUsats,itemsUsats2);
-        float sumProdValorations = 0;
-
-        for(int i = 0; i < intersectionItems.size(); ++i) {
-            int itemID = intersectionItems.get(i);
-            float valoration1 = searchUsedItem(itemID).getValoracio();
-            float valoration2 = user2.searchUsedItem(itemID).getValoracio();
-            sumProdValorations += valoration1*valoration2;
-        }
-        float sumSquareValoration1 = 0;
-        float sumSquareValoration2 = 0;
-        for(int i = 0; i < itemsUsats.size(); ++i) {
-            float valoration1 = itemsUsats.get(i).getValoracio();
-            sumSquareValoration1 += valoration1*valoration1;
-        }
-        for(int i = 0; i < itemsUsats2.size(); ++i) {
-            float valoration2 = itemsUsats2.get(i).getValoracio();
-            sumSquareValoration2 += valoration2*valoration2;
-        }
-        return sumProdValorations/(float)(sqrt(sumSquareValoration1)*sqrt(sumSquareValoration2));
-    }
-
-    public float calculateDistances2(User usuario2) {
-        ArrayList<valoratedItem> valoracionesUsuario2 = usuario2.getItemsUsats();
-        float sumaTotal = 0;
-        int count = 0;
-        for(int i = 0; i < itemsUsats.size(); ++i) {
-            int id1 = itemsUsats.get(i).getItem().getID();
-            for (int j = 0; j < valoracionesUsuario2.size(); ++j) {
-                int id2 = valoracionesUsuario2.get(j).getItem().getID();
-                if(id1 == id2) {
-                    ++count;
-                    valoratedItem item1 = itemsUsats.get(i);
-                    valoratedItem item2 = valoracionesUsuario2.get(j);
-                    sumaTotal += (item1.getValoracio() - item2.getValoracio()) * (item1.getValoracio() - item2.getValoracio());
-                    break;
-                }
-            }
-        }
-        if(count == 0) return Float.POSITIVE_INFINITY;
-        return (float) sqrt(sumaTotal);
-    }
-    public valoratedItem searchUsedItem(int itemID) {
-        for(int i = 0; i < itemsUsats.size(); ++i) {
-            if (itemsUsats.get(i).getItem().getID() == itemID) return itemsUsats.get(i);
-        }
-        return null;
-    }
-
-    // Prints
-
-    public void printUsedItems() {
-        for(int i = 0; i < itemsUsats.size(); ++i) {
-            System.out.println("Item " + itemsUsats.get(i).getItem().getID() + " valorated with " + itemsUsats.get(i).getValoracio());
-        }
-    }
-
+    /**
+     * Calcula la intersección entre dos listas de items valorados según su ID.
+     * @param l1 lista de Items valorados
+     * @param l2 lista de Items valorados
+     * @return ArrayList de ID de la Intersección.
+     */
     private ArrayList<Integer> intersection(ArrayList<valoratedItem> l1, ArrayList<valoratedItem> l2) {
         ArrayList<Integer> l3 = new ArrayList<Integer>();
         for (valoratedItem valoratedItem1 : l1) {
@@ -152,4 +89,160 @@ public class User {
         return l3;
     }
 
+    // Métodos Públicos
+
+    // Getters
+
+    /**
+     * @return Devuelve el ID del usuario
+     */
+    public int getUserID() {
+        return userID;
+    }
+    /**
+     * @return Devuelve el password del usuario
+     */
+    public String getPassword() {
+        return password;
+    }
+    /**
+     * @return Devuelve el rol del usuario
+     */
+    public TipusRol getRol() { return Rol; }
+    /**
+     * @return Devuelve los items valorados por usuario
+     */
+    public ArrayList<valoratedItem> getValoratedItems() { return valoratedItems; }
+    /**
+     * @return Devuelve clúster al que pertenece el usuario
+     */
+    public int getNumCluster() {
+        return numCluster;
+    }
+
+    // Setters
+
+    /**
+     * Cambia el valor del userID por el que le pasamos.
+     * @param userID nuevo userID
+     */
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+    /**
+     * Cambia el valor del password por el que le pasamos.
+     * @param password nueva password
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    /**
+     * Cambia el valor del rol por el que le pasamos.
+     * @param Rol nuevo Rol
+     */
+    public void setRol(TipusRol Rol) { Rol = Rol; }
+    /**
+     * Cambia el valor de los valoratedItems por el que le pasamos.
+     * @param valoratedItems nuevo valoratedItems
+     */
+    public void setValoratedItems(ArrayList<valoratedItem> valoratedItems) { valoratedItems = valoratedItems; }
+    /**
+     * Cambia el valor del numCluster por el que le pasamos.
+     * @param numCluster nuevo numCluster
+     */
+    public void setNumCluster(int numCluster) {
+        this.numCluster = numCluster;
+    }
+
+    // Otros
+
+    /**
+     * Añade un Item valorado a la lista de valoratedItems
+     * @param itemID ID del item que queremos añadir
+     * @param valoration valoración del item que queremos añadir
+     */
+    public void addvaloratedItem(int itemID, float valoration) {
+        Item i = new Item(itemID);
+        valoratedItem usedItem = new valoratedItem(i, valoration);
+        //falta comprobar que no se repitan
+        valoratedItems.add(usedItem);
+    }
+
+    /**
+     * Calcula la similaridad que tiene con otro usuario mediante la formula de cosine-similarity
+     * @param user2 usuario sobre el que queremos ver su similaridad
+     * @return valor entre 0 y 1, donde 1 es muy similar y 0 no es nada similar.
+     */
+    public float calculateSimilarity(User user2) {
+        ArrayList<valoratedItem> valoratedItems2 = user2.getValoratedItems();
+        ArrayList<Integer> intersectionItems = intersection(valoratedItems,valoratedItems2);
+        float sumProdValorations = 0;
+
+        for(int i = 0; i < intersectionItems.size(); ++i) {
+            int itemID = intersectionItems.get(i);
+            float valoration1 = searchUsedItem(itemID).getValoracio();
+            float valoration2 = user2.searchUsedItem(itemID).getValoracio();
+            sumProdValorations += valoration1*valoration2;
+        }
+        float sumSquareValoration1 = 0;
+        float sumSquareValoration2 = 0;
+        for(int i = 0; i < valoratedItems.size(); ++i) {
+            float valoration1 = valoratedItems.get(i).getValoracio();
+            sumSquareValoration1 += valoration1*valoration1;
+        }
+        for(int i = 0; i < valoratedItems2.size(); ++i) {
+            float valoration2 = valoratedItems2.get(i).getValoracio();
+            sumSquareValoration2 += valoration2*valoration2;
+        }
+        return sumProdValorations/(float)(sqrt(sumSquareValoration1)*sqrt(sumSquareValoration2));
+    }
+
+    /**
+     * Calcula la distancia que tiene con otro usuario con otro. (De momento no se usa)
+     * @param usuario2 usuario sobre el que queremos ver su similaridad
+     * @return Valor > 0, contra más grande sea menos se parecen los usuarios
+     */
+    public float calculateDistances2(User usuario2) {
+        ArrayList<valoratedItem> valoracionesUsuario2 = usuario2.getValoratedItems();
+        float sumaTotal = 0;
+        int count = 0;
+        for(int i = 0; i < valoratedItems.size(); ++i) {
+            int id1 = valoratedItems.get(i).getItem().getID();
+            for (int j = 0; j < valoracionesUsuario2.size(); ++j) {
+                int id2 = valoracionesUsuario2.get(j).getItem().getID();
+                if(id1 == id2) {
+                    ++count;
+                    valoratedItem item1 = valoratedItems.get(i);
+                    valoratedItem item2 = valoracionesUsuario2.get(j);
+                    sumaTotal += (item1.getValoracio() - item2.getValoracio()) * (item1.getValoracio() - item2.getValoracio());
+                    break;
+                }
+            }
+        }
+        if(count == 0) return Float.POSITIVE_INFINITY;
+        return (float) sqrt(sumaTotal);
+    }
+
+    /**
+     * Busca si existe el item con ID itemID
+     * @param itemID Id del item que queremos encontrar
+     * @return valoratedItem si existe, null si no existe
+     */
+    public valoratedItem searchUsedItem(int itemID) {
+        for(int i = 0; i < valoratedItems.size(); ++i) {
+            if (valoratedItems.get(i).getItem().getID() == itemID) return valoratedItems.get(i);
+        }
+        return null;
+    }
+
+    // Prints
+
+    /**
+     * Imprime los items que ha valorado el usuario
+     */
+    public void printUsedItems() {
+        for(int i = 0; i < valoratedItems.size(); ++i) {
+            System.out.println("Item " + valoratedItems.get(i).getItem().getID() + " valorated with " + valoratedItems.get(i).getValoracio());
+        }
+    }
 }

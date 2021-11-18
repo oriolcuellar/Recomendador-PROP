@@ -1,22 +1,55 @@
 package FONTS.src.domini.model;
 
-import FONTS.src.domini.model.*;
-
 import java.util.*;
-
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
-
-// Hay que hacer una excepción para comprobar que existe el user
-// @Author Marc Camarillas
+/** \brief Clase que implementa el algoritmo SlopeOne.
+ *  @author  Marc Camarillas
+ */
 public class SlopeOne {
+    /** User sobre el que se quiere hacer la recomendación.
+     * @see User
+     */
     private User user;
+    /** Valor máximo que se le puede asignar a una valoración.
+     */
     private float maxValue;
+    /** Mapa que contiene como llave el ID de un item y com valor la lista de usuarios que lo han valorado.
+     * @see User
+     */
     private Map<Integer,ArrayList<User>> itemValoratedBy;
+    /** ArrayList que contiene las predicciones de todos los items que no ha valorado el usuario sobre el que se quiere hacer la valoracoión.
+     * @see Cluster
+     */
     private ArrayList<myPair> predictions;
+    /** Mapa que contiene como llave el ID de un usuario y com valor dicho usuario.
+     */
     private Map<Integer,User> usersList;
 
+    // Constructora
+
+    /** Constructora de la clase.
+     * @param itemValoratedBy Conjunto de items y los usuarios que lo han valorado
+     * @param usersList conjunto de usuarios
+     * @param maxValue valor máximo que puede tener una recomendación
+     */
+    public SlopeOne(Map<Integer,ArrayList<User>> itemValoratedBy, Map<Integer,User> usersList, float maxValue) {
+        this.maxValue = maxValue;
+        this.itemValoratedBy = itemValoratedBy;
+        this.usersList = usersList;
+        this.predictions = new ArrayList<>();
+    }
+
+    // Métodos Privados
+
+    /**
+     * Calcula la intersección entre los usuarios que hay en la lista l1 y los usuarios que hay en la lista l2 y además pertenecen al mismo clúster.
+     * @param l1 ArrayList de usuarios que ha valorado un item
+     * @param l2 ArrayList de usuarios que ha valorado un item
+     * @param numCluster Número de clúster al que pertenece usuario actual
+     * @return ArrayList de Usuarios de la Intersección
+     */
     private ArrayList<User> intersection(ArrayList<User> l1, ArrayList<User> l2, int numCluster) {
         ArrayList<User> l3 = new ArrayList<User>();
         for (User user1 : l1) {
@@ -31,33 +64,45 @@ public class SlopeOne {
         return l3;
     }
 
+    /**
+     * Calcula la desviación de dos items para cada usuario que ha valoradpo ambos.
+     * @param IDitemI ID del Item I
+     * @param IDitemJ ID del Item J
+     * @param usersIJ Usuarios que han valorado tanto el Item I, como el Item J
+     * @return Desviación entre los dos Items
+     */
     private float calculateDesviation(int IDitemI, int IDitemJ, ArrayList<User> usersIJ) {
         float sumTotal = 0;
         for (User user : usersIJ) {
-            /*System.out.println("ID user " + user.getUserID());
-            System.out.println("ID J " + user.searchUsedItem(IDitemJ).getItem().getID() + " " + IDitemJ +
-                    " ID I " + IDitemI +  " " + user.searchUsedItem(IDitemI).getItem().getID());*/
             float valorationUserI = user.searchUsedItem(IDitemI).getValoracio();
             float valorationUserJ = user.searchUsedItem(IDitemJ).getValoracio();
-            /*System.out.println("Valoración J " + valorationUserJ);
-            System.out.println("Valoración I " + valorationUserI);*/
 
             sumTotal += (valorationUserJ - valorationUserI);
         }
-        //System.out.println("SUMA: " + sumTotal + " Tamaño: " + usersIJ.size());
         return sumTotal/usersIJ.size();
     }
 
+    /**
+     * Calcula la media de todas las desviaciones
+     * @param user Usuario sobre el que se hace la predicción
+     * @return devuelve la media de valoraciones del usuario user
+     */
     private float calculateValorationMean(User user) {
-        ArrayList<valoratedItem> usedItems = user.getItemsUsats();
+        ArrayList<valoratedItem> usedItems = user.getValoratedItems();
         float sum = 0;
         for(valoratedItem u: usedItems) sum += u.getValoracio();
         return sum/usedItems.size();
     }
 
-    // suma media de las desviaciones de todos los items I respecto del item J, ambos puntuados por el usuario user
+    /**
+     * Suma media de las desviaciones de todos los items I que ha valorado el usuario, respecto del item J.
+     * En caso de que nadie haya valorado ambos items la desviación será -infinito debido a que no podremos hacer la predicción.
+     * @param user Usuario sobre el que se hace la predicción
+     * @param IDitemJ ID del Item sobre el que se quiere hacer la predicción(no valorado por el usuario.
+     * @return devuelve la media de las desviaciones.
+     */
     private float calculateDesviationMean(User user, int IDitemJ) {
-        ArrayList<valoratedItem> usedItems = user.getItemsUsats();
+        ArrayList<valoratedItem> usedItems = user.getValoratedItems();
         float num = 0;
         int count = 0;
         for(valoratedItem itemI : usedItems) {
@@ -74,6 +119,12 @@ public class SlopeOne {
         return num/count;
     }
 
+    /**
+     * Calcula los usuarios que han valorado tanto el Item I como el Item J y que pertenecen al mismo clúster.
+     * @param IDitemI ID del Item I
+     * @param IDitemJ ID del Item J
+     * @return ArrayList los ususarios de la Intersección
+     */
     private ArrayList<User> getIntersaction(int IDitemI, int IDitemJ) {
         ArrayList<User> usersI = itemValoratedBy.get(IDitemI);
         ArrayList<User> usersJ = itemValoratedBy.get(IDitemJ);
@@ -81,6 +132,10 @@ public class SlopeOne {
        return intersection(usersI, usersJ, user.getNumCluster());
     }
 
+    /**
+     * Calcula la predicción que hará el usuario user sobre todos los items que no ha valorado.
+     * @param user usuario sobre el que se quiere hacer la predicción
+     */
     private void slopeOneAlgorithm(User user) {
         float meanValoration = calculateValorationMean(user);
 
@@ -90,46 +145,18 @@ public class SlopeOne {
             //si el item no esta valorado por el usuario ejecutar predicción
             if (!item.getValue().contains(user)) {
                 float valoration = min(maxValue, meanValoration + calculateDesviationMean(user, item.getKey()));
-
-                /* si tuvieramos el item
-                valoratedItem iu = new valoratedItem(item, user, valoration);
-                user.addvaloratedItem(iu);
-                 */
                 predictions.add(new myPair(item.getKey(), max(0, valoration)));
             }
         }
     }
 
-    public void printResults() {
-        if (predictions.size() == 0) System.out.println("No hay Predicciones");
-        else {
-            for (myPair prediction : predictions) {
-                System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
-                        ": " + prediction.getValoration());
-            }
-        }
-    }
-
-    public SlopeOne(Map<Integer,ArrayList<User>> itemValoratedBy, Map<Integer,User> usersList, float maxValue) {
-        this.maxValue = maxValue;
-        this.itemValoratedBy = itemValoratedBy;
-        this.usersList = usersList;
-        this.predictions = new ArrayList<>();
-    }
-
-    //retorna las predicciones para el usuario u
-    public ArrayList<myPair> getPredictions(User user){
-        this.user = user;
-        if(!usersList.containsValue(user)) System.out.println("El usuario no existe");
-        else {
-            slopeOneAlgorithm(user);
-            quicksort(predictions, 0, predictions.size() - 1);
-        }
-        return predictions;
-    }
-
-    public static void quicksort(ArrayList<myPair> A, int izq, int der) {
-
+    /**
+     * Algoritmo de ordenación QuickSort
+     * @param A ArrayList que queremos ordenar
+     * @param izq posición donde queremos empezar a ordenar
+     * @param der posición donde queremos dejar de ordenar
+     */
+    private static void quicksort(ArrayList<myPair> A, int izq, int der) {
         float pivote = A.get(izq).getValoration();
         int pivoteID = A.get(izq).getItemID();
         int i=izq;
@@ -157,5 +184,33 @@ public class SlopeOne {
             quicksort(A,izq,j-1);
         if(j+1 < der)
             quicksort(A,j+1,der);
+    }
+
+    // Metodos Públicos
+
+    /**
+     * Imprime las predicciones que se han hecho sobre el usuario actual.
+     */
+    public void printResults() {
+        for (myPair prediction : predictions) {
+            System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
+                    ": " + prediction.getValoration());
+        }
+    }
+
+    /**
+     * Ejecuta el algoritmo SlopeOne y ordena las predicciones en orden decreciente
+     * @param user usuario sobre el que se quiere hacer la recomendación
+     * @return predicciones ordenadas
+     */
+    public ArrayList<myPair> getPredictions(User user){
+        this.user = user;
+        try {
+            slopeOneAlgorithm(user);
+            quicksort(predictions, 0, predictions.size() - 1);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return predictions;
     }
 }

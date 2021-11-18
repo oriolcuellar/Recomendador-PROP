@@ -55,7 +55,7 @@ public class Kmeans {
         int iMin = 0;
         for(int i = 0; i < k; ++i) {
             User centroidActual = clusters.get(i).getcentroid();
-            float distanciaActual = user.calculateDistances(centroidActual);
+            float distanciaActual = user.calculateSimilarity(centroidActual);
             if(distanciaActual > dMin) {
                 dMin = distanciaActual;
                 iMin = i;
@@ -81,14 +81,16 @@ public class Kmeans {
      */
     public void run(int k) {
         this.k = k;
-        if(users.size() == 0) System.out.println("El numero de usuarios tiene que ser superior a 0.");
-        else if(k > users.size()) System.out.println("El numero de clusters tiene que ser menor al numero de usuarios.");
-        else if(k == 0) System.out.println("El numero de clusters tiene que ser mayor que 0.");
+        if(k > users.size() && users.size() != 0) System.out.println("El numero de clusters tiene que ser menor al numero de usuarios.");
         else {
-            assignKCentroids();
-            // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
-            for(Map.Entry<Integer, User> entry : users.entrySet()) {
-                asignUserToCluster(entry.getValue());
+            try {
+                assignKCentroids();
+                // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
+                for (Map.Entry<Integer, User> entry : users.entrySet()) {
+                    asignUserToCluster(entry.getValue());
+                }
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
     }
