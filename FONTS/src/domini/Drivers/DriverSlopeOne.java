@@ -8,14 +8,26 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-//@Author Marc Camarillas
+/** \brief Driver de la clase SlopeOne.
+ *  @author Marc Camarillas
+ */
 public class DriverSlopeOne{
-    static Map<Integer,User> usersList = new HashMap<Integer,User> ();
-    static Map<Integer,ArrayList<User>> itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
-    static ArrayList <Vector<String>> ratings;
 
+    /** Mapa que contiene como llave el ID de un usuario y com valor dicho usuario.
+     *  Se utiliza para relizar las pruebas con los datos recibidos a través del fichero.
+     */
+    static Map<Integer,User> usersList = new HashMap<Integer,User> ();
+    /** Mapa que contiene como llave el ID de un item y com valor la lista de usuarios que lo han valorado.
+     *  Se utiliza para relizar las pruebas con los datos recibidos a través del fichero.
+     */
+    static Map<Integer,ArrayList<User>> itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
+
+    /** Función que lee el archivo que contiene los datos a probar.
+     * @param csvFile Dirección del archivo que contiene los datos-
+     * @return Vector que almacena los datos leídos.
+     */
     public static ArrayList<Vector<String>> Lector_SlopeOne_Test(String csvFile) {
-        ratings = new ArrayList<Vector<String>>();
+        ArrayList<Vector<String>> ratings = new ArrayList<Vector<String>>();
         BufferedReader br = null;
         String line = "";
         //Se define separador ","
@@ -55,7 +67,8 @@ public class DriverSlopeOne{
         }
         return ratings;
     }
-
+    /** Función que se encarga de leer los datos y almacenarlos en su lugar correspondiente.
+     */
     public static void readData() {
         ArrayList<Vector<String>> readed_ratings = Lector_SlopeOne_Test("Entradas_CSV/SlopeOneTest.csv");
 
@@ -87,15 +100,48 @@ public class DriverSlopeOne{
         }
     }
 
-   public static void main(String[] args) {
-       readData();
-       SlopeOne So = new SlopeOne(itemValoratedBy, usersList,5);
-       System.out.println("USER: " + usersList.get(3).getUserID());
-       So.getPredictions(usersList.get(234561));
-       System.out.println();
-       usersList.get(3).printUsedItems();
-       System.out.println();
-       So.printResults();
-       System.out.println();
+
+    /** Main del driver.
+     *  Prueba 5 casos:
+     *      - Llamar al algoritmo con itemBaloratedBy vacio.
+     *      - Llamar al algoritmo con un user que no existe.
+     *      - Llamar al algoritmo con usersList vacia.
+     *      - Llamar al algoritmo con maxValue mayor que valor máximo.
+     *      - Llamar al algoritmo con un fichero de datos real.
+     */
+    public static void main(String[] args) {
+        readData();
+
+        System.out.println("CASO DONDE EL MAP ITEMVALORATEDBY ESTÁ VACIO");
+        Map<Integer,ArrayList<User>> itemValoratedBy1 = new HashMap<Integer,ArrayList<User>>();
+        SlopeOne So = new SlopeOne(itemValoratedBy1, usersList,5);
+        So.getPredictions(usersList.get(3));
+        So.printResults();
+        System.out.println();
+
+        System.out.println("CASO DONDE EL USUARIO AL QUE QUEREMOS PREDECIR NO EXISTE");
+        SlopeOne So1 = new SlopeOne(itemValoratedBy, usersList,5);
+        So1.getPredictions(usersList.get(1000));
+        So1.printResults();
+        System.out.println();
+
+        System.out.println("CASO DONDE EL MAP USERSLIST ESTÁ VACIO");
+        Map<Integer,User> usersList1 = new HashMap<Integer,User> ();
+        SlopeOne So2 = new SlopeOne(itemValoratedBy, usersList1,5);
+        So2.getPredictions(usersList1.get(3));
+        So2.printResults();
+        System.out.println();
+
+        System.out.println("CASO DONDE EL MAXVALUE ES MAYOR AL VALOR MÁXIMO");
+        SlopeOne So3 = new SlopeOne(itemValoratedBy, usersList,10);
+        So3.getPredictions(usersList.get(3));
+        So3.printResults();
+        System.out.println();
+
+        System.out.println("CASO DONDE USAMOS TODO DEL FICHERO DE DATOS QUE LEEMOS");
+        SlopeOne So4 = new SlopeOne(itemValoratedBy, usersList,5);
+        So4.getPredictions(usersList.get(3));
+        So4.printResults();
+        System.out.println();
     }
 }
