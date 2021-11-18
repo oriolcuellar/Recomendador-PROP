@@ -28,13 +28,12 @@ public class Cluster {
         sumDistances = new ArrayList<Float>();
     }
 
-    /** Getter que retorna el centroide del clúster. */
+    /** @return Centroide del clúster. */
     public User getcentroid() {
         return centroid;
     }
 
-    /** Getter que retorna el el ArrayList de usuarios que
-     * forman parte del clúster. */
+    /** @return ArrayList de usuarios que forman parte del clúster. */
     public ArrayList<User> getCluster() {
         return cluster;
     }

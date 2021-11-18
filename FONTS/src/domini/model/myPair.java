@@ -20,13 +20,15 @@ public class myPair {
         this.valoration = valoration;
     }
 
-    /** Devuelve la valoración del item.
+    /** @return Valoración del Item.
+     * @see Item
      */
     public float getValoration() {
         return valoration;
     }
 
-    /** Devuelve el ID del item.
+    /** @return Id del Item.
+     * @see Item
      */
     public int getItemID() {
         return itemID;

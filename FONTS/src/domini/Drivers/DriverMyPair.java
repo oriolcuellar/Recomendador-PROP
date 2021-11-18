@@ -7,7 +7,6 @@ import FONTS.src.domini.model.valoratedItem;
 import java.util.Scanner;
 
 /** \brief Driver de la clase myPair.
- *  Esta clase implementa un par que almacena el ID de un item y una puntuación asignada a dicho item.
  *  @author Roberto Amat
  */
 public class DriverMyPair {
