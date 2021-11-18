@@ -91,7 +91,7 @@ public class DriverSlopeOne{
        readData();
        SlopeOne So = new SlopeOne(itemValoratedBy, usersList,5);
        System.out.println("USER: " + usersList.get(3).getUserID());
-       So.getPredictions(usersList.get(3));
+       So.getPredictions(usersList.get(234561));
        System.out.println();
        usersList.get(3).printUsedItems();
        System.out.println();
