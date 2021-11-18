@@ -7,50 +7,43 @@ import java.util.ArrayList;
  *  @author Marc Camarillas
  */
 public class valoratedItem {
-
-    private float valoracio;
-
+    // Atributos
+    /**
+     * Puntuación que le han dado
+     */
+    private float valoration;
+    /**
+     * Item que ha sido valorado
+     * @see Item
+     */
     private Item item;
 
-    private User usuari;
 
+    // Constructora
 
-    public valoratedItem(Item  item, User usuari, float valoracio) {
+    /**
+     * Constructora de valoratedItem
+     * @param item item que se ha valorado
+     * @param valoration puntuación que se le da al item
+     */
+    public valoratedItem(Item item, float valoration) {
         this.item = item;
-        this.usuari = usuari;
-        this.valoracio = valoracio;
-    }
-
-    public valoratedItem(Item item, float valoracio) {
-        this.item = item;
-        this.valoracio = valoracio;
-    }
-
-    public valoratedItem() {
-        valoracio = -1;
+        this.valoration = valoration;
     }
 
     //Getters
 
+    /**
+     * @return Devuelve la valoración que se le ha dado al Item
+     */
     public float getValoracio() {
-        return valoracio;
+        return valoration;
     }
-    public User getUsuari() {
-        return usuari;
-    }
+
+    /**
+     * @return Devuelve el item que se ha valorado
+     */
     public Item getItem() {
         return item;
-    }
-
-    //Setters
-
-    public void setValoracio(float valoracio) {
-        this.valoracio = valoracio;
-    }
-    public void setUsuari(User Usuari) {
-        this.usuari = Usuari;
-    }
-    public void setvaloratedItem(Item item) {
-        this.item = item;
     }
 }

@@ -55,7 +55,7 @@ public class Kmeans {
         int iMin = 0;
         for(int i = 0; i < k; ++i) {
             User centroidActual = clusters.get(i).getcentroid();
-            float distanciaActual = user.calculateDistances(centroidActual);
+            float distanciaActual = user.calculateSimilarity(centroidActual);
             if(distanciaActual > dMin) {
                 dMin = distanciaActual;
                 iMin = i;

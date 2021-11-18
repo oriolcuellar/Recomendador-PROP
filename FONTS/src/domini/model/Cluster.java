@@ -57,7 +57,7 @@ public class Cluster {
             float d = 0;
             for(int i = 0; i < cluster.size(); ++i) {
                 if(user != null) {
-                    float actualDistance = user.calculateDistances(cluster.get(i));
+                    float actualDistance = user.calculateSimilarity(cluster.get(i));
                     d += actualDistance;
                     float d1 = sumDistances.get(i) + actualDistance;
                     sumDistances.set(i, d1);
@@ -75,7 +75,7 @@ public class Cluster {
     public void deleteUser(User user) {
         if(cluster.contains(user)) {
             for (int i = 0; i < cluster.size(); ++i) {
-                float actualDistance = user.calculateDistances(cluster.get(i));
+                float actualDistance = user.calculateSimilarity(cluster.get(i));
                 float d1 = sumDistances.get(i) - actualDistance;
                 sumDistances.set(i, d1);
             }
