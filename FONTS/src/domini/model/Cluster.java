@@ -1,5 +1,4 @@
 package FONTS.src.domini.model;
-import FONTS.src.domini.model.*;
 
 import java.util.ArrayList;
 
@@ -92,10 +91,10 @@ public class Cluster {
     /** Función que recalcula el centroide del cluster, buscando aquel cuyas distancias con los
      * demás sean más pequeñas. */
     public void recalculateCentroid() {
-        float sumMin = 100000;
+        float sumMin = 0;
         int iMin = 0;
         for(int i = 0; i < sumDistances.size(); ++i) {
-            if(sumDistances.get(i) < sumMin) {
+            if(sumDistances.get(i) > sumMin) {
                 sumMin = sumDistances.get(i);
                 iMin = i;
             }

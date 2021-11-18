@@ -1,6 +1,5 @@
 package FONTS.src.domini.model;
 
-import FONTS.src.domini.model.*;
 import java.util.Vector;
 
 //Author Jordi Olmo
