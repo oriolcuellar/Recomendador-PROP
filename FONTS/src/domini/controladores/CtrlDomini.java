@@ -116,18 +116,23 @@ public class CtrlDomini {
 
     }
     public static void showRecommendedItemsSlope(int k, int maxValue) {// to do------------------
-        //kmeans
+        if (actualUser!=null && !actualUser.getRol().equals(TipusRol.Administrador)) {
+            //kmeans
 
-        Kmeans kmeans = new Kmeans(usersList);
-        kmeans.run(k);
-        //kmeans.printAllClusters();
+            Kmeans kmeans = new Kmeans(usersList);
+            kmeans.run(k);
+            //kmeans.printAllClusters();
 
-        //slope one
+            //slope one
 
-        SlopeOne slopeOne = new SlopeOne(itemValoratedBy, usersList, maxValue);
-        //cambiar por actual user
-        slopeOne.getPredictions(usersList.get(7));
-        slopeOne.printResults();
+            SlopeOne slopeOne = new SlopeOne(itemValoratedBy, usersList, maxValue);
+            //cambiar por actual user
+            slopeOne.getPredictions(actualUser);
+            slopeOne.printResults();
+        }
+        else{
+            System.out.println("No es pot recomenar");
+        }
     }
     public static void showRecommendedItemsKNN(int num_elem) {// to do------------------
         //k-neighbours
