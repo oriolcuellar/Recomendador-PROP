@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
-/** \brief Driver de la clase DriverRateRecomendation.
+/** \brief Driver de la clase RateRecomendation.
  *  @author Oriol Cuellar
  */
-
 public class DriverRateRecomendation {
+
     /** Mapa que contiene como llave el ID de un @si Item y com valor los usuarios que lo han valorado.
      *  Se utiliza como parametro para el algoritmo Slope-One
      *  @see Item
@@ -29,7 +29,11 @@ public class DriverRateRecomendation {
     static Map<Integer, User> usersList= new HashMap<Integer, User>();
 
     /** Main del Driver.
-     *  Lee recomendaciones de un fichero CSV. Crea en los maps correspondientes los usuarios i los items que ha leido.
+     *      - Lee valoraciones de un fichero CSV dado el path.
+     *      - Crea en los maps correspondientes, los usuarios i los items que ha leido.
+     *      - Llama al algoritmo K-means y Slope-One
+     *      - Evalua el resultado con el algortimo
+     * @see  RateRecomendation
      */
     public static void main(String[] args) {
 
@@ -41,23 +45,24 @@ public class DriverRateRecomendation {
         //se rellenan userslist y item_valorated_by
         TipusRol t = TipusRol.Usuari;
         for (Vector<String> vs : readed_ratings) {
-            if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
+            //parte del Usuario
+            if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//Usuario ya existe
                 User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                if (usuari.searchUsedItem(Integer.parseInt(vs.get(1))) == null) {//no existe el item en sus valoraciones
+                if (usuari.searchUsedItem(Integer.parseInt(vs.get(1))) == null) {//No existe el item en sus valoraciones
                     usuari.addvaloratedItem(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
 
                 }
-            } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
+            } else {//Usuari no existe, se crea, añadimos valoracion a su lista, añadimos valoracion itemUsatList
                 User usuari = new User(Integer.parseInt(vs.get(0)));
                 usuari.addvaloratedItem(Integer.parseInt(vs.get(1)), Float.parseFloat(vs.get(2)));
                 usersList.put(Integer.valueOf(vs.get(0)), usuari);
             }
             //parte del item
-            if (item_valorated_by.containsKey(Integer.valueOf(vs.get(1)))){//existeix item al map
+            if (item_valorated_by.containsKey(Integer.valueOf(vs.get(1)))){//Existe item al map
                 User usuari = usersList.get(Integer.valueOf(vs.get(0)));
                 item_valorated_by.get(Integer.valueOf(vs.get(1))).add(usuari);
             }
-            else{//NO existeix item al map
+            else{//NO existe item al map
                 User usuari = usersList.get(Integer.valueOf(vs.get(0)));
                 ArrayList <User> au = new ArrayList<User>();
                 au.add(usuari);
@@ -69,10 +74,12 @@ public class DriverRateRecomendation {
         Kmeans kmeans = new Kmeans(usersList);
         kmeans.run(30);
         ArrayList <Cluster> ac=kmeans.getClusters();
+
         //slope one
         SlopeOne So = new SlopeOne(item_valorated_by, usersList,10);
         ArrayList<myPair> predictions= So.getPredictions(usersList.get(1663));
         So.printResults();
+
         //Algortimo de valorar recomendaciones
         RateRecomendation recomendation = new RateRecomendation(predictions);
         recomendation.execute();

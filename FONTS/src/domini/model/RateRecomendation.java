@@ -27,6 +27,11 @@ public class RateRecomendation {
         result=-1;
     }
     /** Función que ejecuta el algoritmo.
+     * Nos dara la precision del conjunto de algoritmos recomendadores, dado un usuario al cual se le recomiendan items.
+     *      - Sumatorio desde 1 hasta la posicion final del vector de
+     *          -la division de
+     *              - 2 elevado a la valoracion (de la posicion del vector) menos 1
+     *              - Logaritmo base 2 de (la posicion - 1)
      */
     public void execute(){
         float res=0;
