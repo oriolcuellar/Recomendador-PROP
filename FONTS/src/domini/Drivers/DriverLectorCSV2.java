@@ -1,13 +1,20 @@
 package FONTS.src.domini.drivers;
-
 import FONTS.src.domini.model.LectorCSV2;
 
 import java.util.ArrayList;
 import java.util.Vector;
 
+/** \brief Driver de la clase LectorCSV2.
+ *  @author Oriol Cuellar
+ */
 public class DriverLectorCSV2 {
 
-
+    /** Main del driver.
+     *  Prueba 2 casos:
+     *      - Lee valoraciones de un path dado y los imprime por pantalla.
+     *      - Lee items de un path dado y los imprime por pantalla.
+     * @see LectorCSV2
+     */
     public static void main(String[] args) {
 
         String path_Val="Entradas_CSV/ratings.db.csv";
