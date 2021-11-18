@@ -19,7 +19,6 @@ public class CtrlDomini {
     private static User actualUser;
     private static Item selectedItem;
     private static Map <Integer, User> usersList;
-    private static ArrayList <valoratedItem> ratesList;
     private static Conjunt_Items itemList;
     private static Map <String, TipusItem> itemTypeList;
     private static Map<Integer,ArrayList<User>> itemValoratedBy;
@@ -107,31 +106,44 @@ public class CtrlDomini {
         }
     }
     public static void deleteProfile(String delete_me){
-        if (actualUser!=null && actualUser.getRol().equals(TipusRol.Administrador) && delete_me.equals("-1") && usersList.containsKey(Integer.valueOf(delete_me))){
-
+        try {
+            if (actualUser != null && actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1") && usersList.containsKey(Integer.valueOf(delete_me))) {
+                User u = usersList.get(delete_me);
+                ArrayList<valoratedItem> lista_valorados = u.getValoratedItems();
+                for(valoratedItem i: lista_valorados){
+                    ArrayList <User> usuarios=itemValoratedBy.get(i.getItem().getID());
+                    usuarios.remove(u);
+                }
+            } else {
+                System.out.println("No es pot esborrar");
+            }
         }
-        else{
-            System.out.println("No es pot esborrar");
+        catch (Exception e){
+            System.out.println(e);
         }
 
     }
     public static void showRecommendedItemsSlope(int k, int maxValue) {// to do------------------
-        if (actualUser!=null && !actualUser.getRol().equals(TipusRol.Administrador)) {
-            //kmeans
+        try {
+            if (actualUser != null && !actualUser.getRol().equals(TipusRol.Administrador)) {
+                //kmeans
 
-            Kmeans kmeans = new Kmeans(usersList);
-            kmeans.run(k);
-            //kmeans.printAllClusters();
+                Kmeans kmeans = new Kmeans(usersList);
+                kmeans.run(k);
+                //kmeans.printAllClusters();
 
-            //slope one
+                //slope one
 
-            SlopeOne slopeOne = new SlopeOne(itemValoratedBy, usersList, maxValue);
-            //cambiar por actual user
-            slopeOne.getPredictions(actualUser);
-            slopeOne.printResults();
+                SlopeOne slopeOne = new SlopeOne(itemValoratedBy, usersList, maxValue);
+                //cambiar por actual user
+                slopeOne.getPredictions(actualUser);
+                slopeOne.printResults();
+            } else {
+                System.out.println("No es pot recomenar");
+            }
         }
-        else{
-            System.out.println("No es pot recomenar");
+        catch (Exception e){
+            System.out.println(e);
         }
     }
     public static void showRecommendedItemsKNN(int num_elem) {// to do------------------
