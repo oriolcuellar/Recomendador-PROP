@@ -33,10 +33,12 @@ public class DriverRateRecomendation {
      */
     public static void main(String[] args) {
 
+        //se leen valoraciones
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
         LectorCSV2 reader = new LectorCSV2();
         readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.test.known.csv");
 
+        //se rellenan userslist y item_valorated_by
         TipusRol t = TipusRol.Usuari;
         for (Vector<String> vs : readed_ratings) {
             if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix

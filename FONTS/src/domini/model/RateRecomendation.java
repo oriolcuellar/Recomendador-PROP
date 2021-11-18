@@ -6,8 +6,8 @@ import java.util.ArrayList;
 /** \brief Clase que implementa RateRecomendation.
  *  @author Oriol Cuellar
  */
-
 public class RateRecomendation {
+
     /** ArrayList de myPair.
      *  Almacena las valoraciones de un usuario a items.
      *  @see myPair
