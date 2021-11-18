@@ -8,17 +8,26 @@ import java.util.ArrayList;
  */
 
 public class RateRecomendation {
-    /** ArrayList de myPair que contiene como llave el ID de un Item y com valor los usuarios que lo han valorado.
-     *  Se utiliza como parametro para el algoritmo Slope-One
+    /** ArrayList de myPair.
+     *  Almacena las valoraciones de un usuario a items.
      *  @see myPair
      */
     private static ArrayList<myPair> arr;
 
+    /** Variable result de tipo float.
+     *  Se utiliza para almacenar el resultado final de el algoritmo.
+     */
     private static float result;
+
+    /** Constructora de la clase.
+     * @param arr2 items y sus valoraciones de parte de un usuario.
+     */
     public  RateRecomendation(ArrayList<myPair> arr2 ){
         this.arr=arr2;
         result=-1;
     }
+    /** Función que ejecuta el algoritmo.
+     */
     public void execute(){
         float res=0;
         for (int i=0;i<arr.size();++i){
@@ -29,6 +38,9 @@ public class RateRecomendation {
         }
         result=res;
     }
+    /** Función que devuelve el resultado.
+     * @return result de la recomendacion.
+     */
     public float getResult(){
         return result;
     }

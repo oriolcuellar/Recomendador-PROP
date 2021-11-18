@@ -102,7 +102,15 @@ public class CtrlDomini {
             System.out.println("\n Password changed Out \n");
         }
     }
-    public static void deleteProfile(){}
+    public static void deleteProfile(String delete_me){
+        if (actualUser!=null && usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador))) {
+
+        }
+        else{
+            System.out.println("no es pot esborrar");
+        }
+
+    }
     public static void showRecommendedItems(int k, int maxValue){// to do------------------
         //kmeans
 
