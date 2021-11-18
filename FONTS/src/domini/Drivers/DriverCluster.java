@@ -64,7 +64,6 @@ public class DriverCluster {
      */
     public static void readData() {
 
-        LectorCSV2 l = new LectorCSV2();
         ArrayList<Vector<String>> readed_ratings = Lector_Ratings("Entradas_CSV/ratings.db.csv");
 
         for (Vector<String> vs : readed_ratings) {

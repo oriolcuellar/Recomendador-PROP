@@ -1,9 +1,9 @@
 JC = javac
-FLAGS = -d ./exe -classpath ./exe
+FLAGS = -d ./EXE -classpath ./EXE
 
-all: Main
+all: main drivers
 
-Main: Main.class
+main: Main.class
 
 Main.class: CtrlDomini.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/model/Main.java
@@ -56,3 +56,62 @@ valoratedItem.class: Item.class
 
 CtrlDomini.class: User.class Item.class Kmeans.class SlopeOne.class valoratedItem.class Conjunt_Items.class TipusRol.class Ranged_Atribute.class LectorCSV2.class K_Neareast_Neightbour.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/controladores/CtrlDomini.java
+
+drivers: DriverCluster.class DriverKmeans.class DriverKND.class DriverLectorCSV2.class DriverRateRecomendation.class DriverUser.class DriverValoratedItem.class DriverSlopeOne.class DriverMyPair.class
+
+DriverCluster.class: User.class Cluster.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverCluster.java
+
+DriverKmeans.class: User.class Kmeans.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverKmeans.java
+
+DriverKND.class: Atribute.class Ranged_Atribute.class TipusItem.class Conjunt_Items.class K_Neareast_Neightbour.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverKND.java
+
+DriverLectorCSV2.class: LectorCSV2.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverLectorCSV2.java
+
+DriverMyPair.class: myPair.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverMyPair.java
+
+DriverRateRecomendation.class: RateRecomendation.class Item.class User.class SlopeOne.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverRateRecomendation.java
+
+DriverSlopeOne.class: User.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverSlopeOne.java
+
+DriverUser.class:
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverUser.java
+
+DriverValoratedItem.class: valoratedItem.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverValoratedItem.java
+
+Main:
+	java -cp ./EXE FONTS.src.domini.model.Main
+
+DriverCluster:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverCluster
+
+DriverKmeans:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverKmeans
+
+DriverKND:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverKND
+
+DriverLectorCSV2:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverLectorCSV2
+
+DriverMyPair:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverMyPair
+
+DriverRateRecomendation:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverRateRecomendation
+
+DriverSlopeOne:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverSlopeOne
+
+DriverUser:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverUser
+
+DriverValoratedItem:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverValoratedItem
