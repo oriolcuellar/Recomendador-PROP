@@ -101,12 +101,9 @@ public class SlopeOne {
     }
 
     public void printResults() {
-        if (predictions.size() == 0) System.out.println("No hay Predicciones");
-        else {
-            for (myPair prediction : predictions) {
-                System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
-                        ": " + prediction.getValoration());
-            }
+        for (myPair prediction : predictions) {
+            System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
+                    ": " + prediction.getValoration());
         }
     }
 
