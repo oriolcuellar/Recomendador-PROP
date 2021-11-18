@@ -71,7 +71,7 @@ public class TipusItem {
 
 
     //operacions auxiliars
-    public void binary_insertion(ArrayList<Atribute> atributes, Atribute a, int l, int r){
+    private void binary_insertion(ArrayList<Atribute> atributes, Atribute a, int l, int r){
 
         String nombre = a.getName();
         if (r >= l) {

@@ -187,7 +187,7 @@ public class Item {
     }
 
     //retorna el string amb la data YYYY-MM-DD , en un vector de string (3), on [0] == YYYY, [1] = MM, [2] = DD
-    public Vector<String> Construc_Vector(String s, char c) {
+    private Vector<String> Construc_Vector(String s, char c) {
 
         Vector<String> v = new Vector<String>(0);
         for (int i = 0;i < s.length(); i++ ){
