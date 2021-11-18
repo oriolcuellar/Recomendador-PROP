@@ -55,68 +55,72 @@ public class CtrlDomini {
 //Profile controller
 
     public void register(String struserId, String password){
-        //pre: Los strings no son null
         //post: es crea un usuari i es posa d'usuari actiu.
         //err: Usuari actiu null, userId not exists, id o passw son strings buits
-        int userId=Integer.valueOf(struserId);
-        if (usersList.containsKey(userId) || actualUser!=null || struserId.equals("") || password.equals("")){
+        try {
+            int userId = Integer.valueOf(struserId);
+            if (usersList.containsKey(userId) || actualUser != null || struserId.equals("") || password.equals("")) {
 
-            System.out.println("\n error al registrar \n");
+                System.out.println("Error al registrar " + struserId);
+            } else {
+                TipusRol rol = TipusRol.Usuari;
+                actualUser = new User(userId, password, rol);
+                usersList.put(userId, actualUser);
+            }
         }
-        else{
-            TipusRol rol=TipusRol.Usuari;
-            actualUser= new User(userId, password, rol);
-            usersList.put(userId, actualUser);
+        catch (Exception e){
+            System.out.println(e);
         }
     }
     public void login(String struserId, String password){
-        //pre: Usuari actiu null, User amb userId i password existeix
         //post: es crea un usuari i es posa d'usuari actiu.
-        int userId=Integer.valueOf((struserId));
-        if (actualUser!=null) {
-            System.out.println("\n tanca sessio primer \n");
+        try {
+            int userId = Integer.valueOf((struserId));
+            if (actualUser != null) {
+                System.out.println("Tanca sessio primer");
+            } else if (usersList.containsKey(userId)) {
+                actualUser = usersList.get(userId);
+                if (actualUser.getPassword().equals(password)) {//logged
+                    System.out.println("Sessió iniciada");
+                } else {
+                    System.out.println( "Error usuari o contrasenya");
+                }
+            }
         }
-        else if (usersList.containsKey(userId)) {
-            actualUser=usersList.get(userId);
-            if (actualUser.getPassword().equals(password)) {//logged
-                System.out.println("\n Sessió iniciada \n");
-            }
-            else {
-                System.out.println("\n error usuari o contrasenya \n");
-            }
+        catch (Exception e){
+            System.out.println(e);
         }
     }
     public  void logout(){
-        //pre: usuari actiu es null
-        if (actualUser==null) System.out.println("\n No hi ha usuari loggejat \n");
+        if (actualUser==null) System.out.println("No hi ha usuari loggejat");
         else{
             actualUser=null;
-            System.out.println("\n Logged Out \n");
+            System.out.println("Logged Out");
         }
 
     }
     public static void editProfile(String newPass){
-        if (actualUser==null) System.out.println("\n No hi ha usuari loggejat \n");
+        if (actualUser==null) System.out.println("No hi ha usuari loggejat");
         else{
             actualUser.setPassword(newPass);
-            System.out.println("\n Password changed Out \n");
+            System.out.println("Password changed Out");
         }
     }
     public static void deleteProfile(String delete_me){
-        if (actualUser!=null && usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador))) {
+        if (actualUser!=null && actualUser.getRol().equals(TipusRol.Administrador) && delete_me.equals("-1") && usersList.containsKey(Integer.valueOf(delete_me))){
 
         }
         else{
-            System.out.println("no es pot esborrar");
+            System.out.println("No es pot esborrar");
         }
 
     }
-    public static void showRecommendedItems(int k, int maxValue){// to do------------------
+    public static void showRecommendedItemsSlope(int k, int maxValue) {// to do------------------
         //kmeans
 
         Kmeans kmeans = new Kmeans(usersList);
         kmeans.run(k);
-        kmeans.printAllClusters();
+        //kmeans.printAllClusters();
 
         //slope one
 
@@ -124,14 +128,26 @@ public class CtrlDomini {
         //cambiar por actual user
         slopeOne.getPredictions(usersList.get(7));
         slopeOne.printResults();
-
+    }
+    public static void showRecommendedItemsKNN(int num_elem) {// to do------------------
         //k-neighbours
 
+        K_Neareast_Neightbour knn = new K_Neareast_Neightbour(itemList);
 
+        ArrayList <Item> it = new ArrayList<Item>();
+        ArrayList <Double> va = new ArrayList<Double>();
+        LectorCSV2 reader = new LectorCSV2();
+       /* mat_items = reader.Lector_Items("Entradas_CSV/ratings.test.known.csv");
+        for (int i=0;i<ratesList.size();++i){
+            if (ratesList.)
+        }
+        knn.Algorithm(num_elem, )*/
     }
 
 
-    public void selectItem(){}
+    public void selectItem(){
+
+    }
     public void rateItem(){}
     public void showAllItems(){
         for(Item i: itemList.getItems()){
@@ -312,14 +328,15 @@ public class CtrlDomini {
         }
 
     }
-    public void loadRates(){//falta añadir item usado a la lista de items usados
+    //"Entradas_CSV/ratings.db.csv" = path
+    public void loadRates(String path){//falta añadir item usado a la lista de items usados
         //pre: actualUser es admin
         if (actualUser!=null && usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador))){
 
             ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 
             LectorCSV2 reader = new LectorCSV2();
-            readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.db.csv");
+            readed_ratings = reader.Lector_Ratings(path);
 
             TipusRol t = TipusRol.Usuari;
             for (Vector<String> vs : readed_ratings) {
@@ -348,7 +365,7 @@ public class CtrlDomini {
             }
         }
         else{
-            System.out.println("\n" + "usuari no es aministrador" + "\n");
+            System.out.println("Usuari no es aministrador");
         }
     }//to do------------------------------------
     public void deleteUser(String delete_me){
