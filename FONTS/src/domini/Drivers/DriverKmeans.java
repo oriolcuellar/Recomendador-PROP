@@ -80,7 +80,7 @@ public class DriverKmeans {
                 usersList.put(Integer.valueOf(vs.get(0)), usuari);
             }
         }
-    }
+    } 
 
     /** Main del driver.
      *  Prueba 4 casos:

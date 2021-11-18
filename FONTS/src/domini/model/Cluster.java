@@ -1,35 +1,46 @@
 package FONTS.src.domini.model;
-
 import FONTS.src.domini.model.*;
-import java.util.ArrayList;
-import static java.lang.Integer.max;
-import static java.lang.Integer.min;
 
-// @author Roberto Amat
+import java.util.ArrayList;
+
+/** \brief Clase que implementa el cluster.
+ *  @author Roberto Amat
+ */
 public class Cluster {
-    // Atributes
+
+    /** Usuario que representa el centroide del clúster, siendo este
+     * el usuario con distancias más pequeñas con los demás. */
     private User centroid;
-    /* Contine los usuarios que pertenecen al clúster */
+
+    /** ArrayList que contine los usuarios que pertenecen al clúster
+    *  @see User */
     private ArrayList<User> cluster;
-    /* Contiene la suma de distancias de un usuario con los demás */
+
+    /** ArrayList que contiene la suma de distancias de un usuario con los demás.
+     * Su longitud es el número de usuarios que forman parte del clúster. */
     private ArrayList<Float> sumDistances;
 
-    // Constructora
+    /** Constructora de la clase. Inicializa los dos ArrayList vacios y el usuario
+     * como uno por defecto. */
     public Cluster() {
         centroid = new User();
         cluster = new ArrayList<User>();
         sumDistances = new ArrayList<Float>();
     }
 
-    // Getters
+    /** Getter que retorna el centroide del clúster. */
     public User getcentroid() {
         return centroid;
     }
+
+    /** Getter que retorna el el ArrayList de usuarios que
+     * forman parte del clúster. */
     public ArrayList<User> getCluster() {
         return cluster;
     }
 
-    // Setters
+    /** Función que establece un usuario como centroide del clúster.
+     * @param  centroid Usuario que va a pasar a ser el nuevo centroide del clúster. */
     public void setCentroid(User centroid) {
         if(cluster.contains(centroid)) {
             this.centroid = centroid;
@@ -38,16 +49,10 @@ public class Cluster {
                 " dado que no forma parte del cluster.");
     }
 
-    public void setCluster(ArrayList<User> cluster) {
-        this.cluster = cluster;
-    }
-
-    // Modifiers
-    /*  
-       - Añades usuario
-       - Calculas la distancia de este usuario con los demás
-       - Sumas la distancia a cada usuario y al que añades
-    */
+    /** Función que añade un usuario al clúster.
+     * @param user Usuario añadido al clúster.
+     *  Una vez añadido, se añaden en las distancias de los demás su distancia respecto de éste,
+     *  y viceversa. */
     public void addUser(User user) {
         if(cluster.contains(user)) System.out.println("El usuario " + user.getUserID() + " ya forma parte del cluster.");
         else {
@@ -67,11 +72,9 @@ public class Cluster {
         }
     }
 
-    /*
-       - Calculas la distancia de este usuario con los demás
-       - Restas la distancia a cada usuario
-       - Eliminas el usuario
-    */
+     /** Borra un usuario del clúster.
+     * @param user Usuario a borrar.
+     * Se modifican todas las distancias borrando las que involucren al borrado.*/
     public void deleteUser(User user) {
         if(cluster.contains(user)) {
             for (int i = 0; i < cluster.size(); ++i) {
@@ -87,10 +90,8 @@ public class Cluster {
         else System.out.println("El usuario: " + user.getUserID() + " no existe en el cluster.");
     }
 
-    /*
-        Dentro de cada clúster el centroide nuevo será aquel cuya suma de distancias
-        con otros usuarios sea menor
-     */
+    /** Función que recalcula el centroide del cluster, buscando aquel cuyas distancias con los
+     * demás sean más pequeñas. */
     public void recalculateCentroid() {
         float sumMin = 100000;
         int iMin = 0;
@@ -103,7 +104,8 @@ public class Cluster {
         centroid = cluster.get(iMin);
     }
 
-    // Print
+    /**Función que imprime todos los usuarios del clúster, especifiando
+     * además cual de ellos es el centroide. */
     public void printCluster() {
         System.out.println("Centroide: " + centroid.getUserID());
         System.out.print("Usuarios:");
