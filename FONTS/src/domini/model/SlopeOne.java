@@ -120,10 +120,12 @@ public class SlopeOne {
     //retorna las predicciones para el usuario u
     public ArrayList<myPair> getPredictions(User user){
         this.user = user;
-        if(!usersList.containsValue(user)) System.out.println("El usuario no existe");
-        else {
+
+        try {
             slopeOneAlgorithm(user);
             quicksort(predictions, 0, predictions.size() - 1);
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return predictions;
     }
