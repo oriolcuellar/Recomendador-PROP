@@ -157,7 +157,7 @@ public class DriverKND {
                 }
             }
             else {
-                for (int p=0;p<i.length();++p){
+                for (int p = 0; p < i.length() && ranged; ++p){
                     if (!((i.charAt(p)>='0' && i.charAt(p)<='9') || i.charAt(p)=='.')) ranged = false;
                 }
                 if(ranged){
@@ -172,8 +172,8 @@ public class DriverKND {
                     else{
                         if (a.getType().equals("Rang")){
                             double aux = Double.valueOf(vsv.get(pos));
-                            //                      if (a.getUpper()<aux) a.setUpper(aux);
-                            //                          if (a.getLower()>aux) a.setLower(aux);
+                            if (a.getUpper()<aux) a.setUpper(aux);
+                            if (a.getLower()>aux) a.setLower(aux);
                         }
                         else{
                             double min=Double.valueOf(vsv.get(pos));

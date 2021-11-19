@@ -25,11 +25,11 @@ public class TipusItem {
      */
     public TipusItem( ArrayList<Atribute> atributes) {
 
-        Vector <String> v = new Vector<String> (atributes.size());
+        ArrayList <String> v = new ArrayList<String> ();
 
-        for (int i = 0; i < v.size(); ++i) {
+        for (int i = 0; i < atributes.size(); ++i) {
 
-            v.set(i, atributes.get(i).getName());
+            v.add(i, atributes.get(i).getName());
         }
 
         Collections.sort(atributes, new Comparator<Atribute>() {
