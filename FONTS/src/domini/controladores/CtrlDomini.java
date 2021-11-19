@@ -34,7 +34,7 @@ public class CtrlDomini {
         return dominiSingelton;
     }
 
-    /*private void iniCtrlDomini(){
+    private void iniCtrlDomini(){
         usersList = new HashMap<Integer, User>();
         actualUser = null;
         selectedItem = null;
@@ -48,7 +48,7 @@ public class CtrlDomini {
 
     private CtrlDomini(){
         iniCtrlDomini();
-    }*/
+    }
 
 //Profile controller
 
@@ -145,19 +145,27 @@ public class CtrlDomini {
             System.out.println(e);
         }
     }
-    public static void showRecommendedItemsKNN(int num_elem) {// to do------------------
+    public static void showRecommendedItemsKNN(int num_elem,String path ) {//"Entradas_CSV/ratings.test.known.csv"
+
+        //leer valoraciones know
+        ArrayList <Item> it = new ArrayList<Item>();
+        ArrayList <Double> va = new ArrayList<Double>();
+        ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
+
+        LectorCSV2 reader = new LectorCSV2();
+        readed_ratings = reader.Lector_Ratings(path);
+
+        for (Vector<String> vs : readed_ratings) {
+            Item nou_it= new Item(Integer.valueOf(vs.get(1)));
+            if (!it.contains(nou_it)) {//No existeix item
+                it.add(nou_it);
+                va.add(Double.valueOf(vs.get(2)));
+            }
+        }
         //k-neighbours
 
         K_Neareast_Neightbour knn = new K_Neareast_Neightbour(itemList);
-
-        ArrayList <Item> it = new ArrayList<Item>();
-        ArrayList <Double> va = new ArrayList<Double>();
-        LectorCSV2 reader = new LectorCSV2();
-       /* mat_items = reader.Lector_Items("Entradas_CSV/ratings.test.known.csv");
-        for (int i=0;i<ratesList.size();++i){
-            if (ratesList.)
-        }
-        knn.Algorithm(num_elem, )*/
+        knn.Algorithm(num_elem,it, va );
     }
 
 
@@ -181,6 +189,12 @@ public class CtrlDomini {
     public void save(){}
     public void exit(){}
     public void createItem(String atributs, String valors){
+        createItemPath(atributs, valors, itemList, itemTypeList);
+    }
+    private void createItemKNN(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems){
+        createItemPath(atributs, valors,ListaItems,ListaTiposItems);
+    }
+    private void createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems){
 
         //string to arraylist de valors
         ArrayList<String> datos_valors = new ArrayList<String>();
@@ -226,7 +240,7 @@ public class CtrlDomini {
         //miramos si no existe item
 
         int comp = Integer.valueOf(datos_valors.get(pos_id));
-        if (itemList.existeix_item(comp)){
+        if (ListaItems.existeix_item(comp)){
             System.out.println("ja existeix id");
             //acabar la funcion-----------------------------------------------------------------------------
         }
@@ -234,13 +248,13 @@ public class CtrlDomini {
         boolean new_type_item=false;
         String ID_ti=vsa.toString();
         TipusItem ti;
-        if (itemTypeList.containsKey(ID_ti)){//existe
-            ti=itemTypeList.get(ID_ti);
+        if (ListaTiposItems.containsKey(ID_ti)){//existe
+            ti=ListaTiposItems.get(ID_ti);
             va=ti.getAtributes();
         }
         else{//no existe
             ti = new TipusItem(va);
-            itemTypeList.put(ID_ti, ti);
+            ListaTiposItems.put(ID_ti, ti);
             new_type_item=true;
         }
 
@@ -324,18 +338,18 @@ public class CtrlDomini {
         //creamos item
         int id = Integer.valueOf(datos_valors.get(pos_id));
         Item i =new Item(id, ti, vsv);
-        if (!(itemList.existeix_item(id))) itemList.anyadir_item(i);
+        if (!(ListaItems.existeix_item(id))) ListaItems.anyadir_item(i);
 
 
     }
     public void deleteItem(){}
     public void modifyItem(){}
-    public void loadItems(){
+    public void loadItems(String path){//"Entradas_CSV/items.csv"
         //pre: actualUser es admin
         if (actualUser!=null && usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador))) {
             Vector<String> mat_items = new Vector<String>();
             LectorCSV2 reader = new LectorCSV2();
-            mat_items = reader.Lector_Items("Entradas_CSV/items.csv");
+            mat_items = reader.Lector_Items(path);
 
             for(int i=1;i<mat_items.size();++i) {
                 dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
