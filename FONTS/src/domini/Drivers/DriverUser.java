@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import static java.lang.Math.sqrt;
 import static org.junit.Assert.assertEquals;
 
+/*
 public class UserTest extends User {
 
     @Test
@@ -154,5 +155,5 @@ public class UserTest extends User {
         u.addvaloratedItem(1234,4);
         assertEquals(u.searchUsedItem(1234).getItem().getID(),1234);
     }
-}
+}*/
 
