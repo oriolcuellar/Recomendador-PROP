@@ -18,7 +18,7 @@ public class DriverLectorCSV2 {
     public static void main(String[] args) {
 
         String path_Val="Entradas_CSV/ratings.db.csv";
-        String path_Items="Entradas_CSV/Items.csv";
+        String path_Items="Entradas_CSV/items.csv";
 
         LectorCSV2 reader = new LectorCSV2();
 
@@ -27,7 +27,7 @@ public class DriverLectorCSV2 {
         readed_ratings = reader.Lector_Ratings(path_Val);
 
         for(int i=0;i<readed_ratings.size();++i) {
-            System.out.println(readed_ratings.get(i));
+            //System.out.println(readed_ratings.get(i));
         }
 
         //Leer Items
