@@ -78,6 +78,8 @@ public class DriverCluster {
                     break;
                 }
 
+            case 6: break;
+
             default : System.out.print("Porfavor introduce un valor correcto\n ");
         }
     }
