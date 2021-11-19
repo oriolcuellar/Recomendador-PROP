@@ -4,15 +4,30 @@ import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-//@Author Jordi Olmo
+/** \brief Clase que implementa el algoritmo K_Neareast_Neightbour y a la vez guarda una matriz con todas las distancias.
+ *  @author Jordi Olmo
+ */
 public class K_Neareast_Neightbour {
 
     //Atributes
 
+    /** El conjunto de todos los Items guardados en la estructura de datos Conjunt_Item
+     * @see Conjunt_Items
+     */
     private Conjunt_Items C_Items;
+
+    /** Matriu de ArrayList de Double que contiene las distancias de un item a todos los otros items, teniendo en cuenta que las posicion coincide con
+     * la que ocupan en Conjunt_Items tanto en filas, como en columnas. i.e. Si el item ocupa la posicion i en Conjunt_Items la fila i de la matriz,
+     corresponde a ese Item y sus distancias. También en cada fila la columna i representa la distancia del item de esa fila al Item de posicion.
+     * i. Por lo tanto la posicion[i][i] de la matriz tiene valor 0.0.
+     */
     private ArrayList<ArrayList<Double> > Distances;
 
     //Constructora
+
+    /** Constructora de la clase. Inicilaitza y calcula la matriz de Distancias respecto al Conjunt_Items de parametro.
+     * @param c_Items Conjunt_Items de todos los items registrados en el sistema.
+     */
 
     public K_Neareast_Neightbour(Conjunt_Items c_Items) {
         C_Items = c_Items;
@@ -23,9 +38,29 @@ public class K_Neareast_Neightbour {
 
     //Getters
 
-    public Double Distance (Item a , Item b) {return  a.Distance(b);}
+    /** Devuelve la distancia entre dos items.
+     * @param a  Primer Item.
+     * @param b  Segundo Item.
+     */
+
+    public Double Distance (Item a , Item b) {
+
+        Double aux = Distances.get(C_Items.get_posiion(a)).get(C_Items.get_posiion(b));
+        if(aux != -1.0)
+            return aux;
+        else
+            return  a.Distance(b);
+    }
 
     //Algorisme
+
+    /** Algoritmo de recomendación, devuelve una ArraList con los k items mas parecidos a itemsUsats, (itemsUsats quedan
+     añadidos a C_Items si no lo estaban.
+     * @param k  Número de items que se devuelven.
+     * @param itemsUsats  ArrayList de los Items sobre los que se quiere la recomendación.
+     * @param Valoracions  ArrayList con las valoraciones de los itemsUsat, la posicion de la valoración en la ArrayList,
+    debe coincidir con la posicion del Item en itemsUsats.
+     */
 
     public ArrayList<Item> Algorithm(int k, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
 
@@ -38,8 +73,14 @@ public class K_Neareast_Neightbour {
             C_Items.anyadir_item(itemsUsats.get(i));
 
 
-        for(int i = 0; i < itemsUsats.size(); ++i)
-            Valors.add(C_Items.get_posiion(itemsUsats.get(i)), Valoracions.get(i));
+        for(int i = 0; i < itemsUsats.size(); ++i){
+            int pos1 = C_Items.get_posiion(itemsUsats.get(i));
+            if(pos1 > Valoracions.size())
+                Valors.add((Valoracions.size()-1), Valoracions.get(i));
+            else
+                Valors.add((pos1), Valoracions.get(i));
+        }
+
 
         anyadir_elements(itemsUsats.size());
         omplir_matriu();
@@ -76,6 +117,19 @@ public class K_Neareast_Neightbour {
 
     //Operacions Auxiliars del algorisme
 
+    /** Dadas las matrizes de los parametros, devuelve una ArrayList con los items recomendados de medida k, siguiendo
+     la siguiente fórmula: Siendo las matrices en orden de los parámetros Y, Z, X -> por unos Item i, j cualquier as.
+     I_Finals = Sumatorio(Zi*Yi) | Xi == Xj.
+     * @param Val Matriz de ArrayList con las valoraciones de todos los Item, si este no pertenecía a itemsUsats, su
+     valor en la matriz será 0.0. La posicion de los items coincidira con M_de_Items.
+     * @param I_Finals  ArrayList de los Items que se devolverán.
+     * @param Distances Matriz de ArrayList con las distancias de todos los item. La posicion de los items coincidira
+     con M_de_Items.
+     * @param M_de_Items  Matriz con todos los Items ordenados con los que tengan mayor valor de distancia antes en las
+       columnas. Esta ordenación se debe respetar en las otras dos matrices de los parametros.
+     * @param k Número de items que se devuelven.
+     */
+
     //Sent les matrius en ordre del parametres Y, Z, X -> per uns Item i, j qualsevols I_Finals = Sumatori(Zi*Yi) | Xi == Xj
     private void comparar_conjunts (ArrayList<ArrayList<Double>> Val, ArrayList<Item> I_Finals, ArrayList<ArrayList<Double>> Distances,
                                     ArrayList <ArrayList<Item>> M_de_Items, int k) {
@@ -105,6 +159,10 @@ public class K_Neareast_Neightbour {
             I_Finals.remove(i);
     }
 
+    /** Rellena la matriz Distances con las respectivas distancias de los items. La matriz ya debe ser del tamaño del
+     conjunt d'Items.
+     */
+
     //la matriz ya debe ser del tamaño del conjunt d'items
     private void omplir_matriu() {
 
@@ -123,6 +181,10 @@ public class K_Neareast_Neightbour {
             }
     }
 
+    /** Inicializa la matriz Distances con -1.0 en todos los items. La matriz ya debe ser del tamaño del
+     conjunt d'Items.
+     */
+
     private void initzialitzar_matriu() {
 
         for (int i = 0; i < C_Items.n_Items(); ++i) {
@@ -134,6 +196,10 @@ public class K_Neareast_Neightbour {
         }
 
     }
+
+    /** Añades los itemsUsats a Distance con -1.0, si estos no pertenecían a Conjunt_Items.
+     * @param n numeros de items en itemsUsats.
+     */
 
     private void anyadir_elements(int n) {
 
@@ -151,6 +217,15 @@ public class K_Neareast_Neightbour {
 
     }
 
+    /** Ordena toda la ArrayList de los parametros, de forma creciente para los items con mayor valor en el parametro,
+     distancies. El algoritmo es un merge_sort modificado para ordenar las tres ArrayList.
+     * @param l extremo izquierda de las ArrayList a ordenar.
+     * @param r extremo derecho de las ArrayList a ordenar.
+     * @param Val ArrayList de Double con las valoraciones de los items de itemUsats.
+     * @param Items ArrayList de Item.
+     * @param distancies ArrayList de Double con distancies.
+     */
+
     private void ordenar_Items(ArrayList <Double> distancies, ArrayList<Item> Items, ArrayList<Double> Val, int l, int r) {
 
         if (l < r) {
@@ -167,6 +242,14 @@ public class K_Neareast_Neightbour {
     }
 
     //Operacions auxiliars per ordenar
+
+    /** Merge de la funcion Ordenar_Items para combinar las ArrayList separadas con el orden especificado en esa funcion.
+     * @param l extremo izquierda de las ArrayList a ordenar.
+     * @param r extremo derecho de las ArrayList a ordenar.
+     * @param Val ArrayList de Double con las valoraciones de los items de itemUsats.
+     * @param Items ArrayList de Item.
+     * @param distancies ArrayList de Double con distancies.
+     */
 
     private void merge (ArrayList <Double> distancies,ArrayList<Item> Items, ArrayList<Double> Val, int l, int m, int r)
     {
@@ -241,6 +324,15 @@ public class K_Neareast_Neightbour {
         }
     }
 
+    /** Version de ordenar_conjuntos simplificada para usar solo 2 Arraylist y ordenar crecientemente según
+     el valor de Val
+     * @param l extremo izquierda de las ArrayList a ordenar.
+     * @param r extremo derecho de las ArrayList a ordenar.
+     * @param Val ArrayList de Double con los valores resultado de aplicar comparar_conjunts, coincidiendo posiciones
+     con el primer parametro.
+     * @param Items ArrayList de Item, de tamaño igual a k.
+     */
+
     private void ordenar_simplificado(ArrayList<Item> Items, ArrayList<Double> Val, int l, int r) {
 
         if (l < r) {
@@ -255,6 +347,14 @@ public class K_Neareast_Neightbour {
             merge_simplificado(Items, Val,  l, m, r);
         }
     }
+
+    /** Merge simplificado de merge para que funcione con ordenar_simplificacion.
+     * @param l extremo izquierda de las ArrayList a ordenar.
+     * @param r extremo derecho de las ArrayList a ordenar.
+     * @param Val ArrayList de Double con los valores resultado de aplicar comparar_conjunts, coincidiendo posiciones
+    con el primer parametro.
+     * @param Items ArrayList de Item, de tamaño igual a k.
+     */
 
     private void merge_simplificado(ArrayList<Item> Items, ArrayList<Double> Val, int l, int m, int r)
     {
@@ -322,6 +422,11 @@ public class K_Neareast_Neightbour {
     }
 
     //Operacions Auxiliars varies
+
+    /** Copia todos los valores de la segunda ArrayList y los añade en la primera.
+     * @param A ArrayList donde se copiara B, para que queden iguales debe ser vacía.
+     * @param B ArrayList de origen que ser clonada en A.
+     */
 
     private void clonador_ArrayList (ArrayList  A, ArrayList  B) {
 
