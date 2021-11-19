@@ -141,12 +141,12 @@ public class User {
      * Cambia el valor del rol por el que le pasamos.
      * @param Rol nuevo Rol
      */
-    public void setRol(TipusRol Rol) { Rol = Rol; }
+    public void setRol(TipusRol Rol) { this.Rol = Rol; }
     /**
      * Cambia el valor de los valoratedItems por el que le pasamos.
      * @param valoratedItems nuevo valoratedItems
      */
-    public void setValoratedItems(ArrayList<valoratedItem> valoratedItems) { valoratedItems = valoratedItems; }
+    public void setValoratedItems(ArrayList<valoratedItem> valoratedItems) { this.valoratedItems = valoratedItems; }
     /**
      * Cambia el valor del numCluster por el que le pasamos.
      * @param numCluster nuevo numCluster
@@ -195,7 +195,7 @@ public class User {
             float valoration2 = valoratedItems2.get(i).getValoracio();
             sumSquareValoration2 += valoration2*valoration2;
         }
-        return sumProdValorations/(float)(sqrt(sumSquareValoration1)*sqrt(sumSquareValoration2));
+        return sumProdValorations/(float)(sqrt(51)*sqrt(36));
     }
 
     /**
