@@ -112,7 +112,7 @@ public class DriverSlopeOne{
     public static void main(String[] args) {
         readData();
 
-        System.out.println("CASO DONDE EL MAP ITEMVALORATEDBY ESTÁ VACIO");
+        System.out.println("CASO DONDE EL MAP ITEMVALORATEDBY ESTA VACIO");
         Map<Integer,ArrayList<User>> itemValoratedBy1 = new HashMap<Integer,ArrayList<User>>();
         SlopeOne So = new SlopeOne(itemValoratedBy1, usersList,5);
         So.getPredictions(usersList.get(3));
@@ -125,14 +125,14 @@ public class DriverSlopeOne{
         So1.printResults();
         System.out.println();
 
-        System.out.println("CASO DONDE EL MAP USERSLIST ESTÁ VACIO");
+        System.out.println("CASO DONDE EL MAP USERSLIST ESTA VACIO");
         Map<Integer,User> usersList1 = new HashMap<Integer,User> ();
         SlopeOne So2 = new SlopeOne(itemValoratedBy, usersList1,5);
         So2.getPredictions(usersList1.get(3));
         So2.printResults();
         System.out.println();
 
-        System.out.println("CASO DONDE EL MAXVALUE ES MAYOR AL VALOR MÁXIMO");
+        System.out.println("CASO DONDE EL MAXVALUE ES MAYOR AL VALOR MAXIMO");
         SlopeOne So3 = new SlopeOne(itemValoratedBy, usersList,10);
         So3.getPredictions(usersList.get(3));
         So3.printResults();

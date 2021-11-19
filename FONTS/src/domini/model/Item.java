@@ -1,10 +1,11 @@
 package FONTS.src.domini.model;
-
 import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-//@Author Jordi Olmo
+/** \brief Clase que representa un Item.
+ *  @author Jordi Olmo
+ */
 
 /*
     Para leer items, tienes que leer la primera fila, devolver un vector de string con cada atribute (que estan separados por ,), el id sera ese vector.toString()
@@ -16,11 +17,30 @@ import java.util.Vector;
 public class Item {
 
     //Atributes
+    /** Identidicador del Item.
+     */
     private int ID;
+
+    /** Tipus del Item
+     * @see TipusItem
+     */
     private TipusItem tipus;
+
+    /** ArrayList de String que contiene los valores de los Atributo de su tipo, las posiciones de los valores debe
+     coincidir con las posiciones de los atributos de la ArrayList del tipo.
+     * @see TipusItem
+     */
     private ArrayList <String> valors;
 
     //Constructors
+
+    /** Creadora de la classe. Crea un item con los parametros dados.
+     * @see TipusItem
+     * @param ID identificador del item, no puede coincidir el de ningun item.
+     * @param tipus Tipo del item.
+     * @param valors ArrayList de String con el valor de los atributos del tipo del item, las posiciones de los valores debe
+     coincidir con las posiciones de los atributos de la ArrayList del tipo.
+     */
 
     /* El indice del valor debe coincidir con el indice del atributo para funcionar*/
     public Item(int ID, TipusItem tipus, ArrayList <String> valors) {
@@ -31,21 +51,42 @@ public class Item {
         //   }
     }
 
+    /** Creadora de la classe. Crea un item con los parametros dados.
+     * @see TipusItem
+     * @param ID identificador del item, no puede coincidir el de ningun item.
+    coincidir con las posiciones de los atributos de la ArrayList del tipo.
+     */
+
     public Item(int ID) {this.ID = ID;}
 
     //Getters
 
+    /** Devuelve el ID, del item.
+     */
+
     public int getID() {
         return ID;
     }
+
+    /** Devuelve el tipo del Item.
+     */
+
     public TipusItem getTipus() {
         return tipus;
     }
+
+    /** Devuelve la ArrayList de valors del Item.
+     */
+
     public ArrayList getValors() {
         return valors;
     }
 
     //Setters
+
+    /** Establece el valor del id del Item.
+     */
+
     public void setID(int ID) {
         this.ID = ID;
     }
@@ -53,6 +94,11 @@ public class Item {
     //Operacions
 
     //mirar desacoplament de Atribute
+
+    /** Devuelve la distancia del Item implicito y el del parametro.
+     * @param b Item del que se quiere saber la distancia.
+     */
+
     public Double Distance (Item b) {
 
         ArrayList<Atribute>  V_A = new ArrayList<Atribute>();
@@ -102,7 +148,17 @@ public class Item {
 
     //Operacions Auxiliars
 
-    /* Es presoposa que que totels les ArrayList son de la mateixa mida = n_d, ja que tan sols funciona si els dos items tenen els mateixos atributs*/
+    /** Compara todos los atrubutos de los ArrayList y evuelve un Double que serà mayor cuanto más se parezcan. Se
+     presupone que que todas las ArrayList son del mismo tamaño = n_d, ya que tan sólo funciona si los dos items
+     tienen los mismos atributos.
+     * @param V_A ArrayList de Atribute del Item a.
+     * @param V_B ArrayList de Atribute del Item b, tiene que ser del mismo tamaño de V_A.
+     * @param Valors_A ArrayList de String, con los valores que representan los Atributes del item a.
+     * @param Valors_B ArrayList de String, con los valores que representan los Atributes del item b.
+     * @param n_d numero de dimensiones de las dos tipus, (numero de atributos, tienen que ser igual).
+     */
+
+    /* Es presoposa que que totels les ArrayList son de la mateixa mida = n_d, ja que tan sols funciona si els dos items tenen els mateixos atributs */
     private Double comparador_tipus_iguals (ArrayList<Atribute>  V_A, ArrayList<Atribute>  V_B, ArrayList <String> Valors_A, ArrayList <String> Valors_B, int n_d) {
 
         Double distance = 0.0;
@@ -186,6 +242,11 @@ public class Item {
         return Math.sqrt(distance);
     }
 
+    /** Funcion auxiliar que devuelve el string con la fecha YYYY-MM-DD, en un vector de string (3), donde [0] == YYYY, [1] = MM, [2] = DD.
+     * @param s String con la fecha YYYY-MM-DD.
+     * @param c Char que se usa para separar en los String, en el caso de fecha `-`.
+     */
+
     //retorna el string amb la data YYYY-MM-DD , en un vector de string (3), on [0] == YYYY, [1] = MM, [2] = DD
     private Vector<String> Construc_Vector(String s, char c) {
 
@@ -203,7 +264,11 @@ public class Item {
         return v;
     }
 
-    //copia la Arraylist B en A (han de ser els dos del mateix tipus
+    /** Copia todos los valores de la segunda ArrayList y los añade en la primera.
+     * @param A ArrayList donde se copiara B, para que queden iguales debe ser vacía.
+     * @param B ArrayList de origen que ser clonada en A.
+     */
+
     private void clonador_ArrayList (ArrayList  A, ArrayList  B) {
 
             for(int i = 0; i< B.size(); ++i)

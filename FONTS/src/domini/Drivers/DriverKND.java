@@ -50,8 +50,8 @@ public class DriverKND {
         ArrayList<Item> Items = new ArrayList<Item>(Arrays.asList(a2, a3, a4, a5));
 
         Conjunt_Items Ct = new Conjunt_Items(Items);
-        ArrayList<Item> ItemsUsats = new ArrayList<Item>(Arrays.asList(a6, a7, a8, a9));
-        ArrayList<Double> Valoracions = new ArrayList<Double>(Arrays.asList(3.2, 4.1, 1.0, 2.1));
+        ArrayList<Item> ItemsUsats = new ArrayList<Item>(Arrays.asList(a9, a7, a8, a6));
+        ArrayList<Double> Valoracions = new ArrayList<Double>(Arrays.asList(2.1, 4.1, 1.0, 3.2));
 
         K_Neareast_Neightbour prueba = new K_Neareast_Neightbour( Ct);
         ArrayList<Item> Resultado = prueba.Algorithm(3, ItemsUsats, Valoracions);

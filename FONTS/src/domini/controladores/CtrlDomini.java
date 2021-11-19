@@ -34,11 +34,10 @@ public class CtrlDomini {
         return dominiSingelton;
     }
 
-    private void iniCtrlDomini(){
+    /*private void iniCtrlDomini(){
         usersList = new HashMap<Integer, User>();
         actualUser = null;
         selectedItem = null;
-        ratesList = new ArrayList<valoratedItem>();
         itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
         itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
@@ -49,7 +48,7 @@ public class CtrlDomini {
 
     private CtrlDomini(){
         iniCtrlDomini();
-    }
+    }*/
 
 //Profile controller
 
