@@ -93,9 +93,7 @@ public class Atribute {
     /** Funcion para definir en Ranged_Atribute.
      */
 
-    public Double getLower() {
-        return 0.0;
-    }
+    public Double getLower() { return 0.0; }
 
     /** Funcion para definir en Ranged_Atribute.
      */

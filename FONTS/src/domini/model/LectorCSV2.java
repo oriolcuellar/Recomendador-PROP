@@ -22,7 +22,7 @@ public class LectorCSV2 {
     public Vector <String> Lector_Items(String csvFile){
         //post: return un vector de les files del csv
 
-        items=new Vector<String>();
+        items = new Vector<String>();
         BufferedReader br = null;
         String line = "";
         try {

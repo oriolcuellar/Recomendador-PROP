@@ -211,7 +211,7 @@ public class K_Neareast_Neightbour {
             Distances.add(Aux);
         }
 
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < C_Items.n_Items(); ++i)
             for (int j = 0; j < n; ++j )
                 Distances.get(i).add(-1.0);
 

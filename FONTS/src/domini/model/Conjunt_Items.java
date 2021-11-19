@@ -186,7 +186,7 @@ public class Conjunt_Items {
             //si no a la dreta
             return BinaryInsertionPos(Items, mid + 1, r, ID);
         }
-        else  if (Items.get(r).getID() > ID)
+        else  if (r >= 0 && Items.get(r).getID() > ID)
             return r-1; //en teoria exception
         else return r;
     }
