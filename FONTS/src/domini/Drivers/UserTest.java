@@ -136,5 +136,6 @@ public class UserTest extends User {
         user1.setValoratedItems(items1);
         user2.setValoratedItems(items2);
         assertEquals(user1.calculateSimilarity(user2),14/(sqrt(51)*6), 0.01);
+
     }
 }
