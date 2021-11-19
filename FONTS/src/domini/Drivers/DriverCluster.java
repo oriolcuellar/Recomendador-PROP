@@ -170,7 +170,7 @@ public class DriverCluster {
                 "mas cercano en cuanto a gustos con todos los demas.");
         System.out.println("\nFunciones de la clase disponibles para probar:\n");
         System.out.println("    1. getCentroid()\n    2. getCluster()\n    3. setCentroid(usuario)\n" +
-                "    4. addUser(usuario)\n    6. CAMBIAR CLUSTER ACTUAL.\n    7. FINALIZAR PRUEBA.\n");
+                "    4. addUser(usuario)\n    5. CAMBIAR CLUSTER ACTUAL.\n    6. FINALIZAR PRUEBA.\n");
     }
 
     /** Main del driver.
@@ -191,7 +191,7 @@ public class DriverCluster {
             f = s.nextInt();
             testFunction(f);
 
-        }while(f != 7);
+        }while(f != 6);
     }
 
 }
