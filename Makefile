@@ -81,7 +81,7 @@ DriverSlopeOne.class: User.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverSlopeOne.java
 
 UserTest.class:
-	$(JC) -cp libs/junit-4.12.jar: ./FONTS/src/domini/Drivers/UserTest.java
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/UserTest.java
 
 DriverValoratedItem.class: valoratedItem.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverValoratedItem.java
@@ -110,9 +110,10 @@ DriverRateRecomendation:
 DriverSlopeOne:
 	java -cp ./EXE FONTS.src.domini.drivers.DriverSlopeOne
 
-UserTest:
-	java -cp libs/* ./EXE FONTS.src.domini.drivers.UserTest
 
 DriverValoratedItem:
 	java -cp ./EXE FONTS.src.domini.drivers.DriverValoratedItem
 
+klk:
+	$(JC) -d $(CP_TESTS) -cp $(CP):$(TEST_JARS) ./FONTS/src/domini/Drivers/UserTest.java
+	javac /libs/junit-4.12:libs/hamcrest-core-1.3

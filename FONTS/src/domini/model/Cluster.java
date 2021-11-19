@@ -40,7 +40,13 @@ public class Cluster {
     /** Función que establece un usuario como centroide del clúster.
      * @param  centroid Usuario que va a pasar a ser el nuevo centroide del clúster. */
     public void setCentroid(User centroid) {
-        if(cluster.contains(centroid)) {
+        boolean c = false;
+        for (User value : cluster)
+            if (value.getUserID() == centroid.getUserID()) {
+                c = true;
+                break;
+            }
+        if(c) {
             this.centroid = centroid;
         }
         else System.out.println("No se puede asignar " + centroid.getUserID() + " como centroide" +
