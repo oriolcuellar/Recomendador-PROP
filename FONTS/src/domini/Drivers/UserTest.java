@@ -7,7 +7,6 @@ import FONTS.src.domini.model.valoratedItem;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import static java.lang.Math.sqrt;
 import static org.junit.Assert.assertEquals;
@@ -34,14 +33,19 @@ public class UserTest extends User {
 
     @Test
     public void testGetValoratedItems() {
-
+        User u = new User(1234);
+        ArrayList<valoratedItem> items = new ArrayList<valoratedItem>();
+        Item item = new Item(1234);
+        valoratedItem vItem = new valoratedItem(item,4);
+        items.add(vItem);
+        u.setValoratedItems(items);
+        assertEquals(items,u.getValoratedItems());
     }
 
     @Test
     public void testGetNumCluster() {
         User u = new User(1);
         assertEquals(u.getNumCluster(),-1);
-
     }
 
     @Test
@@ -67,7 +71,13 @@ public class UserTest extends User {
 
     @Test
     public void testSetValoratedItems() {
-
+        User u = new User(1234);
+        ArrayList<valoratedItem> items = new ArrayList<valoratedItem>();
+        Item item = new Item(1234);
+        valoratedItem vItem = new valoratedItem(item,4);
+        items.add(vItem);
+        u.setValoratedItems(items);
+        assertEquals(items,u.getValoratedItems());
     }
 
     @Test
@@ -136,6 +146,11 @@ public class UserTest extends User {
         user1.setValoratedItems(items1);
         user2.setValoratedItems(items2);
         assertEquals(user1.calculateSimilarity(user2),14/(sqrt(51)*6), 0.01);
-
+    }
+    @Test
+    public void testSearchUsedItem() {
+        User u = new User(1234);
+        u.addvaloratedItem(1234,4);
+        assertEquals(u.searchUsedItem(1234).getItem().getID(),1234);
     }
 }
