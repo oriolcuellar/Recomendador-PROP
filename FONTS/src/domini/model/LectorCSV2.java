@@ -32,13 +32,23 @@ public class LectorCSV2 {
             while ((line = br.readLine()) != null) {
                 items.add(line);
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return items;
     }
 
-    public ArrayList<Vector<String>> Lector_Ratings(String csvFile ) {
+    public ArrayList<Vector<String>> Lector_Ratings(String csvFile ) throws Exception{
         ratings=new ArrayList<Vector<String>>();
         BufferedReader br = null;
         String line = "";
@@ -74,9 +84,23 @@ public class LectorCSV2 {
                 }
                 first = false;
             }
-        } catch (Exception e) {
-            System.out.println(e);
         }
+        catch (Exception e){
+            throw e;
+        }
+        /*catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }*/
         return ratings;
 
     }

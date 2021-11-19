@@ -41,9 +41,13 @@ public class DriverRateRecomendation {
 
         //se leen valoraciones
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
-        LectorCSV2 reader = new LectorCSV2();
-
-        readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.test.known.csv");
+        try {
+            LectorCSV2 reader = new LectorCSV2();
+            readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.test.known.csv");
+        }
+        catch (Exception e){
+            System.out.println("Volver a leer");
+        }
 
         //se rellenan userslist y item_valorated_by
         TipusRol t = TipusRol.Usuari;
