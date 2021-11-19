@@ -1,68 +1,72 @@
 package FONTS.src.domini.drivers;
 
 import FONTS.src.domini.model.User;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class UserTest extends User {
 
-    @org.junit.Test
+    @Test
     public void testGetUserID() {
+        User user = new User(2);
+        int ID = user.getUserID();
+        assertEquals(2,ID,0);
     }
 
-    @org.junit.Test
+    @Test
     public void testGetPassword() {
     }
 
-    @org.junit.Test
+    @Test
     public void testGetRol() {
     }
 
-    @org.junit.Test
+    @Test
     public void testGetValoratedItems() {
     }
 
-    @org.junit.Test
+    @Test
     public void testGetNumCluster() {
     }
 
-    @org.junit.Test
+    @Test
     public void testSetUserID() {
     }
 
-    @org.junit.Test
+    @Test
     public void testSetPassword() {
     }
 
-    @org.junit.Test
+    @Test
     public void testSetRol() {
     }
 
-    @org.junit.Test
+    @Test
     public void testSetValoratedItems() {
     }
 
-    @org.junit.Test
+    @Test
     public void testSetNumCluster() {
     }
 
-    @org.junit.Test
+    @Test
     public void testAddvaloratedItem() {
     }
 
-    @org.junit.Test
+    @Test
     public void testCalculateSimilarity() {
     }
 
-    @org.junit.Test
+    @Test
     public void testCalculateDistances2() {
     }
 
-    @org.junit.Test
+    @Test
     public void testSearchUsedItem() {
     }
 
-    @org.junit.Test
+    @Test
     public void testPrintUsedItems() {
     }
 }

@@ -39,6 +39,7 @@ public class User {
      * Crea un usuario vacio
      */
     public User() {
+        this.userID = -2;
         this.valoratedItems = new ArrayList<valoratedItem>();
         this.numCluster = -1;
     }
