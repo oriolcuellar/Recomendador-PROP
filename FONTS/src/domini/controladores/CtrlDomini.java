@@ -38,7 +38,6 @@ public class CtrlDomini {
         usersList = new HashMap<Integer, User>();
         actualUser = null;
         selectedItem = null;
-        ratesList = new ArrayList<valoratedItem>();
         itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
         itemValoratedBy = new HashMap<Integer,ArrayList<User>>();

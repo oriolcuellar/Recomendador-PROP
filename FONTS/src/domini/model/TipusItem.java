@@ -1,6 +1,5 @@
 package FONTS.src.domini.model;
 
-import FONTS.src.domini.model.*;
 import java.util.*;
 
 /** \brief Clase que representa un tipo de item, definido por su conjunto de atributos.
