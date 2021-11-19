@@ -33,6 +33,8 @@ public class DriverRateRecomendation {
      *      - Crea en los maps correspondientes, los usuarios i los items que ha leido.
      *      - Llama al algoritmo K-means y Slope-One
      *      - Evalua el resultado con el algortimo
+     * @see Kmeans
+     * @see SlopeOne
      * @see  RateRecomendation
      */
     public static void main(String[] args) {
@@ -40,6 +42,7 @@ public class DriverRateRecomendation {
         //se leen valoraciones
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
         LectorCSV2 reader = new LectorCSV2();
+
         readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.test.known.csv");
 
         //se rellenan userslist y item_valorated_by
