@@ -48,7 +48,7 @@ public class LectorCSV2 {
         return items;
     }
 
-    public ArrayList<Vector<String>> Lector_Ratings(String csvFile ) {
+    public ArrayList<Vector<String>> Lector_Ratings(String csvFile ) throws Exception{
         ratings=new ArrayList<Vector<String>>();
         BufferedReader br = null;
         String line = "";
@@ -84,7 +84,11 @@ public class LectorCSV2 {
                 }
                 first = false;
             }
-        } catch (FileNotFoundException e) {
+        }
+        catch (Exception e){
+            throw e;
+        }
+        /*catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
@@ -96,7 +100,7 @@ public class LectorCSV2 {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
         return ratings;
 
     }

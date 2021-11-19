@@ -24,7 +24,12 @@ public class DriverLectorCSV2 {
 
         //Leer valoraciones
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
-        readed_ratings = reader.Lector_Ratings(path_Val);
+        try {
+            readed_ratings = reader.Lector_Ratings(path_Val);
+        }
+        catch (Exception e){
+            System.out.println("volver a leer");
+        }
 
         for(int i=0;i<readed_ratings.size();++i) {
             //System.out.println(readed_ratings.get(i));
