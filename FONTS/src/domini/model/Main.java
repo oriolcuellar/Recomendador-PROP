@@ -4,19 +4,34 @@ import FONTS.src.domini.model.*;
 import FONTS.src.domini.controladores.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Vector;
 
 
 public class Main {
     public static void main(String[] args) {
-//el administrador es el num -1, hay que logearse con el antes de hacer nada. id= -1 passw = -1
-        CtrlDomini c= CtrlDomini.getInstance();
-        c.login("-1", "-1");
-        c.register(null,null);
-        //c.showAllUsers();
-        c.loadRates("Entradas_CSV/ratings.db.csv");
-        //c.loadItems();
-        //c.showAllItems();
-         CtrlDomini.showRecommendedItemsSlope(1,100);
+
+        ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
+        LectorCSV2 reader = new LectorCSV2();
+        try {
+            readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.test.known.csv");
+        }
+        catch (Exception e){
+            System.out.println("mal");
+        }
+
+/*
+        //kmeans
+
+        Kmeans kmeans = new Kmeans(usersList);
+        kmeans.run(k);
+        //kmeans.printAllClusters();
+
+        //slope one
+
+        SlopeOne slopeOne = new SlopeOne(itemValoratedBy, usersList, maxValue);
+        //cambiar por actual user
+        slopeOne.getPredictions(actualUser);
+        slopeOne.printResults();*/
 
     }
 }

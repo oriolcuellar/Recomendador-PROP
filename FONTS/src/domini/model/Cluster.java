@@ -40,7 +40,13 @@ public class Cluster {
     /** Función que establece un usuario como centroide del clúster.
      * @param  centroid Usuario que va a pasar a ser el nuevo centroide del clúster. */
     public void setCentroid(User centroid) {
-        if(cluster.contains(centroid)) {
+        boolean c = false;
+        for (User value : cluster)
+            if (value.getUserID() == centroid.getUserID()) {
+                c = true;
+                break;
+            }
+        if(c) {
             this.centroid = centroid;
         }
         else System.out.println("No se puede asignar " + centroid.getUserID() + " como centroide" +
@@ -52,7 +58,13 @@ public class Cluster {
      *  Una vez añadido, se añaden en las distancias de los demás su distancia respecto de éste,
      *  y viceversa. */
     public void addUser(User user) {
-        if(cluster.contains(user)) System.out.println("El usuario " + user.getUserID() + " ya forma parte del cluster.");
+        boolean c = false;
+        for (User value : cluster)
+            if (value.getUserID() == user.getUserID()) {
+                c = true;
+                break;
+            }
+        if(c) System.out.println("El usuario " + user.getUserID() + " ya forma parte del cluster.");
         else {
             cluster.add(user);
             float f = 0;
@@ -67,30 +79,13 @@ public class Cluster {
                 }
             }
             sumDistances.set(cluster.size() - 1, d);
+            recalculateCentroid();
         }
-    }
-
-     /** Borra un usuario del clúster.
-     * @param user Usuario a borrar.
-     * Se modifican todas las distancias borrando las que involucren al borrado.*/
-    public void deleteUser(User user) {
-        if(cluster.contains(user)) {
-            for (int i = 0; i < cluster.size(); ++i) {
-                float actualDistance = user.calculateSimilarity(cluster.get(i));
-                float d1 = sumDistances.get(i) - actualDistance;
-                sumDistances.set(i, d1);
-            }
-            int indexUserRemoved = cluster.indexOf(user);
-            cluster.remove(user);
-            sumDistances.remove(indexUserRemoved);
-            user.setNumCluster(-1);
-        }
-        else System.out.println("El usuario: " + user.getUserID() + " no existe en el cluster.");
     }
 
     /** Función que recalcula el centroide del cluster, buscando aquel cuyas distancias con los
      * demás sean más pequeñas. */
-    public void recalculateCentroid() {
+    private void recalculateCentroid() {
         float sumMin = 0;
         int iMin = 0;
         for(int i = 0; i < sumDistances.size(); ++i) {
@@ -106,7 +101,7 @@ public class Cluster {
      * además cual de ellos es el centroide. */
     public void printCluster() {
         System.out.println("Centroide: " + centroid.getUserID());
-        System.out.print("Usuarios:");
+        System.out.print("Usuarios: ");
         boolean first = true;
         for (User user : cluster) {
             if(first) first = false;

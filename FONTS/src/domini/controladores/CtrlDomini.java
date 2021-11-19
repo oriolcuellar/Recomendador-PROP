@@ -5,13 +5,14 @@ package FONTS.src.domini.controladores;
 
 import FONTS.src.domini.model.*;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
 public class CtrlDomini {
-
+/*
 // Atributes
 
     private static CtrlDomini   dominiSingelton = null;
@@ -151,9 +152,13 @@ public class CtrlDomini {
         ArrayList <Item> it = new ArrayList<Item>();
         ArrayList <Double> va = new ArrayList<Double>();
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
-
-        LectorCSV2 reader = new LectorCSV2();
-        readed_ratings = reader.Lector_Ratings(path);
+        try {
+            LectorCSV2 reader = new LectorCSV2();
+            readed_ratings = reader.Lector_Ratings(path);
+        }
+        catch (Exception e){
+            System.out.println("volver a leer");
+        }
 
         for (Vector<String> vs : readed_ratings) {
             Item nou_it= new Item(Integer.valueOf(vs.get(1)));
@@ -183,7 +188,7 @@ public class CtrlDomini {
         //System.out.println(ratesList.size());
        /* for(ItemUsat i: usersList.get(actualUser).getItemsUsats()){
             System.out.println("\n" + i.getUsuari()+ " "+ i.getItem()+" "+ i.getValoracio() + "\n");
-        }*/
+        }
 
     }
     public void save(){}
@@ -409,7 +414,7 @@ public class CtrlDomini {
                 if ( delete_me.equals(StringValueOf(i.getUsuari().getUserID())) ratesList.delete(i);
             }
             usersList.delete(delete_me);
-             */
+
         }
     }
     public void createUser( String create_me){
@@ -426,6 +431,8 @@ public class CtrlDomini {
             System.out.println(u.getUserID());
         }
     }
+
+ */
 
 }
 //driver stubs por cada clase
