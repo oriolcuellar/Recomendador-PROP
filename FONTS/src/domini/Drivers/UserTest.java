@@ -4,7 +4,7 @@ import FONTS.src.domini.model.Item;
 import FONTS.src.domini.model.TipusRol;
 import FONTS.src.domini.model.User;
 import FONTS.src.domini.model.valoratedItem;
-
+/*
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -154,4 +154,4 @@ public class UserTest extends User {
         u.addvaloratedItem(1234,4);
         assertEquals(u.searchUsedItem(1234).getItem().getID(),1234);
     }
-}
+}*/

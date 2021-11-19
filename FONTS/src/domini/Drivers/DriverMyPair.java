@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class DriverMyPair {
 
     static myPair mp;
+    int x;
 
 
     static void testFunction(int f) {

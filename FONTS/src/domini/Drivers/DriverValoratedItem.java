@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 public class DriverValoratedItem {
     public static void main(String[] args) {
+        int x;
         System.out.println("Introduce el ID del Item que quiere valorar: ");
         Scanner S = new Scanner(System.in);
         int itemID =  S.nextInt();

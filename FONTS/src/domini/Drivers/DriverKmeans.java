@@ -13,6 +13,9 @@ import java.util.Vector;
  */
 public class DriverKmeans {
 
+    int x;
+
+
     /** Mapa que contiene como llave el ID de un usuario y com valor dicho usuario.
      *  Se utiliza para relizar las pruebas con los datos recibidos a través del fichero.
      */
