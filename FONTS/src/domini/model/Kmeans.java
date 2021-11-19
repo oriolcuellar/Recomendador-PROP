@@ -63,17 +63,6 @@ public class Kmeans {
         }
         user.setNumCluster(iMin);
         clusters.get(iMin).addUser(user);
-        clusters.get(iMin).recalculateCentroid();
-    }
-
-    /** Elimina un usuario del cluster al que pertenezca.
-     * @param user Usuario a eliminar.
-     */
-    private void deleteUserFromCluster(User user) {
-        int indexCluster = user.getNumCluster();
-        clusters.get(indexCluster).deleteUser(user);
-        clusters.get(indexCluster).recalculateCentroid();
-
     }
 
     /** Función que ejecuta el algoritmo.
