@@ -23,22 +23,12 @@ public class SlopeOne {
      * @see Cluster
      */
     private ArrayList<myPair> predictions;
-    /** Mapa que contiene como llave el ID de un usuario y com valor dicho usuario.
-     */
-    private Map<Integer,User> usersList;
 
     // Constructora
 
     /** Constructora de la clase.
-     * @param itemValoratedBy Conjunto de items y los usuarios que lo han valorado
-     * @param usersList conjunto de usuarios
-     * @param maxValue valor máximo que puede tener una recomendación
      */
-    public SlopeOne(Map<Integer,ArrayList<User>> itemValoratedBy, Map<Integer,User> usersList, float maxValue) {
-        this.maxValue = maxValue;
-        this.itemValoratedBy = itemValoratedBy;
-        this.usersList = usersList;
-        this.predictions = new ArrayList<>();
+    public SlopeOne() {
     }
 
     // Métodos Privados
@@ -138,7 +128,6 @@ public class SlopeOne {
      */
     private void slopeOneAlgorithm(User user) {
         float meanValoration = calculateValorationMean(user);
-
         this.predictions = new ArrayList<myPair>();
         //predecir todos los que no tiene valoracion
         for (Map.Entry<Integer, ArrayList<User>> item : itemValoratedBy.entrySet()) {
@@ -192,19 +181,28 @@ public class SlopeOne {
      * Imprime las predicciones que se han hecho sobre el usuario actual.
      */
     public void printResults() {
-        for (myPair prediction : predictions) {
-            System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
-                    ": " + prediction.getValoration());
+        try {
+            for (myPair prediction : predictions) {
+                System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
+                        ": " + prediction.getValoration());
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
     /**
      * Ejecuta el algoritmo SlopeOne y ordena las predicciones en orden decreciente
      * @param user usuario sobre el que se quiere hacer la recomendación
+     * @param itemValoratedBy Conjunto de items y los usuarios que lo han valorado
+     * @param maxValue valor máximo que puede tener una recomendación
      * @return predicciones ordenadas
      */
-    public ArrayList<myPair> getPredictions(User user){
+    public ArrayList<myPair> getPredictions(User user, Map<Integer,ArrayList<User>> itemValoratedBy, float maxValue){
         this.user = user;
+        this.maxValue = maxValue;
+        this.itemValoratedBy = itemValoratedBy;
+        this.predictions = new ArrayList<>();
         try {
             slopeOneAlgorithm(user);
             quicksort(predictions, 0, predictions.size() - 1);

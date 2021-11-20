@@ -95,12 +95,8 @@ public class DriverCluster {
     }
 
     /** Main del driver.
-     *  Prueba 5 casos
-     *      - Borrar un usuario que no existe en el cluster
-     *      - Añadir usuarios leidos al cluster
-     *      - Añadir usuario que ya existe
-     *      - Establecer como centroide un usuario que no forma parte del cluster
-     *      - Imprimir correctamente el cluster
+     Se le pide al usuario que introduzca el fichero que quiere leer o que use el juego de pruebas por defecto.
+     Una vez leido el fichero, se le pide al usuario que introduzca la funcionalidad que quiere probar.
      */
     public static void main(String[] args) {
         printInfo();

@@ -90,8 +90,8 @@ public class DriverRateRecomendation {
         ArrayList <Cluster> ac=kmeans.getClusters();
 
         //slope one
-        SlopeOne So = new SlopeOne(item_valorated_by, usersList,10);
-        ArrayList<myPair> predictions= So.getPredictions(usersList.get(1663));
+        SlopeOne So = new SlopeOne();
+        ArrayList<myPair> predictions = So.getPredictions(usersList.get(1663),item_valorated_by,10);
         //So.printResults();
 
         //Algortimo de valorar recomendaciones
