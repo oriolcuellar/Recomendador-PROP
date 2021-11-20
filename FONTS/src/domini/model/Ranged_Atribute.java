@@ -29,19 +29,6 @@ public class Ranged_Atribute  extends Atribute{
         upper = max;
     }
 
-    /** Creadora de la classe. Crea un item con los parametros dados, llamando a la creadora del padre.
-     * @see Atribute
-     * @param a Atributo al que se igualaran los valores de sus atributos en este.
-     * @param min lower.
-     * @param max Upper.
-     */
-
-    public Ranged_Atribute(Atribute a, double min, double max) {
-        super(a);
-        lower = min;
-        upper = max;
-    }
-
     //Getters
 
     /** Devuelve el lower, sobreeescribe la funcion de Atribute.

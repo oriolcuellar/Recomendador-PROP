@@ -35,36 +35,18 @@ public class Atribute {
         Tipus = type;
         Rellevant = true;
     }
-    /** Creadora de la classe, con el nomnbre de parametro y tipus vacio, rellevant por defecto es true.
+
+    /** Creadora de la classe, con el nomnbre y tipo de los parametros, rellevant por defecto es true.
      * @param name Nombre del atributo.
+     * @param type Tipo del Atributo.
+     * @param R Indica si el atributo es relevante
      */
 
-    public Atribute(String name) {
+    public Atribute(String name, String type, Boolean R) {
 
         Nom = name;
-        Tipus = "";
-        Rellevant = true;
-    }
-
-    /** Creadora de la classe, con el nombre y tipo vacíos, rellevant por defecto es true.
-     */
-
-    public Atribute() {
-
-        Nom = "";
-        Tipus = "";
-        Rellevant = true;
-    }
-
-    /** Creadora de la classe, con un atributo de parametro, rellevant por defecto es true.
-     * @param a Atributo al que se igualaran los valores de sus atributos en este.
-     */
-
-    public Atribute(Atribute a) {
-
-        Nom = a.Nom;
-        Tipus = a.Tipus;
-        Rellevant = a.Rellevant;
+        Tipus = type;
+        Rellevant = R;
     }
 
     //Getters
@@ -93,13 +75,13 @@ public class Atribute {
     /** Funcion para definir en Ranged_Atribute.
      */
 
-    public Double getLower() { return 0.0; }
+    public Double getLower() { return -1.0; }
 
     /** Funcion para definir en Ranged_Atribute.
      */
 
     public Double getUpper() {
-        return 0.0;
+        return -1.0;
     }
 
     //Setters
@@ -128,29 +110,11 @@ public class Atribute {
     /** Funcion para definir en Ranged_Atribute.
      */
 
-    public void setLower(double low) {    }
+    public void setLower(Double low) {    }
 
     /** Funcion para definir en Ranged_Atribute.
      */
 
-    public void setUpper(double up) {   }
+    public void setUpper(Double up) {   }
 
-    //Operacions
-
-    public Vector<String> Construc_vector(String s) {
-
-        Vector<String> v = new Vector<String>(0);
-        for (int i = 0;i < s.length(); i++ ){
-
-            if (s.charAt(i) == ';') {
-
-                v.add(s.substring(0, i));
-                s = s.substring(i+1, s.length());
-                i = 0;
-            }
-
-        }
-        v.add(s);
-        return v;
-    }
 }

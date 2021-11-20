@@ -44,11 +44,6 @@ public class TipusItem {
         this.atributes = atributes;
     }
 
-    /** Constructora de la clase de TpiusItem vacio.
-     */
-
-    public TipusItem(){}
-
     //getters
 
     /** Devueve el ID del tipus.
