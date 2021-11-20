@@ -100,15 +100,18 @@ public class Cluster {
     /**Función que imprime todos los usuarios del clúster, especifiando
      * además cual de ellos es el centroide. */
     public void printCluster() {
-        System.out.println("Centroide: " + centroid.getUserID());
-        System.out.print("Usuarios: ");
+        System.out.println("Centroide: " + centroid.getUserID() + "\n");
+        System.out.print("Usuarios: [");
+        int count = 0;
         boolean first = true;
         for (User user : cluster) {
             if(first) first = false;
             else System.out.print(", ");
+            if(count%13 == 0 && count!=0) System.out.println();
+            count++;
             System.out.print(user.getUserID());
         }
-        System.out.println("\n");
+        System.out.println("]\n");
     }
 }
 

@@ -73,7 +73,8 @@ public class Kmeans {
         clusters = new ArrayList<Cluster>();
         this.users = users;
         if(k > users.size() && users.size() != 0) System.out.println("El numero de clusters tiene que ser menor al numero de usuarios.");
-        else {
+        else if(k == 0) System.out.println("K tiene que ser un numero mayor que cero.");
+
             try {
                 assignKCentroids();
                 // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
@@ -83,7 +84,7 @@ public class Kmeans {
             } catch (Exception e) {
                 System.out.println(e);
             }
-        }
+
     }
 
     /** Constructora de la clase.
@@ -104,8 +105,10 @@ public class Kmeans {
      * @see Cluster
      */
     public void printAllClusters() {
-        for (Cluster cluster : clusters) {
-            cluster.printCluster();
+        for (int i = 0; i < clusters.size(); ++i) {
+            System.out.println("Cluster "+i+", formado por " + clusters.get(i).getCluster().size() + " usuarios.\n");
+            clusters.get(i).printCluster();
+            System.out.println("\n============================================================================================================\n");
         }
     }
 }
