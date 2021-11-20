@@ -1,6 +1,4 @@
 package FONTS.src.domini.drivers;
-
-import FONTS.src.domini.model.Atribute;
 import FONTS.src.domini.model.Ranged_Atribute;
 
 

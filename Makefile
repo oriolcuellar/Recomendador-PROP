@@ -57,7 +57,7 @@ valoratedItem.class: Item.class
 CtrlDomini.class: User.class Item.class Kmeans.class SlopeOne.class valoratedItem.class Conjunt_Items.class TipusRol.class Ranged_Atribute.class LectorCSV2.class K_Neareast_Neightbour.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/controladores/CtrlDomini.java
 
-drivers: DriverCluster.class DriverKmeans.class DriverKND.class DriverLectorCSV2.class DriverRateRecomendation.class UserTest.class DriverValoratedItem.class DriverSlopeOne.class DriverMyPair.class
+drivers: DriverCluster.class DriverKmeans.class DriverKND.class DriverLectorCSV2.class DriverRateRecomendation.class UserTest.class DriverValoratedItem.class DriverSlopeOne.class DriverMyPair.class DriverRanged_Atribute.class DriverItem.class DriverConjuntItems.class DriverTipusItem.class DriverAtribute.class DriverRanged_Atribute.class
 
 DriverCluster.class: User.class Cluster.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverCluster.java
@@ -83,9 +83,23 @@ DriverSlopeOne.class: User.class
 UserTest.class:
 	javac FONTS/src/domini/Drivers/UserTest.java
 
-
 DriverValoratedItem.class: valoratedItem.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverValoratedItem.java
+	
+DriverItem.class: Item.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverItem.java
+	
+DriverConjuntItems.class: Item.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverConjuntItems.java
+
+DriverTipusItem.class: Item.class Atribute.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverTipusItem.java
+	
+DriverAtribute.class: Atribute.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverAtribute.java
+	
+DriverRanged_Atribute.class: Ranged_Atribute.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverRanged_Atribute.java
 
 Main:
 	java -cp ./EXE FONTS.src.domini.model.Main
@@ -117,4 +131,22 @@ UserTest:
 
 DriverValoratedItem:
 	java -cp ./EXE FONTS.src.domini.drivers.DriverValoratedItem
+	
+DriverItem:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverItem
+	
+DriverTipusItem:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverTipusItem
+	
+DriverConjuntItems:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverConjuntItems
+	
+	
+DriverAtribute:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverAtribute
+	
+DriverRanged_Atribute:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverRanged_Atribute
+	
+
 
