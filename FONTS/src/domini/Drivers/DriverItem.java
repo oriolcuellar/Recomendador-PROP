@@ -14,7 +14,7 @@ import java.util.Vector;
 /** \brief Driver de la clase Item.
  *  @author Jordi Olmo
  */
-public class DiverItem {
+public class DriverItem {
 
     private static Vector<String> items = new Vector<String>();
     private static Conjunt_Items itemList = new Conjunt_Items();
