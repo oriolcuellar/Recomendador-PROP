@@ -8,32 +8,23 @@ import java.util.ArrayList;
  */
 public class RateRecomendation {
 
-    /** ArrayList de myPair.
-     *  Almacena las valoraciones de un usuario a items.
-     *  @see myPair
-     */
-    private static ArrayList<myPair> arr;
-
-    /** Variable result de tipo float.
-     *  Se utiliza para almacenar el resultado final de el algoritmo.
-     */
-    private static float result;
 
     /** Constructora de la clase.
-     * @param arr2 items y sus valoraciones de parte de un usuario.
      */
-    public  RateRecomendation(ArrayList<myPair> arr2 ){
-        this.arr=arr2;
-        result=-1;
+    public  RateRecomendation(){
+
     }
     /** Función que ejecuta el algoritmo.
+     *  @param arr de myPair (items y sus valoraciones) de parte de un usuario.
+     *  @return result de la recomendacion.
      * Nos dara la precision del conjunto de algoritmos recomendadores, dado un usuario al cual se le recomiendan items.
      *      - Sumatorio desde 1 hasta la posicion final del vector de
      *          -la division de
      *              - 2 elevado a la valoracion (de la posicion del vector) menos 1
      *              - Logaritmo base 2 de (la posicion - 1)
+     * @see myPair
      */
-    public void execute(){
+    public float execute(ArrayList<myPair> arr ){
         float res=0;
         for (int i=0;i<arr.size();++i){
             double top=(Math.pow(2, arr.get(i).getValoration())-1);
@@ -41,12 +32,7 @@ public class RateRecomendation {
             top=top/down;
             res+=top;
         }
-        result=res;
+        return res;
     }
-    /** Función que devuelve el resultado.
-     * @return result de la recomendacion.
-     */
-    public float getResult(){
-        return result;
-    }
+
 }
