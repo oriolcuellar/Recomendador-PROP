@@ -12,9 +12,6 @@ public class LectorCSV2 {
 
 
 
-
-
-
     public LectorCSV2(){
     }
     public Vector <String> Lector_Items(String csvFile) throws Exception{
@@ -51,7 +48,7 @@ public class LectorCSV2 {
             boolean first = true;
             while ((line = br.readLine()) != null) {
                 String[] datos = line.split(cvsSplitBy);
-                if (datos.length!=3)System.out.println("a");
+                if (datos.length!=3) throw  new Exception("Not ratings file: " + csvFile);
                 if (first){//colamos orden. User, item, valoracion
                     if (datos[0].equals("userId")) user=0;
                     if (datos[1].equals("userId")) user=1;

@@ -28,6 +28,7 @@ public class DriverLectorCSV2 {
         boolean leido=false;
         LectorCSV2 reader = new LectorCSV2();
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
+        Vector<String> readed_Items = new Vector<String>();
         while (!leido){
             try {
                 if (cual == 0) {//leer valoraciones
@@ -35,6 +36,13 @@ public class DriverLectorCSV2 {
                     System.out.println("\n- INTRODUCE el path al CSV de valoraciones que desea leer: ");
                     path = s.next();
                     readed_ratings = reader.Lector_Ratings(path);
+                    leido=true;
+                }
+                if (cual == 1) {//leer items
+                    String path;
+                    System.out.println("\n- INTRODUCE el path al CSV de items que desea leer: ");
+                    path = s.next();
+                    readed_Items = reader.Lector_Items(path);
                     leido=true;
                 }
             }
@@ -53,31 +61,23 @@ public class DriverLectorCSV2 {
                 for(String st: v){
                     pal+=st+" ";
                 }
-                //System.out.println(pal);
+                System.out.println(pal);
+            }
+        }
+        else if (cual==1){
+            for (String st: readed_Items){
+                System.out.println(st);
             }
         }
 
-
-/*
-        //Leer Items
-        Vector<String> readed_Items = new Vector<String>();
-        try {
-            readed_Items = reader.Lector_Items(path_Items);
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
-
-        for(int i=0;i<readed_Items.size();++i) {
-            System.out.println(readed_Items.get(i)+"\n");
-        }
-
-*/
     }
+    /** Funcion que muestra informacion sobre el driver.
+     * Se puede escoger entre los 2 casos.
+     */
     static void printInfo() {
         System.out.println("\nDRIVER DE LA CLASE LectorCSV2\n");
         System.out.println("    La clase LectorCSV2 lee ficheros CSV de los paths introducidos por el usuario.");
-        System.out.println("    Esta salida la redirige a la funcion execute de la clase Rate Recomendation");
+        System.out.println("    Los muestra por pantalla");
 
     }
 }
