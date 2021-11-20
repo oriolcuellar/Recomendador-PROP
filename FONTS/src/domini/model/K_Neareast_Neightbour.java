@@ -206,7 +206,7 @@ public class K_Neareast_Neightbour {
         for (int i = 0; i < n; ++i) {
 
             ArrayList<Double> Aux = new ArrayList<Double>();
-            for (int j = 0; j < C_Items.n_Items(); ++j)
+            for (int j = 0; j < C_Items.n_Items() - n; ++j)
                 Aux.add(-1.0);
             Distances.add(Aux);
         }
@@ -214,6 +214,7 @@ public class K_Neareast_Neightbour {
         for (int i = 0; i < C_Items.n_Items(); ++i)
             for (int j = 0; j < n; ++j )
                 Distances.get(i).add(-1.0);
+
 
     }
 
@@ -253,6 +254,7 @@ public class K_Neareast_Neightbour {
 
     private void merge (ArrayList <Double> distancies,ArrayList<Item> Items, ArrayList<Double> Val, int l, int m, int r)
     {
+        int x;
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
         int n2 = r - m;
@@ -270,6 +272,8 @@ public class K_Neareast_Neightbour {
         /*Copy data to temp arrays*/
         for (int i = 0; i < n1; ++i) {
 
+            if (l+i == 2254)
+                x = 1;
             L[i] = distancies.get(l+i);
             LI[i] = Items.get(l+i);
             LV[i] = Val.get(l+i);
@@ -299,7 +303,7 @@ public class K_Neareast_Neightbour {
             else {
                 distancies.set(k, R[j]);
                 Items.set(k, RI[j]);
-                Val.set(k, RV[i]);
+                Val.set(k, RV[j]);
                 j++;
             }
             k++;

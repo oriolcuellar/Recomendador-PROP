@@ -112,10 +112,10 @@ public class Item {
         clonador_ArrayList(Valors_A, valors);
         clonador_ArrayList(Valors_B, b.getValors());
 
-        if (!tipus.equals(b.getTipus())) {
+        if (!tipus.equals(b.getTipus()) && !tipus.equals("") && !b.getTipus().equals("")) {
 
             /*Transformar 2 Atributes de dos tipus diferents en dos del mateix tipus*/
-            for (int i = 0; i < V_A.size();) {
+           /* for (int i = 0; i < V_A.size();) {
                 for (int j = 0; j < V_B.size();) {
 
                     if (!V_A.get(i).equals(V_B.get(j))) {
@@ -135,13 +135,15 @@ public class Item {
                     }
                 }
                 ++i;
-            }
+            }*/
         }
-        int n_dimensions = V_A.size();
-        if(V_A.size() > 0 && V_B.size() > 0) {
+        else {
+            int n_dimensions = V_A.size();
+            if (V_A.size() > 0 && V_B.size() > 0) {
 
-            Double Distancia  = comparador_tipus_iguals(V_A, V_B, Valors_A, Valors_B, n_dimensions);
-            return  Distancia;
+                Double Distancia = comparador_tipus_iguals(V_A, V_B, Valors_A, Valors_B, n_dimensions);
+                return Distancia;
+            }
         }
         return 0.0;
     }
@@ -231,7 +233,13 @@ public class Item {
 
                         Double max = V_A.get(i).getUpper();
                         Double min = V_A.get(i).getLower();
-                        Double coeficient = 1.0 - ((Math.max(valor_a, valor_b) - Math.min(valor_a, valor_b)) / (max - min));
+                        Double dividend = max - min;
+                        Double coeficient;
+
+                        if (dividend != 0.0)
+                            coeficient = 1.0 - ((Math.max(valor_a, valor_b) - Math.min(valor_a, valor_b)) / (max - min));
+                        else
+                            coeficient = 1.0;
                         distance += Math.pow(coeficient, 2);
 
                     }
