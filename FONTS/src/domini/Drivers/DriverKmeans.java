@@ -94,17 +94,14 @@ public class DriverKmeans {
      */
     public static void main(String[] args) {
         readData();
-        Kmeans kmeans = new Kmeans(usersList);
-        kmeans.run(213423442);
+        Kmeans kmeans = new Kmeans();
+        kmeans.run(usersList,213423442);
         kmeans.printAllClusters();
-        Kmeans kmeans2 = new Kmeans(usersList2);
-        kmeans2.run(6);
-        kmeans2.printAllClusters();
-        Kmeans kmeans3 = new Kmeans(usersList);
-        kmeans3.run(0);
-        kmeans3.printAllClusters();
-        Kmeans kmeans4 = new Kmeans(usersList);
-        kmeans4.run(6);
-        kmeans4.printAllClusters();
+        kmeans.run(usersList2,6);
+        kmeans.printAllClusters();
+        kmeans.run(usersList,0);
+        kmeans.printAllClusters();
+        kmeans.run(usersList,6);
+        kmeans.printAllClusters();
     }
 }

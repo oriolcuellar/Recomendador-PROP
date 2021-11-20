@@ -68,8 +68,10 @@ public class Kmeans {
     /** Función que ejecuta el algoritmo.
      * @param k Numero de clusters que tendra el algoritmo.
      */
-    public void run(int k) {
+    public void run(Map <Integer, User> users, int k) {
         this.k = k;
+        clusters = new ArrayList<Cluster>();
+        this.users = users;
         if(k > users.size() && users.size() != 0) System.out.println("El numero de clusters tiene que ser menor al numero de usuarios.");
         else {
             try {
@@ -85,12 +87,9 @@ public class Kmeans {
     }
 
     /** Constructora de la clase.
-     * @param users Usuarios sobre los que se ejecutará el algoritmo.
      */
-    public Kmeans(Map <Integer, User> users) {
-        this.k = -1;
-        clusters = new ArrayList<Cluster>();
-        this.users = users;
+    public Kmeans() {
+
     }
 
     /** Función que devuelve los clusters.
