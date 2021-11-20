@@ -52,7 +52,7 @@ public class DriverRateRecomendation {
             } catch (Exception e) {
                 System.out.println("\n\n- ERROR");
                 System.out.println(e);
-                System.out.println("\n- Prueba con una entrada como \n   ratings.test.known.csv \n   o \n   Entradas_CSV/ratings.test.known.csv (si estubiera en carpeta)");
+                System.out.println("\n- Prueba con una entrada como \n   ratings.test.known.csv \n   o \n   nombre_carpeta/ratings.test.known.csv (si estubiera en carpeta)");
             }
         }
 
@@ -103,8 +103,8 @@ public class DriverRateRecomendation {
 
     static void printInfo() {
         System.out.println("\nDRIVER DE LA CLASE RATE RECOMENDATION\n");
-        System.out.println("La clase Rate Recomendation evalua la salida de los algoritmos K-Means y Slope-One.");
-        System.out.println("Esta salida la redirige a la funcion execute de la clase Rate Recomendation");
+        System.out.println("    La clase Rate Recomendation evalua la salida de los algoritmos K-Means y Slope-One.");
+        System.out.println("    Esta salida la redirige a la funcion execute de la clase Rate Recomendation");
 
     }
 
