@@ -36,8 +36,71 @@ public class DriverRateRecomendation {
      */
     public static void main(String[] args) {
         printInfo();
+
         //se leen valoraciones
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
+        readed_ratings=leer_datos(readed_ratings);
+        rellenar_listas(readed_ratings);
+
+        //kmeans
+        Kmeans kmeans = new Kmeans();
+        kmeans.run(usersList,30);
+
+        //slope one
+        SlopeOne So = new SlopeOne();
+
+        //get user
+        Scanner s = new Scanner(System.in);
+        boolean trobat=false;
+        User u = new User();
+        while (!trobat){
+            mostrar_opciones();
+                int op = s.nextInt();
+                switch (op) {
+                    case 1: {//usuario aleatorio
+                        Random r = new Random();
+                        int valorDado = r.nextInt(usersList.size());
+                        int id=(int ) usersList.keySet().toArray()[valorDado];
+                        System.out.println("Usuario escogido: " + id);
+                        u = usersList.get(id);
+                        trobat = true;
+                        break;
+                    }
+                    case 2: {//teclado
+                        System.out.println("Introduce el ID del usuario");
+                        int tec = s.nextInt();
+                        if (!usersList.containsKey(tec)) {
+                            System.out.println("Usuario no existe");
+                            break;
+                        }
+                        u = usersList.get(tec);
+                        trobat = true;
+                        break;
+                    }
+                    case 3: {//mostrar todos
+                        Set keys = usersList.keySet();
+                        for (Iterator i = keys.iterator(); i.hasNext(); ) {
+                            int key = (int) i.next();
+                            System.out.println(key);
+                        }
+                        break;
+                    }
+
+                    default:
+                        System.out.print("Porfavor introduce un valor correcto\n ");
+                }
+
+        }
+
+        ArrayList<myPair> predictions = So.getPredictions(u,item_valorated_by,10);
+
+        //Algortimo de valorar recomendaciones
+        RateRecomendation recomendation = new RateRecomendation();
+        float result=recomendation.execute(predictions);
+        System.out.println("\n\n El resultado es: " + result);
+
+    }
+    static ArrayList<Vector<String>> leer_datos(ArrayList<Vector<String>> readed_ratings){
         boolean leido= false;
         while (!leido) {
             try {
@@ -55,9 +118,9 @@ public class DriverRateRecomendation {
                 System.out.println("\n- Prueba con una entrada como \n   ratings.test.known.csv \n   o \n   nombre_carpeta/ratings.test.known.csv (si estubiera en carpeta)");
             }
         }
-
-        //se rellenan userslist y item_valorated_by
-        TipusRol t = TipusRol.Usuari;
+        return readed_ratings;
+    }
+    static void rellenar_listas(ArrayList<Vector<String>> readed_ratings){
         for (Vector<String> vs : readed_ratings) {
             //parte del Usuario
             if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//Usuario ya existe
@@ -83,22 +146,6 @@ public class DriverRateRecomendation {
                 item_valorated_by.put( Integer.valueOf(vs.get(1)), au);
             }
         }
-
-        //kmeans
-        Kmeans kmeans = new Kmeans();
-        kmeans.run(usersList,30);
-        ArrayList <Cluster> ac=kmeans.getClusters();
-
-        //slope one
-        SlopeOne So = new SlopeOne();
-        ArrayList<myPair> predictions = So.getPredictions(usersList.get(1663),item_valorated_by,10);
-        //So.printResults();
-
-        //Algortimo de valorar recomendaciones
-        RateRecomendation recomendation = new RateRecomendation();
-        float result=recomendation.execute(predictions);
-        System.out.println("\n\n El resultado es: " + result);
-
     }
 
     static void printInfo() {
@@ -107,6 +154,17 @@ public class DriverRateRecomendation {
         System.out.println("    Esta salida la redirige a la funcion execute de la clase Rate Recomendation");
 
     }
+    static void mostrar_opciones() {
+        System.out.println("\nOPCIONES PARA ELEGIR EL USUARIO SOBRE EL QUE HACER LA PREDICCION\n");
+        System.out.println("    - 1 ");
+        System.out.println("         Usuario aleatorio");
+        System.out.println("    - 2 ");
+        System.out.println("         Usuario introducido por teclado");
+        System.out.println("    - 3 ");
+        System.out.println("         Mostrar todos los usuarios\n\n");
+
+    }
+
 
 }
 
