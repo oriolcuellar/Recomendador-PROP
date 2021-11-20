@@ -2,10 +2,7 @@ package FONTS.src.domini.drivers;
 import FONTS.src.domini.model.*;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 /** \brief Driver de la clase RateRecomendation.
  *  @author Oriol Cuellar
@@ -38,15 +35,25 @@ public class DriverRateRecomendation {
      * @see  RateRecomendation
      */
     public static void main(String[] args) {
-
+        printInfo();
         //se leen valoraciones
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
-        try {
-            LectorCSV2 reader = new LectorCSV2();
-            readed_ratings = reader.Lector_Ratings("Entradas_CSV/ratings.test.known.csv");
-        }
-        catch (Exception e){
-            System.out.println("Volver a leer");
+        boolean leido= false;
+        while (!leido) {
+            try {
+
+                System.out.println("\n- INTRODUCE el path al CSV de valoraciones que desea leer: ");
+                Scanner s = new Scanner(System.in);
+                String path;
+                path = s.next();
+                LectorCSV2 reader = new LectorCSV2();
+                readed_ratings = reader.Lector_Ratings(path);
+                leido=true;
+            } catch (Exception e) {
+                System.out.println("\n\n- ERROR");
+                System.out.println(e);
+                System.out.println("\n- Prueba con una entrada como \n   ratings.test.known.csv \n   o \n   Entradas_CSV/ratings.test.known.csv (si estubiera en carpeta)");
+            }
         }
 
         //se rellenan userslist y item_valorated_by
@@ -85,12 +92,19 @@ public class DriverRateRecomendation {
         //slope one
         SlopeOne So = new SlopeOne(item_valorated_by, usersList,10);
         ArrayList<myPair> predictions= So.getPredictions(usersList.get(1663));
-        So.printResults();
+        //So.printResults();
 
         //Algortimo de valorar recomendaciones
-        RateRecomendation recomendation = new RateRecomendation(predictions);
-        recomendation.execute();
-        System.out.println(recomendation.getResult());
+        RateRecomendation recomendation = new RateRecomendation();
+        float result=recomendation.execute(predictions);
+        System.out.println("\n\n El resultado es: " + result);
+
+    }
+
+    static void printInfo() {
+        System.out.println("\nDRIVER DE LA CLASE RATE RECOMENDATION\n");
+        System.out.println("La clase Rate Recomendation evalua la salida de los algoritmos K-Means y Slope-One.");
+        System.out.println("Esta salida la redirige a la funcion execute de la clase Rate Recomendation");
 
     }
 
