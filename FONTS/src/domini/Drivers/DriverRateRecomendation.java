@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class DriverRateRecomendation {
 
-    /** Mapa que contiene como llave el ID de un @si Item y com valor los usuarios que lo han valorado.
+    /** Mapa que contiene como llave el ID de un Item y com valor los usuarios que lo han valorado.
      *  Se utiliza como parametro para el algoritmo Slope-One
      *  @see Item
      *  @see User
@@ -58,6 +58,7 @@ public class DriverRateRecomendation {
                 int op = s.nextInt();
                 switch (op) {
                     case 1: {//usuario aleatorio
+                        System.out.println("=====================================================================================");
                         Random r = new Random();
                         int valorDado = r.nextInt(usersList.size());
                         int id=(int ) usersList.keySet().toArray()[valorDado];
@@ -67,6 +68,7 @@ public class DriverRateRecomendation {
                         break;
                     }
                     case 2: {//teclado
+                        System.out.println("=====================================================================================");
                         System.out.println("Introduce el ID del usuario");
                         int tec = s.nextInt();
                         if (!usersList.containsKey(tec)) {
@@ -78,6 +80,7 @@ public class DriverRateRecomendation {
                         break;
                     }
                     case 3: {//mostrar todos
+                        System.out.println("=====================================================================================");
                         Set keys = usersList.keySet();
                         for (Iterator i = keys.iterator(); i.hasNext(); ) {
                             int key = (int) i.next();
@@ -87,6 +90,7 @@ public class DriverRateRecomendation {
                     }
 
                     default:
+                        System.out.println("=====================================================================================");
                         System.out.print("Porfavor introduce un valor correcto\n ");
                 }
 
@@ -97,9 +101,13 @@ public class DriverRateRecomendation {
         //Algortimo de valorar recomendaciones
         RateRecomendation recomendation = new RateRecomendation();
         float result=recomendation.execute(predictions);
-        System.out.println("\n\n El resultado es: " + result);
+        System.out.println("\n\n La valoracion de la recomendacion: " + result);
 
     }
+    /** Función que lee valoraciones.
+     *  @param readed_ratings .
+     *  @return ArrayList de vectores de Strings.Cada vector contiene 2 posiciones, UserId, ItemId, rating
+     */
     static ArrayList<Vector<String>> leer_datos(ArrayList<Vector<String>> readed_ratings){
         boolean leido= false;
         while (!leido) {
@@ -120,6 +128,9 @@ public class DriverRateRecomendation {
         }
         return readed_ratings;
     }
+    /** Función que rellena una lista de usuarios y una lista de items con los usuarios que lo han valorado.
+     *  @param readed_ratings .
+     */
     static void rellenar_listas(ArrayList<Vector<String>> readed_ratings){
         for (Vector<String> vs : readed_ratings) {
             //parte del Usuario
@@ -147,14 +158,19 @@ public class DriverRateRecomendation {
             }
         }
     }
-
+    /** Función que imprime informacion sobre el driver.
+     */
     static void printInfo() {
+        System.out.println("=====================================================================================");
         System.out.println("\nDRIVER DE LA CLASE RATE RECOMENDATION\n");
         System.out.println("    La clase Rate Recomendation evalua la salida de los algoritmos K-Means y Slope-One.");
         System.out.println("    Esta salida la redirige a la funcion execute de la clase Rate Recomendation");
 
     }
+    /** Función que muestra las opciones del usuario para introducir usuarios.
+     */
     static void mostrar_opciones() {
+        System.out.println("=====================================================================================");
         System.out.println("\nOPCIONES PARA ELEGIR EL USUARIO SOBRE EL QUE HACER LA PREDICCION\n");
         System.out.println("    - 1 ");
         System.out.println("         Usuario aleatorio");
