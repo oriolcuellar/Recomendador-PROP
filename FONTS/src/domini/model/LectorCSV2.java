@@ -1,19 +1,21 @@
 package FONTS.src.domini.model;
 
-import FONTS.src.domini.model.*;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
 import java.util.Vector;
 
-// @Author Oriol Cuellar
+/** \brief Clase que implementa LectorCSV2.
+ *  @author Oriol Cuellar
+ */
 public class LectorCSV2 {
-
-
-
+    /** Constructora de la clase.
+     */
     public LectorCSV2(){
     }
+    /** Función que lee Items de un fichero CSV.
+     * @param csvFile Path al fichero CSV.
+     * @return Vector de Strings que contienen los items leidos.
+     */
     public Vector <String> Lector_Items(String csvFile) throws Exception{
         //post: return un vector de les files del csv
 
@@ -33,7 +35,10 @@ public class LectorCSV2 {
             }
         return items;
     }
-
+    /** Función que lee valoraciones de un fichero CSV.
+     * @param csvFile Path al fichero CSV.
+     * @return ArrayList de Vectores de Strings que contienen las valoraciones leidas.
+     */
     public ArrayList<Vector<String>> Lector_Ratings(String csvFile ) throws Exception{
             ArrayList <Vector<String>> ratings=new ArrayList<Vector<String>>();
         BufferedReader br = null;
@@ -48,7 +53,7 @@ public class LectorCSV2 {
             boolean first = true;
             while ((line = br.readLine()) != null) {
                 String[] datos = line.split(cvsSplitBy);
-                if (datos.length!=3) throw  new Exception("Not ratings file: " + csvFile);
+                if (datos.length!=3) throw  new Exception("Not a ratings file: " + csvFile);
                 if (first){//colamos orden. User, item, valoracion
                     if (datos[0].equals("userId")) user=0;
                     if (datos[1].equals("userId")) user=1;

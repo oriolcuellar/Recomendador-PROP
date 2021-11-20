@@ -22,6 +22,7 @@ public class DriverLectorCSV2 {
         Scanner s = new Scanner(System.in);
         int cual=-1;
         while(cual!=1 && cual!= 0) {
+            System.out.println("=====================================================================================");
             System.out.println("\n- INTRODUCE \n  - 0 para leer valoraciones \n  - 1 para leer items \n");
             cual = s.nextInt();
         }
@@ -32,6 +33,7 @@ public class DriverLectorCSV2 {
         while (!leido){
             try {
                 if (cual == 0) {//leer valoraciones
+                    System.out.println("=====================================================================================");
                     String path;
                     System.out.println("\n- INTRODUCE el path al CSV de valoraciones que desea leer: ");
                     path = s.next();
@@ -39,6 +41,7 @@ public class DriverLectorCSV2 {
                     leido=true;
                 }
                 if (cual == 1) {//leer items
+                    System.out.println("=====================================================================================");
                     String path;
                     System.out.println("\n- INTRODUCE el path al CSV de items que desea leer: ");
                     path = s.next();
@@ -49,7 +52,7 @@ public class DriverLectorCSV2 {
             catch (Exception e){
                 System.out.println("\n\n- ERROR");
                 System.out.println(e);
-                System.out.println("\n- Prueba con una entrada como \n   - ratings.db.csv \n   - nombre_carpeta/ratings.db.csv) " +
+                System.out.println("\n- Prueba con una entrada como \n   - ratings.db.csv \n   - nombre_carpeta/ratings.db.csv " +
                         "\n   - items.csv \n   - nombre_carpeta/items.csv");
             }
         }
@@ -75,6 +78,7 @@ public class DriverLectorCSV2 {
      * Se puede escoger entre los 2 casos.
      */
     static void printInfo() {
+        System.out.println("=====================================================================================");
         System.out.println("\nDRIVER DE LA CLASE LectorCSV2\n");
         System.out.println("    La clase LectorCSV2 lee ficheros CSV de los paths introducidos por el usuario.");
         System.out.println("    Los muestra por pantalla");
