@@ -1,16 +1,25 @@
-Objecto de la prueba: Comprobar que funciona correctamente el algoritmo Kmeans
+========================================
+Objeto de prueba: Kmeans
+========================================
 
-Clases integradas en la prueba:
-        Kmeans.java
+La clase Kmeans implementa dihco algoritmo. Las pruebas de esta clase van enfocadas a comprobar
+que se ejecuta correctamente y sin errores, puediendo elegir varios parametros como los ficheros
+entrada o el valor de la K.
 
-Drivers para esta prueba.:
-        DriverKmeans
 
-Ficheros de datos necesarios:
+====================
+Ficheros necesarios
+====================
+
         - ratings.db.csv (fichero por defecto con el que se prueba el algoritmo)
 
-Valores estudiados: Se trabajará con los valores que se encuentren en el fichero anterior
-o en otro similar (el driver da la opción de elegir otro archivo para probar)
+====================
+Manual de Uso
+====================
 
-Operativa: Al ejecutar el programa aparecerá un menú donde cada opción tiene un número,
+- Compilar con el comando make
+- Ejecutar el test con el comando make DriverKmeans
+
+Al ejecutar el programa aparecerá un menú donde cada opción tiene un número,
 únicamente hay que seleccionar la opción deseada e introducir los parámetros que se requieran.
+
