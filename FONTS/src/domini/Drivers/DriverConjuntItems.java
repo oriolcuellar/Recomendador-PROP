@@ -1035,7 +1035,7 @@ public class DriverConjuntItems {
                 "    4: get_position()\n    5: n_Items()\n    6: getItems()\n" +
                 "    7: getDistances()\n    8: Distance()\n    9: setItems()\n" +
                 "    10: omplir_matriu()\n    11: anyadir_item()\n    12: eliminar_item()\n" +
-                "    13: PASAR A PRUEBA ESTATICA.\n     14: FINALIZAR PRUEBA");
+                "    13: PASAR A PRUEBA ESTATICA.\n    14: FINALIZAR PRUEBA");
     }
 
 

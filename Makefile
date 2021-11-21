@@ -55,7 +55,7 @@ valoratedItem.class: Item.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/model/valoratedItem.java
 
 
-drivers: DriverCluster.class DriverKmeans.class DriverKND.class DriverLectorCSV2.class DriverRateRecomendation.class DriverValoratedItem.class DriverSlopeOne.class DriverMyPair.class DriverRanged_Atribute.class DriverItem.class DriverConjuntItems.class DriverTipusItem.class DriverAtribute.class DriverRanged_Atribute.class 
+drivers: DriverCluster.class DriverKmeans.class DriverKND.class DriverLectorCSV2.class DriverRateRecomendation.class DriverValoratedItem.class DriverSlopeOne.class DriverMyPair.class DriverRanged_Atribute.class DriverConjuntItems.class DriverTipusItem.class DriverAtribute.class DriverRanged_Atribute.class 
 
 DriverCluster.class: User.class Cluster.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverCluster.java
@@ -84,8 +84,8 @@ DriverSlopeOne.class: User.class
 DriverValoratedItem.class: valoratedItem.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverValoratedItem.java
 	
-DriverItem.class: Item.class
-	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverItem.java
+/*DriverItem.class: Item.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverItem.java/*
 	
 DriverConjuntItems.class: Item.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverConjuntItems.java
@@ -130,8 +130,8 @@ UserTest:
 DriverValoratedItem:
 	java -cp ./EXE FONTS.src.domini.drivers.DriverValoratedItem
 	
-DriverItem:
-	java -cp ./EXE FONTS.src.domini.drivers.DriverItem
+/*DriverItem:
+	java -cp ./EXE FONTS.src.domini.drivers.DriverItem*/
 	
 DriverTipusItem:
 	java -cp ./EXE FONTS.src.domini.drivers.DriverTipusItem
