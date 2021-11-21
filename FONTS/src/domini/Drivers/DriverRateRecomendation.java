@@ -43,8 +43,16 @@ public class DriverRateRecomendation {
         rellenar_listas(readed_ratings);
 
         //kmeans
+        boolean leerk=false;
+        int k=1;
+        while(!leerk){
+            System.out.println("Introduce un valor para el numero de clusters");
+            Scanner aux = new Scanner(System.in);
+            k= aux.nextInt();
+            if (k>0 && k<50) leerk=true;
+        }
         Kmeans kmeans = new Kmeans();
-        kmeans.run(usersList,30);
+        kmeans.run(usersList,k);
 
         //slope one
         SlopeOne So = new SlopeOne();
