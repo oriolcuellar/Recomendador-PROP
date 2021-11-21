@@ -1,0 +1,16 @@
+Objecto de la prueba: Comprobar que funciona correctamente el algoritmo Kmeans
+
+Clases integradas en la prueba:
+        Kmeans.java
+
+Drivers para esta prueba.:
+        DriverKmeans
+
+Ficheros de datos necesarios:
+        - ratings.db.csv (fichero por defecto con el que se prueba el algoritmo)
+
+Valores estudiados: Se trabajará con los valores que se encuentren en el fichero anterior
+o en otro similar (el driver da la opción de elegir otro archivo para probar)
+
+Operativa: Al ejecutar el programa aparecerá un menú donde cada opción tiene un número,
+únicamente hay que seleccionar la opción deseada e introducir los parámetros que se requieran.
