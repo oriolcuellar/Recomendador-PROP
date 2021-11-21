@@ -18,5 +18,5 @@ Manual de Uso
 - Compilar con el comando make
 - Ejecutar el test con el comando make DriverValoratedItem
 
-- El programa te pedira que pases los parámetros por pantalla y luego te mostrara las funcionalidades getItem y getvaloracion.
+- El programa te pedira que pases los parametros por pantalla y luego te mostrara las funcionalidades getItem y getvaloracion.
 	
