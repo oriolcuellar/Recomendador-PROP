@@ -51,7 +51,7 @@ public class DriverItem {
 
     public static void loadItems(){
 
-        items = Lector_Items("Entradas_CSV/items.csv");
+        items = Lector_Items("EXE/Entradas_CSV/items.csv");
 
         for(int i = 1; i < items.size();++i)
             createItem(items.get(0), items.get(i));

@@ -1,0 +1,13 @@
+Objecto de la prueba: Comprobar que funciona correctamente la clase myPair.
+
+Clases integradas en la prueba:
+        myPair.java
+
+Drivers para esta prueba.:
+        DriverMyPair
+
+Valores estudiados: Se trabajará con los valores que se introducian dentro del propio programa
+y seran estos los que analizaran el correcto funcionamiento de la clase.
+
+Operativa: Al ejecutar el programa aparecerá un menú donde cada opción tiene un número,
+únicamente hay que seleccionar la opción deseada e introducir los parámetros que se requieran.

@@ -115,7 +115,7 @@ public class DriverSlopeOne{
             }
             case 2: {
                 itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
-                readData("Entradas_CSV/SlopeOneTest.csv");
+                readData("EXE/Entradas_CSV/SlopeOneTest.csv");
                 System.out.println("=============================================================");
                 System.out.println("Se ha cargado correctamente el conjunto de datos por defecto");
                 System.out.println("=============================================================");
