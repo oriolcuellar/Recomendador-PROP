@@ -71,9 +71,7 @@ public class Item {
     /** Devuelve la ArrayList de valors del Item.
      */
 
-    public ArrayList getValors() {
-        return valors;
-    }
+    public ArrayList getValors() { return valors; }
 
     //Setters
 
@@ -100,8 +98,8 @@ public class Item {
         ArrayList <String> Valors_A = new ArrayList<String>();
         ArrayList <String> Valors_B = new ArrayList<String>();
 
-        clonador_ArrayList(V_A, tipus.Atributs_rellevants());
-        clonador_ArrayList(V_B, b.getTipus().Atributs_rellevants());
+        clonador_ArrayList(V_A, tipus.getAtributes());
+        clonador_ArrayList(V_B, b.getTipus().getAtributes());
         clonador_ArrayList(Valors_A, valors);
         clonador_ArrayList(Valors_B, b.getValors());
 
@@ -132,7 +130,7 @@ public class Item {
         Double distance = 0.0;
         for (int i = 0; i < n_d; ++i){
 
-            if(!(Valors_A.get(i).equals("")) && !(Valors_B.get(i).equals(""))) {
+            if(!(Valors_A.get(i).equals("")) && !(Valors_B.get(i).equals("")) && V_A.get(i).isRellevant() && V_B.get(i).isRellevant()) {
 
                 if (V_A.get(i) == V_B.get(i)) {
 
