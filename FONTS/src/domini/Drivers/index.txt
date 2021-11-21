@@ -6,9 +6,11 @@ DriverTipusItem.java
 DriverItem.java
 DriverRateRecomendation.java
 DriverLectorCSV2.java
-DriverValoratedItem
-DriverUser.java
+DriverValoratedItem.java
 DriverSlopeOne.java
 DriverCluster.java
 DriverMyPair.java
 DriverKmeans.java
+UserTest.java
+Suite_Distance_Item.java
+Suite_Resto_Item.java
