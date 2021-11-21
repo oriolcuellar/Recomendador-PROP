@@ -15,6 +15,7 @@ public class DriverKND {
     private static Conjunt_Items CI_Static;
     private static boolean prueba_static = false;
 
+
     public static Vector<String> Lector_Items(String csvFile) {
         //post: return un vector de les files del csv
         Vector <String>  items = new Vector<String>();
@@ -209,7 +210,7 @@ public class DriverKND {
         System.out.println("\nDRIVER DE LA CLASE K_Neareast_Neightbour\n");
         System.out.println("Funciones de la clase disponibles para probar:\n");
         System.out.println(
-                "    1: Crear K_Neareast_Neightbour\n    2: Algorithm()\n    3: PASAR A PRUEBA ESTATICA.\n     4: FINALIZAR PRUEBA");
+                "    1: Crear K_Neareast_Neightbour\n    2: Algorithm()\n    3: PASAR A PRUEBA ESTATICA.\n    4: FINALIZAR PRUEBA");
     }
 
     static void testFunction(int f) {

@@ -1,9 +1,6 @@
 package FONTS.src.domini.model;
 
-import FONTS.src.domini.model.*;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
+import FONTS.src.domini.drivers.DriverKND;
 import java.util.*;
 
 
@@ -32,9 +29,9 @@ public class Main {
         String op="";
         //escoger algoritmo
         while (!escogido) {
-            mostrar_opciones_slop();
+            mostrar_opciones();
             op=s.next();
-            if (op.equals("1") || op.equals("2") || op.equals("3")){
+            if (op.equals("1") || op.equals("2") || op.equals("3") || op.equals("4")){
                 escogido=true;
             }
             else{
@@ -52,11 +49,14 @@ public class Main {
         if (op.equals("3")){
             execute_RateRecomendation();
         }
+        if (op.equals("4")){
+            execute_KNeares_Neighbour();
+        }
     }
 
     static void printInfo() {
         System.out.println("\nClase MAIN\n");
-        System.out.println("    Permite probar los algoritmos KMeans, Slope-One y \n    dar una valoración a la recomendación de items dada por los algoritmos");
+        System.out.println("    Permite probar los algoritmos KMeans, Slope-One, K Nearest Neighbour y \n    dar una valoración a la recomendación de items dada por los algoritmos");
     }
     static void mostrar_opciones() {
         System.out.println("=====================================================================================");
@@ -66,7 +66,23 @@ public class Main {
         System.out.println("    - 2 ");
         System.out.println("         Slope-One y KMeans");
         System.out.println("    - 3 ");
-        System.out.println("         Valorar una recomendacion\n\n");
+        System.out.println("         Valorar una recomendacion");
+        System.out.println("    - 4 ");
+        System.out.println("         K Nearest Neighbour\n\n");
+
+    }
+    static void execute_KNeares_Neighbour(){
+        DriverKND.main(null);
+        /*Scanner s = new Scanner(System.in);
+        int f;
+        do{
+            printInfo();
+            System.out.println("\nSelecciona funcion a probar: ");
+            f = s.nextInt();
+            testFunction(f);
+
+        }while(f != 4);*/
+
 
     }
     static void execute_kmeans(){
@@ -110,7 +126,7 @@ public class Main {
         boolean trobat=false;
         User u = new User();
         while (!trobat){
-            mostrar_opciones();
+            mostrar_opciones_slop();
             String op = s.next();
             switch (op) {
                 case "1": {//usuario aleatorio
