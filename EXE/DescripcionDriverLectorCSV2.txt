@@ -1,17 +1,17 @@
- Objecte de la prova: casos d'ús i classes, o integració de conjunts, provats
+Objecte de la prova: casos d'ús i classes, o integració de conjunts, provats
 anteriorment, que es proven
- Altres elements integrats a la prova: classes ja provades o que s'han provat
-d'alguna altra manera –reutilitzats, etc.– integrades en aquest executable (si n'hi ha)
- Drivers construïts per aquesta prova i integrats en l'executable, amb descripció de
-la seva missió (si n'hi ha)
- Stubs construïts per aquesta prova i integrats en l'executable, amb descripció de la
-seva missió (si n'hi ha)
- Fitxers de dades necessaris: nom dels fitxers de dades, si n'hi ha, i en tal cas les
-classes que s'emmagatzemen en cadascun
- Valors estudiats: amb quins valors es prova i quina missió tenen, aquí és on
+Clases integradas en la prueba:
+        LectorCSV2.java
+Drivers para esta prueba.:
+        DriverLectorCSV2
+Fitxers de dades necessaris:
+        - rates.db.csv o cualquier otro fichero con valoraciones. (Valoraciones de un usuarios a items)
+        - items.csv o cualquier otro fichero con items. (Items)
+Valors estudiats: amb quins valors es prova i quina missió tenen, aquí és on
 s'hauria de parlar de caixa blanca o negra, conjunts de dades de comportament homogeni,
 etc.
- Efectes estudiats: funcionalitats com ara vistes, moviments per la pantalla,
+Efectes estudiats: funcionalitats com ara vistes, moviments per la pantalla,
 selecció en llistes, etc. que no són dades concretes
- Operativa: petit manual o descripció del funcionament de l'executable, molt
+Operativa: petit manual o descripció del funcionament de l'executable, molt
 bàsica
+
