@@ -48,7 +48,7 @@ public class DriverAtribute {
                 System.out.println("================================================================================================");
                 System.out.println("Prueba de la funcion getLower()");
                 System.out.println("Introduce los siguientes parametros de la siguiente forma: Nombre Tipus");
-                System.out.println("Teniendo en cuenta que: Nombre y tipus son String");
+                System.out.println("Teniendo en cuenta que: Nombre y tipus son String\n");
                 Scanner s = new Scanner(System.in);
                 Atribute a = new Atribute(s.next(), s.next());
                 System.out.println("El Atribute se ha creado correctamente y este es el valor de Min" +
@@ -64,13 +64,14 @@ public class DriverAtribute {
                 System.out.println("================================================================================================");
                 System.out.println("Prueba de la funcion getUpper()");
                 System.out.println("Introduce los siguientes parametros de la siguiente forma: Nombre Tipus");
-                System.out.println("Teniendo en cuenta que: Nombre y tipus son String");
+                System.out.println("Teniendo en cuenta que: Nombre y tipus son String\n");
                 Scanner s = new Scanner(System.in);
                 Atribute a = new Atribute(s.next(), s.next());
                 System.out.println("El Atribute se ha creado correctamente y este es el valor de Man" +
                         " (que és una funcion para que se sobreescriba en la clase hijo) \n"
                         + a.getUpper());
                 System.out.println("=================================================================================================");
+                break;
             }
 
             case 5:
