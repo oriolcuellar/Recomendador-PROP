@@ -78,14 +78,14 @@ DriverRateRecomendation.class: RateRecomendation.class Item.class User.class Slo
 DriverSlopeOne.class: User.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverSlopeOne.java
 
-/*UserTest.class:
-	javac FONTS/src/domini/Drivers/UserTest.java*/
+UserTest.class:
+	javac FONTS/src/domini/Drivers/UserTest.java
 
 DriverValoratedItem.class: valoratedItem.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverValoratedItem.java
 	
-/*DriverItem.class: Item.class
-	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverItem.java/*
+DriverItem.class: Item.class
+	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverItem.java
 	
 DriverConjuntItems.class: Item.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverConjuntItems.java
@@ -99,7 +99,15 @@ DriverAtribute.class: Atribute.class
 DriverRanged_Atribute.class: Ranged_Atribute.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverRanged_Atribute.java
 
-Main:
+Suite_Distance_Item.class:
+	javac FONTS/src/domini/Drivers/Suite_Distance_Item.java
+
+Suite_Resto_Item.class:
+	javac FONTS/src/domini/Drivers/Suite_Resto_Item.java
+
+
+
+RunMain:
 	java -cp ./EXE FONTS.src.domini.model.Main
 
 DriverCluster:
@@ -125,6 +133,12 @@ DriverSlopeOne:
 
 UserTest:
 	java org.junit.runner.JUnitCore FONTS.src.domini.drivers.UserTest
+
+Suite_Distance_Item:
+	java org.junit.runner.JUnitCore FONTS.src.domini.drivers.Suite_Distance_Item
+
+Suite_Resto_Item:
+	java org.junit.runner.JUnitCore FONTS.src.domini.drivers.Suite_Resto_Item
 
 
 DriverValoratedItem:
