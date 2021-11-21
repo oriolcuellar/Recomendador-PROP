@@ -1,12 +1,15 @@
 ====================
-Objecto de la prueba:
+Objecto de la prueba: Comprobar que funciona correctamente todas las clases del modelo.
 ====================
-        Comprobar que funciona correctamente el algoritmo Rate Recomendation
 
 ====================
 Clases integradas en la prueba:
 ====================
+        Main.java
         RateRecomendation.java
+        Kmeans.java
+        SlopeOne.java
+        K_Neareast_Neightbour
 
 ====================
 Drivers para esta prueba:
@@ -17,6 +20,7 @@ Drivers para esta prueba:
 Ficheros de datos necesarios:
 ====================
         - rates.db.csv o cualquier otro fichero con valoraciones. (Valoraciones de un usuarios a items)
+        - Items.csv o cualquier otro fichero con Items.
 
 ====================
 Valores estudiados:
@@ -28,4 +32,4 @@ Valores estudiados:
 Operativa:
 ====================
         Al ejecutar el programa aparecera un menu donde cada opcion tiene un numero,
-        unicamente hay que seleccionar la opcion deseada e introducir los parametros que se requieran.
+        unicamente hay que seleccionar la opción deseada e introducir los parametros que se requieran.
