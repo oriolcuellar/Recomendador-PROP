@@ -3,7 +3,7 @@ Objeto de prueba: Items valorados
 ========================================
 
 Para probar esta clase hemos necesitado utilizar la clase "Item" testeada anteriormente.
-La mision de este driver comprobar que guarda y devuelve bien un item y su valoración.
+La mision de este driver comprobar que guarda y devuelve bien un item y su valoracion.
 
 ====================
 Ficheros necesarios
