@@ -55,9 +55,9 @@ public class DriverRateRecomendation {
         User u = new User();
         while (!trobat){
             mostrar_opciones();
-                int op = s.nextInt();
+                String op = s.next();
                 switch (op) {
-                    case 1: {//usuario aleatorio
+                    case "1": {//usuario aleatorio
                         System.out.println("=====================================================================================");
                         Random r = new Random();
                         int valorDado = r.nextInt(usersList.size());
@@ -67,7 +67,7 @@ public class DriverRateRecomendation {
                         trobat = true;
                         break;
                     }
-                    case 2: {//teclado
+                    case "2": {//teclado
                         System.out.println("=====================================================================================");
                         System.out.println("Introduce el ID del usuario");
                         int tec = s.nextInt();
@@ -79,7 +79,7 @@ public class DriverRateRecomendation {
                         trobat = true;
                         break;
                     }
-                    case 3: {//mostrar todos
+                    case "3": {//mostrar todos
                         System.out.println("=====================================================================================");
                         Set keys = usersList.keySet();
                         for (Iterator i = keys.iterator(); i.hasNext(); ) {

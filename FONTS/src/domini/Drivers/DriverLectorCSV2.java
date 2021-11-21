@@ -20,11 +20,11 @@ public class DriverLectorCSV2 {
         printInfo();
 
         Scanner s = new Scanner(System.in);
-        int cual=-1;
-        while(cual!=1 && cual!= 0) {
+        String cual="-1";
+        while(!cual.equals("1") && !cual.equals("0")) {
             System.out.println("=====================================================================================");
             System.out.println("\n- INTRODUCE \n  - 0 para leer valoraciones \n  - 1 para leer items \n");
-            cual = s.nextInt();
+            cual = s.next();
         }
         boolean leido=false;
         LectorCSV2 reader = new LectorCSV2();
@@ -32,7 +32,7 @@ public class DriverLectorCSV2 {
         Vector<String> readed_Items = new Vector<String>();
         while (!leido){
             try {
-                if (cual == 0) {//leer valoraciones
+                if (cual.equals("0")) {//leer valoraciones
                     System.out.println("=====================================================================================");
                     String path;
                     System.out.println("\n- INTRODUCE el path al CSV de valoraciones que desea leer: ");
@@ -40,7 +40,7 @@ public class DriverLectorCSV2 {
                     readed_ratings = reader.Lector_Ratings(path);
                     leido=true;
                 }
-                if (cual == 1) {//leer items
+                if (cual.equals("1")) {//leer items
                     System.out.println("=====================================================================================");
                     String path;
                     System.out.println("\n- INTRODUCE el path al CSV de items que desea leer: ");
@@ -57,7 +57,7 @@ public class DriverLectorCSV2 {
             }
         }
 
-        if (cual==0){
+        if (cual.equals("0")){
             System.out.println("UserId ItemId Rating");
             for (Vector<String> v: readed_ratings){
                 String pal="";
@@ -67,7 +67,7 @@ public class DriverLectorCSV2 {
                 System.out.println(pal);
             }
         }
-        else if (cual==1){
+        else if (cual.equals("1")){
             for (String st: readed_Items){
                 System.out.println(st);
             }
