@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['lector_5fitems_0',['Lector_Items',['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_conjunt_items.html#a94c57657ca7eead2e70d22fad035e117',1,'FONTS.src.domini.drivers.DriverConjuntItems.Lector_Items()'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_k_n_d.html#ab2be52839dbed71ab05a619a870310c4',1,'FONTS.src.domini.drivers.DriverKND.Lector_Items()'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_lector_c_s_v2.html#a925220fade04891b6ac08173ebe24360',1,'FONTS.src.domini.model.LectorCSV2.Lector_Items()']]],
+  ['lector_5fratings_1',['Lector_Ratings',['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_kmeans.html#a13af0fdb1667fb9dc4f72376da2b11c4',1,'FONTS.src.domini.drivers.DriverKmeans.Lector_Ratings()'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_lector_c_s_v2.html#a40e16f1e569492d9fb5eaedfd323ec51',1,'FONTS.src.domini.model.LectorCSV2.Lector_Ratings()']]],
+  ['lector_5fslopeone_5ftest_2',['Lector_SlopeOne_Test',['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_slope_one.html#a212338d0fccf0e05f6e69ce4da961314',1,'FONTS::src::domini::drivers::DriverSlopeOne']]],
+  ['lectorcsv2_3',['LectorCSV2',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_lector_c_s_v2.html#a2586d70bc90e362fa4538213d99ec6b9',1,'FONTS::src::domini::model::LectorCSV2']]],
+  ['loaditems_4',['loadItems',['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_conjunt_items.html#ae7e7238d0f954e125fef2818e79193b7',1,'FONTS.src.domini.drivers.DriverConjuntItems.loadItems()'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_k_n_d.html#ade2ded95f41456323b169211df1cb139',1,'FONTS.src.domini.drivers.DriverKND.loadItems()']]]
+];
