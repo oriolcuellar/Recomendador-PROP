@@ -7,13 +7,6 @@ import java.util.Vector;
  *  @author Jordi Olmo
  */
 
-/*
-    Para leer items, tienes que leer la primera fila, devolver un vector de string con cada atribute (que estan separados por ,), el id sera ese vector.toString()
-    i cada posicion del vector sera el nombre del atributo. Para mirar el tipo y el rango tendras que esperar a los valores. Si es rellevant o no ns hacerlo automaticamente.
-    Luego cada fila sera un item , pasas es string de la fila a vectores i la primera posicion serà el id y el resto los valores. Para el rang del atributo, tendras que recorer
-    todos los items que tengan ese atributo i mirar la posicion de ese atributo en el vector de valores y conseguir el màximo y el minimo de todos esos.
-
- */
 public class Item {
 
     //Atributes
@@ -95,7 +88,7 @@ public class Item {
 
     //mirar desacoplament de Atribute
 
-    /** Devuelve la distancia del Item implicito y el del parametro.
+    /** Devuelve la distancia del Item implicito y el del parametro. Los dos Item deben ser del mismo tipo
      * @param b Item del que se quiere saber la distancia.
      */
 
@@ -112,38 +105,11 @@ public class Item {
         clonador_ArrayList(Valors_A, valors);
         clonador_ArrayList(Valors_B, b.getValors());
 
-        if (!tipus.equals(b.getTipus()) && !tipus.equals("") && !b.getTipus().equals("")) {
+        int n_dimensions = V_A.size();
+        if (V_A.size() > 0 && V_B.size() > 0 && tipus == b.getTipus() && !tipus.equals("[]")) {
 
-            /*Transformar 2 Atributes de dos tipus diferents en dos del mateix tipus*/
-           /* for (int i = 0; i < V_A.size();) {
-                for (int j = 0; j < V_B.size();) {
-
-                    if (!V_A.get(i).equals(V_B.get(j))) {
-                        if (V_A.get(i).getName().compareTo(V_B.get(j).getName()) < 0) {
-
-                            V_A.remove(i);
-                            Valors_A.remove(i);
-                        } else {
-
-                            V_B.remove(j);
-                            Valors_B.remove(j);
-                        }
-                    } else {
-
-                        ++i;
-                        ++j;
-                    }
-                }
-                ++i;
-            }*/
-        }
-        else {
-            int n_dimensions = V_A.size();
-            if (V_A.size() > 0 && V_B.size() > 0) {
-
-                Double Distancia = comparador_tipus_iguals(V_A, V_B, Valors_A, Valors_B, n_dimensions);
-                return Distancia;
-            }
+            Double Distancia = comparador_tipus_iguals(V_A, V_B, Valors_A, Valors_B, n_dimensions);
+            return Distancia;
         }
         return 0.0;
     }
@@ -194,7 +160,6 @@ public class Item {
 
                             }
                         }
-                        Sum /= 2.0;
                         distance += Math.pow(Sum, 2);
 
                     }
