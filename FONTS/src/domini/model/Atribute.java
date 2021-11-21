@@ -13,7 +13,7 @@ public class Atribute {
      */
     private String Nom;
 
-    /** Tipo del Atribute wue deberia ser uno de los siguientes para usarse en el algoritmo
+    /** Tipo del Atribute que deberia ser uno de los siguientes para usarse en el algoritmo
      {Boolean, String, Vector de String, Data, Rang}.
      */
     private String Tipus;

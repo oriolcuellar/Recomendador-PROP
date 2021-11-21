@@ -33,3 +33,10 @@ Operativa:
 ====================
         Al ejecutar el programa aparecera un menu donde cada opcion tiene un numero,
         unicamente hay que seleccionar la opción deseada e introducir los parametros que se requieran.
+
+====================
+Manual de Uso
+====================
+
+- Compilar con el comando make
+- Ejecutar el test con el comando make RunMain

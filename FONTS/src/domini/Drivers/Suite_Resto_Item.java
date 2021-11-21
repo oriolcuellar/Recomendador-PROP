@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class Suite_Resto_Item {
 
-    private  Atribute AT;
+    private  Atribute AT, AT2, AT3;
     private  ArrayList<Atribute> Tipus1;
     private  TipusItem STRING;
     private  ArrayList<String> Valors;
@@ -28,8 +28,10 @@ public class Suite_Resto_Item {
     @Before
     public  void antesdeclase(){
 
-        AT = new Atribute("Color", "String");
-        Tipus1 = new ArrayList<Atribute>(Arrays.asList(AT));
+        AT = new Atribute("Color", "String", false);
+        AT2 = new Atribute("Forma", "String", true);
+        AT3 = new Atribute("Longitud", "String", false);
+        Tipus1 = new ArrayList<Atribute>(Arrays.asList(AT, AT2, AT3));
         STRING = new TipusItem(Tipus1);
         Valors = new ArrayList<String>(Arrays.asList("Verde"));
     }

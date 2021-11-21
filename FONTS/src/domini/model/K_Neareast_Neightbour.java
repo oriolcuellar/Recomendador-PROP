@@ -78,9 +78,6 @@ public class K_Neareast_Neightbour {
 
             ordenar_Items(Dis.get(j), M_de_Items.get(j),0, Dis.get(j).size()-1);
 
-            /*borra los que son mas que k
-            for (int i = M_de_Items.get(j).size() -1; i >= k ; --i)
-                M_de_Items.get(j).remove(i);*/
         }
 
         ArrayList<Item> Items_a_devolver = new ArrayList<>(k);
@@ -93,7 +90,7 @@ public class K_Neareast_Neightbour {
 
     /** Dadas las matrizes de los parametros, devuelve una ArrayList con los items recomendados de medida k, siguiendo
      la siguiente fórmula: Siendo las matrices en orden de los parámetros X,Y y el vector V -> por unos Item i, j cualquiera.
-     I_Finals_i = Sumatorio(Xij * Vi)
+     Valors_i = Sumatorio(Xij * Vi)
      * @param Val ArrayList con las valoraciones de todos los Item de itemsUsats.
      * @param I_Finals  ArrayList de los Items que se devolverán.
      * @param Distances Matriz de ArrayList con las distancias de todos los item. La posicion de los items coincidira
