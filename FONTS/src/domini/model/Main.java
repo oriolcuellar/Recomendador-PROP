@@ -65,7 +65,7 @@ public class Main {
         System.out.println("    - 1 ");
         System.out.println("         KMeans");
         System.out.println("    - 2 ");
-        System.out.println("         Slope-One");
+        System.out.println("         Slope-One y KMeans");
         System.out.println("    - 3 ");
         System.out.println("         Valorar una recomendacion\n\n");
 

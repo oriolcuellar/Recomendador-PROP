@@ -49,7 +49,7 @@ public class DriverRateRecomendation {
             System.out.println("Introduce un valor para el numero de clusters");
             Scanner aux = new Scanner(System.in);
             k= aux.nextInt();
-            if (k>0 && k<50) leerk=true;
+            if (k>0 && k<usersList.keySet().size()-1) leerk=true;
         }
         Kmeans kmeans = new Kmeans();
         kmeans.run(usersList,k);
