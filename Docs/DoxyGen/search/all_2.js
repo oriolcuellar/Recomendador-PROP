@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['c_5fitems_0',['C_Items',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_k___neareast___neightbour.html#a5ac88ff2e13ce396983e45c1a02eac7b',1,'FONTS::src::domini::model::K_Neareast_Neightbour']]],
+  ['calculatedesviation_1',['calculateDesviation',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_slope_one.html#ab5372ffdec9ac16a045769293e0170bc',1,'FONTS::src::domini::model::SlopeOne']]],
+  ['calculatedesviationmean_2',['calculateDesviationMean',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_slope_one.html#ae71b322c318b9eed5490238b71b5b333',1,'FONTS::src::domini::model::SlopeOne']]],
+  ['calculatesimilarity_3',['calculateSimilarity',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#ae4909215d55b8bde26bbf23b44904d46',1,'FONTS::src::domini::model::User']]],
+  ['calculatevalorationmean_4',['calculateValorationMean',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_slope_one.html#a0a46bee0c79d4d1bc4a4c7765fdfe079',1,'FONTS::src::domini::model::SlopeOne']]],
+  ['centroid_5',['centroid',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_cluster.html#ad3d69bf06f777ca4dcdc50775aac4613',1,'FONTS::src::domini::model::Cluster']]],
+  ['ci_5fstatic_6',['CI_Static',['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_conjunt_items.html#abacab7ef81748d89cc418984e70788bb',1,'FONTS.src.domini.drivers.DriverConjuntItems.CI_Static()'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_k_n_d.html#a684fc68043b2f12ca7c3a44fbe3c7923',1,'FONTS.src.domini.drivers.DriverKND.CI_Static()']]],
+  ['clonador_5farraylist_7',['clonador_ArrayList',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_item.html#a0b248c204248d432712ff593f8eef4a5',1,'FONTS.src.domini.model.Item.clonador_ArrayList()'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_k___neareast___neightbour.html#a355cde5c350ed04e0c8bff762ca191d3',1,'FONTS.src.domini.model.K_Neareast_Neightbour.clonador_ArrayList()']]],
+  ['cluster_8',['cluster',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_cluster.html#af2ff2ea3f517e8313f58f8720f8f2fda',1,'FONTS::src::domini::model::Cluster']]],
+  ['cluster_9',['Cluster',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_cluster.html#a99506244b338dc1c4d45cc1b9d34f745',1,'FONTS.src.domini.model.Cluster.Cluster()'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_cluster.html',1,'FONTS.src.domini.model.Cluster']]],
+  ['cluster_2ejava_10',['Cluster.java',['../_cluster_8java.html',1,'']]],
+  ['clusters_11',['clusters',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_kmeans.html#afd4623f18d789b85a61c3ba5df8d78d2',1,'FONTS::src::domini::model::Kmeans']]],
+  ['comparador_5ftipus_5figuals_12',['comparador_tipus_iguals',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_item.html#a5da98c2260b4fc45f04b008388ee6b51',1,'FONTS::src::domini::model::Item']]],
+  ['comparar_5fconjunts_13',['comparar_conjunts',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_k___neareast___neightbour.html#a139e795eaad682f708d6431b70f10f3b',1,'FONTS::src::domini::model::K_Neareast_Neightbour']]],
+  ['conjunt_5fitems_14',['Conjunt_Items',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_conjunt___items.html#ab1a7188c3f86ae1092962f8f0b421226',1,'FONTS.src.domini.model.Conjunt_Items.Conjunt_Items(ArrayList&lt; Item &gt; items)'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_conjunt___items.html#a553737b0a8ace2e43d1dbce6d656abb1',1,'FONTS.src.domini.model.Conjunt_Items.Conjunt_Items()'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_conjunt___items.html',1,'FONTS.src.domini.model.Conjunt_Items']]],
+  ['conjunt_5fitems_2ejava_15',['Conjunt_Items.java',['../_conjunt___items_8java.html',1,'']]],
+  ['construc_5fvector_16',['Construc_Vector',['../class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_item.html#aef18ac14cd8df5f207c29f9807ce3d84',1,'FONTS::src::domini::model::Item']]],
+  ['createitem_17',['createItem',['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_conjunt_items.html#a97644c5fac58ee1bafe0c18d79a755b4',1,'FONTS.src.domini.drivers.DriverConjuntItems.createItem()'],['../class_f_o_n_t_s_1_1src_1_1domini_1_1drivers_1_1_driver_k_n_d.html#ac1b944a3510d346250ed3b9cfd8d721b',1,'FONTS.src.domini.drivers.DriverKND.createItem()']]]
+];
