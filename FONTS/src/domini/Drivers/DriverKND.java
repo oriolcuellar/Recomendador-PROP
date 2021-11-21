@@ -12,6 +12,9 @@ import java.util.*;
  */
 public class DriverKND {
 
+    private static Conjunt_Items CI_Static;
+    private static boolean prueba_static = false;
+
     public static Vector<String> Lector_Items(String csvFile) {
         //post: return un vector de les files del csv
         Vector <String>  items = new Vector<String>();
@@ -206,7 +209,7 @@ public class DriverKND {
         System.out.println("\nDRIVER DE LA CLASE K_Neareast_Neightbour\n");
         System.out.println("Funciones de la clase disponibles para probar:\n");
         System.out.println(
-                "    1: Crear K_Neareast_Neightbour\n    2: Algorithm()\n    3: FINALIZAR PRUEBA.");
+                "    1: Crear K_Neareast_Neightbour\n    2: Algorithm()\n    3: PASAR A PRUEBA ESTATICA.\n     4: FINALIZAR PRUEBA");
     }
 
     static void testFunction(int f) {
@@ -216,77 +219,130 @@ public class DriverKND {
             case 1:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba la creadora de K_Neareast_Neightbour");
-                System.out.println("Introduce los siguientes dos ficheros de Items de la siguiente forma: ./path/file.csv ./path/file.csv");
+                if (prueba_static)
+                    System.out.println("ESTAS EN PRUEBA ESTATICA, LA SIGUIENE FUNCION NO AFECTARA AL CONJUNT ESTATIC,\n" +
+                            "SI QUERES REDEFINIR ESTE USA LA OPCION PRUEBA ESTATICA");
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba la creadora de K_Neareast_Neightbour");
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                String file2 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
-                ArrayList<Item> A2 = loadItems(file2);
+                    K_Neareast_Neightbour prueba = new K_Neareast_Neightbour();
 
-                System.out.println("Seguidamente pont todas las valoraciones del segundo fichero, teniendo en cuenta que: ");
-                System.out.println("Que las valoraciones son del tipo Double (separa el decimal con ,) y");
-                System.out.println("que tienes que poner el mismo numero de valoraciones, que el numero de items del segundo fichero");
-
-                ArrayList<Double> Valoracions = new ArrayList<Double>();
-                while(s.hasNext())
-                    Valoracions.add(s.nextDouble());
-
-                Conjunt_Items Ct = new Conjunt_Items(A1);
-                K_Neareast_Neightbour prueba = new K_Neareast_Neightbour (Ct);
-                ArrayList<Item> Resultado = Ct.getItems();
-
-                System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los  items del conjunto: \n");
-
-                for (int i = 0; i < Resultado.size(); ++i)
-                    System.out.print(' ' + Resultado.get(i).getID());
-                System.out.print("\n");
-                System.out.println("=================================================================================================");
+                    System.out.println("El K_Neareast_Neightbour se ha creado correctamente, pero como no almacena nada no tiene nada que motrar: \n");
+                    System.out.println("=================================================================================================");
                 break;
             }
 
             case 2:
 
             {
+                if(!prueba_static){
+
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba la creadora de la funcion Algorithm()");
+                    System.out.println("Introduce los siguientes dos ficheros de Items de la siguiente forma: ./path/file.csv ./path/file.csv");
+
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    String file2 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
+                    ArrayList<Item> A2 = loadItems(file2);
+
+                    System.out.println("Seguidamente pont todas las valoraciones del segundo fichero, teniendo en cuenta que: ");
+                    System.out.println("Que las valoraciones son del tipo Double (separa el decimal con ,) y");
+                    System.out.println("que tienes que poner el mismo numero de valoraciones, que el numero de items del segundo fichero");
+
+                    ArrayList<Double> Valoracions = new ArrayList<Double>();
+                    while (s.hasNext())
+                        Valoracions.add(s.nextDouble());
+
+                    System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que és un entero: ");
+
+                    int k = s.nextInt();
+
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
+                    K_Neareast_Neightbour prueba = new K_Neareast_Neightbour();
+                    ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, A2, Valoracions);
+
+                    System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los k items recomendados: \n");
+                    for (int i = 0; i < Resultado.size(); ++i)
+                        System.out.print(' ' + Resultado.get(i).getID());
+                    System.out.print("\n");
+                    System.out.println("=================================================================================================");
+                }
+                else {
+
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba la creadora de la funcion Algorithm() con el Connjunt_Items Static");
+                    System.out.println("Introduce un fichero de Items de la siguiente forma: ./path/file.csv");
+
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    String file2 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
+                    ArrayList<Item> A2 = loadItems(file2);
+
+                    System.out.println("Seguidamente pont todas las valoraciones del fichero, teniendo en cuenta que: ");
+                    System.out.println("Que las valoraciones son del tipo Double (separa el decimal con ,) y");
+                    System.out.println("que tienes que poner el mismo numero de valoraciones, que el numero de items del segundo fichero");
+
+                    ArrayList<Double> Valoracions = new ArrayList<Double>();
+                    while (s.hasNext())
+                        Valoracions.add(s.nextDouble());
+
+                    System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que és un entero: ");
+
+                    int k = s.nextInt();
+
+                    Conjunt_Items Ct = CI_Static;
+                    K_Neareast_Neightbour prueba = new K_Neareast_Neightbour();
+                    ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, A2, Valoracions);
+
+                    System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los k items recomendados: \n");
+                    for (int i = 0; i < Resultado.size(); ++i)
+                        System.out.print(' ' + Resultado.get(i).getID());
+                    System.out.print("\n");
+                    System.out.println("=================================================================================================");
+                }
+                break;
+            }
+
+            case 3:
+
+            {
                 System.out.println("================================================================================================");
-                System.out.println("Prueba la creadora de la funcion Algorithm()");
-                System.out.println("Introduce los siguientes dos ficheros de Items de la siguiente forma: ./path/file.csv ./path/file.csv");
+                System.out.println("A partir dr ahora todas las pruebas se haran con el mis Conjunt_Items, para comenzar inizializa el Conjunt");
+                System.out.println("Introduce un fichero de Items de la siguiente forma: ./path/file.csv ");
 
                 Scanner s = new Scanner(System.in);
                 String file1 = s.next();
-                String file2 = s.next();
                 ArrayList<Item> A1 = loadItems(file1);
-                ArrayList<Item> A2 = loadItems(file2);
+                CI_Static = new Conjunt_Items(A1);
 
-                System.out.println("Seguidamente pont todas las valoraciones del segundo fichero, teniendo en cuenta que: ");
-                System.out.println("Que las valoraciones son del tipo Double (separa el decimal con ,) y");
-                System.out.println("que tienes que poner el mismo numero de valoraciones, que el numero de items del segundo fichero");
+                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
 
-                ArrayList<Double> Valoracions = new ArrayList<Double>();
-                while(s.hasNext())
-                    Valoracions.add(s.nextDouble());
+                prueba_static = true;
+                A1 = CI_Static.getItems();
 
-                System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que és un entero: ");
-
-                int k = s.nextInt();
-
-                Conjunt_Items Ct = new Conjunt_Items(A1);
-                K_Neareast_Neightbour prueba = new K_Neareast_Neightbour (Ct);
-                ArrayList<Item> Resultado = prueba.Algorithm(k, A2, Valoracions);
-
-                System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los k items recomendados: \n");
-                for (int i = 0; i < Resultado.size(); ++i)
-                    System.out.print(' ' + Resultado.get(i).getID());
+                for (int i = 0; i < A1.size(); ++i)
+                    System.out.print(' ' + A1.get(i).getID());
                 System.out.print("\n");
+
+                System.out.println("y esta la matriz de Distancias: \n");
+                ArrayList<ArrayList<Double>> Aux = CI_Static.getDistances();
+                for (int i = 0; i < Aux.size(); ++i) {
+
+                    for(int j = 0; j < Aux.size(); ++j)
+                        System.out.print(' ' + Aux.get(i).get(j));
+
+                    System.out.print("\n");
+                }
                 System.out.println("=================================================================================================");
                 break;
             }
 
-            case 3:break;
+            case 4:break;
 
-            default : System.out.println("No has introducido un número entre 1 y 3");
+            default : System.out.println("No has introducido un número entre 1 y 4");
 
         }
     }
@@ -301,7 +357,7 @@ public class DriverKND {
             f = s.nextInt();
             testFunction(f);
 
-        }while(f != 3);
+        }while(f != 4);
 
     }
 }

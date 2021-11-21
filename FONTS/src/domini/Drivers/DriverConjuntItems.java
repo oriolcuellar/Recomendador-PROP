@@ -13,6 +13,9 @@ import java.util.*;
  */
 public class DriverConjuntItems {
 
+    private static Conjunt_Items CI_Static;
+    private static boolean prueba_static = false;
+
     public static Vector<String> Lector_Items(String csvFile) {
         //post: return un vector de les files del csv
         Vector <String>  items = new Vector<String>();
@@ -209,6 +212,9 @@ public class DriverConjuntItems {
             case 1:
 
             {
+                if (prueba_static)
+                    System.out.println("ESTAS EN PRUEBA ESTATICA, LA SIGUIENE FUNCION NO AFECTARA AL CONJUNT ESTATIC,\n" +
+                            "SI QUERES REDEFINIR ESTE USA LA OPCION PRUEBA ESTATICA");
                 System.out.println("================================================================================================");
                 System.out.println("Prueba la creadora de ConjuntItems");
                 System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
@@ -241,6 +247,9 @@ public class DriverConjuntItems {
             case 2:
 
             {
+                if (prueba_static)
+                    System.out.println("ESTAS EN PRUEBA ESTATICA, LA SIGUIENE FUNCION NO AFECTARA AL CONJUNT ESTATIC,\n" +
+                            "SI QUERES REDEFINIR ESTE USA LA OPCION PRUEBA ESTATICA");
                 System.out.println("================================================================================================");
                 System.out.println("Prueba la creadora de ConjuntItems vacia");
                 System.out.println("Como es vacía no hace falta que introduzcas nada: \n");
@@ -268,455 +277,737 @@ public class DriverConjuntItems {
             case 3:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion existeix_item()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                if(!prueba_static) {
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion existeix_item()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
 
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
 
-                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                    System.out.println("Ahora introduce los siguientes parametros del Item a comprovar: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Boolean exist = Ct.existeix_item(s.nextInt());
+                    System.out.println("El resultado de la funcion és: \n");
+                    System.out.println(exist);
+                    System.out.println("=================================================================================================");
                 }
-                System.out.println("Ahora introduce los siguientes parametros del Item a comprovar: ID");
-                System.out.println("teniendo en cuenta que Id és un Integer\n");
-                Boolean exist = Ct.existeix_item(s.nextInt());
-                System.out.println("El resultado de la funcion és: \n");
-                System.out.println(exist);
-                System.out.println("=================================================================================================");
+                else {
+
+                    System.out.println("Prueba de la funcion existeix_item() Estatica");
+
+                    Conjunt_Items Ct = CI_Static;
+                    Scanner s = new Scanner(System.in);
+
+                    System.out.println("Ahora introduce los siguientes parametros del Item a comprovar: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Boolean exist = Ct.existeix_item(s.nextInt());
+                    System.out.println("El resultado de la funcion és: \n");
+                    System.out.println(exist);
+                    System.out.println("=================================================================================================");
+                }
                 break;
             }
 
             case 4:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion get_position()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                if(!prueba_static) {
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion get_position()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
 
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
 
-                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                    System.out.println("Ahora introduce los siguientes parametros del Item a comprovar: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Item i = new Item(s.nextInt());
+                    int pos = Ct.get_position(i);
+                    System.out.println("La posicion del item és: \n");
+                    System.out.println(pos);
+                    System.out.println("=================================================================================================");
                 }
-                System.out.println("Ahora introduce los siguientes parametros del Item a comprovar: ID");
-                System.out.println("teniendo en cuenta que Id és un Integer\n");
-                Item i = new Item(s.nextInt());
-                int pos = Ct.get_position(i);
-                System.out.println("La posicion del item és: \n");
-                System.out.println(pos);
-                System.out.println("=================================================================================================");
+                else {
+
+                    System.out.println("Prueba de la funcion get_position() Estatica");
+
+                    Conjunt_Items Ct = CI_Static;
+                    Scanner s = new Scanner(System.in);
+
+                    System.out.println("Ahora introduce los siguientes parametros del Item a comprovar: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Item i = new Item(s.nextInt());
+                    int pos = Ct.get_position(i);
+                    System.out.println("La posicion del item és: \n");
+                    System.out.println(pos);
+                    System.out.println("=================================================================================================");
+                }
                 break;
             }
 
             case 5:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion n_Items()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                if(!prueba_static) {
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion n_Items()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
 
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
 
-                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
-                }
 
-                int n = Ct.n_Items();
-                System.out.println("El número de Item és: \n");
-                System.out.println(n);
-                System.out.println("=================================================================================================");
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+
+                    int n = Ct.n_Items();
+                    System.out.println("El número de Item és: \n");
+                    System.out.println(n);
+                    System.out.println("=================================================================================================");
+                }
+                else {
+                    System.out.println("Prueba de la funcion n_Items() Estatica");
+
+                    Conjunt_Items Ct = CI_Static;
+
+                    int n = Ct.n_Items();
+                    System.out.println("El número de Item és: \n");
+                    System.out.println(n);
+                    System.out.println("=================================================================================================");
+                }
                 break;
             }
 
             case 6:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion getItems()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                if(!prueba_static) {
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion getItems()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
 
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
 
-                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+
+                    System.out.println("Estos son los ID de los items, resultado de usar getItems() en el conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
+                    System.out.print("\n");
+                    System.out.println("=================================================================================================");
                 }
 
-                System.out.println("Estos son los ID de los items, resultado de usar getItems() en el conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
-                System.out.println("=================================================================================================");
+                else {
+
+                    System.out.println("Prueba de la funcion getItems() Estatica");
+
+                    Conjunt_Items Ct = CI_Static;
+
+                    System.out.println("Estos son los ID de los items, resultado de usar getItems() en el conjunto: \n");
+                    ArrayList<Item> A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
+                    System.out.print("\n");
+                    System.out.println("=================================================================================================");
+                }
                 break;
             }
 
             case 7:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion getDistances()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                if (!prueba_static) {
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion getDistances()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
 
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
 
-                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+
+                    System.out.println("Estos son las distancias de los items, resultado de usar getDistances() en el conjunto: \n");
+                    Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                    System.out.println("=================================================================================================");
                 }
+                else {
 
-                System.out.println("Estos son las distancias de los items, resultado de usar getDistances() en el conjunto: \n");
-                Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
+                    System.out.println("Prueba de la funcion getDistances() Estatica");
 
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
+                    Scanner s = new Scanner(System.in);
+                    Conjunt_Items Ct = CI_Static;
+                    System.out.println("Estos son las distancias de los items, resultado de usar getDistances() en el conjunto: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
 
-                    System.out.print("\n");
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
                 }
-                System.out.println("=================================================================================================");
                 break;
             }
 
             case 8:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion gDistance()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                if(!prueba_static) {
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion gDistance()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
 
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
 
-                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
-                }
 
-                System.out.println("Ahora introduce los siguientes parametros de los dos Items a comprovar: ID");
-                System.out.println("teniendo en cuenta que Id és un Integer\n");
-                Item a = new Item(s.nextInt());
-                Item b = new Item(s.nextInt());
-                Double d = Ct.Distance(a, b);
-                System.out.println("Esta és la distancias de los items, resultado de usar Distance() en el conjunto: \n");
-                System.out.print(d);
-                System.out.println("=================================================================================================");
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+
+                    System.out.println("Ahora introduce los siguientes parametros de los dos Items a comprovar: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Item a = new Item(s.nextInt());
+                    Item b = new Item(s.nextInt());
+                    Double d = Ct.Distance(a, b);
+                    System.out.println("Esta és la distancias de los items, resultado de usar Distance() en el conjunto: \n");
+                    System.out.print(d);
+                    System.out.println("=================================================================================================");
+                }
+                else{
+
+                    System.out.println("Prueba de la funcion getDistance() Estatica");
+
+                    Scanner s = new Scanner(System.in);
+                    Conjunt_Items Ct = CI_Static;
+                    System.out.println("Ahora introduce los siguientes parametros de los dos Items a comprovar: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Item a = new Item(s.nextInt());
+                    Item b = new Item(s.nextInt());
+                    Double d = Ct.Distance(a, b);
+                    System.out.println("Esta és la distancias de los items, resultado de usar Distance() en el conjunto: \n");
+                    System.out.print(d);
+                }
                 break;
             }
 
             case 9:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion setItems()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                if(!prueba_static) {
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion setItems()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
 
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
 
-                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+
+                    System.out.println("Ahora introduce otro fichero de la misma forma: ./path/file.csv\n");
+                    file1 = s.next();
+                    A1 = loadItems(file1);
+                    Ct.setItems(A1);
+
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
+                    System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+
+                    System.out.println("=================================================================================================");
                 }
 
-                System.out.println("Ahora introduce otro fichero de la misma forma: ./path/file.csv\n");
-                file1 = s.next();
-                A1 = loadItems(file1);
-                Ct.setItems(A1);
+                else {
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion setItems() Estatica");
 
-                System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                    Scanner s = new Scanner(System.in);
+                    Conjunt_Items Ct = CI_Static;
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
+                    System.out.println("Introduce un fichero de la forma: ./path/file.csv\n");
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
+                    Ct.setItems(A1);
 
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
-                }
 
-                System.out.println("=================================================================================================");
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                }
                 break;
             }
 
             case 10:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion omplir()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                if (!prueba_static) {
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion omplir_matriu()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
 
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
 
-                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
-
-                System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
-                }
 
-                System.out.println("Ahora introduce los siguientes parametros del Item a añadir: ID");
-                System.out.println("teniendo en cuenta que Id és un Integer y que no debe pertenecer al ConjuntItems\n");
-                Item a = new Item(s.nextInt());
-                Ct.anyadir_item(a);
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
 
-                System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
+                        System.out.print("\n");
+                    }
 
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
+                    System.out.println("Ahora introduce los siguientes parametros del Item a añadir: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer y que no debe pertenecer al ConjuntItems\n");
+                    Item a = new Item(s.nextInt());
+                    Ct.anyadir_item(a);
 
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
-                }
 
-                System.out.println("Ahora se ejecutara omplir_matriu y se comprovara el resultado: \n");
-                Ct.omplir_matriu();
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
 
-                System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
+                        System.out.print("\n");
+                    }
 
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
+                    System.out.println("Ahora se ejecutara omplir_matriu y se comprovara el resultado: \n");
+                    Ct.omplir_matriu();
 
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                    System.out.println("=================================================================================================");
                 }
-                System.out.println("=================================================================================================");
+                else {
+
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion omplir_matricu() Estatica");
+
+                    Scanner s = new Scanner(System.in);
+                    Conjunt_Items Ct = CI_Static;
+
+                    System.out.println("Ahora introduce los siguientes parametros del Item a añadir: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Item a = new Item(s.nextInt());
+                    Ct.anyadir_item(a);
+
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    ArrayList<Item> A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
+                    System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double> > Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+
+                    System.out.println("Ahora se ejecutara omplir_matriu y se comprovara el resultado: \n");
+                    Ct.omplir_matriu();
+
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
+                    System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                    System.out.println("=================================================================================================");
+                }
                 break;
             }
 
             case 11:
 
             {
-                System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion anyadir_item()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                if (!prueba_static) {
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion anyadir_item()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
 
-                Scanner s = new Scanner(System.in);
-                String file1 = s.next();
-                ArrayList<Item> A1 = loadItems(file1);
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
 
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
 
-                System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
-
-                System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
-                }
 
-                System.out.println("Ahora introduce los siguientes parametros del Item a añadir: ID");
-                System.out.println("teniendo en cuenta que Id és un Integer\n");
-                Item a = new Item(s.nextInt());
-                Ct.anyadir_item(a);
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
 
-                System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
 
-                System.out.println("y esta la matriz de Distancias: \n");
-                Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
+                        System.out.print("\n");
+                    }
 
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
+                    System.out.println("Ahora introduce los siguientes parametros del Item a añadir: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Item a = new Item(s.nextInt());
+                    Ct.anyadir_item(a);
 
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
                     System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                    System.out.println("=================================================================================================");
                 }
-                System.out.println("=================================================================================================");
+                else {
+
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion añadir_item() Estatica");
+
+                    Scanner s = new Scanner(System.in);
+                    Conjunt_Items Ct = CI_Static;
+
+                    System.out.println("Ahora introduce los siguientes parametros del Item a añadir: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Item a = new Item(s.nextInt());
+                    Ct.eliminar_item(a);
+
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    ArrayList<Item> A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
+                    System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double> > Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                    System.out.println("=================================================================================================");
+                }
                 break;
             }
 
-            case 12:
+            case 12: {
+
+                if (!prueba_static) {
+
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion eliminar_item()");
+                    System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+
+                    Scanner s = new Scanner(System.in);
+                    String file1 = s.next();
+                    ArrayList<Item> A1 = loadItems(file1);
+
+                    Conjunt_Items Ct = new Conjunt_Items(A1);
+
+                    System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
+                    System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+
+                    System.out.println("Ahora introduce los siguientes parametros del Item a eliminar: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Item a = new Item(s.nextInt());
+                    Ct.anyadir_item(a);
+
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
+                    System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                    System.out.println("=================================================================================================");
+                }
+                else {
+
+                    System.out.println("================================================================================================");
+                    System.out.println("Prueba de la funcion eliminar_item() Estatica");
+
+                    Scanner s = new Scanner(System.in);
+                    Conjunt_Items Ct = CI_Static;
+
+                    System.out.println("Ahora introduce los siguientes parametros del Item a eliminar: ID");
+                    System.out.println("teniendo en cuenta que Id és un Integer\n");
+                    Item a = new Item(s.nextInt());
+                    Ct.eliminar_item(a);
+
+                    System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
+                    ArrayList<Item> A1 = Ct.getItems();
+                    for (int i = 0; i < A1.size(); ++i)
+                        System.out.print(' ' + A1.get(i).getID());
+                    System.out.print("\n");
+
+                    System.out.println("y esta la matriz de Distancias: \n");
+                    ArrayList<ArrayList<Double> > Aux = Ct.getDistances();
+                    for (int i = 0; i < Aux.size(); ++i) {
+
+                        for (int j = 0; j < Aux.size(); ++j)
+                            System.out.print(' ' + Aux.get(i).get(j));
+
+                        System.out.print("\n");
+                    }
+                    System.out.println("=================================================================================================");
+                }
+                break;
+            }
+
+            case 13:
 
             {
                 System.out.println("================================================================================================");
-                System.out.println("Prueba de la funcion eliminar_item()");
-                System.out.println("Introduce los siguientes un fichero de Items de la siguiente forma: ./path/file.csv\n");
+                System.out.println("A partir dr ahora todas las pruebas se haran con el mis Conjunt_Items, para comenzar inizializa el Conjunt");
+                System.out.println("Introduce un fichero de Items de la siguiente forma: ./path/file.csv ");
 
                 Scanner s = new Scanner(System.in);
                 String file1 = s.next();
                 ArrayList<Item> A1 = loadItems(file1);
-
-                Conjunt_Items Ct = new Conjunt_Items(A1);
+                CI_Static = new Conjunt_Items(A1);
 
                 System.out.println("El ConjuntItems se ha creado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
+
+                prueba_static = true;
+                A1 = CI_Static.getItems();
+
                 for (int i = 0; i < A1.size(); ++i)
                     System.out.print(' ' + A1.get(i).getID());
                 System.out.print("\n");
 
                 System.out.println("y esta la matriz de Distancias: \n");
-                ArrayList<ArrayList<Double>> Aux = Ct.getDistances();
-                for (int i = 0; i < Aux.size(); ++i) {
-
-                    for(int j = 0; j < Aux.size(); ++j)
-                        System.out.print(' ' + Aux.get(i).get(j));
-
-                    System.out.print("\n");
-                }
-
-                System.out.println("Ahora introduce los siguientes parametros del Item a añadir: ID");
-                System.out.println("teniendo en cuenta que Id és un Integer\n");
-                Item a = new Item(s.nextInt());
-                Ct.eliminar_item(a);
-
-                System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
-                A1 = Ct.getItems();
-                for (int i = 0; i < A1.size(); ++i)
-                    System.out.print(' ' + A1.get(i).getID());
-                System.out.print("\n");
-
-                System.out.println("y esta la matriz de Distancias: \n");
-                Aux = Ct.getDistances();
+                ArrayList<ArrayList<Double>> Aux = CI_Static.getDistances();
                 for (int i = 0; i < Aux.size(); ++i) {
 
                     for(int j = 0; j < Aux.size(); ++j)
@@ -728,9 +1019,9 @@ public class DriverConjuntItems {
                 break;
             }
 
-            case 13:break;
+            case 14:break;
 
-            default : System.out.println("\nNo has introducido un número entre 1 y 13");
+            default : System.out.println("\nNo has introducido un número entre 1 y 14");
 
         }
     }
@@ -744,7 +1035,7 @@ public class DriverConjuntItems {
                 "    4: get_position()\n    5: n_Items()\n    6: getItems()\n" +
                 "    7: getDistances()\n    8: Distance()\n    9: setItems()\n" +
                 "    10: omplir_matriu()\n    11: anyadir_item()\n    12: eliminar_item()\n" +
-                "    13: FINALIZAR PRUEBA.");
+                "    13: PASAR A PRUEBA ESTATICA.\n     14: FINALIZAR PRUEBA");
     }
 
 
@@ -758,6 +1049,6 @@ public class DriverConjuntItems {
             f = s.nextInt();
             testFunction(f);
 
-        }while(f != 13);
+        }while(f != 14);
     }
 }

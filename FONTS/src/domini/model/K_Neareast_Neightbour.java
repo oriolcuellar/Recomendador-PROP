@@ -16,12 +16,10 @@ public class K_Neareast_Neightbour {
 
     //Constructora
 
-    /** Constructora de la clase. Inicilaitza y calcula la matriz de Distancias respecto al Conjunt_Items de parametro.
-     * @param c_Items Conjunt_Items de todos los items registrados en el sistema.
+    /** Constructora de la clase.
      */
 
-    public K_Neareast_Neightbour(Conjunt_Items c_Items) {
-        C_Items = c_Items;
+    public K_Neareast_Neightbour() {
     }
 
     //Getters
@@ -38,10 +36,11 @@ public class K_Neareast_Neightbour {
      * @param k  Número de items que se devuelven.
      * @param itemsUsats  ArrayList de los Items sobre los que se quiere la recomendación.
      * @param Valoracions  ArrayList con las valoraciones de los itemsUsat, la posicion de la valoración en la ArrayList,
+     * @param C_Items Conjunt_Items de todos los items registrados en el sistema.
     debe coincidir con la posicion del Item en itemsUsats.
      */
 
-    public ArrayList<Item> Algorithm(int k, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
+    public ArrayList<Item> Algorithm(int k,Conjunt_Items C_Items, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
 
         ArrayList<Double> Valors = new ArrayList<Double>();
 
