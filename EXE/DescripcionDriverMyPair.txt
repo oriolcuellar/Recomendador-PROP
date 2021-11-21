@@ -1,13 +1,24 @@
-Objecto de la prueba: Comprobar que funciona correctamente la clase myPair.
+========================================
+Objeto de prueba: myPair
+========================================
 
-Clases integradas en la prueba:
-        myPair.java
+La clase myPair representa un par itemID y valoration. Las pruebas consisitiran en crear un par y comprobar
+mediante las funciones propias de la clase que este se ha creado correctamente.
 
-Drivers para esta prueba.:
-        DriverMyPair
 
-Valores estudiados: Se trabajará con los valores que se introducian dentro del propio programa
-y seran estos los que analizaran el correcto funcionamiento de la clase.
+====================
+Ficheros necesarios
+====================
 
-Operativa: Al ejecutar el programa aparecerá un menú donde cada opción tiene un número,
+Para ejecutar este Test no hace falta pasar ningun fichero externo
+
+====================
+Manual de Uso
+====================
+
+- Compilar con el comando make
+- Ejecutar el test con el comando make DriverMyPair
+
+Al ejecutar el programa aparecerá un menú donde cada opción tiene un número,
 únicamente hay que seleccionar la opción deseada e introducir los parámetros que se requieran.
+

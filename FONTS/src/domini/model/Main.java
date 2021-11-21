@@ -3,7 +3,9 @@ package FONTS.src.domini.model;
 import FONTS.src.domini.drivers.DriverKND;
 import java.util.*;
 
-
+/** \brief Clase que implementa el Main.
+ *  @author Oriol Cuellar
+ */
 public class Main {
 
     /** Mapa que contiene como llave el ID de un Item y com valor los usuarios que lo han valorado.
@@ -21,7 +23,17 @@ public class Main {
      *  @see SlopeOne
      */
     static Map<Integer, User> usersList= new HashMap<Integer, User>();
-
+    /** Main de la clase Main.
+     *   Ejecuta:
+     *      - K-means
+     *      - Slope-One
+     *      - Evalua el resultado con el algortimo
+     *      - K Nearest Neighbour
+     * @see Kmeans
+     * @see SlopeOne
+     * @see RateRecomendation
+     * @see K_Neareast_Neightbour
+     */
     public static void main(String[] args) {
         printInfo();
         Scanner s = new Scanner(System.in);
@@ -54,10 +66,15 @@ public class Main {
         }
     }
 
+    /** Función que imprime informacion de la clase main.
+     *  el algoritmo.
+     */
     static void printInfo() {
         System.out.println("\nClase MAIN\n");
         System.out.println("    Permite probar los algoritmos KMeans, Slope-One, K Nearest Neighbour y \n    dar una valoración a la recomendación de items dada por los algoritmos");
     }
+    /** Función que imprime informacion de las opciones que se pueden ejecutar.
+     */
     static void mostrar_opciones() {
         System.out.println("=====================================================================================");
         System.out.println("\nQUE DESEAS EJECUTAR\n");
@@ -71,9 +88,13 @@ public class Main {
         System.out.println("         K Nearest Neighbour\n\n");
 
     }
+    /** Función que ejecuta el K Nearest Neighbour.
+     */
     static void execute_KNeares_Neighbour(){
         DriverKND.main(null);
     }
+    /** Función que ejecuta el K Means.
+     */
     static void execute_kmeans(){
         System.out.println("=====================================================================================");
         System.out.println("EJECUTANDO K MEANS");
@@ -102,6 +123,8 @@ public class Main {
 
         kmeans.printAllClusters();
     }
+    /** Función que ejecuta el Slope OneK.
+     */
     static ArrayList<myPair> execute_Slope_One(){
         System.out.println("=====================================================================================");
         System.out.println("PRIMERO EJECUTAR KMEANS");
@@ -161,6 +184,8 @@ public class Main {
         return predictions;
 
     }
+    /** Función que ejecuta Rate Recomendation.
+     */
     static void execute_RateRecomendation(){
         System.out.println("=====================================================================================");
         System.out.println("EJECUTANDO RATE RECOMENDATION");
@@ -228,7 +253,8 @@ public class Main {
         }
         return readed_ratings;
     }
-
+    /** Función que muestra las opciones que se pueden hacer en el slope One para elegir usuario.
+     */
     static void mostrar_opciones_slop() {
         System.out.println("=====================================================================================");
         System.out.println("\nOPCIONES PARA ELEGIR EL USUARIO SOBRE EL QUE HACER LA PREDICCION\n");
