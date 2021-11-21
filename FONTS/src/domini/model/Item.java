@@ -272,7 +272,7 @@ public class Item {
         return v;
     }
 
-    /** Copia todos los valores de la segunda ArrayList y los añade en la primera.
+    /** Copia todos los valores de la segunda ArrayList y los añade en la primera. Las ArrayList tienen que ser de los mismos tipos.
      * @param A ArrayList donde se copiara B, para que queden iguales debe ser vacía.
      * @param B ArrayList de origen que ser clonada en A.
      */

@@ -7,19 +7,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-/** \brief Driver de la clase Cluster.
+/** \brief Driver de la clase DriverKND.
  *  @author Jordi Olmo
  */
 public class DriverKND {
 
-    private static Vector <String> items = new Vector<String>();
-    private static Conjunt_Items itemList = new Conjunt_Items();
-    private static Map<String, TipusItem> itemTypeList = new HashMap<String, TipusItem>();
-
     public static Vector<String> Lector_Items(String csvFile) {
         //post: return un vector de les files del csv
-
-        items = new Vector<String>();
+        Vector <String>  items = new Vector<String>();
         BufferedReader br = null;
         String line = "";
         try {
@@ -45,18 +40,21 @@ public class DriverKND {
         return items;
     }
 
-    public static void loadItems(){
+    public static ArrayList<Item> loadItems(String File){
 
-            items = Lector_Items("Entradas_CSV/items.csv");
+        ArrayList<Item> A_Items = new ArrayList<Item>();
+        Vector <String>  items = Lector_Items(File);
 
             for(int i = 1; i < items.size();++i)
-                createItem(items.get(0), items.get(i));
-
+                A_Items.addAll(createItem(items.get(0), items.get(i)));
+        return A_Items;
     }
 
-    public static void createItem(String atributs, String valors){
+    public static ArrayList<Item> createItem(String atributs, String valors){
 
         //string to arraylist de valors
+        Conjunt_Items itemList = new Conjunt_Items();
+        Map<String, TipusItem> itemTypeList = new HashMap<String, TipusItem>();
 
         ArrayList<String> datos_valors = new ArrayList<String>();
         String pal="";
@@ -200,62 +198,110 @@ public class DriverKND {
         int id = Integer.valueOf(datos_valors.get(pos_id));
         Item i =new Item(id, ti, vsv);
         if (!(itemList.existeix_item(id))) itemList.anyadir_item(i);
+        return itemList.getItems();
+    }
 
+    static void printInfo() {
 
+        System.out.println("\nDRIVER DE LA CLASE K_Neareast_Neightbour\n");
+        System.out.println("Funciones de la clase disponibles para probar:\n");
+        System.out.println(
+                "    1: Crear K_Neareast_Neightbour\n    2: Algorithm()\n    3: FINALIZAR PRUEBA.");
+    }
+
+    static void testFunction(int f) {
+
+        switch (f) {
+
+            case 1:
+
+            {
+                System.out.println("================================================================================================");
+                System.out.println("Prueba la creadora de K_Neareast_Neightbour");
+                System.out.println("Introduce los siguientes dos ficheros de Items de la siguiente forma: ./path/file.csv ./path/file.csv");
+
+                Scanner s = new Scanner(System.in);
+                String file1 = s.next();
+                String file2 = s.next();
+                ArrayList<Item> A1 = loadItems(file1);
+                ArrayList<Item> A2 = loadItems(file2);
+
+                System.out.println("Seguidamente pont todas las valoraciones del segundo fichero, teniendo en cuenta que: ");
+                System.out.println("Que las valoraciones son del tipo Double (separa el decimal con ,) y");
+                System.out.println("que tienes que poner el mismo numero de valoraciones, que el numero de items del segundo fichero");
+
+                ArrayList<Double> Valoracions = new ArrayList<Double>();
+                while(s.hasNext())
+                    Valoracions.add(s.nextDouble());
+
+                Conjunt_Items Ct = new Conjunt_Items(A1);
+                K_Neareast_Neightbour prueba = new K_Neareast_Neightbour (Ct);
+                ArrayList<Item> Resultado = Ct.getItems();
+
+                System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los  items del conjunto: \n");
+
+                for (int i = 0; i < Resultado.size(); ++i)
+                    System.out.print(' ' + Resultado.get(i).getID());
+                System.out.print("\n");
+                System.out.println("=================================================================================================");
+                break;
+            }
+
+            case 2:
+
+            {
+                System.out.println("================================================================================================");
+                System.out.println("Prueba la creadora de la funcion Algorithm()");
+                System.out.println("Introduce los siguientes dos ficheros de Items de la siguiente forma: ./path/file.csv ./path/file.csv");
+
+                Scanner s = new Scanner(System.in);
+                String file1 = s.next();
+                String file2 = s.next();
+                ArrayList<Item> A1 = loadItems(file1);
+                ArrayList<Item> A2 = loadItems(file2);
+
+                System.out.println("Seguidamente pont todas las valoraciones del segundo fichero, teniendo en cuenta que: ");
+                System.out.println("Que las valoraciones son del tipo Double (separa el decimal con ,) y");
+                System.out.println("que tienes que poner el mismo numero de valoraciones, que el numero de items del segundo fichero");
+
+                ArrayList<Double> Valoracions = new ArrayList<Double>();
+                while(s.hasNext())
+                    Valoracions.add(s.nextDouble());
+
+                System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que és un entero: ");
+
+                int k = s.nextInt();
+
+                Conjunt_Items Ct = new Conjunt_Items(A1);
+                K_Neareast_Neightbour prueba = new K_Neareast_Neightbour (Ct);
+                ArrayList<Item> Resultado = prueba.Algorithm(k, A2, Valoracions);
+
+                System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los k items recomendados: \n");
+                for (int i = 0; i < Resultado.size(); ++i)
+                    System.out.print(' ' + Resultado.get(i).getID());
+                System.out.print("\n");
+                System.out.println("=================================================================================================");
+                break;
+            }
+
+            case 3:break;
+
+            default : System.out.println("No has introducido un número entre 1 y 3");
+
+        }
     }
 
     public static void main(String[] args) {
 
-        loadItems();
+        Scanner s = new Scanner(System.in);
+        int f;
+        do{
+            printInfo();
+            System.out.println("\nSelecciona funcion a probar: ");
+            f = s.nextInt();
+            testFunction(f);
 
-        Ranged_Atribute AT = new Ranged_Atribute("Peso", "Rang", 32.4, 75.8);
-        Atribute AT2 = new Atribute("Color", "String");
-        Atribute AT3 = new Atribute("Fecha", "Data");
-        Atribute AT4 = new Atribute("Disponible", "Boolean");
-        Atribute AT5 = new Atribute("KeyWords", "Vector de String");
-
-        Ranged_Atribute AU = new Ranged_Atribute("Duracion", "Rang", 60.0, 240.0);
-        Atribute AU2 = new Atribute("Idioma", "String");
-        Atribute AU4 = new Atribute("Disponible", "Boolean");
-        Atribute AU3 = new Atribute("Estreno", "Data");
-
-        ArrayList<Atribute> Tipus1 = new ArrayList<Atribute>(Arrays.asList(AT, AT2, AT3, AT4, AT5));
-        ArrayList<Atribute> Tipus2 = new ArrayList<Atribute>(Arrays.asList(AU, AU2, AU4, AU3));
-
-        TipusItem T1 = new TipusItem(Tipus1);
-        TipusItem T2 = new TipusItem(Tipus2);
-
-        ArrayList<String> Valors2 = new ArrayList<String>(Arrays.asList("Verde", "true", "1992-04-12", "hola;que;tal", "32.4"));
-        ArrayList<String> Valors3 = new ArrayList<String>(Arrays.asList("Verde", "false", "1960-05-03", "Burnos;dias;siñorina", "75.8"));
-        ArrayList<String> Valors4 = new ArrayList<String>(Arrays.asList("Rojo", "false", "2000-12-04", "Habia;una;vez;un;varquito;chuiquito;dias", "32.4"));
-        ArrayList<String> Valors5 = new ArrayList<String>(Arrays.asList("Azul", "", "1999-00-00", "hola;que;tal", "46.8"));
-
-        ArrayList<String> Valors6 = new ArrayList<String>(Arrays.asList("true", "120", "1992-04-12", "Ingles"));
-        ArrayList<String> Valors7 = new ArrayList<String>(Arrays.asList("false", "712", "1960-05-03", "Españolo"));
-        ArrayList<String> Valors8 = new ArrayList<String>(Arrays.asList("", "240", "2000-12-04", "Ingles"));
-        ArrayList<String> Valors9 = new ArrayList<String>(Arrays.asList("true", "60", "1999-00-00", "Espa"));
-
-        Item a2 = new Item(2, T1, Valors2);
-        Item a3 = new Item(3, T1, Valors3);
-        Item a4 = new Item(4, T1, Valors4);
-        Item a5 = new Item(5, T1, Valors5);
-
-        Item a6 = new Item(10, T2, Valors6);
-        Item a7 = new Item(11, T2, Valors7);
-        Item a8 = new Item(12, T2, Valors8);
-        Item a9 = new Item(13, T2, Valors9);
-
-        ArrayList<Item> Items = new ArrayList<Item>(Arrays.asList(a2, a3, a4, a5));
-
-        Conjunt_Items Ct = new Conjunt_Items(Items);
-        ArrayList<Item> ItemsUsats = new ArrayList<Item>(Arrays.asList(a9, a7, a8, a6));
-        ArrayList<Double> Valoracions = new ArrayList<Double>(Arrays.asList(2.1, 4.1, 1.0, 3.2));
-
-        K_Neareast_Neightbour prueba = new K_Neareast_Neightbour (itemList);
-        ArrayList<Item> Resultado = prueba.Algorithm(3, ItemsUsats, Valoracions);
-
-        for (int i = 0; i < Resultado.size(); ++i)
-            System.out.println(Resultado.get(i).getID());
+        }while(f != 3);
 
     }
 }
