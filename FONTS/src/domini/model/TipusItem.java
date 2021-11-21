@@ -27,11 +27,6 @@ public class TipusItem {
 
         ArrayList <String> v = new ArrayList<String> ();
 
-        for (int i = 0; i < atributes.size(); ++i) {
-
-            v.add(i, atributes.get(i).getName());
-        }
-
         Collections.sort(atributes, new Comparator<Atribute>() {
             @Override
             public int compare(Atribute a, Atribute b) {
@@ -39,6 +34,11 @@ public class TipusItem {
             }
 
         });
+
+        for (int i = 0; i < atributes.size(); ++i) {
+
+            v.add(i, atributes.get(i).getName());
+        }
 
         this.ID = v.toString();
         this.atributes = atributes;
