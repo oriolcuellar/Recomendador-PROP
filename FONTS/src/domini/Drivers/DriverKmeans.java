@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class DriverKmeans {
 
-    static String path = "Entradas_CSV/ratings.db.csv";
+    static String path = "EXE/Entradas_CSV/ratings.db.csv";
 
 
 
@@ -50,8 +50,6 @@ public class DriverKmeans {
                     if (datos[1].equals("rating")) rating=1;
                     if (datos[2].equals("rating")) rating=2;
                 }
-                for(int i = 0; i < datos.length; ++i) {
-                }// userId, itemId, rating
                 if(!first) {
                     Vector<String> dentro = new Vector<String>();
                     dentro.add(datos[user]);

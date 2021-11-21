@@ -1,7 +1,6 @@
 package FONTS.src.domini.model;
 
 import FONTS.src.domini.model.*;
-import FONTS.src.domini.controladores.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

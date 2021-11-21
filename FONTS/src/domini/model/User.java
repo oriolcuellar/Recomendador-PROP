@@ -198,33 +198,7 @@ public class User {
         return sumProdValorations/(float)(sqrt(51)*sqrt(36));
     }
 
-    /**
-     * Calcula la distancia que tiene con otro usuario con otro. (De momento no se usa)
-     * @param usuario2 usuario sobre el que queremos ver su similaridad
-     * @return Valor > 0, contra más grande sea menos se parecen los usuarios
-     */
-    public float calculateDistances2(User usuario2) {
-        ArrayList<valoratedItem> valoracionesUsuario2 = usuario2.getValoratedItems();
-        float sumaTotal = 0;
-        int count = 0;
-        for(int i = 0; i < valoratedItems.size(); ++i) {
-            int id1 = valoratedItems.get(i).getItem().getID();
-            for (int j = 0; j < valoracionesUsuario2.size(); ++j) {
-                int id2 = valoracionesUsuario2.get(j).getItem().getID();
-                if(id1 == id2) {
-                    ++count;
-                    valoratedItem item1 = valoratedItems.get(i);
-                    valoratedItem item2 = valoracionesUsuario2.get(j);
-                    sumaTotal += (item1.getValoracio() - item2.getValoracio()) * (item1.getValoracio() - item2.getValoracio());
-                    break;
-                }
-            }
-        }
-        if(count == 0) return Float.POSITIVE_INFINITY;
-        return (float) sqrt(sumaTotal);
-    }
-
-    /**
+     /**
      * Busca si existe el item con ID itemID
      * @param itemID Id del item que queremos encontrar
      * @return valoratedItem si existe, null si no existe
