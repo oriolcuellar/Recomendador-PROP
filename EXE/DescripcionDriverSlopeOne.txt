@@ -26,7 +26,7 @@ Manual de Uso
 ====================
 
 - Compilar con el comando make
-- Ejecutar el test con el comando make UserTest
+- Ejecutar el test con el comando make DriverSlopeOne
 
 - El programa te pedirá que elijas entre cuatro funcionalidades:
 	- Cargar fichero de datos a elección
