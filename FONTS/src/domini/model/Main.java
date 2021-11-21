@@ -32,7 +32,7 @@ public class Main {
         String op="";
         //escoger algoritmo
         while (!escogido) {
-            mostrar_opciones();
+            mostrar_opciones_slop();
             op=s.next();
             if (op.equals("1") || op.equals("2") || op.equals("3")){
                 escogido=true;
@@ -80,24 +80,91 @@ public class Main {
 
         Scanner s = new Scanner(System.in);
         boolean escogido=false;
-        int k;
+        int k=1;
         //escoger valor K
         while (!escogido) {
             System.out.print("Introduce el valor de la K (numero de clusters del algoritmo)");
             k=s.nextInt();
-            if (k>0 && k<50){//cual es el maximo?---------------------------------------------------------------------------------------------------------------
+            if (k>0 && k<usersList.keySet().size()){
                 escogido=true;
             }
             else{
                 System.out.print("Porfavor introduce un valor correcto\n ");
             }
         }
+        Kmeans kmeans = new Kmeans();
+        kmeans.run(usersList,k);
+
+        kmeans.printAllClusters();
     }
-    static void execute_Slope_One(){//para este necesito kmeans?
+    static ArrayList<myPair> execute_Slope_One(){
+        System.out.println("=====================================================================================");
+        System.out.println("PRIMERO EJECUTAR KMEANS");
+        execute_kmeans();
         System.out.println("=====================================================================================");
         System.out.println("EJECUTANDO SLOPE-ONE");
+
+        SlopeOne So = new SlopeOne();
+
+        Scanner s = new Scanner(System.in);
+        boolean trobat=false;
+        User u = new User();
+        while (!trobat){
+            mostrar_opciones();
+            String op = s.next();
+            switch (op) {
+                case "1": {//usuario aleatorio
+                    System.out.println("=====================================================================================");
+                    Random r = new Random();
+                    int valorDado = r.nextInt(usersList.size());
+                    int id=(int ) usersList.keySet().toArray()[valorDado];
+                    System.out.println("Usuario escogido: " + id);
+                    u = usersList.get(id);
+                    trobat = true;
+                    break;
+                }
+                case "2": {//teclado
+                    System.out.println("=====================================================================================");
+                    System.out.println("Introduce el ID del usuario");
+                    int tec = s.nextInt();
+                    if (!usersList.containsKey(tec)) {
+                        System.out.println("Usuario no existe");
+                        break;
+                    }
+                    u = usersList.get(tec);
+                    trobat = true;
+                    break;
+                }
+                case "3": {//mostrar todos
+                    System.out.println("=====================================================================================");
+                    Set keys = usersList.keySet();
+                    for (Iterator i = keys.iterator(); i.hasNext(); ) {
+                        int key = (int) i.next();
+                        System.out.println(key);
+                    }
+                    break;
+                }
+
+                default:
+                    System.out.println("=====================================================================================");
+                    System.out.print("Porfavor introduce un valor correcto\n ");
+            }
+
+        }
+        ArrayList<myPair> predictions =So.getPredictions(u,item_valorated_by,10);
+        So.printResults();
+        return predictions;
+
     }
-    static void execute_RateRecomendation(){//para este necesito los dos?
+    static void execute_RateRecomendation(){
+        System.out.println("=====================================================================================");
+        System.out.println("EJECUTANDO RATE RECOMENDATION");
+
+        ArrayList<myPair> pred=execute_Slope_One();
+
+        RateRecomendation rec = new RateRecomendation();
+        float result=rec.execute(pred);
+        System.out.println("\n\n La valoracion de la recomendacion: " + result);
 
     }
 
@@ -155,6 +222,18 @@ public class Main {
             }
         }
         return readed_ratings;
+    }
+
+    static void mostrar_opciones_slop() {
+        System.out.println("=====================================================================================");
+        System.out.println("\nOPCIONES PARA ELEGIR EL USUARIO SOBRE EL QUE HACER LA PREDICCION\n");
+        System.out.println("    - 1 ");
+        System.out.println("         Usuario aleatorio");
+        System.out.println("    - 2 ");
+        System.out.println("         Usuario introducido por teclado");
+        System.out.println("    - 3 ");
+        System.out.println("         Mostrar todos los usuarios\n\n");
+
     }
 
 }
