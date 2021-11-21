@@ -25,6 +25,15 @@ public class RateRecomendation {
      * @see myPair
      */
     public float execute(ArrayList<myPair> arr ){
+        //DCG
+        float res1=0;
+        for (int i=0;i<arr.size();++i){
+            double top=arr.get(i).getValoration();
+            double down=(Math.log10(i+1+1) / Math.log10(2));
+            top=top/down;
+            res1+=top;
+        }
+        //IDCG
         float res=0;
         for (int i=0;i<arr.size();++i){
             double top=(Math.pow(2, arr.get(i).getValoration())-1);
@@ -32,7 +41,8 @@ public class RateRecomendation {
             top=top/down;
             res+=top;
         }
-        return res;
+        //nDCG (normalized)
+        return res1/res;
     }
 
 }
