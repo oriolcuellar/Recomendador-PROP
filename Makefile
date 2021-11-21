@@ -5,7 +5,7 @@ all: main drivers
 
 main: Main.class
 
-Main.class: CtrlDomini.class
+Main.class: 
 	$(JC) $(FLAGS) ./FONTS/src/domini/model/Main.java
 
 Atribute.class:
@@ -54,8 +54,6 @@ User.class: TipusRol.class valoratedItem.class
 valoratedItem.class: Item.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/model/valoratedItem.java
 
-CtrlDomini.class: User.class Item.class Kmeans.class SlopeOne.class valoratedItem.class Conjunt_Items.class TipusRol.class Ranged_Atribute.class LectorCSV2.class K_Neareast_Neightbour.class
-	$(JC) $(FLAGS) ./FONTS/src/domini/controladores/CtrlDomini.java
 
 drivers: DriverCluster.class DriverKmeans.class DriverKND.class DriverLectorCSV2.class DriverRateRecomendation.class DriverValoratedItem.class DriverSlopeOne.class DriverMyPair.class DriverRanged_Atribute.class DriverItem.class DriverConjuntItems.class DriverTipusItem.class DriverAtribute.class DriverRanged_Atribute.class 
 
