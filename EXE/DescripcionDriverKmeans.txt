@@ -2,7 +2,7 @@
 Objeto de prueba: Kmeans
 ========================================
 
-La clase Kmeans implementa dihco algoritmo. Las pruebas de esta clase van enfocadas a comprobar
+La clase Kmeans implementa dicho algoritmo. Las pruebas de esta clase van enfocadas a comprobar
 que se ejecuta correctamente y sin errores, puediendo elegir varios parametros como los ficheros
 entrada o el valor de la K.
 
@@ -20,6 +20,6 @@ Manual de Uso
 - Compilar con el comando make
 - Ejecutar el test con el comando make DriverKmeans
 
-Al ejecutar el programa aparecerá un menú donde cada opción tiene un número,
-únicamente hay que seleccionar la opción deseada e introducir los parámetros que se requieran.
+Al ejecutar el programa aparecera un menu donde cada opcion tiene un numero,
+unicamente hay que seleccionar la opcion deseada e introducir los parametros que se requieran.
 
