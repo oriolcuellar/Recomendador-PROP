@@ -73,17 +73,6 @@ public class Main {
     }
     static void execute_KNeares_Neighbour(){
         DriverKND.main(null);
-        /*Scanner s = new Scanner(System.in);
-        int f;
-        do{
-            printInfo();
-            System.out.println("\nSelecciona funcion a probar: ");
-            f = s.nextInt();
-            testFunction(f);
-
-        }while(f != 4);*/
-
-
     }
     static void execute_kmeans(){
         System.out.println("=====================================================================================");
