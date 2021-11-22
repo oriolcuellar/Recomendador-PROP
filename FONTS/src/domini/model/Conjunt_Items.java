@@ -3,7 +3,7 @@ package FONTS.src.domini.model;
 import FONTS.src.domini.model.*;
 import java.util.*;
 
-/** \brief Estructura de datos para guardar Item de forma ordenada por ID.
+/** \brief Estructura de datos para guardar Item de forma ordenada por ID y a la vez guarda una matriz con todas las distancias.
  *  @author Jordi Olmo
  */
 public class Conjunt_Items {
