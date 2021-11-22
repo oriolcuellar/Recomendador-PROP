@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
-/** \brief Driver de la classe item. Suite de distancias
+/** \brief Driver de la classe Item. Suite del resto de funciones
  *  @author Jordi Olmo
  */
 public class Suite_Resto_Item {

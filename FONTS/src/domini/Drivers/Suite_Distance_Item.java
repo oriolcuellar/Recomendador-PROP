@@ -13,7 +13,9 @@ import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(value=Parameterized.class)
 
-
+/** \brief Driver de la classe Item. Suite de Distance.
+ *  @author Jordi Olmo
+ */
 
 public class Suite_Distance_Item {
 

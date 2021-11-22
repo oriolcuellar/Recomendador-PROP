@@ -2,17 +2,12 @@ package FONTS.src.domini.model;
 
 import java.util.ArrayList;
 
-/** \brief Clase que implementa el algoritmo K_Neareast_Neightbour y a la vez guarda una matriz con todas las distancias.
+/** \brief Clase que implementa el algoritmo K_Neareast_Neightbour.
  *  @author Jordi Olmo
  */
 public class K_Neareast_Neightbour {
 
     //Atributes
-
-    /** El conjunto de todos los Items guardados en la estructura de datos Conjunt_Item
-     * @see Conjunt_Items
-     */
-    private Conjunt_Items C_Items;
 
     //Constructora
 
