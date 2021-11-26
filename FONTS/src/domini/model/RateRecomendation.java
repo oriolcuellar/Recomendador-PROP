@@ -24,16 +24,16 @@ public class RateRecomendation {
      *              - Logaritmo base 2 de (la posicion - 1)
      * @see myPair
      */
-    public float execute(ArrayList<myPair> arr ){
-        //DCG
+    public float execute(ArrayList<myPair> arr, ArrayList<myPair> u ){
+        //IDCG
         float res1=0;
         for (int i=0;i<arr.size();++i){
-            double top=arr.get(i).getValoration();
+            double top=(Math.pow(2, u.get(i).getValoration())-1);
             double down=(Math.log10(i+1+1) / Math.log10(2));
             top=top/down;
             res1+=top;
         }
-        //IDCG
+        //DCG
         float res=0;
         for (int i=0;i<arr.size();++i){
             double top=(Math.pow(2, arr.get(i).getValoration())-1);
@@ -42,7 +42,7 @@ public class RateRecomendation {
             res+=top;
         }
         //nDCG (normalized)
-        return res1/res;
+        return res/res1;
     }
 
 }
