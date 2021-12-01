@@ -1,46 +1,20 @@
-package FONTS.src.domini.model;
+package FONTS.src.persistencia;
 
-import java.io.*;
+import FONTS.src.domini.exceptions.FileNotExistsException;
+import FONTS.src.domini.exceptions.NotRatingsFileException;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Vector;
 
-/** \brief Clase que implementa LectorCSV2.
- *  @author Oriol Cuellar
- */
-public class LectorCSV2 {
-    /** Constructora de la clase.
-     */
-    public LectorCSV2(){
-    }
-    /** Función que lee Items de un fichero CSV.
-     * @param csvFile Path al fichero CSV.
-     * @return Vector de Strings que contienen los items leidos.
-     */
-    public Vector <String> Lector_Items(String csvFile) throws Exception{
-        //post: return un vector de les files del csv
-
-        Vector <String> items = new Vector<String>();
-        BufferedReader br = null;
-        String line = "";
-        try {
-            br = new BufferedReader(new FileReader(csvFile));
-            boolean first = true;
-            int num_atributes = 0;
-            while ((line = br.readLine()) != null) {
-                items.add(line);
-            }
-        }
-        catch (Exception e){
-                throw e;
-            }
-        return items;
-    }
+public class DadesRatings {
     /** Función que lee valoraciones de un fichero CSV.
      * @param csvFile Path al fichero CSV.
      * @return ArrayList de Vectores de Strings que contienen las valoraciones leidas.
      */
     public ArrayList<Vector<String>> Lector_Ratings(String csvFile ) throws Exception{
-            ArrayList <Vector<String>> ratings=new ArrayList<Vector<String>>();
+        ArrayList <Vector<String>> ratings=new ArrayList<Vector<String>>();
         BufferedReader br = null;
         String line = "";
         //Se define separador ","
@@ -50,10 +24,15 @@ public class LectorCSV2 {
         int rating=2;
         try {
             br = new BufferedReader(new FileReader(csvFile));
+        }
+        catch (Exception e){
+            throw new FileNotExistsException(csvFile);
+        }
+        try {
             boolean first = true;
             while ((line = br.readLine()) != null) {
                 String[] datos = line.split(cvsSplitBy);
-                if (datos.length!=3) throw  new Exception("Not a ratings file: " + csvFile);
+                if (datos.length!=3) throw  new NotRatingsFileException(csvFile);
                 if (first){//colamos orden. User, item, valoracion
                     if (datos[0].equals("userId")) user=0;
                     if (datos[1].equals("userId")) user=1;
@@ -81,5 +60,4 @@ public class LectorCSV2 {
         return ratings;
 
     }
-
 }

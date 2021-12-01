@@ -1,5 +1,5 @@
 package FONTS.src.domini.drivers;
-import FONTS.src.domini.model.LectorCSV2;
+import FONTS.src.persistencia.LectorCSV2;
 
 import java.util.ArrayList;
 import java.util.Scanner;

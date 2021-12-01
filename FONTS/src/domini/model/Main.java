@@ -1,6 +1,8 @@
 package FONTS.src.domini.model;
 
 import FONTS.src.domini.drivers.DriverKND;
+import FONTS.src.persistencia.LectorCSV2;
+
 import java.util.*;
 
 /** \brief Clase que implementa el Main.
