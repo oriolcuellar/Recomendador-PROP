@@ -1,11 +1,11 @@
 package FONTS.src.domini.drivers;
-import FONTS.src.persistencia.LectorCSV2;
+import FONTS.src.persistencia.ControladorPersistencia;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Vector;
 
-/** \brief Driver de la clase LectorCSV2.
+/** \brief Driver de la clase ControladorPersistencia.
  *  @author Oriol Cuellar
  */
 public class DriverLectorCSV2 {
@@ -14,7 +14,7 @@ public class DriverLectorCSV2 {
      *  Prueba 2 casos:
      *      - Lee valoraciones de un path dado y los imprime por pantalla.
      *      - Lee items de un path dado y los imprime por pantalla.
-     * @see LectorCSV2
+     * @see ControladorPersistencia
      */
     public static void main(String[] args) {
         printInfo();
@@ -27,7 +27,7 @@ public class DriverLectorCSV2 {
             cual = s.next();
         }
         boolean leido=false;
-        LectorCSV2 reader = new LectorCSV2();
+        ControladorPersistencia reader = new ControladorPersistencia();
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
         Vector<String> readed_Items = new Vector<String>();
         while (!leido){
@@ -79,8 +79,8 @@ public class DriverLectorCSV2 {
      */
     static void printInfo() {
         System.out.println("=====================================================================================");
-        System.out.println("\nDRIVER DE LA CLASE LectorCSV2\n");
-        System.out.println("    La clase LectorCSV2 lee ficheros CSV de los paths introducidos por el usuario.");
+        System.out.println("\nDRIVER DE LA CLASE ControladorPersistencia\n");
+        System.out.println("    La clase ControladorPersistencia lee ficheros CSV de los paths introducidos por el usuario.");
         System.out.println("    Los muestra por pantalla");
 
     }

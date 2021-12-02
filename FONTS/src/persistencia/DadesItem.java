@@ -1,10 +1,25 @@
 package FONTS.src.persistencia;
 
+import FONTS.src.domini.exceptions.FileNotExistsException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Vector;
 
 public class DadesItem {
+
+    static DadesItem  CtrItem;
+
+    private DadesItem(){
+    }
+
+    public static DadesItem getInstance(){
+        if (CtrItem==null){
+            CtrItem = new DadesItem();
+        }
+        return CtrItem;
+    }
+
 
     /** Función que lee Items de un fichero CSV.
      * @param csvFile Path al fichero CSV.
@@ -19,11 +34,10 @@ public class DadesItem {
         try{
             br = new BufferedReader(new FileReader(csvFile));
         }
-
+        catch (Exception e){
+            throw new FileNotExistsException(csvFile);
+        }
         try {
-
-            boolean first = true;
-            int num_atributes = 0;
             while ((line = br.readLine()) != null) {
                 items.add(line);
             }

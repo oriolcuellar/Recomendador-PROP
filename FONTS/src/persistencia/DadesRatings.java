@@ -9,6 +9,19 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class DadesRatings {
+
+    static DadesRatings CtrRatings;
+
+    private DadesRatings(){
+    }
+
+    public static DadesRatings getInstance(){
+        if (CtrRatings==null){
+            CtrRatings = new DadesRatings();
+        }
+        return CtrRatings;
+    }
+
     /** Función que lee valoraciones de un fichero CSV.
      * @param csvFile Path al fichero CSV.
      * @return ArrayList de Vectores de Strings que contienen las valoraciones leidas.
