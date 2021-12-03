@@ -100,7 +100,7 @@ public class K_Neareast_Neightbour {
 
         ArrayList <Double> Valors = new ArrayList<Double>();
         for (int i = 0; i < M_de_Items.size(); ++i)
-            for (int j = 0; j < M_de_Items.get(i).size(); ++j) {
+            for (int j = 0; j < M_de_Items.get(i).size() && Distances.get(i).get(j) > 0; ++j) {
 
                 if (!I_Finals.contains(M_de_Items.get(i).get(j))) {
 

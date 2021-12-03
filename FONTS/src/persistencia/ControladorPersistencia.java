@@ -17,7 +17,7 @@ public class ControladorPersistencia {
     //----------------------------------------------------------------------------
     /** Constructora de la clase.
      */
-     private ControladorPersistencia(){
+    public ControladorPersistencia(){
          CtrlItem = DadesItem.getInstance();
          CtrlRatings = DadesRatings.getInstance();
          CtrlRecomendation = DadesRecomendation.getInstance();

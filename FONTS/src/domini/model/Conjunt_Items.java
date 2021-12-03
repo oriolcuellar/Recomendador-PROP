@@ -39,6 +39,7 @@ public class Conjunt_Items {
             }
         });
         Distances = new ArrayList<ArrayList<Double>>();
+        initzialitzar_matriu();
     }
 
     /** Creadora de la classe con una ArraList vacía.

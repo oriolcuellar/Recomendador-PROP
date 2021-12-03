@@ -109,7 +109,7 @@ public class DriverRateRecomendation {
 
         //Algortimo de valorar recomendaciones
         RateRecomendation recomendation = new RateRecomendation();
-        float result=recomendation.execute(predictions);
+        float result=recomendation.execute(predictions, predictions);
         System.out.println("\n\n La valoracion de la recomendacion: " + result);
 
     }
