@@ -254,7 +254,7 @@ public class DriverKND {
                     System.out.println("que tienes que poner el mismo numero de valoraciones, que el numero de items del segundo fichero");
 
                     ArrayList<Double> Valoracions = new ArrayList<Double>();
-                    while (s.hasNext())
+                    for (int i = 0; i < A2.size(); ++i)
                         Valoracions.add(s.nextDouble());
 
                     System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que és un entero: ");
