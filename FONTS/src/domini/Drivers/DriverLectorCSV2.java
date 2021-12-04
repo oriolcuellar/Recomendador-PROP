@@ -1,5 +1,5 @@
 package FONTS.src.domini.drivers;
-import FONTS.src.persistencia.ControladorPersistencia;
+import FONTS.src.persistencia.ControladorPersistenciaRatings;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,7 +14,7 @@ public class DriverLectorCSV2 {
      *  Prueba 2 casos:
      *      - Lee valoraciones de un path dado y los imprime por pantalla.
      *      - Lee items de un path dado y los imprime por pantalla.
-     * @see ControladorPersistencia
+     * @see ControladorPersistenciaRatings
      */
     public static void main(String[] args) {
         printInfo();
@@ -27,7 +27,7 @@ public class DriverLectorCSV2 {
             cual = s.next();
         }
         boolean leido=false;
-        ControladorPersistencia reader = new ControladorPersistencia();
+        ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
         Vector<String> readed_Items = new Vector<String>();
         while (!leido){

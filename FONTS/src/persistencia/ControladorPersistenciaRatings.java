@@ -8,19 +8,14 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class DadesRatings {
+public class ControladorPersistenciaRatings {
 
-    static DadesRatings CtrRatings;
 
-    private DadesRatings(){
+
+    public ControladorPersistenciaRatings(){
     }
 
-    public static DadesRatings getInstance(){
-        if (CtrRatings==null){
-            CtrRatings = new DadesRatings();
-        }
-        return CtrRatings;
-    }
+
 
     /** Función que lee valoraciones de un fichero CSV.
      * @param csvFile Path al fichero CSV.

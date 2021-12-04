@@ -1,7 +1,7 @@
 package FONTS.src.domini.model;
 
 import FONTS.src.domini.drivers.DriverKND;
-import FONTS.src.persistencia.ControladorPersistencia;
+import FONTS.src.persistencia.ControladorPersistenciaRatings;
 
 import java.util.*;
 
@@ -244,7 +244,7 @@ public class Main {
                 Scanner s = new Scanner(System.in);
                 String path;
                 path = s.next();
-                ControladorPersistencia reader = new ControladorPersistencia();
+                ControladorPersistencia reader = new ControladorPersistenciaRatings();
                 readed_ratings = reader.Lector_Ratings(path);
                 leido=true;
             } catch (Exception e) {

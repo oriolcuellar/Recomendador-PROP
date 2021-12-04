@@ -6,19 +6,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Vector;
 
-public class DadesItem {
+public class ControladorPersistenciaItem {
 
-    static DadesItem  CtrItem;
 
-    private DadesItem(){
+    public ControladorPersistenciaItem(){
     }
 
-    public static DadesItem getInstance(){
-        if (CtrItem==null){
-            CtrItem = new DadesItem();
-        }
-        return CtrItem;
-    }
 
 
     /** Función que lee Items de un fichero CSV.

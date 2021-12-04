@@ -1,6 +1,6 @@
 package FONTS.src.domini.drivers;
 import FONTS.src.domini.model.*;
-import FONTS.src.persistencia.ControladorPersistencia;
+import FONTS.src.persistencia.ControladorPersistenciaRatings;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -71,7 +71,7 @@ public class DriverKmeans {
      */
     public static Map<Integer, User> readData(String s){
         Map<Integer, User> usersList = new HashMap<>();
-        ControladorPersistencia l = new ControladorPersistencia();
+        ControladorPersistencia l = new ControladorPersistenciaRatings();
         ArrayList<Vector<String>> readed_ratings = Lector_Ratings(s);
         boolean fail = false;
         for (Vector<String> vs : readed_ratings) {

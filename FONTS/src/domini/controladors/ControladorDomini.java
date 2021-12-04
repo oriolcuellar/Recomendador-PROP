@@ -1,5 +1,14 @@
-/*
+
 package FONTS.src.domini.controladors;
+
+import FONTS.src.domini.exceptions.*;
+import FONTS.src.domini.model.*;
+import FONTS.src.persistencia.ControladorPersistenciaRatings;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
 
 public class ControladorDomini {
 
@@ -14,22 +23,22 @@ public class ControladorDomini {
 
 // Atributes
 
-    private static CtrlDomini   dominiSingelton = null;
+    private static ControladorDomini   dominiSingelton = null;
 
     private static User actualUser;
     private static Item selectedItem;
     private static Map <Integer, User> usersList;
     private static Conjunt_Items itemList;
-    private static Map <String, TipusItem> itemTypeList;
-    private static Map<Integer,ArrayList<User>> itemValoratedBy;
+    private static Map<String, TipusItem> itemTypeList;
+    private static Map<Integer, ArrayList<User>> itemValoratedBy;
 
 //CtrlDomini control= CtrlDomini.getInstance();
 //control.getAllUsers();
 //constructor
-    public static CtrlDomini getInstance(){
+    public static ControladorDomini getInstance(){
         if (dominiSingelton == null)
         {
-            dominiSingelton = new CtrlDomini() {};
+            dominiSingelton = new ControladorDomini() {};
         }
         return dominiSingelton;
     }
@@ -46,20 +55,19 @@ public class ControladorDomini {
         usersList.put(-1, admin);
     }
 
-    private CtrlDomini(){
+    private ControladorDomini(){
         iniCtrlDomini();
     }
 
 //Profile controller
 
-    public void register(String struserId, String password){
+    public void register(String struserId, String password) throws Exception {
         //post: es crea un usuari i es posa d'usuari actiu.
         //err: Usuari actiu null, userId not exists, id o passw son strings buits
         try {
             int userId = Integer.valueOf(struserId);
             if (usersList.containsKey(userId) || actualUser != null || struserId.equals("") || password.equals("")) {
-
-                System.out.println("Error al registrar " + struserId);
+                throw new NotValidUserorPasswException(struserId +" "+ password);
             } else {
                 TipusRol rol = TipusRol.Usuari;
                 actualUser = new User(userId, password, rol);
@@ -67,21 +75,22 @@ public class ControladorDomini {
             }
         }
         catch (Exception e){
-            System.out.println(e);
+            throw e;
         }
+
     }
-    public void login(String struserId, String password){
+    public void login(String struserId, String password) throws Exception{
         //post: es crea un usuari i es posa d'usuari actiu.
         try {
             int userId = Integer.valueOf((struserId));
             if (actualUser != null) {
-                System.out.println("Tanca sessio primer");
+                throw new ImpossibleStateException("login");
             } else if (usersList.containsKey(userId)) {
                 actualUser = usersList.get(userId);
                 if (actualUser.getPassword().equals(password)) {//logged
                     System.out.println("Sessió iniciada");
                 } else {
-                    System.out.println( "Error usuari o contrasenya");
+                    throw new UserNotExistsException(struserId);
                 }
             }
         }
@@ -89,36 +98,38 @@ public class ControladorDomini {
             System.out.println(e);
         }
     }
-    public  void logout(){
-        if (actualUser==null) System.out.println("No hi ha usuari loggejat");
+    public  void logout()throws Exception{
+        if (actualUser==null) throw new ImpossibleStateException("logout");
         else{
             actualUser=null;
             System.out.println("Logged Out");
         }
 
     }
-    public static void editProfile(String newPass){
-        if (actualUser==null) System.out.println("No hi ha usuari loggejat");
+    public static void editProfile(String newPass) throws Exception{
+        if (actualUser==null) throw new ImpossibleStateException("editProfile");
         else{
             actualUser.setPassword(newPass);
             System.out.println("Password changed Out");
         }
     }
-    public static void deleteProfile(String delete_me){
+    public static void deleteProfile(String delete_me) throws Exception{
         try {
-            if (actualUser != null && actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1") && usersList.containsKey(Integer.valueOf(delete_me))) {
+            if(actualUser == null) throw new ImpossibleStateException("deleteProfile");
+            else if(!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
+            else if(delete_me.equals("-1")) throw new DeleteAdministratorException(delete_me);
+            else if (usersList.containsKey(Integer.valueOf(delete_me))) {
                 User u = usersList.get(delete_me);
                 ArrayList<valoratedItem> lista_valorados = u.getValoratedItems();
                 for(valoratedItem i: lista_valorados){
                     ArrayList <User> usuarios=itemValoratedBy.get(i.getItem().getID());
                     usuarios.remove(u);
                 }
-            } else {
-                System.out.println("No es pot esborrar");
             }
+            else throw new UserNotExistsException(delete_me);
         }
         catch (Exception e){
-            System.out.println(e);
+            throw e;
         }
 
     }
@@ -152,7 +163,7 @@ public class ControladorDomini {
         ArrayList <Double> va = new ArrayList<Double>();
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
         try {
-            LectorCSV2 reader = new LectorCSV2();
+            ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
             readed_ratings = reader.Lector_Ratings(path);
         }
         catch (Exception e){
@@ -177,29 +188,51 @@ public class ControladorDomini {
 
     }
     public void rateItem(){}
-    public void showAllItems(){
+    public Vector<String> showAllItems(){
+        Vector <String> totsItems = new Vector<String>();
         for(Item i: itemList.getItems()){
             System.out.println(i.getID());
+            totsItems.add(String.valueOf(i.getID()));
         }
+        return totsItems;
     }
-    /*
-    public void ShowRatedItems(){
 
-        //System.out.println(ratesList.size());
-        for(ItemUsat i: usersList.get(actualUser).getItemsUsats()){
-            System.out.println("\n" + i.getUsuari()+ " "+ i.getItem()+" "+ i.getValoracio() + "\n");
+    public Vector <Vector<String>> ShowRatedItems() throws Exception{//vector de vectores de strings de 3 posiciones user id, item id, valoracion
+        if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException("");
+
+        Vector <Vector<String>> valorations = new Vector<Vector<String>>();
+        for(valoratedItem i: usersList.get(actualUser).getValoratedItems()){
+            System.out.println("\n" + actualUser.getUserID()+ " "+ i.getItem().getID()+" "+ i.getValoracio() + "\n");
+            Vector <String> aux = new Vector<String>();
+            aux.add(String.valueOf(actualUser.getUserID()));
+            aux.add(String.valueOf(i.getItem().getID()));
+            aux.add(String.valueOf(i.getValoracio()));
+            valorations.add(aux);
         }
+        return valorations;
+
 
     }
     public void save(){}
     public void exit(){}
-    public void createItem(String atributs, String valors){
-        createItemPath(atributs, valors, itemList, itemTypeList);
+    public void createItem(String atributs, String valors) throws Exception{
+        try {
+            createItemPath(atributs, valors, itemList, itemTypeList);
+        }
+        catch (Exception e){
+            throw e;
+        }
     }
     private void createItemKNN(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems){
-        createItemPath(atributs, valors,ListaItems,ListaTiposItems);
+        try {
+            createItemPath(atributs, valors,ListaItems,ListaTiposItems);
+        }
+        catch (Exception e){
+            throw e;
+        }
     }
     private void createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems){
+        //dado una lista de items lo mete ahi si no existe
 
         //string to arraylist de valors
         ArrayList<String> datos_valors = new ArrayList<String>();
@@ -347,7 +380,19 @@ public class ControladorDomini {
 
 
     }
-    public void deleteItem(){}
+    public void deleteItem(String deleteme) throws Exception{
+        if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
+        else if (itemList.existeix_item(Integer.valueOf(deleteme))) throw new ItemNotExistsException(deleteme);
+        //borrar de cada usuario el item si lo ha valorado
+        for (int i: usersList){
+
+        }
+        //borrar de el vector de itemValoratedBy
+
+        //borrar de itemList
+
+        //si es item selected==null
+    }
     public void modifyItem(){}
     public void loadItems(String path){//"Entradas_CSV/items.csv"
         //pre: actualUser es admin
@@ -408,7 +453,7 @@ public class ControladorDomini {
         if(actualUser!=null && actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1")){//no esborres l'admin
 
 
-            /*
+
 
             for (ItemUsat i: ratesList){
                 if ( delete_me.equals(StringValueOf(i.getUsuari().getUserID())) ratesList.delete(i);
@@ -435,7 +480,3 @@ public class ControladorDomini {
 
 
 }
-//driver stubs por cada clase
-//juegos de prueba
-//excepciones
-*/
