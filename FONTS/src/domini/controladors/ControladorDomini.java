@@ -1,4 +1,4 @@
-
+/*
 package FONTS.src.domini.controladors;
 
 import FONTS.src.domini.exceptions.*;
@@ -369,7 +369,6 @@ public class ControladorDomini {
         //creamos item
         int id = Integer.valueOf(datos_valors.get(pos_id));
         Item i =new Item(id, ti, vsv);
-        i.setOriginalID(valors);
         if (!(ListaItems.existeix_item(id))){
             ListaItems.anyadir_item(i);
         }
@@ -481,7 +480,7 @@ public class ControladorDomini {
         }
     }
     -----------------------------------------------------------------------
-    */
+
 
     public void createUser( String create_me) throws Exception{
         if(actualUser.getRol().equals(TipusRol.Administrador) ){//no esborres l'admin
@@ -505,3 +504,4 @@ public class ControladorDomini {
 
 
 }
+*/

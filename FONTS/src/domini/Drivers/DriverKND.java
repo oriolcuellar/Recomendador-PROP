@@ -239,8 +239,10 @@ public class DriverKND {
             {
                 if(!prueba_static){
 
+                    long mil = (long) 1000.0;
+                    long start_time = System.currentTimeMillis();
                     System.out.println("================================================================================================");
-                    System.out.println("Prueba la creadora de la funcion Algorithm()");
+                    System.out.println("Prueba de la funcion Algorithm()");
                     System.out.println("Introduce los siguientes dos ficheros de Items de la siguiente forma: ./path/file.csv ./path/file.csv");
 
                     Scanner s = new Scanner(System.in);
@@ -265,6 +267,11 @@ public class DriverKND {
                     K_Neareast_Neightbour prueba = new K_Neareast_Neightbour();
                     ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, A2, Valoracions);
 
+                    long end_time = System.currentTimeMillis();
+                    long ex_time = (end_time - start_time)/mil;
+
+                    System.out.println("\n Se ejecuta en: " + ex_time + " segundos\n");
+
                     System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los k items recomendados: \n");
                     for (int i = 0; i < Resultado.size(); ++i)
                         System.out.print(' ' + Resultado.get(i).getID());
@@ -274,7 +281,7 @@ public class DriverKND {
                 else {
 
                     System.out.println("================================================================================================");
-                    System.out.println("Prueba la creadora de la funcion Algorithm() con el Connjunt_Items Static");
+                    System.out.println("Prueba de la funcion Algorithm() con el Connjunt_Items Static");
                     System.out.println("Introduce un fichero de Items de la siguiente forma: ./path/file.csv");
 
                     Scanner s = new Scanner(System.in);
