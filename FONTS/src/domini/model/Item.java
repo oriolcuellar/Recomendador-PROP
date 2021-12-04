@@ -25,6 +25,10 @@ public class Item {
      */
     private ArrayList <String> valors;
 
+    /** Atribut identificador auxiliar sin procesar.
+     */
+    private String original_ID;
+
     //Constructors
 
     /** Creadora de la classe. Crea un item con los parametros dados.
@@ -73,6 +77,11 @@ public class Item {
 
     public ArrayList getValors() { return valors; }
 
+    /** Devuelve el identificador auxiliar sin procesar.
+     */
+
+    public String getOriginalID() { return original_ID; }
+
     //Setters
 
     /** Establece el valor del id del Item.
@@ -82,6 +91,10 @@ public class Item {
         this.ID = ID;
     }
 
+    /** Establece el identificador auxiliar sin procesar.
+     */
+
+    public void setOriginalID(String oID){ this.original_ID=oID; }
     //Operacions
 
     //mirar desacoplament de Atribute
@@ -245,5 +258,7 @@ public class Item {
             for(int i = 0; i< B.size(); ++i)
                 A.add(i, B.get(i));
     }
+
+
 
 }

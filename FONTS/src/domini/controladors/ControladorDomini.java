@@ -214,7 +214,8 @@ public class ControladorDomini {
 
 
     }
-    public void save(){}
+    public void save(){
+    }
     public void exit(){}
     public void createItem(String atributs, String valors) throws Exception{
         try {
@@ -377,7 +378,10 @@ public class ControladorDomini {
         //creamos item
         int id = Integer.valueOf(datos_valors.get(pos_id));
         Item i =new Item(id, ti, vsv);
-        if (!(ListaItems.existeix_item(id))) ListaItems.anyadir_item(i);
+        i.setOriginalID(valors);
+        if (!(ListaItems.existeix_item(id))){
+            ListaItems.anyadir_item(i);
+        }
 
 
     }

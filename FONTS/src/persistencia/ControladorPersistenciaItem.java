@@ -1,9 +1,15 @@
 package FONTS.src.persistencia;
 
+import FONTS.src.domini.exceptions.FileExistsException;
 import FONTS.src.domini.exceptions.FileNotExistsException;
+import FONTS.src.domini.model.Conjunt_Items;
+import FONTS.src.domini.model.Item;
+import FONTS.src.domini.model.User;
+import FONTS.src.domini.model.valoratedItem;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Vector;
 
 public class ControladorPersistenciaItem {
@@ -11,8 +17,6 @@ public class ControladorPersistenciaItem {
 
     public ControladorPersistenciaItem(){
     }
-
-
 
     /** Función que lee Items de un fichero CSV.
      * @param csvFile Path al fichero CSV.
@@ -39,6 +43,27 @@ public class ControladorPersistenciaItem {
             throw e;
         }
         return items;
+    }
+
+    public void Escritor_Ratings(String csvFile, Conjunt_Items list_items) throws Exception{
+        File fichero = new File(csvFile);
+
+        if (fichero.exists()) throw new FileExistsException(csvFile);
+        else {
+            try{
+                BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
+                for (Item i: list_items.getItems()){
+                    String linea="";
+                    linea+=i.getOriginalID();
+                    bw.write(linea);
+                }
+
+                // Hay que cerrar el fichero
+                bw.close();
+            } catch (Exception e){
+                throw e;
+            }
+        }
     }
 
 }
