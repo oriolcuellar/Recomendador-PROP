@@ -126,7 +126,7 @@ public class DriverRateRecomendation {
                 Scanner s = new Scanner(System.in);
                 String path;
                 path = s.next();
-                ControladorPersistencia reader = new ControladorPersistenciaRatings();
+                ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
                 readed_ratings = reader.Lector_Ratings(path);
                 leido=true;
             } catch (Exception e) {

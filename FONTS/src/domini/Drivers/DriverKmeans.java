@@ -71,7 +71,7 @@ public class DriverKmeans {
      */
     public static Map<Integer, User> readData(String s){
         Map<Integer, User> usersList = new HashMap<>();
-        ControladorPersistencia l = new ControladorPersistenciaRatings();
+        ControladorPersistenciaRatings l = new ControladorPersistenciaRatings();
         ArrayList<Vector<String>> readed_ratings = Lector_Ratings(s);
         boolean fail = false;
         for (Vector<String> vs : readed_ratings) {

@@ -1,21 +1,20 @@
 package FONTS.src.persistencia;
 
+import FONTS.src.domini.exceptions.FileExistsException;
 import FONTS.src.domini.exceptions.FileNotExistsException;
 import FONTS.src.domini.exceptions.NotRatingsFileException;
+import FONTS.src.domini.model.User;
+import FONTS.src.domini.model.valoratedItem;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Vector;
 
 public class ControladorPersistenciaRatings {
 
-
-
     public ControladorPersistenciaRatings(){
     }
-
-
 
     /** Función que lee valoraciones de un fichero CSV.
      * @param csvFile Path al fichero CSV.
@@ -65,7 +64,35 @@ public class ControladorPersistenciaRatings {
         catch (Exception e){
             throw e;
         }
+        br.close();
         return ratings;
 
+    }
+
+    public void Escritor_Ratings(String csvFile, Map <Integer, User> list_users) throws Exception{
+        File fichero = new File(csvFile);
+
+        if (fichero.exists()) throw new FileExistsException(csvFile);
+        else {
+            try{
+                BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
+
+                for (int i: list_users.keySet()){
+                    ArrayList<valoratedItem> valoraciones_usuario = list_users.get(i).getValoratedItems();
+                    for (valoratedItem j: valoraciones_usuario){
+                        String linea="";
+                        linea+= i+ ", ";
+                        linea+= j.getItem().getID()+ ", ";
+                        linea+= j.getValoracio()+"\n";
+                        bw.write(linea);
+                    }
+                }
+
+                // Hay que cerrar el fichero
+                bw.close();
+            } catch (Exception e){
+                throw e;
+            }
+        }
     }
 }

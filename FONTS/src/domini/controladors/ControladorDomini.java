@@ -3,6 +3,7 @@ package FONTS.src.domini.controladors;
 
 import FONTS.src.domini.exceptions.*;
 import FONTS.src.domini.model.*;
+import FONTS.src.persistencia.ControladorPersistenciaItem;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 
 import java.util.ArrayList;
@@ -383,71 +384,93 @@ public class ControladorDomini {
     public void deleteItem(String deleteme) throws Exception{
         if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
         else if (itemList.existeix_item(Integer.valueOf(deleteme))) throw new ItemNotExistsException(deleteme);
-        //borrar de cada usuario el item si lo ha valorado
-        for (int i: usersList){
+        Item it = itemList.getItems().get(Integer.valueOf(deleteme));
 
+        //borrar de cada usuario el item si lo ha valorado
+        for (int i: usersList.keySet()){
+            User u = usersList.get(i);
+            ArrayList <valoratedItem> valorated = u.getValoratedItems();
+            valorated.remove(it);
         }
         //borrar de el vector de itemValoratedBy
-
+        itemValoratedBy.remove(it.getID());
         //borrar de itemList
-
+        itemList.eliminar_item(it);
         //si es item selected==null
+        if (selectedItem==it) selectedItem=null;
     }
-    public void modifyItem(){}
-    public void loadItems(String path){//"Entradas_CSV/items.csv"
+    //necesario?----------------------------------------------------------------------------------------
+    public void modifyItem(){
+
+    }
+    //--------------------------
+
+    public void loadItems(String path) throws Exception{//"Entradas_CSV/items.csv"
         //pre: actualUser es admin
-        if (actualUser!=null && usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador))) {
-            Vector<String> mat_items = new Vector<String>();
-            LectorCSV2 reader = new LectorCSV2();
-            mat_items = reader.Lector_Items(path);
+        try {
+            if (actualUser == null) throw new ImpossibleStateException("loadItems");
+            else if (actualUser.getRol().equals(TipusRol.Administrador)) {
+                Vector<String> mat_items = new Vector<String>();
+                ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
+                mat_items = reader.Lector_Items(path);
 
-            for(int i=1;i<mat_items.size();++i) {
-                dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
-            }
+                for (int i = 1; i < mat_items.size(); ++i) {
+                    dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
+                }
 
+            } else throw new NotAnAdministratorException("loadItems");
+        }
+        catch (Exception e){
+            throw e;
         }
 
     }
     //"Entradas_CSV/ratings.db.csv" = path
-    public void loadRates(String path){//falta añadir item usado a la lista de items usados
+    public void loadRates(String path) throws Exception{//falta añadir item usado a la lista de items usados
         //pre: actualUser es admin
-        if (actualUser!=null && usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador))){
+        try {
+            if (actualUser==null) throw new ImpossibleStateException("loadRates");
+            else if(!usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador)))
+                throw new NotAnAdministratorException((String.valueOf(actualUser.getUserID())))
+            else{
 
-            ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
+                ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 
-            LectorCSV2 reader = new LectorCSV2();
-            readed_ratings = reader.Lector_Ratings(path);
+                ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
+                readed_ratings = reader.Lector_Ratings(path);
 
-            TipusRol t = TipusRol.Usuari;
-            for (Vector<String> vs : readed_ratings) {
-                if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
-                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                    if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
+                TipusRol t = TipusRol.Usuari;
+                for (Vector<String> vs : readed_ratings) {
+                    if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
+                        User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                        if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
+                            usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+
+                        }
+                    } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
+                        User usuari = new User(Integer.valueOf(vs.get(0)));
                         usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
-
+                        usersList.put(Integer.valueOf(vs.get(0)), usuari);
                     }
-                } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
-                    User usuari = new User(Integer.valueOf(vs.get(0)));
-                    usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
-                    usersList.put(Integer.valueOf(vs.get(0)), usuari);
-                }
-                //parte del item
-                if (itemValoratedBy.containsKey(Integer.valueOf(vs.get(1)))){//existeix item al map
-                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                    itemValoratedBy.get(Integer.valueOf(vs.get(1))).add(usuari);
-                }
-                else{//NO existeix item al map
-                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                    ArrayList <User> au = new ArrayList<User>();
-                    au.add(usuari);
-                    itemValoratedBy.put( Integer.valueOf(vs.get(1)), au);
+                    //parte del item
+                    if (itemValoratedBy.containsKey(Integer.valueOf(vs.get(1)))) {//existeix item al map
+                        User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                        itemValoratedBy.get(Integer.valueOf(vs.get(1))).add(usuari);
+                    } else {//NO existeix item al map
+                        User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                        ArrayList<User> au = new ArrayList<User>();
+                        au.add(usuari);
+                        itemValoratedBy.put(Integer.valueOf(vs.get(1)), au);
+                    }
                 }
             }
         }
-        else{
-            System.out.println("Usuari no es aministrador");
+        catch (Exception e){
+            throw e;
         }
-    }//to do------------------------------------
+    }
+    //Necesario?--------------------------------------------------
+    /*
     public void deleteUser(String delete_me){
         //pre: actualUser admin
         if(actualUser!=null && actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1")){//no esborres l'admin
@@ -462,7 +485,10 @@ public class ControladorDomini {
 
         }
     }
-    public void createUser( String create_me){
+    -----------------------------------------------------------------------
+    */
+
+    public void createUser( String create_me) throws Exception{
         if(actualUser.getRol().equals(TipusRol.Administrador) ){//no esborres l'admin
             if (!usersList.containsKey(create_me)){
               User nou = new User(Integer.valueOf(create_me));
@@ -470,11 +496,15 @@ public class ControladorDomini {
             }
 
         }
+        else throw new NotAnAdministratorException("createUser");
     }
-    public void showAllUsers( ){
+    public Vector <String> showAllUsers( ){
+        Vector <String> vs = new Vector<String>();
         for (User u: usersList.values()){
             System.out.println(u.getUserID());
+            vs.add(String.valueOf(u.getUserID()));
         }
+        return vs;
     }
 
 
