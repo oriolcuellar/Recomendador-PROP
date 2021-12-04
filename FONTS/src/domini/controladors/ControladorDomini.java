@@ -13,15 +13,6 @@ import java.util.Vector;
 
 public class ControladorDomini {
 
-
-        import FONTS.src.domini.model.*;
-
-        import java.security.spec.ECField;
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.Map;
-        import java.util.Vector;
-
 // Atributes
 
     private static ControladorDomini   dominiSingelton = null;
