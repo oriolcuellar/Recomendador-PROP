@@ -195,7 +195,7 @@ public class Main {
         ArrayList<myPair> pred=execute_Slope_One();
 
         RateRecomendation rec = new RateRecomendation();
-        float result=rec.execute(pred);
+        float result=rec.execute(pred, pred);
         System.out.println("\n\n La valoracion de la recomendacion: " + result);
 
     }

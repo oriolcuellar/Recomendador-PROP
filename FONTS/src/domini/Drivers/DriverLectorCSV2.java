@@ -1,4 +1,5 @@
 package FONTS.src.domini.drivers;
+import FONTS.src.persistencia.ControladorPersistenciaItem;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class DriverLectorCSV2 {
         }
         boolean leido=false;
         ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
+        ControladorPersistenciaItem readerItems = new ControladorPersistenciaItem();
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
         Vector<String> readed_Items = new Vector<String>();
         while (!leido){
@@ -45,7 +47,7 @@ public class DriverLectorCSV2 {
                     String path;
                     System.out.println("\n- INTRODUCE el path al CSV de items que desea leer: ");
                     path = s.next();
-                    readed_Items = reader.Lector_Items(path);
+                    readed_Items = readerItems.Lector_Items(path);
                     leido=true;
                 }
             }

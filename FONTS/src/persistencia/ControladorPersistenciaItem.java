@@ -45,7 +45,7 @@ public class ControladorPersistenciaItem {
         return items;
     }
 
-    public void Escritor_Ratings(String csvFile, Conjunt_Items list_items) throws Exception{
+    public void Escritor_Items(String csvFile, Conjunt_Items list_items) throws Exception{
         File fichero = new File(csvFile);
 
         if (fichero.exists()) throw new FileExistsException(csvFile);
