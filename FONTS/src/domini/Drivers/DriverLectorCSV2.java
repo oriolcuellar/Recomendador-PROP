@@ -9,7 +9,9 @@ import java.util.Vector;
 /** \brief Driver de la clase ControladorPersistencia.
  *  @author Oriol Cuellar
  */
-public class DriverLectorCSV2 {
+
+
+//public class DriverLectorCSV2 {
 
     /** Main del driver.
      *  Prueba 2 casos:
@@ -17,6 +19,7 @@ public class DriverLectorCSV2 {
      *      - Lee items de un path dado y los imprime por pantalla.
      * @see ControladorPersistenciaRatings
      */
+    /*
     public static void main(String[] args) {
         printInfo();
 
@@ -78,7 +81,7 @@ public class DriverLectorCSV2 {
     }
     /** Funcion que muestra informacion sobre el driver.
      * Se puede escoger entre los 2 casos.
-     */
+
     static void printInfo() {
         System.out.println("=====================================================================================");
         System.out.println("\nDRIVER DE LA CLASE ControladorPersistencia\n");
@@ -87,4 +90,4 @@ public class DriverLectorCSV2 {
 
     }
 }
-
+*/

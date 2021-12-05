@@ -53,8 +53,8 @@ public class ControladorPersistenciaItem {
             try{
                 BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
                 for (Item i: list_items.getItems()){
-                    String linea="";
-                    linea+=i.getOriginalID();
+                    String linea;
+                    linea =  Integer.toString(i.getID());
                     bw.write(linea);
                 }
 
