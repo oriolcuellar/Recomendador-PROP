@@ -1,4 +1,4 @@
-/*
+
 package FONTS.src.domini.controladors;
 
 import FONTS.src.domini.exceptions.*;
@@ -540,7 +540,7 @@ public class ControladorDomini {
         }
     }
     -----------------------------------------------------------------------
-
+*/
 
     public void createUser( String create_me) throws Exception{
         if(actualUser.getRol().equals(TipusRol.Administrador) ){//no esborres l'admin
@@ -564,4 +564,3 @@ public class ControladorDomini {
 
 
 }
-*/
