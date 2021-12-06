@@ -108,9 +108,14 @@ public class DriverRateRecomendation {
         ArrayList<myPair> predictions = So.getPredictions(u,item_valorated_by,10);
 
         //Algortimo de valorar recomendaciones
-        RateRecomendation recomendation = new RateRecomendation();
-        float result=recomendation.execute(predictions, predictions);
-        System.out.println("\n\n La valoracion de la recomendacion: " + result);
+        try {
+            RateRecomendation recomendation = new RateRecomendation();
+            float result = recomendation.execute(predictions, predictions);
+            System.out.println("\n\n La valoracion de la recomendacion: " + result);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
 
     }
     /** Función que lee valoraciones.

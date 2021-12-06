@@ -1,5 +1,6 @@
 package FONTS.src.persistencia;
 
+import FONTS.src.domini.exceptions.EmptyFileException;
 import FONTS.src.domini.exceptions.FileExistsException;
 import FONTS.src.domini.exceptions.FileNotExistsException;
 import FONTS.src.domini.exceptions.NotRatingsFileException;
@@ -65,6 +66,7 @@ public class ControladorPersistenciaRatings {
             throw e;
         }
         br.close();
+        if (ratings.size()==0) throw new EmptyFileException("Lector_Ratings");
         return ratings;
 
     }

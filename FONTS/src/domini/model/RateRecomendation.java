@@ -1,5 +1,6 @@
 package FONTS.src.domini.model;
 
+import FONTS.src.domini.exceptions.CorruptFileException;
 import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 
@@ -24,10 +25,10 @@ public class RateRecomendation {
      *              - Logaritmo base 2 de (la posicion - 1)
      * @see myPair
      */
-    public float execute(ArrayList<myPair> arr, ArrayList<myPair> u ){//tienen que estar ordenadas las 2? la u no lo esta.
+    public float execute(ArrayList<myPair> arr, ArrayList<myPair> u ) throws Exception{
         //IDCG
         int dist=arr.size();
-        if (dist>u.size()) dist = u.size();
+        if (dist!=u.size()) throw new CorruptFileException("RateRecomendation");
         float res1=0;
         for (int i=0;i<dist;++i){
             double top=(Math.pow(2, u.get(i).getValoration())-1);
@@ -38,8 +39,13 @@ public class RateRecomendation {
         //DCG
         float res=0;
         for (int i=0;i<dist;++i){
-            double top=(Math.pow(2, arr.get(i).getValoration())-1);
-            double down=(Math.log10(i+1+1) / Math.log10(2));
+            myPair aux = u.get(i);
+            int pos=0 ;
+            for(int it=0; it<dist;it++){
+                if(arr.get(it).getItemID()==aux.getItemID()) pos= it;
+            }
+            double top=(Math.pow(2, u.get(i).getValoration())-1);
+            double down=(Math.log10(pos+1+1) / Math.log10(2));
             top=top/down;
             res+=top;
         }

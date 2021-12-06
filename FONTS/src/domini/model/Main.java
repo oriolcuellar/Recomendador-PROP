@@ -2,6 +2,7 @@ package FONTS.src.domini.model;
 
 import FONTS.src.domini.controladors.ControladorDomini;
 import FONTS.src.domini.drivers.DriverKND;
+import FONTS.src.domini.exceptions.FileNotExistsException;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 
 import java.util.*;
@@ -26,6 +27,8 @@ public class Main {
      *  @see SlopeOne
      */
     static Map<Integer, User> usersList= new HashMap<Integer, User>();
+    private static Object FileNotExistsException;
+
     /** Main de la clase Main.
      *   Ejecuta:
      *      - K-means
@@ -53,22 +56,27 @@ public class Main {
                 System.out.print("Porfavor introduce un valor correcto\n ");
             }
         }
+        try {
 
-        //ejecutar algoritmo
-        if (op.equals("1")){
-            execute_kmeans();
+            //ejecutar algoritmo
+            if (op.equals("1")) {
+                execute_kmeans();
+            }
+            if (op.equals("2")) {
+                execute_Slope_One();
+            }
+            if (op.equals("3")) {
+                execute_RateRecomendation();
+            }
+            if (op.equals("4")) {
+                execute_KNeares_Neighbour();
+            }
+            if (op.equals("5")) {
+                programa_oriol();
+            }
         }
-        if (op.equals("2")){
-            execute_Slope_One();
-        }
-        if (op.equals("3")){
-            execute_RateRecomendation();
-        }
-        if (op.equals("4")){
-            execute_KNeares_Neighbour();
-        }
-        if (op.equals("5")){
-            programa_oriol();
+        catch (Exception e){
+            System.out.println(e);
         }
     }
 
@@ -194,15 +202,20 @@ public class Main {
     }
     /** Función que ejecuta Rate Recomendation.
      */
-    static void execute_RateRecomendation(){
+    static void execute_RateRecomendation() throws Exception{
         System.out.println("=====================================================================================");
         System.out.println("EJECUTANDO RATE RECOMENDATION");
 
         ArrayList<myPair> pred=execute_Slope_One();
+        try {
 
-        RateRecomendation rec = new RateRecomendation();
-        float result=rec.execute(pred, pred);
-        System.out.println("\n\n La valoracion de la recomendacion: " + result);
+            RateRecomendation rec = new RateRecomendation();
+            float result = rec.execute(pred, pred);
+            System.out.println("\n\n La valoracion de la recomendacion: " + result);
+        }
+        catch (Exception e){
+            throw e;
+        }
 
     }
 
@@ -283,8 +296,8 @@ public class Main {
             dom.loadRates("ratings.test.known.csv");
             dom.logout();
             dom.login("117588", "117588");
-            ArrayList<myPair>m= dom.showRecommendedItemsSlope(6, 5);
-            dom.evaluateRecomendation("ratings.test.unknown.csv");
+            dom.doRecomendation(6, 5);
+            System.out.println(dom.evaluateRecomendation("ratings.test.unknown.csv"));
 
 
         }

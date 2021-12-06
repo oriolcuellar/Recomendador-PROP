@@ -7,10 +7,7 @@ import FONTS.src.persistencia.ControladorPersistenciaItem;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 public class ControladorDomini {
 
@@ -87,9 +84,10 @@ public class ControladorDomini {
                 if (actualUser.getPassword().equals(password)) {//logged
                     System.out.println("Sessió iniciada");
                 } else {
-                    throw new UserNotExistsException(struserId);
+                    throw new WrongDataException("login" + struserId + " "+ password);
                 }
             }
+            else throw new UserNotExistsException(struserId);
         }
         catch (Exception e){
             System.out.println(e);
@@ -134,6 +132,8 @@ public class ControladorDomini {
         try {
             if (actualUser == null) throw new ImpossibleStateException("showRecommendedItemsSlope");
             else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
+            else if (k<1 || k>usersList.size()) throw new WrongDataException("showRecommendedItemsSlope "+ k);
+            else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
             //kmeans
 
             Kmeans kmeans = new Kmeans();
@@ -175,22 +175,61 @@ public class ControladorDomini {
         K_Neareast_Neightbour knn = new K_Neareast_Neightbour();
         return knn.Algorithm(num_elem, itemList, it, va);
     }
+    public float doRecomendation(int k_slope, int max_slope) throws Exception{
+        try{
+            ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+            lastRecomendation=slope;
+            float a =2;
+            return a;
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
     public float evaluateRecomendation(String path) throws Exception{ //co
         if (actualUser==null) throw new ImpossibleStateException("avaluateRecomendation");
         else if(actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException("avaluateRecomendation");
-        else if (lastRecomendation.size()==0) throw new EmptyLastRecomendationException("");
+        else if (lastRecomendation.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
             ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
-            ArrayList <Vector<String>> avs = ctrRec.Lector_Ratings(path);
-            ArrayList <myPair> amp = new ArrayList<myPair>();
-            for (Vector<String> v: avs){
+            ArrayList <Vector<String>> ratings_leidos = ctrRec.Lector_Ratings(path);
+            ArrayList <myPair> ratingsOrdenados = new ArrayList<myPair>();
+            for (Vector<String> v: ratings_leidos){//ordenar y eliminar valoraciones que no son mias
                 if (String.valueOf(actualUser.getUserID()).equals(v.get(0))){
                     myPair m = new myPair(Integer.valueOf(v.get(1)),Float.valueOf(v.get(2)));
-                    amp.add(m);
+                    ratingsOrdenados.add(m);
                 }
             }
-            RateRecomendation r = new RateRecomendation();
-            return r.execute(lastRecomendation, amp);
+            //Comparator<myPair> comparador = Collections.reverseOrder();
+            Collections.sort(ratingsOrdenados, new Comparator<myPair>() {//ordenar las varolaciones en unknown
+                public int compare(myPair p1, myPair p2) {
+                    if (p1.getValoration()>p2.getValoration()) return 1;
+                    else if(p1.getValoration()<p2.getValoration()) return -1;
+                    return 0;
+                }
+            });
+            Collections.reverse(ratingsOrdenados);//girar
+
+            for (myPair m4: ratingsOrdenados) System.out.println(m4.getValoration());
+            //System.out.println(aux.size());
+            //System.out.println(ratingsOrdenados.size());
+            ArrayList<myPair> lastRecomendationAuxiliar = new ArrayList<myPair>();
+            for (myPair m: lastRecomendation){//eliminar mis predicciones que no estan en unknown
+                for (myPair m2: ratingsOrdenados){
+                    if(m2.getItemID()==m.getItemID()){
+                        lastRecomendationAuxiliar.add(m);
+                    }
+                }
+            }
+            //System.out.println(lastRecomendation.size());
+            //System.out.println(lastRecomendationAuxiliar.size());
+            try {
+                RateRecomendation r = new RateRecomendation();
+                return r.execute(lastRecomendationAuxiliar, ratingsOrdenados);
+            }
+            catch (Exception e){
+                throw e;
+            }
         }
         catch (Exception e){
             throw e;

@@ -1,5 +1,6 @@
 package FONTS.src.persistencia;
 
+import FONTS.src.domini.exceptions.EmptyFileException;
 import FONTS.src.domini.exceptions.FileExistsException;
 import FONTS.src.domini.exceptions.FileNotExistsException;
 import FONTS.src.domini.model.Conjunt_Items;
@@ -42,6 +43,7 @@ public class ControladorPersistenciaItem {
         catch (Exception e){
             throw e;
         }
+        if (items.size()==0) throw new EmptyFileException("Lector_Items");
         return items;
     }
 
