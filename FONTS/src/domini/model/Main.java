@@ -1,5 +1,6 @@
 package FONTS.src.domini.model;
 
+import FONTS.src.domini.controladors.ControladorDomini;
 import FONTS.src.domini.drivers.DriverKND;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 
@@ -45,7 +46,7 @@ public class Main {
         while (!escogido) {
             mostrar_opciones();
             op=s.next();
-            if (op.equals("1") || op.equals("2") || op.equals("3") || op.equals("4")){
+            if (op.equals("1") || op.equals("2") || op.equals("3") || op.equals("4") || op.equals("5")){
                 escogido=true;
             }
             else{
@@ -65,6 +66,9 @@ public class Main {
         }
         if (op.equals("4")){
             execute_KNeares_Neighbour();
+        }
+        if (op.equals("5")){
+            programa_oriol();
         }
     }
 
@@ -88,6 +92,8 @@ public class Main {
         System.out.println("         Valorar una recomendacion");
         System.out.println("    - 4 ");
         System.out.println("         K Nearest Neighbour\n\n");
+        System.out.println("    - 5 ");
+        System.out.println("         programa oriol\n\n");
 
     }
     /** Función que ejecuta el K Nearest Neighbour.
@@ -267,6 +273,24 @@ public class Main {
         System.out.println("    - 3 ");
         System.out.println("         Mostrar todos los usuarios\n\n");
 
+    }
+
+    static void programa_oriol(){
+        ControladorDomini dom = ControladorDomini.getInstance();
+        try {
+            dom.login("-1", "-1");
+            dom.loadItems("items.csv");
+            dom.loadRates("ratings.test.known.csv");
+            dom.logout();
+            dom.login("117588", "117588");
+            ArrayList<myPair>m= dom.showRecommendedItemsSlope(6, 5);
+            dom.evaluateRecomendation("ratings.test.unknown.csv");
+
+
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
 }

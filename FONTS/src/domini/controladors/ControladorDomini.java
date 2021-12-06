@@ -103,14 +103,14 @@ public class ControladorDomini {
         }
 
     }
-    public static void editProfile(String newPass) throws Exception{
+    public  void editProfile(String newPass) throws Exception{
         if (actualUser==null) throw new ImpossibleStateException("editProfile");
         else{
             actualUser.setPassword(newPass);
             System.out.println("Password changed Out");
         }
     }
-    public static void deleteProfile(String delete_me) throws Exception{
+    public void deleteProfile(String delete_me) throws Exception{
         try {
             if(actualUser == null) throw new ImpossibleStateException("deleteProfile");
             else if(!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
@@ -130,9 +130,9 @@ public class ControladorDomini {
         }
 
     }
-    public static ArrayList<myPair> showRecommendedItemsSlope(int k, int maxValue) throws Exception{// to do------------------
+    public ArrayList<myPair> showRecommendedItemsSlope(int k, int maxValue) throws Exception{// to do------------------
         try {
-            if (actualUser != null) throw new ImpossibleStateException("showRecommendedItemsSlope");
+            if (actualUser == null) throw new ImpossibleStateException("showRecommendedItemsSlope");
             else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
             //kmeans
 
@@ -151,7 +151,7 @@ public class ControladorDomini {
         }
 
     }
-    public static ArrayList<Item> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
+    public ArrayList<Item> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         //leer valoraciones know
         ArrayList <Item> it = new ArrayList<Item>();
         ArrayList <Double> va = new ArrayList<Double>();
@@ -175,7 +175,7 @@ public class ControladorDomini {
         K_Neareast_Neightbour knn = new K_Neareast_Neightbour();
         return knn.Algorithm(num_elem, itemList, it, va);
     }
-    public static float avaluateRecomendation(String path) throws Exception{
+    public float evaluateRecomendation(String path) throws Exception{ //co
         if (actualUser==null) throw new ImpossibleStateException("avaluateRecomendation");
         else if(actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException("avaluateRecomendation");
         else if (lastRecomendation.size()==0) throw new EmptyLastRecomendationException("");
