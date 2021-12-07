@@ -195,7 +195,8 @@ public class User {
             float valoration2 = valoratedItems2.get(i).getValoracio();
             sumSquareValoration2 += valoration2*valoration2;
         }
-        return sumProdValorations/(float)(sqrt(sumSquareValoration1)*sqrt(sumSquareValoration2));
+
+        return (sumProdValorations)/(float)(sqrt(sumSquareValoration1)*sqrt(sumSquareValoration2));
     }
 
      /**

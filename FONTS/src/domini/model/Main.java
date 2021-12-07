@@ -1,6 +1,7 @@
 package FONTS.src.domini.model;
 
 import FONTS.src.domini.controladors.ControladorDomini;
+import FONTS.src.domini.controladors.ControladorPresentacion;
 import FONTS.src.domini.drivers.DriverKND;
 import FONTS.src.domini.exceptions.FileNotExistsException;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
@@ -41,15 +42,16 @@ public class Main {
      * @see K_Neareast_Neightbour
      */
     public static void main(String[] args) {
+        ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
         printInfo();
         Scanner s = new Scanner(System.in);
         boolean escogido=false;
-        String op="";
+        String op = "";
         //escoger algoritmo
         while (!escogido) {
             mostrar_opciones();
             op=s.next();
-            if (op.equals("1") || op.equals("2") || op.equals("3") || op.equals("4") || op.equals("5")){
+            if (op.equals("1") || op.equals("2") || op.equals("3") || op.equals("4") || op.equals("5") || op.equals("6")){
                 escogido=true;
             }
             else{
@@ -73,6 +75,9 @@ public class Main {
             }
             if (op.equals("5")) {
                 programa_oriol();
+            }
+            if(op.equals("6")) {
+                CtrlPres.inicializePresentation();
             }
         }
         catch (Exception e){
@@ -295,8 +300,8 @@ public class Main {
             dom.loadItems("EXE/Entradas_CSV/items.csv");
             dom.loadRates("EXE/Entradas_CSV/ratings.test.known.csv");
             dom.logout();
-            dom.login("2383", "2383");
-            dom.doRecomendation(6, 10);
+            dom.login("11133", "11133");
+            dom.doRecomendation(1, 10);
             System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
 
         }

@@ -13,7 +13,7 @@ public class ControladorDomini {
 
 // Atributes
 
-    private static ControladorDomini   dominiSingelton = null;
+    private static ControladorDomini dominiSingelton = null;
 
     private static User actualUser;
     private static Item selectedItem;
@@ -138,7 +138,7 @@ public class ControladorDomini {
 
             Kmeans kmeans = new Kmeans();
             kmeans.run(usersList,k);
-            //kmeans.printAllClusters();
+            kmeans.printAllClusters();
 
             //slope one
             SlopeOne slopeOne = new SlopeOne();

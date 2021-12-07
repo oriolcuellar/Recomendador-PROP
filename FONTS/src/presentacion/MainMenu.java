@@ -1,4 +1,7 @@
+package FONTS.src.presentacion;
+
 import FONTS.src.domini.controladors.ControladorDomini;
+import FONTS.src.domini.controladors.ControladorPresentacion;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MainMenu {
+
+    ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
+    private static JFrame frame;
     private JPanel panel;
     private JButton settingsButton;
     private JButton showRatedItemsButton;
@@ -39,17 +45,17 @@ public class MainMenu {
         showAllItemsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(null,"Show All Items Pushed");
+                frame.setVisible(false);
+                CtrlPres.changeShowAllItemsView();
             }
         });
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("myFrame");
+    public void showWindow() {
+        frame = new JFrame("Sistema Recomanador");
         frame.setContentPane(new MainMenu().panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setMinimumSize(new Dimension(600,600));
+        frame.setMinimumSize(new Dimension(600, 600));
         frame.setResizable(false);
         frame.setVisible(true);
     }
