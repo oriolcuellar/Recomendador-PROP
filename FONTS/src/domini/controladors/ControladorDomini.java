@@ -211,7 +211,7 @@ public class ControladorDomini {
             Collections.reverse(ratingsOrdenados);//girar
 
 
-            for (myPair m4: ratingsOrdenados) System.out.println(m4.getValoration());
+            //for (myPair m4: ratingsOrdenados) System.out.println(m4.getItemID()+" "+m4.getValoration());
             //System.out.println(aux.size());
             //System.out.println(ratingsOrdenados.size());
             ArrayList<myPair> lastRecomendationAuxiliar = new ArrayList<myPair>();
@@ -222,11 +222,22 @@ public class ControladorDomini {
                     }
                 }
             }
+            System.out.println(" ");
+            //for (myPair m: lastRecomendationAuxiliar) System.out.println(m.getItemID()+" "+m.getValoration());
+            ArrayList <myPair> ratingsFiltrados = new ArrayList<myPair>();
+            for (myPair m: lastRecomendationAuxiliar){//eliminar de known los que no haya prediccion
+                for (myPair m2: ratingsOrdenados){
+                    if (m.getItemID()==m2.getItemID()){
+                        ratingsFiltrados.add(m);
+                    }
+                }
+            }
+            //System.out.println(ratingsFiltrados.size());
             //System.out.println(lastRecomendation.size());
             //System.out.println(lastRecomendationAuxiliar.size());
             try {
                 RateRecomendation r = new RateRecomendation();
-                return r.execute(lastRecomendationAuxiliar, ratingsOrdenados);
+                return r.execute(lastRecomendationAuxiliar, ratingsFiltrados);
             }
             catch (Exception e){
                 throw e;
