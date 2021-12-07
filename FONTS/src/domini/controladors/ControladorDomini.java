@@ -143,8 +143,9 @@ public class ControladorDomini {
             //slope one
             SlopeOne slopeOne = new SlopeOne();
             //cambiar por actual user
-            return slopeOne.getPredictions(actualUser, itemValoratedBy, maxValue);
-            //slopeOne.printResults();
+            ArrayList<myPair> p = slopeOne.getPredictions(actualUser, itemValoratedBy, maxValue);
+            slopeOne.printResults();
+            return p;
         }
         catch (Exception e){
             throw e;
