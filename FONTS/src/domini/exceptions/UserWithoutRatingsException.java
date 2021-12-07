@@ -8,4 +8,5 @@ public class UserWithoutRatingsException extends Exception {
     public UserWithoutRatingsException(String message) {
         super (message);
     }
+
 }

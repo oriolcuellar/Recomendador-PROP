@@ -8,4 +8,5 @@ public class NoRatedItemsException extends Exception{
     public NoRatedItemsException(String message) {
         super (message);
     }
+
 }

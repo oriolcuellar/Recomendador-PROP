@@ -53,6 +53,7 @@ public class ControladorPersistenciaRatings {
                     if (datos[2].equals("rating")) rating=2;
                 }
                 if(!first) {
+
                     Vector<String> dentro = new Vector<String>();
                     dentro.add(datos[user]);
                     dentro.add(datos[item]);

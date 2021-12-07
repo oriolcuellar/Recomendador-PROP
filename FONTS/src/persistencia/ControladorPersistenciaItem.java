@@ -35,6 +35,7 @@ public class ControladorPersistenciaItem {
         catch (Exception e){
             throw new FileNotExistsException(csvFile);
         }
+
         try {
             while ((line = br.readLine()) != null) {
                 items.add(line);
