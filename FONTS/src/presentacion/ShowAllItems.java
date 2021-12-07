@@ -48,6 +48,9 @@ public class ShowAllItems {
         frame.setMinimumSize(new Dimension(600, 600));
         frame.setResizable(false);
         frame.setVisible(true);
+    }
 
+    public void setInvisible() {
+        frame.setVisible(false);
     }
 }

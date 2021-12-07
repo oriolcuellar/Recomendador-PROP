@@ -6,6 +6,7 @@ import FONTS.src.domini.drivers.DriverKND;
 import FONTS.src.domini.exceptions.FileNotExistsException;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 
+import javax.swing.*;
 import java.util.*;
 
 /** \brief Clase que implementa el Main.

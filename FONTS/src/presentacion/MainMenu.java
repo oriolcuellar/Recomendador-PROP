@@ -45,7 +45,6 @@ public class MainMenu {
         showAllItemsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                frame.setVisible(false);
                 CtrlPres.changeShowAllItemsView();
             }
         });
@@ -58,5 +57,9 @@ public class MainMenu {
         frame.setMinimumSize(new Dimension(600, 600));
         frame.setResizable(false);
         frame.setVisible(true);
+    }
+
+    public void setInvisible() {
+        frame.setVisible(false);
     }
 }
