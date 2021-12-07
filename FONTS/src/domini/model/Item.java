@@ -71,7 +71,7 @@ public class Item {
     /** Devuelve la ArrayList de valors del Item.
      */
 
-    public ArrayList getValors() { return valors; }
+    public ArrayList<String> getValors() { return valors; }
 
     //Setters
 
