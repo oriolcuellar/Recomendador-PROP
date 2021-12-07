@@ -16,6 +16,7 @@ public class ControladorDomini {
     private static ControladorDomini dominiSingelton = null;
 
     private static User actualUser;
+    private static User admin;
     private static Item selectedItem;
     private static Map <Integer, User> usersList;
     private static Conjunt_Items itemList;
@@ -42,7 +43,7 @@ public class ControladorDomini {
         itemTypeList = new HashMap<String, TipusItem>();
         itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
         lastRecomendation = new ArrayList<myPair>();
-        User admin= new User(-1);
+        admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
         usersList.put(-1, admin);
     }
@@ -58,7 +59,7 @@ public class ControladorDomini {
         //err: Usuari actiu null, userId not exists, id o passw son strings buits
         try {
             int userId = Integer.valueOf(struserId);
-            if (usersList.containsKey(userId)) throw new UserExistsException(struserId);
+            if (usersList.containsKey(userId) || String.valueOf(admin.getUserID()).equals(struserId)) throw new UserExistsException(struserId);
             else if ( actualUser != null) throw new ImpossibleStateException("register");
             else if (struserId.equals("") || password.equals("")) {
                 throw new NotValidUserorPasswException(struserId +" "+ password);
@@ -80,12 +81,16 @@ public class ControladorDomini {
             if (actualUser != null) {
                 throw new ImpossibleStateException("login");
             } else if (usersList.containsKey(userId)) {
-                actualUser = usersList.get(userId);
                 if (actualUser.getPassword().equals(password)) {//logged
+                    actualUser = usersList.get(userId);
                     System.out.println("Sessió iniciada");
                 } else {
                     throw new WrongDataException("login" + struserId + " "+ password);
                 }
+            }
+            else if(String.valueOf(admin.getUserID()).equals(struserId)){
+                if (admin.getPassword().equals(password)) actualUser=admin;
+                else throw new WrongDataException("login" + struserId + " "+ password);
             }
             else throw new UserNotExistsException(struserId);
         }
@@ -111,8 +116,7 @@ public class ControladorDomini {
     public void deleteProfile(String delete_me) throws Exception{
         try {
             if(actualUser == null) throw new ImpossibleStateException("deleteProfile");
-            else if(!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
-            else if(delete_me.equals("-1")) throw new DeleteAdministratorException(delete_me);
+            else if(delete_me.equals(String.valueOf(admin.getUserID()))) throw new DeleteAdministratorException(delete_me);
             else if (usersList.containsKey(Integer.valueOf(delete_me))) {
                 User u = usersList.get(delete_me);
                 ArrayList<valoratedItem> lista_valorados = u.getValoratedItems();
@@ -131,7 +135,7 @@ public class ControladorDomini {
     public ArrayList<myPair> showRecommendedItemsSlope(int k, int maxValue) throws Exception{// to do------------------
         try {
             if (actualUser == null) throw new ImpossibleStateException("showRecommendedItemsSlope");
-            else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
+            else if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
             else if (k<1 || k>usersList.size()) throw new WrongDataException("showRecommendedItemsSlope "+ k);
             else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
             //kmeans
@@ -153,6 +157,9 @@ public class ControladorDomini {
 
     }
     public ArrayList<Item> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
+        if (actualUser == null) throw new ImpossibleStateException("showRecommendedItemsSlope");
+        else if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
+        else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
         //leer valoraciones know
         ArrayList <Item> it = new ArrayList<Item>();
         ArrayList <Double> va = new ArrayList<Double>();
@@ -178,7 +185,17 @@ public class ControladorDomini {
     }
     public float doRecomendation(int k_slope, int max_slope) throws Exception{
         try{
+            if (actualUser==null) throw new ImpossibleStateException("avaluateRecomendation");
+            if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException("doRecomendation");
+            if (itemList.n_Items()==0){
+                throw new NoItemsException("doRecomendation");
+            }
+            else if (usersList.size()==0){
+                throw new NoUsersException("doRecomendation");
+            }
             ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+            //mix los 2 algoritmos
+
             lastRecomendation=slope;
             float a =2;
             return a;
@@ -189,7 +206,7 @@ public class ControladorDomini {
     }
     public float evaluateRecomendation(String path) throws Exception{ //co
         if (actualUser==null) throw new ImpossibleStateException("avaluateRecomendation");
-        else if(actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException("avaluateRecomendation");
+        else if(!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException("avaluateRecomendation");
         else if (lastRecomendation.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
             ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
@@ -252,12 +269,52 @@ public class ControladorDomini {
         }
     }
 
-    public void selectItem(){
+    public void selectItem(String id)throws Exception{
+        for (Item m: itemList.getItems()){
+            if (String.valueOf(m.getID()).equals(id)){
+                selectedItem=m;
+            }
+        }
+        throw new ItemNotExistsException("selectItem");
+    }
+    public ArrayList<String> showItemInfoValues()throws Exception{
+        if (selectedItem==null) throw new NoItemSelectedException("showItemInfoValues");
+        return selectedItem.getValors();
+    }
+    public ArrayList<String> showItemInfoAtributes()throws Exception{
+        if (selectedItem==null) throw new NoItemSelectedException("showItemInfoAtributes");
+        ArrayList <String> lista=new ArrayList<String>();
+        for(Atribute a: selectedItem.getTipus().getAtributes()){
+            lista.add(a.getName());
+        }
+        return lista;
     }
 
-    public void rateItem(){}
+    public void rateItem(String idItem, float val) throws Exception{
+        if(actualUser==null) throw new ImpossibleStateException("rateItem");
+        boolean hay=false;
+        for (Item m: itemList.getItems()){
+            if (String.valueOf(m.getID()).equals(idItem)){
+                hay=true;
+            }
+        }
+        if (!hay) throw new ItemNotExistsException("rateItem");
+        hay=false;
+        for(valoratedItem m: actualUser.getValoratedItems()){
+            if(String.valueOf(m.getItem().getID()).equals(idItem)) {
+                hay = true;
+            }
+        }
+        if(!hay){
+            throw new ItemAlreadyValoredException("rateItem");
+        }
+        else{
+            actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
+        }
+    }
 
-    public Vector<String> showAllItems(){
+    public Vector<String> showAllItems()throws Exception{
+        if (itemList.n_Items()==0) throw new NoItemsException("showAllItems");
         Vector <String> totsItems = new Vector<String>();
         for(Item i: itemList.getItems()){
             System.out.println(i.getID());
@@ -269,7 +326,6 @@ public class ControladorDomini {
     public Vector <Vector<String>> ShowRatedItems() throws Exception{//vector de vectores de strings de 3 posiciones user id, item id, valoracion
         if (actualUser==null) throw new ImpossibleStateException("ShowRatedItems");
         else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
-
         Vector <Vector<String>> valorations = new Vector<Vector<String>>();
         try {
             for (valoratedItem i : usersList.get(actualUser).getValoratedItems()) {
@@ -288,7 +344,6 @@ public class ControladorDomini {
     }
     public void saveItems(String path) throws Exception{
         if (actualUser==null) throw new ImpossibleStateException("saveItems");
-        else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
         try{
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
             ctrlItem.Escritor_Items(path, itemList);
@@ -299,7 +354,6 @@ public class ControladorDomini {
     }
     public void saveRatings(String path) throws Exception{
         if (actualUser==null) throw new ImpossibleStateException("saveRatings");
-        else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
         try{
             ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Ratings(path,usersList );
@@ -310,10 +364,9 @@ public class ControladorDomini {
     }
     public void saveRecomendation(String path) throws Exception{
         if (actualUser==null) throw new ImpossibleStateException("saveRatings");
-        else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
         try{
             ControladorPersistenciaRecomendation ctrlRecomendation= new ControladorPersistenciaRecomendation();
-            ctrlRecomendation.Escritor_Recomendation(path );
+            ctrlRecomendation.Escritor_Recomendation(path, lastRecomendation);
         }
         catch (Exception e){
             throw e;
@@ -491,7 +544,7 @@ public class ControladorDomini {
     }
     public void deleteItem(String deleteme) throws Exception{
         if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
-        else if (itemList.existeix_item(Integer.valueOf(deleteme))) throw new ItemNotExistsException(deleteme);
+        else if (!itemList.existeix_item(Integer.valueOf(deleteme))) throw new ItemNotExistsException(deleteme);
         Item it = itemList.getItems().get(Integer.valueOf(deleteme));
 
         //borrar de cada usuario el item si lo ha valorado
@@ -507,12 +560,6 @@ public class ControladorDomini {
         //si es item selected==null
         if (selectedItem==it) selectedItem=null;
     }
-    //necesario?----------------------------------------------------------------------------------------
-    public void modifyItem(){
-
-    }
-    //--------------------------
-
     public void loadItems(String path) throws Exception{//"Entradas_CSV/items.csv"
         //pre: actualUser es admin
         try {
@@ -538,7 +585,7 @@ public class ControladorDomini {
         //pre: actualUser es admin
         try {
             if (actualUser==null) throw new ImpossibleStateException("loadRates");
-            else if(!usersList.get(actualUser.getUserID()).getRol().equals((TipusRol.Administrador)))
+            else if(!actualUser.getRol().equals(TipusRol.Administrador))
                 throw new NotAnAdministratorException((String.valueOf(actualUser.getUserID())));
             else{
 
@@ -598,7 +645,7 @@ public class ControladorDomini {
 */
 
     public void createUser( String create_me) throws Exception{
-        if(actualUser.getRol().equals(TipusRol.Administrador) ){//no esborres l'admin
+        if(actualUser.getRol().equals(TipusRol.Administrador) ){
             if (!usersList.containsKey(create_me)){
               User nou = new User(Integer.valueOf(create_me));
                 usersList.put(Integer.valueOf(create_me), nou);
@@ -607,7 +654,8 @@ public class ControladorDomini {
         }
         else throw new NotAnAdministratorException("createUser");
     }
-    public Vector <String> showAllUsers( ){
+    public Vector <String> showAllUsers( )throws Exception{
+        if (usersList.size()==0) throw new NoUsersException("showAllUsers");
         Vector <String> vs = new Vector<String>();
         for (User u: usersList.values()){
             System.out.println(u.getUserID());
