@@ -223,16 +223,18 @@ public class ControladorDomini {
                     }
                 }
             }
-            System.out.println(" ");
-            //for (myPair m: lastRecomendationAuxiliar) System.out.println(m.getItemID()+" "+m.getValoration());
+
+            for (myPair m: lastRecomendationAuxiliar) System.out.println(m.getItemID()+" "+m.getValoration());
             ArrayList <myPair> ratingsFiltrados = new ArrayList<myPair>();
-            for (myPair m: lastRecomendationAuxiliar){//eliminar de known los que no haya prediccion
-                for (myPair m2: ratingsOrdenados){
+            for (myPair m2: ratingsOrdenados){//eliminar de known los que no haya prediccion
+                for (myPair m: lastRecomendationAuxiliar){
                     if (m.getItemID()==m2.getItemID()){
-                        ratingsFiltrados.add(m);
+                        ratingsFiltrados.add(m2);
                     }
                 }
             }
+            System.out.println(" ");
+            for (myPair m4: ratingsFiltrados) System.out.println(m4.getItemID()+" "+m4.getValoration());
             //System.out.println(ratingsFiltrados.size());
             //System.out.println(lastRecomendation.size());
             //System.out.println(lastRecomendationAuxiliar.size());

@@ -26,6 +26,8 @@ public class RateRecomendation {
      * @see myPair
      */
     public float execute(ArrayList<myPair> arr, ArrayList<myPair> u ) throws Exception{
+        //System.out.println(arr.size());
+        //System.out.println(u.size());
         //IDCG
         int dist=arr.size();
         if (dist!=u.size()) throw new CorruptFileException("RateRecomendation");
@@ -44,6 +46,7 @@ public class RateRecomendation {
             for(int it=0; it<dist;it++){
                 if(arr.get(it).getItemID()==aux.getItemID()) pos= it;
             }
+
             double top=(Math.pow(2, u.get(i).getValoration())-1);
             double down=(Math.log10(pos+1+1) / Math.log10(2));
             top=top/down;
