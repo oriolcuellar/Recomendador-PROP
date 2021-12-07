@@ -6,6 +6,7 @@ package FONTS.src.domini.exceptions;
 
 public class EmptyLastRecomendationException extends Exception{
     public EmptyLastRecomendationException(String message) {
+
         super (message);
     }
 }

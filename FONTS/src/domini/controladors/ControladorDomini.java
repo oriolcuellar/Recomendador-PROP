@@ -242,6 +242,7 @@ public class ControladorDomini {
             }
             catch (Exception e){
                 throw e;
+
             }
         }
         catch (Exception e){

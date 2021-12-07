@@ -8,4 +8,5 @@ public class DeleteAdministratorException extends Exception{
     public DeleteAdministratorException(String message) {
         super (message);
     }
+
 }

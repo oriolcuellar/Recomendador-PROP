@@ -8,4 +8,5 @@ public class ImpossibleStateException extends Exception{
     public ImpossibleStateException(String message) {
         super (message);
     }
+
 }
