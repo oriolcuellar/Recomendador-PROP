@@ -299,7 +299,6 @@ public class Main {
             dom.doRecomendation(6, 5);
             System.out.println(dom.evaluateRecomendation("ratings.test.unknown.csv"));
 
-
         }
         catch (Exception e){
             System.out.println(e);

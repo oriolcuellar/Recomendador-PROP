@@ -48,6 +48,7 @@ public class RateRecomendation {
             double down=(Math.log10(pos+1+1) / Math.log10(2));
             top=top/down;
             res+=top;
+
         }
         //nDCG (normalized)
         return res/res1;

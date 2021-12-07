@@ -210,6 +210,7 @@ public class ControladorDomini {
             });
             Collections.reverse(ratingsOrdenados);//girar
 
+
             for (myPair m4: ratingsOrdenados) System.out.println(m4.getValoration());
             //System.out.println(aux.size());
             //System.out.println(ratingsOrdenados.size());
