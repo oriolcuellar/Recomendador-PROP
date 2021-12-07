@@ -133,7 +133,7 @@ public class SlopeOne {
         for (Map.Entry<Integer, ArrayList<User>> item : itemValoratedBy.entrySet()) {
             //si el item no esta valorado por el usuario ejecutar predicción
             if (!item.getValue().contains(user)) {
-                float valoration = meanValoration + calculateDesviationMean(user, item.getKey());
+                float valoration = meanValoration + calculateDesviationMean(user, item.getKey()) ;
                 predictions.add(new myPair(item.getKey(), max(-maxValue, valoration)));
             }
         }
