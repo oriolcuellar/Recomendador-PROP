@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class DriverKmeans {
 
-    static String path = "EXE/Entradas_CSV/ratings.db.csv";
+    static String path;
 
 
 
@@ -121,7 +121,7 @@ public class DriverKmeans {
             {
                 System.out.println("=====================================================================================");
                 System.out.println("El fichero por defecto, en la ruta [Entradas_CSV/ratings.db.csv] es el seleccionado.");
-                path = "Entradas_CSV/ratings.db.csv";
+                path = "EXE/Entradas_CSV/ratings.db.csv";
                 System.out.println("=====================================================================================");
                 break;
             }

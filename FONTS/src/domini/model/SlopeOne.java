@@ -105,7 +105,7 @@ public class SlopeOne {
                 }
             }
         }
-        if(count == 0) return Float.NEGATIVE_INFINITY;
+        if(count == 0) return -maxValue;
         return num/count;
     }
 
@@ -133,8 +133,8 @@ public class SlopeOne {
         for (Map.Entry<Integer, ArrayList<User>> item : itemValoratedBy.entrySet()) {
             //si el item no esta valorado por el usuario ejecutar predicción
             if (!item.getValue().contains(user)) {
-                float valoration = min(maxValue, meanValoration + calculateDesviationMean(user, item.getKey()));
-                predictions.add(new myPair(item.getKey(), max(0, valoration)));
+                float valoration = meanValoration + calculateDesviationMean(user, item.getKey());
+                predictions.add(new myPair(item.getKey(), max(-maxValue, valoration)));
             }
         }
     }

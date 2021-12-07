@@ -178,7 +178,7 @@ public class User {
         ArrayList<valoratedItem> valoratedItems2 = user2.getValoratedItems();
         ArrayList<Integer> intersectionItems = intersection(valoratedItems,valoratedItems2);
         float sumProdValorations = 0;
-
+        if(intersectionItems.size() == 0) sumProdValorations = 1;
         for(int i = 0; i < intersectionItems.size(); ++i) {
             int itemID = intersectionItems.get(i);
             float valoration1 = searchUsedItem(itemID).getValoracio();
@@ -195,7 +195,7 @@ public class User {
             float valoration2 = valoratedItems2.get(i).getValoracio();
             sumSquareValoration2 += valoration2*valoration2;
         }
-        return sumProdValorations/(float)(sqrt(51)*sqrt(36));
+        return sumProdValorations/(float)(sqrt(sumSquareValoration1)*sqrt(sumSquareValoration2));
     }
 
      /**
