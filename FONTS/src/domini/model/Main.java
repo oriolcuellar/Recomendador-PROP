@@ -292,12 +292,12 @@ public class Main {
         ControladorDomini dom = ControladorDomini.getInstance();
         try {
             dom.login("-1", "-1");
-            dom.loadItems("items.csv");
-            dom.loadRates("ratings.test.known.csv");
+            dom.loadItems("EXE/Entradas_CSV/items.csv");
+            dom.loadRates("EXE/Entradas_CSV/ratings.test.known.csv");
             dom.logout();
-            dom.login("117588", "117588");
-            dom.doRecomendation(6, 5);
-            System.out.println(dom.evaluateRecomendation("ratings.test.unknown.csv"));
+            dom.login("2383", "2383");
+            dom.doRecomendation(6, 10);
+            System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
 
         }
         catch (Exception e){
