@@ -7,6 +7,7 @@ import FONTS.src.persistencia.ControladorPersistenciaItem;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class ControladorDomini {
@@ -316,8 +317,18 @@ public class ControladorDomini {
         }
         return totsItems;
     }
-
-    public Vector <Vector<String>> ShowRatedItems() throws Exception{//vector de vectores de strings de 3 posiciones user id, item id, valoracion
+    public ArrayList<Integer> getRatedItems() throws Exception {
+        if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
+        else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
+        ArrayList<Integer> valorations = new ArrayList<Integer>();
+        try {
+            actualUser.getValoratedItems();
+        } catch (Exception e) {
+            throw e;
+        }
+        return valorations;
+    }
+    public Vector <Vector<String>> showRatedItems() throws Exception{//vector de vectores de strings de 3 posiciones user id, item id, valoracion
         if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
         else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
         Vector <Vector<String>> valorations = new Vector<Vector<String>>();

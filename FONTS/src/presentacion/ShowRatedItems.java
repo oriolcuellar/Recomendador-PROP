@@ -1,17 +1,15 @@
 package FONTS.src.presentacion;
 
 import FONTS.src.domini.controladors.ControladorPresentacion;
+import FONTS.src.domini.model.myPair;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Vector;
 
-public class ShowAllItems {
-
+public class ShowRatedItems {
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
 
     private static JFrame frame;
@@ -21,10 +19,10 @@ public class ShowAllItems {
     private JList list1;
     private JScrollPane scrollPane;
 
-    public ShowAllItems() {
+    public ShowRatedItems () {
 
         DefaultListModel demoList = new DefaultListModel();
-        Vector<String> items = CtrlPres.getAllItems();
+        ArrayList<Integer> items = CtrlPres.getRatedItems();
         for(int i = 0; i < items.size(); ++i) {
             demoList.addElement(items.get(i));
         }

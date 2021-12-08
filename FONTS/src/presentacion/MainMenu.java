@@ -18,15 +18,8 @@ public class MainMenu {
     private JButton showAllItemsButton;
     private JButton showRecomendedItemsButton;
 
-
     public MainMenu() {
-        showRatedItemsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(null,"Show Rated Items Pushed");
-            }
-        });
-        showRecomendedItemsButton.addActionListener(new ActionListener() {
+        settingsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 ControladorDomini dom = ControladorDomini.getInstance();
@@ -36,30 +29,47 @@ public class MainMenu {
                     dom.loadRates("EXE/Entradas_CSV/ratings.db.csv");
                     dom.logout();
                     dom.login("12", "12");
-                    dom.showRecommendedItemsSlope(6, 10);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                JOptionPane.showMessageDialog(null,"Show Rated Items Pushed");
+            }
+        });
+        showRatedItemsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int x = frame.getX();
+                int y = frame.getY();
+                CtrlPres.changeShowRatedItemsView(x,y);
+                frame.setVisible(false);
+            }
+        });
+        showRecomendedItemsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int x = frame.getX();
+                int y = frame.getY();
+                CtrlPres.changeShowRecomendedItemsView(x,y);
+                frame.setVisible(false);
             }
         });
         showAllItemsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                CtrlPres.changeShowAllItemsView();
+                int x = frame.getX();
+                int y = frame.getY();
+                CtrlPres.changeShowAllItemsView(x,y);
+                frame.setVisible(false);
             }
         });
     }
-    public void showWindow() {
+    public void showWindow(int x, int y) {
         frame = new JFrame("Sistema Recomanador");
-        frame.setContentPane(new MainMenu().panel);
+        frame.setContentPane(this.panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setMinimumSize(new Dimension(600, 600));
+        frame.setBounds(x,y,600,600);
         frame.setResizable(false);
         frame.setVisible(true);
-    }
-
-    public void setInvisible() {
-        frame.setVisible(false);
     }
 }

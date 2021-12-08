@@ -78,7 +78,7 @@ public class Main {
                 programa_oriol();
             }
             if(op.equals("6")) {
-                CtrlPres.inicializePresentation();
+                CtrlPres.inicializePresentation(100, 100);
             }
         }
         catch (Exception e){
