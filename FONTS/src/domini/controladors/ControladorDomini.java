@@ -98,7 +98,7 @@ public class ControladorDomini {
         }
     }
     public  void logout()throws Exception{
-        if (actualUser==null) throw new ImpossibleStateException("logout");
+        if (actualUser==null) throw new NoUserLogedInException("logout");
         else{
             actualUser=null;
             System.out.println("Logged Out");
@@ -106,7 +106,7 @@ public class ControladorDomini {
 
     }
     public  void editProfile(String newPass) throws Exception{
-        if (actualUser==null) throw new ImpossibleStateException("editProfile");
+        if (actualUser==null) throw new NoUserLogedInException("editProfile");
         else{
             actualUser.setPassword(newPass);
             System.out.println("Password changed Out");
@@ -114,7 +114,7 @@ public class ControladorDomini {
     }
     public void deleteProfile(String delete_me) throws Exception{
         try {
-            if(actualUser == null) throw new ImpossibleStateException("deleteProfile");
+            if(actualUser == null) throw new NoUserLogedInException("deleteProfile");
             else if(delete_me.equals(String.valueOf(admin.getUserID()))) throw new DeleteAdministratorException(delete_me);
             else if (usersList.containsKey(Integer.valueOf(delete_me))) {
                 User u = usersList.get(delete_me);
@@ -133,7 +133,7 @@ public class ControladorDomini {
     }
     public ArrayList<myPair> showRecommendedItemsSlope(int k, int maxValue) throws Exception{// to do------------------
         try {
-            if (actualUser == null) throw new ImpossibleStateException("showRecommendedItemsSlope");
+            if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
             else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
             else if (k<1 || k>usersList.size()) throw new WrongDataException("showRecommendedItemsSlope "+ k);
             else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
@@ -156,7 +156,7 @@ public class ControladorDomini {
 
     }
     public ArrayList<Item> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
-        if (actualUser == null) throw new ImpossibleStateException("showRecommendedItemsSlope");
+        if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
         else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
         else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
         //leer valoraciones know
@@ -184,7 +184,7 @@ public class ControladorDomini {
     }
     public float doRecomendation(int k_slope, int max_slope) throws Exception{
         try{
-            if (actualUser==null) throw new ImpossibleStateException("avaluateRecomendation");
+            if (actualUser==null) throw new NoUserLogedInException("avaluateRecomendation");
             if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException("doRecomendation");
             if (itemList.n_Items()==0){
                 throw new NoItemsException("doRecomendation");
@@ -204,7 +204,7 @@ public class ControladorDomini {
         }
     }
     public float evaluateRecomendation(String path) throws Exception{ //co
-        if (actualUser==null) throw new ImpossibleStateException("evaluateRecomendation");
+        if (actualUser==null) throw new NoUserLogedInException("evaluateRecomendation");
         else if (lastRecomendation.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
             ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
@@ -253,14 +253,10 @@ public class ControladorDomini {
             //System.out.println(ratingsFiltrados.size());
             //System.out.println(lastRecomendation.size());
             //System.out.println(lastRecomendationAuxiliar.size());
-            try {
-                RateRecomendation r = new RateRecomendation();
-                return r.execute(lastRecomendationAuxiliar, ratingsFiltrados);
-            }
-            catch (Exception e){
-                throw e;
 
-            }
+            RateRecomendation r = new RateRecomendation();
+            return r.execute(lastRecomendationAuxiliar, ratingsFiltrados);
+
         }
         catch (Exception e){
             throw e;
@@ -289,7 +285,7 @@ public class ControladorDomini {
     }
 
     public void rateItem(String idItem, float val) throws Exception{
-        if(actualUser==null) throw new ImpossibleStateException("rateItem");
+        if(actualUser==null) throw new NoUserLogedInException("rateItem");
         boolean hay=false;
         for (Item m: itemList.getItems()){
             if (String.valueOf(m.getID()).equals(idItem)){
@@ -322,7 +318,7 @@ public class ControladorDomini {
     }
 
     public Vector <Vector<String>> ShowRatedItems() throws Exception{//vector de vectores de strings de 3 posiciones user id, item id, valoracion
-        if (actualUser==null) throw new ImpossibleStateException("ShowRatedItems");
+        if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
         else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
         Vector <Vector<String>> valorations = new Vector<Vector<String>>();
         try {
@@ -341,7 +337,7 @@ public class ControladorDomini {
         return valorations;
     }
     public void saveItems(String path) throws Exception{
-        if (actualUser==null) throw new ImpossibleStateException("saveItems");
+        if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
             ctrlItem.Escritor_Items(path, itemList);
@@ -351,7 +347,7 @@ public class ControladorDomini {
         }
     }
     public void saveRatings(String path) throws Exception{
-        if (actualUser==null) throw new ImpossibleStateException("saveRatings");
+        if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
             ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Ratings(path,usersList );
@@ -361,7 +357,7 @@ public class ControladorDomini {
         }
     }
     public void saveRecomendation(String path) throws Exception{
-        if (actualUser==null) throw new ImpossibleStateException("saveRatings");
+        if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
             ControladorPersistenciaRecomendation ctrlRecomendation= new ControladorPersistenciaRecomendation();
             ctrlRecomendation.Escritor_Recomendation(path, lastRecomendation);
@@ -372,7 +368,7 @@ public class ControladorDomini {
     }
 
     public void createItem(String atributs, String valors) throws Exception{
-        if (actualUser==null) throw new ImpossibleStateException("ShowRatedItems");
+        if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
         try {
             createItemPath(atributs, valors, itemList, itemTypeList);
         }
@@ -381,7 +377,7 @@ public class ControladorDomini {
         }
     }
     private void createItemKNN(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
-        if (actualUser==null) throw new ImpossibleStateException("ShowRatedItems");
+        if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
         try {
             createItemPath(atributs, valors,ListaItems,ListaTiposItems);
         }
@@ -561,7 +557,7 @@ public class ControladorDomini {
     public void loadItems(String path) throws Exception{//"Entradas_CSV/items.csv"
         //pre: actualUser es admin
         try {
-            if (actualUser == null) throw new ImpossibleStateException("loadItems");
+            if (actualUser == null) throw new NoUserLogedInException("loadItems");
             else if (actualUser.getRol().equals(TipusRol.Administrador)) {
                 Vector<String> mat_items = new Vector<String>();
                 ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
@@ -582,7 +578,7 @@ public class ControladorDomini {
     public void loadRates(String path) throws Exception{//falta añadir item usado a la lista de items usados
         //pre: actualUser es admin
         try {
-            if (actualUser==null) throw new ImpossibleStateException("loadRates");
+            if (actualUser==null) throw new NoUserLogedInException("loadRates");
             else if(!actualUser.getRol().equals(TipusRol.Administrador))
                 throw new NotAnAdministratorException((String.valueOf(actualUser.getUserID())));
             else{
