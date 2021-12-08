@@ -45,7 +45,6 @@ public class ControladorDomini {
         lastRecomendation = new ArrayList<myPair>();
         admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
-        usersList.put(-1, admin);
     }
 
     private ControladorDomini(){
@@ -81,7 +80,7 @@ public class ControladorDomini {
             if (actualUser != null) {
                 throw new ImpossibleStateException("login");
             } else if (usersList.containsKey(userId)) {
-                if (actualUser.getPassword().equals(password)) {//logged
+                if (usersList.get(userId).getPassword().equals(password)) {//logged
                     actualUser = usersList.get(userId);
                     System.out.println("Sessió iniciada");
                 } else {
@@ -135,7 +134,7 @@ public class ControladorDomini {
     public ArrayList<myPair> showRecommendedItemsSlope(int k, int maxValue) throws Exception{// to do------------------
         try {
             if (actualUser == null) throw new ImpossibleStateException("showRecommendedItemsSlope");
-            else if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
+            else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
             else if (k<1 || k>usersList.size()) throw new WrongDataException("showRecommendedItemsSlope "+ k);
             else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
             //kmeans
@@ -158,7 +157,7 @@ public class ControladorDomini {
     }
     public ArrayList<Item> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         if (actualUser == null) throw new ImpossibleStateException("showRecommendedItemsSlope");
-        else if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
+        else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
         else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
         //leer valoraciones know
         ArrayList <Item> it = new ArrayList<Item>();
@@ -186,7 +185,7 @@ public class ControladorDomini {
     public float doRecomendation(int k_slope, int max_slope) throws Exception{
         try{
             if (actualUser==null) throw new ImpossibleStateException("avaluateRecomendation");
-            if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException("doRecomendation");
+            if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException("doRecomendation");
             if (itemList.n_Items()==0){
                 throw new NoItemsException("doRecomendation");
             }
@@ -205,8 +204,7 @@ public class ControladorDomini {
         }
     }
     public float evaluateRecomendation(String path) throws Exception{ //co
-        if (actualUser==null) throw new ImpossibleStateException("avaluateRecomendation");
-        else if(!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException("avaluateRecomendation");
+        if (actualUser==null) throw new ImpossibleStateException("evaluateRecomendation");
         else if (lastRecomendation.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
             ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
