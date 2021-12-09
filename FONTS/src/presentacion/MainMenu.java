@@ -19,6 +19,8 @@ public class MainMenu {
     private JButton showRecomendedItemsButton;
 
     public MainMenu() {
+
+
         settingsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -37,15 +39,18 @@ public class MainMenu {
         showRatedItemsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                showRatedItemsButton.setEnabled(false);
                 int x = frame.getX();
                 int y = frame.getY();
                 CtrlPres.changeShowRatedItemsView(x,y);
                 frame.setVisible(false);
+                showRatedItemsButton.setEnabled(true);
             }
         });
         showRecomendedItemsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                showRecomendedItemsButton.setEnabled(false);
                 int x = frame.getX();
                 int y = frame.getY();
                 CtrlPres.changeShowRecomendedItemsView(x,y);
@@ -63,6 +68,7 @@ public class MainMenu {
         });
     }
     public void showWindow(int x, int y) {
+        enableButtons();
         frame = new JFrame("Sistema Recomanador");
         frame.setContentPane(this.panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -70,5 +76,16 @@ public class MainMenu {
         frame.setBounds(x,y,600,600);
         frame.setResizable(false);
         frame.setVisible(true);
+    }
+
+    public void disableButtons() {
+        showRecomendedItemsButton.setEnabled(true);
+        settingsButton.setEnabled(true);
+        showAllItemsButton.setEnabled(true);
+        showRatedItemsButton.setEnabled(true);
+    }
+
+    public void enableButtons() {
+        showRecomendedItemsButton.setEnabled(true);
     }
 }

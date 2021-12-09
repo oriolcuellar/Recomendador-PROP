@@ -65,8 +65,9 @@ public class ControladorPresentacion {
     public static ArrayList<myPair> getRecomendedItems(){
         ArrayList<myPair> s = new ArrayList<>();
         try {
-            s = CtrlDom.showRecommendedItemsSlope(6,10);
+            s = CtrlDom.doRecomendation(6,10);
         } catch (Exception e) {
+            principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended");
         }
         return s;

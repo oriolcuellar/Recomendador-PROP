@@ -182,7 +182,7 @@ public class ControladorDomini {
         K_Neareast_Neightbour knn = new K_Neareast_Neightbour();
         return knn.Algorithm(num_elem, itemList, it, va);
     }
-    public float doRecomendation(int k_slope, int max_slope) throws Exception{
+    public ArrayList<myPair> doRecomendation(int k_slope, int max_slope) throws Exception{
         try{
             if (actualUser==null) throw new NoUserLogedInException("avaluateRecomendation");
             if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException("doRecomendation");
@@ -196,8 +196,8 @@ public class ControladorDomini {
             //mix los 2 algoritmos
 
             lastRecomendation=slope;
-            float a =2;
-            return a;
+
+            return lastRecomendation;
         }
         catch (Exception e){
             throw e;
