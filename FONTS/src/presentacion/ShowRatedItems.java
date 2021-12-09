@@ -27,10 +27,13 @@ public class ShowRatedItems {
         scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
-                this.thumbColor = Color.BLACK;
-                this.trackColor  = Color.getHSBColor(43,53,52);
+                this.thumbColor = new Color(134,114,62);
+                this.trackColor  = new Color(187,165,107);
             }
         });
+
+        scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
+        scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
 
         DefaultListModel demoList = new DefaultListModel();
         ArrayList<valoratedItem> items = CtrlPres.getRatedItems();

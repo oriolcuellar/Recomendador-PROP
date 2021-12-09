@@ -6,6 +6,7 @@ import FONTS.src.domini.model.myPair;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
@@ -23,6 +24,18 @@ public class ShowRecomendedItems {
     private JScrollPane scrollPane;
 
     public ShowRecomendedItems() {
+
+        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = new Color(134,114,62);
+                this.trackColor  = new Color(187,165,107);
+
+            }
+        });
+
+        scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
+        scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
 
         DefaultListModel demoList = new DefaultListModel();
         ArrayList<myPair> items = CtrlPres.getRecomendedItems();

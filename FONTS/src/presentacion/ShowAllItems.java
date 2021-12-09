@@ -28,11 +28,13 @@ public class ShowAllItems {
         scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
-                Color c = new Color(187,165,107);
-                this.thumbColor = Color.BLACK;
-                this.trackColor  = c;
+                this.thumbColor = new Color(134,114,62);
+                this.trackColor  = new Color(187,165,107);
             }
         });
+
+        scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
+        scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
 
         DefaultListModel demoList = new DefaultListModel();
         Vector<String> items = CtrlPres.getAllItems();
