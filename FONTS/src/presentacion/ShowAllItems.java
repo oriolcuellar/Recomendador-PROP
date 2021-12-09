@@ -6,8 +6,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Vector;
 
 public class ShowAllItems {
@@ -33,12 +32,25 @@ public class ShowAllItems {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                frame.setVisible(false);
                 int x = frame.getX();
                 int y = frame.getY();
                 CtrlPres.inicializePresentation(x,y);
+                frame.setVisible(false);
             }
         });
+
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    String selectedItem = (String) list1.getSelectedValue();
+                    int x = frame.getX();
+                    int y = frame.getY();
+                    CtrlPres.inicializePresentation(x,y);
+                    frame.setVisible(false);
+                }
+            }
+        };
+        list1.addMouseListener(mouseListener);
     }
 
     public void showWindow(int x, int y) {
@@ -51,7 +63,4 @@ public class ShowAllItems {
         frame.setVisible(true);
     }
 
-    public void setInvisible() {
-        frame.setVisible(false);
-    }
 }
