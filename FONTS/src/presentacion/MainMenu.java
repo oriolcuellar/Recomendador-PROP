@@ -32,7 +32,6 @@ public class MainMenu {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(null,"Show Rated Items Pushed");
             }
         });
         showRatedItemsButton.addActionListener(new ActionListener() {

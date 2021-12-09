@@ -1,6 +1,7 @@
 package FONTS.src.domini.controladors;
 
 import FONTS.src.domini.model.myPair;
+import FONTS.src.domini.model.valoratedItem;
 import FONTS.src.presentacion.*;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ public class ControladorPresentacion {
 
     private static ControladorPresentacion CtrlPres;
     private static ControladorDomini CtrlDom = ControladorDomini.getInstance();
-
+    static MainMenu principalView = new MainMenu();
     private ControladorPresentacion() {
     }
 
@@ -21,7 +22,6 @@ public class ControladorPresentacion {
     }
 
     public static void inicializePresentation(int x, int y) {
-        MainMenu principalView = new MainMenu();
         principalView.showWindow(x,y);
     }
 
@@ -40,8 +40,6 @@ public class ControladorPresentacion {
         showRatedItems.showWindow(x,y);
     }
 
-
-
     public static Vector<String> getAllItems(){
         Vector<String> s = new Vector<>();
         try {
@@ -53,10 +51,10 @@ public class ControladorPresentacion {
         return s;
     }
 
-    public static ArrayList<Integer> getRatedItems(){
-        ArrayList<Integer> s = new ArrayList<Integer>();
+    public static ArrayList<valoratedItem> getRatedItems(){
+        ArrayList<valoratedItem> s = new ArrayList<valoratedItem>();
         try {
-            s = CtrlDom.getRatedItems();
+            s = CtrlDom.getActualUser().getValoratedItems();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"No items Rated");
             System.out.println(s.get(0));

@@ -2,10 +2,10 @@ package FONTS.src.presentacion;
 
 import FONTS.src.domini.controladors.ControladorPresentacion;
 import FONTS.src.domini.model.myPair;
+import FONTS.src.domini.model.valoratedItem;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -22,9 +22,9 @@ public class ShowRatedItems {
     public ShowRatedItems () {
 
         DefaultListModel demoList = new DefaultListModel();
-        ArrayList<Integer> items = CtrlPres.getRatedItems();
+        ArrayList<valoratedItem> items = CtrlPres.getRatedItems();
         for(int i = 0; i < items.size(); ++i) {
-            demoList.addElement(items.get(i));
+            demoList.addElement(items.get(i).getItem().getID());
         }
         list1.setModel(demoList);
 
@@ -37,6 +37,18 @@ public class ShowRatedItems {
                 CtrlPres.inicializePresentation(x,y);
             }
         });
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    String selectedItem = (String) list1.getSelectedValue();
+                    int x = frame.getX();
+                    int y = frame.getY();
+                    CtrlPres.inicializePresentation(x,y);
+                    frame.setVisible(false);
+                }
+            }
+        };
+        list1.addMouseListener(mouseListener);
     }
 
     public void showWindow(int x, int y) {
