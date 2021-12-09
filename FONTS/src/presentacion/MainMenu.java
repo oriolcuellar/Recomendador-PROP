@@ -79,10 +79,10 @@ public class MainMenu {
     }
 
     public void disableButtons() {
-        showRecomendedItemsButton.setEnabled(true);
-        settingsButton.setEnabled(true);
-        showAllItemsButton.setEnabled(true);
-        showRatedItemsButton.setEnabled(true);
+        showRecomendedItemsButton.setEnabled(false);
+        settingsButton.setEnabled(false);
+        showAllItemsButton.setEnabled(false);
+        showRatedItemsButton.setEnabled(false);
     }
 
     public void enableButtons() {

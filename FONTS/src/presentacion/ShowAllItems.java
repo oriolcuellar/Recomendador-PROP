@@ -28,8 +28,9 @@ public class ShowAllItems {
         scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
+                Color c = new Color(187,165,107);
                 this.thumbColor = Color.BLACK;
-                this.trackColor  = Color.getHSBColor(43,53,52);
+                this.trackColor  = c;
             }
         });
 
