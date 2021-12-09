@@ -45,10 +45,13 @@ public class ShowRatedItems {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                frame.setVisible(false);
+
                 int x = frame.getX();
                 int y = frame.getY();
                 CtrlPres.inicializePresentation(x,y);
+                frame.dispose();
+
+
             }
         });
         MouseListener mouseListener = new MouseAdapter() {
@@ -58,7 +61,8 @@ public class ShowRatedItems {
                     int x = frame.getX();
                     int y = frame.getY();
                     CtrlPres.inicializePresentation(x,y);
-                    frame.setVisible(false);
+                    frame.dispose();
+
                 }
             }
         };

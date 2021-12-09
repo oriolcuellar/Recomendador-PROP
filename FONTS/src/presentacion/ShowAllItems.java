@@ -49,7 +49,7 @@ public class ShowAllItems {
                 int x = frame.getX();
                 int y = frame.getY();
                 CtrlPres.inicializePresentation(x,y);
-                frame.setVisible(false);
+                frame.dispose();
             }
         });
 
@@ -60,7 +60,7 @@ public class ShowAllItems {
                     int x = frame.getX();
                     int y = frame.getY();
                     CtrlPres.inicializePresentation(x,y);
-                    frame.setVisible(false);
+                    frame.dispose();
                 }
             }
         };

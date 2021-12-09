@@ -1,5 +1,4 @@
 package FONTS.src.presentacion;
-
 import FONTS.src.domini.controladors.ControladorPresentacion;
 import FONTS.src.domini.model.myPair;
 
@@ -47,20 +46,22 @@ public class ShowRecomendedItems {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                frame.setVisible(false);
+
                 int x = frame.getX();
                 int y = frame.getY();
                 CtrlPres.inicializePresentation(x,y);
+                frame.dispose();
             }
         });
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     String selectedItem = (String) list1.getSelectedValue();
+                    System.out.println(selectedItem);
                     int x = frame.getX();
                     int y = frame.getY();
                     CtrlPres.inicializePresentation(x,y);
-                    frame.setVisible(false);
+                    frame.dispose();
                 }
             }
         };
