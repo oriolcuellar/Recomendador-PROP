@@ -1,10 +1,13 @@
 package FONTS.src.presentacion;
 
 import FONTS.src.domini.controladors.ControladorPresentacion;
+import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
@@ -21,6 +24,14 @@ public class ShowAllItems {
     private JScrollPane scrollPane;
 
     public ShowAllItems() {
+
+        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = Color.BLACK;
+                this.trackColor  = Color.getHSBColor(43,53,52);
+            }
+        });
 
         DefaultListModel demoList = new DefaultListModel();
         Vector<String> items = CtrlPres.getAllItems();

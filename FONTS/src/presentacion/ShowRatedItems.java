@@ -5,6 +5,9 @@ import FONTS.src.domini.model.myPair;
 import FONTS.src.domini.model.valoratedItem;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -20,6 +23,14 @@ public class ShowRatedItems {
     private JScrollPane scrollPane;
 
     public ShowRatedItems () {
+
+        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = Color.BLACK;
+                this.trackColor  = Color.getHSBColor(43,53,52);
+            }
+        });
 
         DefaultListModel demoList = new DefaultListModel();
         ArrayList<valoratedItem> items = CtrlPres.getRatedItems();
