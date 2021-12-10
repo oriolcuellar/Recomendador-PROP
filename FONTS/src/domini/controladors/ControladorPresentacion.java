@@ -40,6 +40,11 @@ public class ControladorPresentacion {
         showRatedItems.showWindow(x,y);
     }
 
+    public static void changeShowAtributesView(int x, int y)  {
+        showAtributes showAtributes = new showAtributes();
+        showAtributes.showWindow(x,y);
+    }
+
     public static Vector<String> getAllItems(){
         Vector<String> s = new Vector<>();
         try {
