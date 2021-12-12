@@ -136,6 +136,8 @@ public class ControladorDomini {
             else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
             else if (k<1 || k>usersList.size()) throw new WrongDataException("showRecommendedItemsSlope "+ k);
             else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
+            else if (itemList.n_Items()==0) throw new NoItemsException("showRecommendedItemsSlope");
+
             //kmeans
 
             Kmeans kmeans = new Kmeans();
@@ -154,10 +156,12 @@ public class ControladorDomini {
         }
 
     }
-    public ArrayList<Item> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
+    public ArrayList<myPair> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
         else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
         else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
+        else if (itemList.n_Items()==0) throw new NoItemsException("showRecommendedItemsKNN") ;
+        else if (num_elem<1) throw new WrongDataException("showRecommendedItemsKNN");
         //leer valoraciones know
         ArrayList <Item> it = new ArrayList<Item>();
         ArrayList <Double> va = new ArrayList<Double>();
@@ -179,24 +183,52 @@ public class ControladorDomini {
         }
         //k-neighbours
         K_Neareast_Neightbour knn = new K_Neareast_Neightbour();
-        return knn.Algorithm(num_elem, itemList, it, va);
+        ArrayList <Item> aux =knn.Algorithm(num_elem, itemList, it, va);
+        ArrayList<myPair> pair= new ArrayList<myPair>();
+        for (Item m: aux){
+            myPair nou = new myPair(m.getID(), 0);
+            pair.add(nou);
+        }
+        return pair;
     }
-    public float doRecomendation(int k_slope, int max_slope) throws Exception{
+    public ArrayList<myPair> doSlope(int k_slope, int max_slope) throws Exception{
         try{
-            if (actualUser==null) throw new NoUserLogedInException("avaluateRecomendation");
-            if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException("doRecomendation");
-            if (itemList.n_Items()==0){
-                throw new NoItemsException("doRecomendation");
-            }
-            else if (usersList.size()==0){
-                throw new NoUsersException("doRecomendation");
-            }
-            ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
-            //mix los 2 algoritmos
 
-            lastRecomendation=slope;
-            float a =2;
-            return a;
+            lastRecomendation= dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+            return lastRecomendation;
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+    public ArrayList<myPair> doKNN(int num_elem,String path) throws Exception{
+        try{
+            lastRecomendation = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
+            return lastRecomendation;
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+    public ArrayList<myPair> doRecomendation(int k_slope, int max_slope, int num_elem,String path ) throws Exception{
+        try{
+
+            ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+            ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
+            ArrayList<myPair> tot = new ArrayList<myPair>();
+            int itSlope=0;
+            int itKnn=0;
+            while (itKnn<knn.size() || itSlope<slope.size()){
+                if(itKnn<knn.size()){
+                    tot.add(knn.get(itKnn));
+                }
+                if(itSlope<slope.size()){
+                    tot.add(slope.get(itSlope));
+                }
+            }
+            //mix los 2 algoritmos
+            lastRecomendation=tot;
+            return lastRecomendation;
         }
         catch (Exception e){
             throw e;

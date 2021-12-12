@@ -5,6 +5,9 @@ import FONTS.src.domini.model.myPair;
 import FONTS.src.domini.model.valoratedItem;
 
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -21,6 +24,17 @@ public class ShowRatedItems {
 
     public ShowRatedItems () {
 
+        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = new Color(134,114,62);
+                this.trackColor  = new Color(187,165,107);
+            }
+        });
+
+        scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
+        scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
+
         DefaultListModel demoList = new DefaultListModel();
         ArrayList<valoratedItem> items = CtrlPres.getRatedItems();
         for(int i = 0; i < items.size(); ++i) {
@@ -31,10 +45,13 @@ public class ShowRatedItems {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                frame.setVisible(false);
+
                 int x = frame.getX();
                 int y = frame.getY();
                 CtrlPres.inicializePresentation(x,y);
+                frame.dispose();
+
+
             }
         });
         MouseListener mouseListener = new MouseAdapter() {
@@ -43,8 +60,8 @@ public class ShowRatedItems {
                     String selectedItem = (String) list1.getSelectedValue();
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.inicializePresentation(x,y);
-                    frame.setVisible(false);
+                    CtrlPres.changeShowAtributesView(x,y);
+                    frame.dispose();
                 }
             }
         };

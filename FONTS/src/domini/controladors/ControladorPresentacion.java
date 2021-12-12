@@ -40,6 +40,11 @@ public class ControladorPresentacion {
         showRatedItems.showWindow(x,y);
     }
 
+    public static void changeShowAtributesView(int x, int y)  {
+        showAtributes showAtributes = new showAtributes();
+        showAtributes.showWindow(x,y);
+    }
+
     public static Vector<String> getAllItems(){
         Vector<String> s = new Vector<>();
         try {
@@ -65,8 +70,9 @@ public class ControladorPresentacion {
     public static ArrayList<myPair> getRecomendedItems(){
         ArrayList<myPair> s = new ArrayList<>();
         try {
-            s = CtrlDom.showRecommendedItemsSlope(6,10);
+            s = CtrlDom.doRecomendation(6,10);
         } catch (Exception e) {
+            principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended");
         }
         return s;

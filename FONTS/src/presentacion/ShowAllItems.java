@@ -1,10 +1,13 @@
 package FONTS.src.presentacion;
 
 import FONTS.src.domini.controladors.ControladorPresentacion;
+import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
@@ -22,6 +25,17 @@ public class ShowAllItems {
 
     public ShowAllItems() {
 
+        scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = new Color(134,114,62);
+                this.trackColor  = new Color(187,165,107);
+            }
+        });
+
+        scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
+        scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
+
         DefaultListModel demoList = new DefaultListModel();
         Vector<String> items = CtrlPres.getAllItems();
         for(int i = 0; i < items.size(); ++i) {
@@ -35,7 +49,7 @@ public class ShowAllItems {
                 int x = frame.getX();
                 int y = frame.getY();
                 CtrlPres.inicializePresentation(x,y);
-                frame.setVisible(false);
+                frame.dispose();
             }
         });
 
@@ -45,8 +59,8 @@ public class ShowAllItems {
                     String selectedItem = (String) list1.getSelectedValue();
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.inicializePresentation(x,y);
-                    frame.setVisible(false);
+                    CtrlPres.changeShowAtributesView(x,y);
+                    frame.dispose();
                 }
             }
         };
