@@ -1,4 +1,3 @@
-
 package FONTS.src.domini.controladors;
 
 import FONTS.src.domini.exceptions.*;
@@ -24,7 +23,7 @@ public class ControladorDomini {
     private static Map<Integer, ArrayList<User>> itemValoratedBy;
     private static ArrayList<myPair> lastRecomendation;
 
-//CtrlDomini control= CtrlDomini.getInstance();
+    //CtrlDomini control= CtrlDomini.getInstance();
 //control.getAllUsers();
 //constructor
     public static ControladorDomini getInstance(){
@@ -321,7 +320,7 @@ public class ControladorDomini {
         else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
         ArrayList<valoratedItem> valorations;
         try {
-           valorations = actualUser.getValoratedItems();
+            valorations = actualUser.getValoratedItems();
         } catch (Exception e) {
             throw e;
         }
@@ -461,7 +460,7 @@ public class ControladorDomini {
         }
 
         //DEFINIR TIPO ATRIBUTO
-            //string de valores to vector
+        //string de valores to vector
 
         //if (valors[valors.length()].equals(","))
         //System.out.println(vsa.size());
@@ -515,8 +514,8 @@ public class ControladorDomini {
                     else{
                         if (a.getType().equals("Rang")){
                             double aux = Double.valueOf(vsv.get(pos));
-      //                      if (a.getUpper()<aux) a.setUpper(aux);
-  //                          if (a.getLower()>aux) a.setLower(aux);
+                            //                      if (a.getUpper()<aux) a.setUpper(aux);
+                            //                          if (a.getLower()>aux) a.setLower(aux);
                         }
                         else{
                             double min=Double.valueOf(vsv.get(pos));
@@ -651,7 +650,7 @@ public class ControladorDomini {
     public void createUser( String create_me) throws Exception{
         if(actualUser.getRol().equals(TipusRol.Administrador) ){
             if (!usersList.containsKey(create_me)){
-              User nou = new User(Integer.valueOf(create_me));
+                User nou = new User(Integer.valueOf(create_me));
                 usersList.put(Integer.valueOf(create_me), nou);
             }
 
