@@ -301,14 +301,14 @@ public class Main {
             dom.loadItems("EXE/Entradas_CSV/items.csv");
             dom.loadRates("EXE/Entradas_CSV/ratings.test.known.csv");
             dom.logout();
-            for (String u: dom.showAllUsers()){
+            /*for (String u: dom.showAllUsers()){
                 dom.login(u, u);
                 dom.doSlope(5, 10);
                 //dom.doKNN(10, "EXE/Entradas_CSV/ratings.test.known.csv");
                 //dom.doRecomendation(5, 10, 20, "EXE/Entradas_CSV/ratings.test.known.csv");
                 System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
                 dom.logout();
-            }
+            }*/
             //System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
             //dom.saveRecomendation("EXE/Entradas_CSV/recom.csv");
             //dom.loadRecomendation("EXE/Entradas_CSV/recom.csv");
@@ -317,6 +317,8 @@ public class Main {
             //dom.saveRecomendation("EXE/Entradas_CSV/recom5.csv");
             //dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv");
             //System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
+            dom.login("-1", "-1");
+            dom.showAllItems();
         }
         catch (Exception e){
             System.out.println(e);

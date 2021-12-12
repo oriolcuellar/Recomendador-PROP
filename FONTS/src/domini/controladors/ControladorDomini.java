@@ -558,8 +558,8 @@ public class ControladorDomini {
                     else{
                         if (a.getType().equals("Rang")){
                             double aux = Double.valueOf(vsv.get(pos));
-                            //                      if (a.getUpper()<aux) a.setUpper(aux);
-                            //                          if (a.getLower()>aux) a.setLower(aux);
+                            if (a.getUpper()<aux) a.setUpper(aux);
+                            if (a.getLower()>aux) a.setLower(aux);
                         }
                         else{
                             double min=Double.valueOf(vsv.get(pos));
