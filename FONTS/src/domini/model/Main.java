@@ -302,9 +302,11 @@ public class Main {
             dom.loadRates("EXE/Entradas_CSV/ratings.test.known.csv");
             dom.logout();
             dom.login("6913", "6913");
-            dom.doSlope(5, 10);
-            System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
-
+            //dom.doSlope(5, 10);
+            //System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
+            //dom.saveRecomendation("EXE/Entradas_CSV/recom.csv");
+            dom.loadRecomendation("EXE/Entradas_CSV/recom.csv");
+            dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv");
         }
         catch (Exception e){
             System.out.println(e);

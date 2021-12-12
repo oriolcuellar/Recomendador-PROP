@@ -22,6 +22,7 @@ public class ControladorDomini {
     private static Map<String, TipusItem> itemTypeList;
     private static Map<Integer, ArrayList<User>> itemValoratedBy;
     private static ArrayList<myPair> lastRecomendation;
+    private static boolean recomendationChanged;
 
     //CtrlDomini control= CtrlDomini.getInstance();
 //control.getAllUsers();
@@ -42,6 +43,7 @@ public class ControladorDomini {
         itemTypeList = new HashMap<String, TipusItem>();
         itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
         lastRecomendation = new ArrayList<myPair>();
+        recomendationChanged=true;
         admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
     }
@@ -75,6 +77,7 @@ public class ControladorDomini {
     public void login(String struserId, String password) throws Exception{
         //post: es crea un usuari i es posa d'usuari actiu.
         try {
+            recomendationChanged=true;
             int userId = Integer.valueOf((struserId));
             if (actualUser != null) {
                 throw new ImpossibleStateException("login");
@@ -193,8 +196,9 @@ public class ControladorDomini {
     }
     public ArrayList<myPair> doSlope(int k_slope, int max_slope) throws Exception{
         try{
-
-            lastRecomendation= dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+            if (recomendationChanged)
+                lastRecomendation= dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+            recomendationChanged=false;
             return lastRecomendation;
         }
         catch (Exception e){
@@ -203,7 +207,9 @@ public class ControladorDomini {
     }
     public ArrayList<myPair> doKNN(int num_elem,String path) throws Exception{
         try{
-            lastRecomendation = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
+            if (recomendationChanged)
+                lastRecomendation = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
+            recomendationChanged=false;
             return lastRecomendation;
         }
         catch (Exception e){
@@ -212,22 +218,24 @@ public class ControladorDomini {
     }
     public ArrayList<myPair> doRecomendation(int k_slope, int max_slope, int num_elem,String path ) throws Exception{
         try{
-
-            ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
-            ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
-            ArrayList<myPair> tot = new ArrayList<myPair>();
-            int itSlope=0;
-            int itKnn=0;
-            while (itKnn<knn.size() || itSlope<slope.size()){
-                if(itKnn<knn.size()){
-                    tot.add(knn.get(itKnn));
+            if (recomendationChanged) {
+                ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+                ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
+                ArrayList<myPair> tot = new ArrayList<myPair>();
+                int itSlope = 0;
+                int itKnn = 0;
+                while (itKnn < knn.size() || itSlope < slope.size()) {
+                    if (itKnn < knn.size()) {
+                        tot.add(knn.get(itKnn));
+                    }
+                    if (itSlope < slope.size()) {
+                        tot.add(slope.get(itSlope));
+                    }
                 }
-                if(itSlope<slope.size()){
-                    tot.add(slope.get(itSlope));
-                }
+                //mix los 2 algoritmos
+                lastRecomendation = tot;
+                recomendationChanged=false;
             }
-            //mix los 2 algoritmos
-            lastRecomendation=tot;
             return lastRecomendation;
         }
         catch (Exception e){
@@ -328,13 +336,14 @@ public class ControladorDomini {
         for(valoratedItem m: actualUser.getValoratedItems()){
             if(String.valueOf(m.getItem().getID()).equals(idItem)) {
                 hay = true;
+                actualUser.getValoratedItems().remove(m);
+                actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
+                recomendationChanged=true;
             }
         }
         if(!hay){
-            throw new ItemAlreadyValoredException("rateItem");
-        }
-        else{
             actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
+            recomendationChanged=true;
         }
     }
 
@@ -412,6 +421,7 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
         try {
             createItemPath(atributs, valors, itemList, itemTypeList);
+            recomendationChanged=true;
         }
         catch (Exception e){
             throw e;
@@ -593,6 +603,7 @@ public class ControladorDomini {
         //borrar de itemList
         itemList.eliminar_item(it);
         //si es item selected==null
+        recomendationChanged=true;
         if (selectedItem==it) selectedItem=null;
     }
     public void loadItems(String path) throws Exception{//"Entradas_CSV/items.csv"
@@ -607,6 +618,7 @@ public class ControladorDomini {
                 for (int i = 1; i < mat_items.size(); ++i) {
                     dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
                 }
+                recomendationChanged=true;
 
             } else throw new NotAnAdministratorException("loadItems");
         }
@@ -623,7 +635,7 @@ public class ControladorDomini {
             else if(!actualUser.getRol().equals(TipusRol.Administrador))
                 throw new NotAnAdministratorException((String.valueOf(actualUser.getUserID())));
             else{
-
+                recomendationChanged=true;
                 ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 
                 ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
@@ -659,6 +671,42 @@ public class ControladorDomini {
             throw e;
         }
     }
+    public void loadRecomendation(String path) throws Exception{
+        if (actualUser==null) throw new NoUserLogedInException("loadRecomendation");
+        try {
+            recomendationChanged = true;
+            ControladorPersistenciaRecomendation reader = new ControladorPersistenciaRecomendation();
+            ArrayList <String> leido = reader.Lector_Recomendation(path);
+            ArrayList <myPair> creado = new ArrayList<myPair>();
+            for (String linea: leido){
+                boolean coma=false;
+                String item="";
+                String val="";
+                for(int i=0;i<linea.length();++i){
+                    String letra=String.valueOf(linea.charAt(i));
+                    if (!coma && letra.equals(",")){
+                        coma=true;
+                        i++;
+                    }
+                    else{
+                        if (!coma){
+                            item+=letra;
+                        }
+                        else{
+                            val+=letra;
+                        }
+                    }
+                }
+                myPair m = new myPair(Integer.valueOf(item), Float.valueOf(val));
+                creado.add(m);
+            }
+            lastRecomendation=creado;
+        }
+        catch (Exception e){
+            throw e;
+        }
+
+    }
 
     //Necesario?--------------------------------------------------
     /*
@@ -684,6 +732,7 @@ public class ControladorDomini {
             if (!usersList.containsKey(create_me)){
                 User nou = new User(Integer.valueOf(create_me));
                 usersList.put(Integer.valueOf(create_me), nou);
+                recomendationChanged=true;
             }
 
         }
