@@ -301,12 +301,20 @@ public class Main {
             dom.loadItems("EXE/Entradas_CSV/items.csv");
             dom.loadRates("EXE/Entradas_CSV/ratings.test.known.csv");
             dom.logout();
-            dom.login("6913", "6913");
-            //dom.doSlope(5, 10);
+            for (String u: dom.showAllUsers()){
+                dom.login(u, u);
+                dom.doSlope(5, 10);
+                System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
+                dom.logout();
+            }
             //System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
             //dom.saveRecomendation("EXE/Entradas_CSV/recom.csv");
-            dom.loadRecomendation("EXE/Entradas_CSV/recom.csv");
-            dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv");
+            //dom.loadRecomendation("EXE/Entradas_CSV/recom.csv");
+            //dom.doRecomendation(5, 10, 20, "EXE/Entradas_CSV/ratings.test.known.csv");
+            //dom.doKNN(10, "EXE/Entradas_CSV/ratings.test.known.csv");
+            //dom.saveRecomendation("EXE/Entradas_CSV/recom5.csv");
+            //dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv");
+            //System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
         }
         catch (Exception e){
             System.out.println(e);

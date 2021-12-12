@@ -84,7 +84,7 @@ public class ControladorDomini {
             } else if (usersList.containsKey(userId)) {
                 if (usersList.get(userId).getPassword().equals(password)) {//logged
                     actualUser = usersList.get(userId);
-                    System.out.println("Sessió iniciada");
+                    //System.out.println("Sessió iniciada");
                 } else {
                     throw new WrongDataException("login" + struserId + " "+ password);
                 }
@@ -103,7 +103,7 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("logout");
         else{
             actualUser=null;
-            System.out.println("Logged Out");
+            //System.out.println("Logged Out");
         }
 
     }
@@ -227,9 +227,11 @@ public class ControladorDomini {
                 while (itKnn < knn.size() || itSlope < slope.size()) {
                     if (itKnn < knn.size()) {
                         tot.add(knn.get(itKnn));
+                        itKnn++;
                     }
                     if (itSlope < slope.size()) {
                         tot.add(slope.get(itSlope));
+                        itSlope++;
                     }
                 }
                 //mix los 2 algoritmos
@@ -278,7 +280,7 @@ public class ControladorDomini {
                 }
             }
 
-            for (myPair m: lastRecomendationAuxiliar) System.out.println(m.getItemID()+" "+m.getValoration());
+            //for (myPair m: lastRecomendationAuxiliar) System.out.println(m.getItemID()+" "+m.getValoration());
             ArrayList <myPair> ratingsFiltrados = new ArrayList<myPair>();
             for (myPair m2: ratingsOrdenados){//eliminar de known los que no haya prediccion
                 for (myPair m: lastRecomendationAuxiliar){
@@ -287,8 +289,8 @@ public class ControladorDomini {
                     }
                 }
             }
-            System.out.println(" ");
-            for (myPair m4: ratingsFiltrados) System.out.println(m4.getItemID()+" "+m4.getValoration());
+            //System.out.println(" ");
+            //for (myPair m4: ratingsFiltrados) System.out.println(m4.getItemID()+" "+m4.getValoration());
             //System.out.println(ratingsFiltrados.size());
             //System.out.println(lastRecomendation.size());
             //System.out.println(lastRecomendationAuxiliar.size());

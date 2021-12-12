@@ -116,9 +116,9 @@ public class Kmeans {
      */
     public void printAllClusters() {
         for (int i = 0; i < clusters.size(); ++i) {
-            System.out.println("Cluster "+i+", formado por " + clusters.get(i).getCluster().size() + " usuarios.\n");
-            clusters.get(i).printCluster();
-            System.out.println("\n============================================================================================================\n");
+           // System.out.println("Cluster "+i+", formado por " + clusters.get(i).getCluster().size() + " usuarios.\n");
+            //clusters.get(i).printCluster();
+            //System.out.println("\n============================================================================================================\n");
         }
     }
 }

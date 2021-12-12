@@ -183,8 +183,8 @@ public class SlopeOne {
     public void printResults() {
         try {
             for (myPair prediction : predictions) {
-                System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
-                        ": " + prediction.getValoration());
+                //System.out.println("Valoracion estimada para el item " + prediction.getItemID() +
+                //        ": " + prediction.getValoration());
             }
         } catch (Exception e) {
             System.out.println(e);
