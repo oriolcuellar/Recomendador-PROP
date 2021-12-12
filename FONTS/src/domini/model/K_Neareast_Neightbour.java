@@ -120,8 +120,7 @@ public class K_Neareast_Neightbour {
 
         ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size()-1);
 
-        for (int i = I_Finals.size()-1; i >= k ; --i)
-            I_Finals.remove(i);
+
     }
 
     /** Ordena toda la ArrayList de los parametros, de forma creciente para los items con mayor valor en el parametro,

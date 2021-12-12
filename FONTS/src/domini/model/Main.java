@@ -304,6 +304,8 @@ public class Main {
             for (String u: dom.showAllUsers()){
                 dom.login(u, u);
                 dom.doSlope(5, 10);
+                //dom.doKNN(10, "EXE/Entradas_CSV/ratings.test.known.csv");
+                //dom.doRecomendation(5, 10, 20, "EXE/Entradas_CSV/ratings.test.known.csv");
                 System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
                 dom.logout();
             }
