@@ -103,7 +103,7 @@ public class Kmeans {
                     //System.out.print(clusters.get(j).getcentroid().getUserID() + " ");
                 }
 
-                //System.out.println("La iteración es " + ++i);
+                System.out.println("La iteración es " + ++i);
             }
     }
 
