@@ -38,13 +38,15 @@ public class K_Neareast_Neightbour {
     public ArrayList<Item> Algorithm(int k,Conjunt_Items C_Items, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
 
         ArrayList<Double> Valors = new ArrayList<Double>();
+        ArrayList <Integer> Posicions = new ArrayList<Integer>();
 
         for(int i = 0; i < C_Items.n_Items(); ++i)
             Valors.add(i, 0.0);
 
         for (int i = 0; i < itemsUsats.size(); ++i) {
-            C_Items.anyadir_item(itemsUsats.get(i));
-            Valors.add(0.0);
+            boolean anyadit = C_Items.anyadir_item(itemsUsats.get(i));
+            if (anyadit) Valors.add(0.0);
+            Posicions.add(C_Items.get_position(itemsUsats.get(i)));
         }
 
         for (int i = 0; i < itemsUsats.size(); ++i) {
@@ -54,22 +56,21 @@ public class K_Neareast_Neightbour {
         }
 
         C_Items.omplir_matriu();
-        ArrayList <ArrayList<Double>> M_Dis = C_Items.getDistances();
 
         ArrayList <ArrayList<Item>> M_de_Items = new ArrayList<ArrayList<Item>>();
         ArrayList <ArrayList<Double>> Dis = new ArrayList<ArrayList<Double>>();
 
 
-        for (int j = 0; j < C_Items.n_Items(); ++j) {
+        for (int j = 0; j < Posicions.size(); ++j) {
 
             ArrayList<Item> Items_Aux = new ArrayList<Item>();
             ArrayList<Double> Dis_Aux = new ArrayList<Double>();
 
             clonador_ArrayList(Items_Aux, C_Items.getItems());
-            clonador_ArrayList(Dis_Aux, M_Dis.get(j));
+            clonador_ArrayList(Dis_Aux, C_Items.getDistancesofItem(itemsUsats.get(j)));
 
-            M_de_Items.add(j, Items_Aux);
-            Dis.add(j, Dis_Aux);
+            M_de_Items.add(Items_Aux);
+            Dis.add(Dis_Aux);
 
             ordenar_Items(Dis.get(j), M_de_Items.get(j),0, Dis.get(j).size()-1);
 
@@ -120,6 +121,8 @@ public class K_Neareast_Neightbour {
 
         ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size()-1);
 
+        for (int i = I_Finals.size()-1; i >= k ; --i)
+            I_Finals.remove(i);
 
     }
 
@@ -220,7 +223,7 @@ public class K_Neareast_Neightbour {
     }
 
     /** Version de ordenar_conjuntos simplificada para usar solo 2 Arraylist y ordenar crecientemente según
-     el valor de Val
+     el valor de Val (la valoracion)
      * @param l extremo izquierda de las ArrayList a ordenar.
      * @param r extremo derecho de las ArrayList a ordenar.
      * @param Val ArrayList de Double con los valores resultado de aplicar comparar_conjunts, coincidiendo posiciones

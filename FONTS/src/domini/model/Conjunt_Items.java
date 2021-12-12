@@ -92,18 +92,43 @@ public class Conjunt_Items {
 
     public ArrayList<ArrayList<Double>> getDistances() { return Distances; }
 
-    /** Devuelve la distancia entre dos items.
+    /** Devuelve el vector con las distancias
+     */
+
+    public ArrayList<Double> getDistancesofItem(Item a) {
+
+        int pos = get_position(a);
+        return Distances.get(pos);
+    }
+
+    /** Devuelve la distancia entre dos items. Al finalizar si esta no estaba en la matriz se añade.
      * @param a  Primer Item.
      * @param b  Segundo Item.
      */
 
     public Double Distance (Item a , Item b) {
 
-        Double aux = Distances.get(binarySearchPosition(Items, 0, Items.size()-1, a.getID())).get(binarySearchPosition(Items, 0, Items.size()-1, b.getID()));
-        if(aux != -1.0)
-            return aux;
-        else
-            return  a.Distance(b);
+        int pos_a = get_position(a);
+        int pos_b = get_position(b);
+        if (a.getID() != b.getID()) {
+
+
+            Double aux = Distances.get(pos_a).get(pos_b);
+            if (aux != -1.0)
+                return aux;
+            else {
+
+                double d = a.Distance(b);
+                Distances.get(pos_a).set(pos_b, d);
+                Distances.get(pos_b).set(pos_a, d);
+                return d;
+            }
+        }
+        else{
+
+            Distances.get(pos_a).set(pos_b, 0.0);
+            return 0.0;
+        }
     }
 
     //Setters

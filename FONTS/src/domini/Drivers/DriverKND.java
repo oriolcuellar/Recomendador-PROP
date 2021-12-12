@@ -1,4 +1,6 @@
 package FONTS.src.domini.drivers;
+import FONTS.src.domini.exceptions.EmptyFileException;
+import FONTS.src.domini.exceptions.FileNotExistsException;
 import FONTS.src.domini.model.*;
 
 import java.io.BufferedReader;
@@ -16,49 +18,46 @@ public class DriverKND {
     private static boolean prueba_static = false;
 
 
-    public static Vector<String> Lector_Items(String csvFile) {
+    public static Vector<String> Lector_Items(String csvFile) throws Exception {
         //post: return un vector de les files del csv
-        Vector <String>  items = new Vector<String>();
+
+        Vector <String> items = new Vector<String>();
         BufferedReader br = null;
         String line = "";
-        try {
+        try{
             br = new BufferedReader(new FileReader(csvFile));
-            boolean first = true;
-            int num_atributes=0;
+        }
+        catch (Exception e){
+            throw new FileNotExistsException(csvFile);
+        }
+
+        try {
             while ((line = br.readLine()) != null) {
                 items.add(line);
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
+        catch (Exception e){
+            throw e;
+        }
+        if (items.size()==0) throw new EmptyFileException("Lector_Items");
         return items;
     }
 
-    public static ArrayList<Item> loadItems(String File){
+    public static ArrayList<Item> loadItems(String File) throws Exception {
 
         ArrayList<Item> A_Items = new ArrayList<Item>();
+        Map<String, TipusItem> itemTypeList = new HashMap<String, TipusItem>();
         Vector <String>  items = Lector_Items(File);
 
             for(int i = 1; i < items.size();++i)
-                A_Items.addAll(createItem(items.get(0), items.get(i)));
+                A_Items.addAll(createItem(items.get(0), items.get(i), itemTypeList ));
         return A_Items;
     }
 
-    public static ArrayList<Item> createItem(String atributs, String valors){
+    public static ArrayList<Item> createItem(String atributs, String valors, Map<String, TipusItem> itemTypeList ){
 
         //string to arraylist de valors
         Conjunt_Items itemList = new Conjunt_Items();
-        Map<String, TipusItem> itemTypeList = new HashMap<String, TipusItem>();
 
         ArrayList<String> datos_valors = new ArrayList<String>();
         String pal="";
@@ -214,7 +213,7 @@ public class DriverKND {
                 "    5: FINALIZAR PRUEBA");
     }
 
-    static void testFunction(int f) {
+    static void testFunction(int f) throws Exception {
 
         switch (f) {
 
@@ -223,7 +222,7 @@ public class DriverKND {
             {
                 if (prueba_static)
                     System.out.println("ESTAS EN PRUEBA ESTATICA, LA SIGUIENE FUNCION NO AFECTARA AL CONJUNT ESTATIC,\n" +
-                            "SI QUERES REDEFINIR ESTE USA LA OPCION PRUEBA ESTATICA");
+                            "SI QUERES REDEFINIR ESTE, USA LA OPCION PRUEBA ESTATICA");
                     System.out.println("================================================================================================");
                     System.out.println("Prueba la creadora de K_Neareast_Neightbour");
 
@@ -251,7 +250,7 @@ public class DriverKND {
                     ArrayList<Item> A1 = loadItems(file1);
                     ArrayList<Item> A2 = loadItems(file2);
 
-                    System.out.println("Seguidamente pont todas las valoraciones del segundo fichero, teniendo en cuenta que: ");
+                    System.out.println("Seguidamente pon todas las valoraciones del segundo fichero, teniendo en cuenta que: ");
                     System.out.println("Que las valoraciones son del tipo Double (separa el decimal con ,) y");
                     System.out.println("que tienes que poner el mismo numero de valoraciones, que el numero de items del segundo fichero");
 
@@ -274,7 +273,7 @@ public class DriverKND {
 
                     System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los k items recomendados: \n");
                     for (int i = 0; i < Resultado.size(); ++i)
-                        System.out.print(' ' + Resultado.get(i).getID());
+                        System.out.print(" " + Resultado.get(i).getID());
                     System.out.print("\n");
                     System.out.println("=================================================================================================");
                 }
@@ -308,7 +307,7 @@ public class DriverKND {
 
                     System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los k items recomendados: \n");
                     for (int i = 0; i < Resultado.size(); ++i)
-                        System.out.print(' ' + Resultado.get(i).getID());
+                        System.out.print(" "  + Resultado.get(i).getID());
                     System.out.print("\n");
                     System.out.println("=================================================================================================");
                 }
@@ -425,7 +424,7 @@ public class DriverKND {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Scanner s = new Scanner(System.in);
         int f;

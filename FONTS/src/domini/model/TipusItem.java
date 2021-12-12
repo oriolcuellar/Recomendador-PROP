@@ -27,13 +27,13 @@ public class TipusItem {
 
         ArrayList <String> v = new ArrayList<String> ();
 
-        Collections.sort(atributes, new Comparator<Atribute>() {
+        /*Collections.sort(atributes, new Comparator<Atribute>() {
             @Override
             public int compare(Atribute a, Atribute b) {
                 return a.getName().compareTo(b.getName());
             }
 
-        });
+        });*/
 
         for (int i = 0; i < atributes.size(); ++i) {
 
