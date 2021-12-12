@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
+import static java.lang.Math.sqrt;
+
 /** \brief Clase que implementa el algoritmo Kmeans.
  *  @author Roberto Amat
  */
@@ -47,7 +49,7 @@ public class Kmeans {
 
 
     /** Función que asigna un nuevo usuario al cluster con el centroide más
-     * cercano a él.
+     * cercano a él. Devuelva true si ha cambiado el centroide y false en caso contrario.
      * @param user Usuario a asignar.
      */
     private void asignUserToCluster(User user) {
@@ -80,21 +82,38 @@ public class Kmeans {
 
             assignKCentroids();
             // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
+            boolean equilibrated = false;
             int i = 0;
-            while(i < 4) {
+            while(!equilibrated && i < 5) {
+                ArrayList<User> centroids = new ArrayList<>();
                 for(int j = 0; j < k; ++j) {
                     clusters.get(j).getCluster().removeAll(clusters.get(j).getCluster());
                     clusters.get(j).clearSumDistances();
+                    centroids.add(clusters.get(j).getcentroid());
+                    //System.out.print(centroids.get(j).getUserID() + " ");
                 }
+                //System.out.println();
 
                 for (Map.Entry<Integer, User> entry : users.entrySet()) {
                     asignUserToCluster(entry.getValue());
                 }
-                ++i;
-            printAllClusters();
+                equilibrated = true;
+                for(int j = 0; j < k; ++j) {
+                    if(clusters.get(j).getcentroid().getUserID() != centroids.get(j).getUserID()) equilibrated = false;
+                    //System.out.print(clusters.get(j).getcentroid().getUserID() + " ");
+                }
+
+                //System.out.println("La iteración es " + ++i);
             }
+    }
 
-
+    public float obtainWCSS() {
+        int sum = 0;
+        for(int i = 0; i < k; ++i) {
+            clusters.get(i).calculateWCSS();
+            sum += clusters.get(i).getWCSS();
+        }
+        return (float) sqrt(sum);
     }
 
     /** Constructora de la clase.

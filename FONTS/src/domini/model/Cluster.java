@@ -2,6 +2,8 @@ package FONTS.src.domini.model;
 
 import java.util.ArrayList;
 
+import static java.lang.Math.sqrt;
+
 /** \brief Clase que implementa el cluster.
  *  @author Roberto Amat
  */
@@ -19,6 +21,8 @@ public class Cluster {
      * Su longitud es el número de usuarios que forman parte del clúster. */
     private ArrayList<Float> sumDistances;
 
+    private float WCSS;
+
     /** Constructora de la clase. Inicializa los dos ArrayList vacios y el usuario
      * como uno por defecto. */
     public Cluster() {
@@ -35,6 +39,10 @@ public class Cluster {
     /** @return ArrayList de usuarios que forman parte del clúster. */
     public ArrayList<User> getCluster() {
         return cluster;
+    }
+
+    public float getWCSS() {
+        return WCSS;
     }
 
     /** Función que establece un usuario como centroide del clúster.
@@ -56,7 +64,7 @@ public class Cluster {
     /** Función que añade un usuario al clúster.
      * @param user Usuario añadido al clúster.
      *  Una vez añadido, se añaden en las distancias de los demás su distancia respecto de éste,
-     *  y viceversa. */
+     *  y viceversa.*/
     public void addUser(User user) {
         boolean c = false;
         for (User value : cluster)
@@ -84,7 +92,7 @@ public class Cluster {
     }
 
     /** Función que recalcula el centroide del cluster, buscando aquel cuyas distancias con los
-     * demás sean más pequeñas. */
+     * demás sean más pequeñas. Devuelva true si ha cambiado el centroide y false en caso contrario. */
     private void recalculateCentroid() {
         float sumMin = 0;
         int iMin = 0;
@@ -100,6 +108,17 @@ public class Cluster {
     public void clearSumDistances() {
         sumDistances.removeAll(sumDistances);
     }
+
+    public void calculateWCSS() {
+        float sum = 0;
+        for(User u : cluster) {
+            //hacemos 1 - para que 0 sea cerca y 1 sea lejos
+            float dist = u.calculateSimilarity(this.centroid);
+            sum += (1 - dist)*100*(1 - dist);
+        }
+        WCSS = sum;
+    }
+
 
     /**Función que imprime todos los usuarios del clúster, especifiando
      * además cual de ellos es el centroide. */

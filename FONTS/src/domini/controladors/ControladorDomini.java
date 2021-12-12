@@ -750,7 +750,8 @@ public class ControladorDomini {
         return vs;
     }
 
-    public static User getActualUser() {
+    public User getActualUser() {
         return actualUser;
     }
+    public Map<Integer,User> getUsersList() { return usersList; }
 }
