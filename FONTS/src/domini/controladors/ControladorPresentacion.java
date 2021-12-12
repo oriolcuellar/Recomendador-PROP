@@ -3,7 +3,6 @@ package FONTS.src.domini.controladors;
 import FONTS.src.domini.model.myPair;
 import FONTS.src.domini.model.valoratedItem;
 import FONTS.src.presentacion.*;
-
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -50,7 +49,7 @@ public class ControladorPresentacion {
         try {
             s = CtrlDom.showAllItems();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"No items Loaded");
+            JOptionPane.showMessageDialog(null,e + "\nNo items Loaded");
             System.out.println(s.get(0));
         }
         return s;
@@ -67,10 +66,10 @@ public class ControladorPresentacion {
         return s;
     }
 
-    public static ArrayList<myPair> getRecomendedItems(){
+    public static ArrayList<myPair> getRecomendedItemsSlope(){
         ArrayList<myPair> s = new ArrayList<>();
         try {
-            s = CtrlDom.doRecomendation(6,10);
+            s = CtrlDom.doSlope(6,10);
         } catch (Exception e) {
             principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended");

@@ -81,7 +81,7 @@
             <properties>
               <font name="Noto Sans Mono CJK SC" size="48" style="1"/>
               <foreground color="-16777216"/>
-              <text value="Rated Items"/>
+              <text value="Atributes"/>
             </properties>
           </component>
           <scrollpane id="428ea" binding="scrollPane">

@@ -37,7 +37,7 @@ public class ShowRecomendedItems {
         scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
 
         DefaultListModel demoList = new DefaultListModel();
-        ArrayList<myPair> items = CtrlPres.getRecomendedItems();
+        ArrayList<myPair> items = CtrlPres.getRecomendedItemsSlope();
         for(int i = 0; i < 50; ++i) {
             demoList.addElement(items.get(i).getItemID());
         }
@@ -56,11 +56,9 @@ public class ShowRecomendedItems {
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    String selectedItem = (String) list1.getSelectedValue();
-                    System.out.println(selectedItem);
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.inicializePresentation(x,y);
+                    CtrlPres.changeShowAtributesView(x,y);
                     frame.dispose();
                 }
             }
