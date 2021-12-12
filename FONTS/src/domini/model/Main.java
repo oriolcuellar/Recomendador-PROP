@@ -301,8 +301,8 @@ public class Main {
             dom.loadItems("EXE/Entradas_CSV/items.csv");
             dom.loadRates("EXE/Entradas_CSV/ratings.test.known.csv");
             dom.logout();
-            dom.login("11133", "11133");
-            dom.doRecomendation(1, 10);
+            dom.login("6913", "6913");
+            dom.doSlope(5, 10);
             System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
 
         }

@@ -199,7 +199,7 @@ public class User {
         return (sumProdValorations)/(float)(sqrt(sumSquareValoration1)*sqrt(sumSquareValoration2));
     }
 
-     /**
+    /**
      * Busca si existe el item con ID itemID
      * @param itemID Id del item que queremos encontrar
      * @return valoratedItem si existe, null si no existe

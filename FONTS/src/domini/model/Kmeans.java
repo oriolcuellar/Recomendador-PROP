@@ -22,8 +22,8 @@ public class Kmeans {
      */
     private int k;
 
-     /** Función que crea aleatoriamente los k clusters iniciales con los que parte
-      *  el algoritmo.
+    /** Función que crea aleatoriamente los k clusters iniciales con los que parte
+     *  el algoritmo.
      */
     private void assignKCentroids(){
         Random myRandom = new Random();
@@ -56,7 +56,7 @@ public class Kmeans {
         for(int i = 0; i < k; ++i) {
             User centroidActual = clusters.get(i).getcentroid();
             float distanciaActual = user.calculateSimilarity(centroidActual);
-            if(user.getUserID() == clusters.get(i).getCluster().get(0).getUserID()) distanciaActual = 5; // para que el centroide se añada en su propio cluster
+            //if(user.getUserID() == clusters.get(i).getCluster().get(0).getUserID()) distanciaActual = 5; // para que el centroide se añada en su propio cluster
             //System.out.println("Distancia entre " + user.getUserID() + " " + centroidActual.getUserID() + " es " + distanciaActual);
             if(distanciaActual > dMin) {
                 dMin = distanciaActual;
@@ -77,15 +77,23 @@ public class Kmeans {
         if(k > users.size() && users.size() != 0) System.out.println("El numero de clusters tiene que ser menor al numero de usuarios.");
         else if(k == 0) System.out.println("K tiene que ser un numero mayor que cero.");
 
-            try {
-                assignKCentroids();
-                // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
+
+            assignKCentroids();
+            // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
+            int i = 0;
+            while(i < 4) {
+                for(int j = 0; j < k; ++j) {
+                    clusters.get(j).getCluster().removeAll(clusters.get(j).getCluster());
+                    clusters.get(j).clearSumDistances();
+                }
+
                 for (Map.Entry<Integer, User> entry : users.entrySet()) {
                     asignUserToCluster(entry.getValue());
                 }
-            } catch (Exception e) {
-                System.out.println(e);
+                ++i;
+            printAllClusters();
             }
+
 
     }
 

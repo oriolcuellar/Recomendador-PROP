@@ -12,7 +12,7 @@ public class Cluster {
     private User centroid;
 
     /** ArrayList que contine los usuarios que pertenecen al clúster
-    *  @see User */
+     *  @see User */
     private ArrayList<User> cluster;
 
     /** ArrayList que contiene la suma de distancias de un usuario con los demás.
@@ -97,6 +97,10 @@ public class Cluster {
         centroid = cluster.get(iMin);
     }
 
+    public void clearSumDistances() {
+        sumDistances.removeAll(sumDistances);
+    }
+
     /**Función que imprime todos los usuarios del clúster, especifiando
      * además cual de ellos es el centroide. */
     public void printCluster() {
@@ -114,4 +118,3 @@ public class Cluster {
         System.out.println("]\n");
     }
 }
-
