@@ -178,12 +178,14 @@ public class ControladorDomini {
         catch (Exception e){
             throw e;
         }
-
+        ArrayList <String> validador = new ArrayList<String>();
         for (Vector<String> vs : readed_ratings) {
             Item nou_it= new Item(Integer.valueOf(vs.get(1)));
-            if (!it.contains(nou_it)) {//No existeix item
+            String aux = String.valueOf(nou_it.getID());
+            if (!validador.contains(aux)) {//No existeix item
                 it.add(nou_it);
                 va.add(Double.valueOf(vs.get(2)));
+                validador.add(aux);
             }
         }
         //k-neighbours
@@ -440,7 +442,7 @@ public class ControladorDomini {
             throw e;
         }
     }
-    private void createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems){
+    private void createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
         //dado una lista de items lo mete ahi si no existe
 
         //string to arraylist de valors
@@ -473,7 +475,7 @@ public class ControladorDomini {
         //System.out.println(datos.length);
         ArrayList <Atribute> va = new ArrayList<Atribute>();
         ArrayList <String> vsa = new ArrayList<String>();//solo para definir el tipo de item
-        int pos_id=0;
+        int pos_id=-1;
         for (int i = 0; i <datos.length; ++i) {
             if(datos[i].equals("id")) pos_id=i;
             else{
@@ -485,7 +487,7 @@ public class ControladorDomini {
         }
 
         //miramos si no existe item
-
+        if (pos_id==-1) throw new IsNotItemException("create item");
         int comp = Integer.valueOf(datos_valors.get(pos_id));
         if (ListaItems.existeix_item(comp)){
             System.out.println("ja existeix id");
