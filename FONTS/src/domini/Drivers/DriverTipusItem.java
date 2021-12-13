@@ -26,11 +26,13 @@ public class DriverTipusItem {
             {
                 System.out.println("================================================================================================");
                 System.out.println("Prueba de la creadora de TipusItem");
-                System.out.println("Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus" );
+                System.out.println("Introduce cuantos atributos vas a intrducir" );
+                System.out.println("Seguidamente Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus" );
                 System.out.println("Teniendo en cuenta que: nombre y tipus son String, y los nombres deben ser diferentes");
                 Scanner s = new Scanner(System.in);
                 ArrayList<Atribute> Aux = new ArrayList<Atribute>();
-                while (s.hasNext()){
+                int i = s.nextInt();
+                while (i > 0){
 
                     Atribute a = new Atribute(s.next(), s.next());
                     Aux.add(a);
@@ -48,11 +50,13 @@ public class DriverTipusItem {
             {
                 System.out.println("================================================================================================");
                 System.out.println("Prueba de la funcion getID()");
-                System.out.println("Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus" );
+                System.out.println("Introduce cuantos atributos vas a intrducir" );
+                System.out.println("Seguidamente Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus" );
                 System.out.println("Teniendo en cuenta que: Nombre y tipus son String, y los nombres deben ser diferentes");
                 Scanner s = new Scanner(System.in);
                 ArrayList<Atribute> Aux = new ArrayList<Atribute>();
-                while (s.hasNext()){
+                int i = s.nextInt();
+                while (i > 0){
 
                     Atribute a = new Atribute(s.next(), s.next());
                     Aux.add(a);
@@ -69,11 +73,14 @@ public class DriverTipusItem {
             {
                 System.out.println("================================================================================================");
                 System.out.println("Prueba de la funcion getAtributes()");
-                System.out.println("Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus" );
+                System.out.println("Introduce cuantos atributos vas a intrducir" );
+                System.out.println("Seguidamente Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus " );
                 System.out.println("Teniendo en cuenta que: Nombre y tipus son String, y los nombres deben ser diferentes");
+                System.out.println("Introduce s cuando termines");
                 Scanner s = new Scanner(System.in);
                 ArrayList<Atribute> Aux = new ArrayList<Atribute>();
-                while (s.hasNext()){
+                int i = s.nextInt();
+                while (i > 0){
 
                     Atribute a = new Atribute(s.next(), s.next());
                     Aux.add(a);
@@ -91,11 +98,13 @@ public class DriverTipusItem {
             {
                 System.out.println("================================================================================================");
                 System.out.println("Prueba de la funcion num_atributs()");
-                System.out.println("Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus" );
+                System.out.println("Introduce cuantos atributos vas a intrducir" );
+                System.out.println("Seguidamente Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus" );
                 System.out.println("Teniendo en cuenta que: Nombre y tipus son String, y los nombres deben ser diferentes");
                 Scanner s = new Scanner(System.in);
                 ArrayList<Atribute> Aux = new ArrayList<Atribute>();
-                while (s.hasNext()){
+                int i = s.nextInt();
+                while (i > 0){
 
                     Atribute a = new Atribute(s.next(), s.next());
                     Aux.add(a);
@@ -112,11 +121,13 @@ public class DriverTipusItem {
             {
                 System.out.println("=========================================================================================================");
                 System.out.println("Prueba de la funcion Atributs_rellevant()");
-                System.out.println("Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus Rellevant" );
+                System.out.println("Introduce cuantos atributos vas a intrducir" );
+                System.out.println("Seguidamente Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus Rellevant" );
                 System.out.println("Teniendo en cuenta que: Nombre y tipus son String, Rellevent és un Boolean y los nombres deben ser diferentes");
                 Scanner s = new Scanner(System.in);
                 ArrayList<Atribute> Aux = new ArrayList<Atribute>();
-                while (s.hasNext()){
+                int i = s.nextInt();
+                while (i > 0){
 
                     Atribute a = new Atribute(s.next(), s.next(), s.nextBoolean());
                     Aux.add(a);
@@ -133,14 +144,17 @@ public class DriverTipusItem {
             {
                 System.out.println("=========================================================================================================");
                 System.out.println("Prueba de la funcion num_atributs_rellevants()");
-                System.out.println("Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus Rellevant" );
+                System.out.println("Introduce cuantos atributos vas a intrducir" );
+                System.out.println("Seguidamente Introduce una serie de parametros de Atributes de la siguiente forma: Nombre Tipus Rellevant" );
                 System.out.println("Teniendo en cuenta que: Nombre y tipus son String, Rellevent és un Boolean y los nombres deben ser diferentes");
                 Scanner s = new Scanner(System.in);
                 ArrayList<Atribute> Aux = new ArrayList<Atribute>();
-                while (s.hasNext()){
+                int i = s.nextInt();
+                while (i > 0){
 
                     Atribute a = new Atribute(s.next(), s.next(), s.nextBoolean());
                     Aux.add(a);
+                    --i;
                 }
                 TipusItem nou_tipus = new TipusItem(Aux);
                 System.out.print("El TipusItem se ha creado correctamente y estos son los Atributos relevantes que lo forman: \n");
