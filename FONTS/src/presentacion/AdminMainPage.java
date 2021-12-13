@@ -16,6 +16,7 @@ public class AdminMainPage {
     private JButton deleteUserButton;
     private JButton uploadUsersRatingsButton;
     private JButton uploadItemsButton;
+    private JButton backButton;
     private JFileChooser fileChooser = new JFileChooser();
 
     public AdminMainPage() {
@@ -34,6 +35,41 @@ public class AdminMainPage {
                     e.printStackTrace();
                 }
                 enableButtons();
+            }
+        });
+        uploadUsersRatingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    fileChooser.showOpenDialog(fileChooser);
+                    String path = fileChooser.getSelectedFile().getAbsolutePath();
+                    CtrlPres.loadRates(path);
+                } catch (Exception e) {
+                    enableButtons();
+                    JOptionPane.showMessageDialog(null,"El fichero introducido no tiene el formato válido");
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+
+                    ControladorDomini dom = ControladorDomini.getInstance();
+                    dom.logout();
+                    dom.login("1","1");
+                    System.out.println(dom.getActualUser().getUserID());
+                } catch (Exception e) {
+
+                }
+                int x = frame.getX();
+                int y = frame.getY();
+                CtrlPres.inicializePresentation(x,y);
+                frame.dispose();
             }
         });
 
@@ -64,5 +100,8 @@ public class AdminMainPage {
         uploadUsersRatingsButton.setEnabled(true);
         deleteItemButton.setEnabled(true);
         deleteUserButton.setEnabled(true);
+    }
+    public void setInvisible() {
+        frame.dispose();
     }
 }
