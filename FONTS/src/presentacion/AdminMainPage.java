@@ -1,6 +1,5 @@
 package FONTS.src.presentacion;
 
-import FONTS.src.domini.controladors.ControladorDomini;
 import FONTS.src.domini.controladors.ControladorPresentacion;
 
 import javax.swing.*;
@@ -16,6 +15,7 @@ public class AdminMainPage {
     private JButton deleteUserButton;
     private JButton uploadUsersRatingsButton;
     private JButton uploadItemsButton;
+    private JButton backButton;
     private JFileChooser fileChooser = new JFileChooser();
 
     public AdminMainPage() {
@@ -34,6 +34,33 @@ public class AdminMainPage {
                     e.printStackTrace();
                 }
                 enableButtons();
+            }
+        });
+        uploadUsersRatingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    fileChooser.showOpenDialog(fileChooser);
+                    String path = fileChooser.getSelectedFile().getAbsolutePath();
+                    CtrlPres.loadRates(path);
+                } catch (Exception e) {
+                    enableButtons();
+                    JOptionPane.showMessageDialog(null,"El fichero introducido no tiene el formato válido");
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                int x = frame.getX();
+                int y = frame.getY();
+                CtrlPres.inicializePresentation(x,y);
+                frame.dispose();
             }
         });
 
@@ -64,5 +91,8 @@ public class AdminMainPage {
         uploadUsersRatingsButton.setEnabled(true);
         deleteItemButton.setEnabled(true);
         deleteUserButton.setEnabled(true);
+    }
+    public void setInvisible() {
+        frame.dispose();
     }
 }

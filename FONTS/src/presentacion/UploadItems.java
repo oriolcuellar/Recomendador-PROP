@@ -11,15 +11,12 @@ public class UploadItems {
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
     private static JFrame frame;
     private JPanel panel;
-    private JButton settingsButton;
-    private JFileChooser fileChooser;
 
     public UploadItems() {
 
     }
 
     public void showWindow(int x, int y) {
-        enableButtons();
         frame = new JFrame("Sistema Recomanador");
         frame.setContentPane(this.panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,11 +26,8 @@ public class UploadItems {
         frame.setVisible(true);
     }
 
-    public void disableButtons() {
-        settingsButton.setEnabled(false);
+    public void setInvisible() {
+        frame.setVisible(false);
     }
 
-    public void enableButtons() {
-        settingsButton.setEnabled(true);
-    }
 }
