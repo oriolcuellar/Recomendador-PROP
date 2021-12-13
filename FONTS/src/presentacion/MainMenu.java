@@ -17,6 +17,7 @@ public class MainMenu {
     private JButton showRatedItemsButton;
     private JButton showAllItemsButton;
     private JButton showRecomendedItemsButton;
+    private JLabel Label;
 
     public MainMenu() {
 
@@ -28,11 +29,13 @@ public class MainMenu {
                 try {
                     disableButtons();
                     dom.login("-1", "-1");
-                    dom.loadItems("EXE/Entradas_CSV/items.csv");
-                    dom.loadRates("EXE/Entradas_CSV/ratings.db.csv");
-                    dom.logout();
-                    dom.login("12", "12");
+                    int x = frame.getX();
+                    int y = frame.getY();
+                    CtrlPres.changeAdminMainView(x,y);
+                    frame.dispose();
+                    settingsButton.setEnabled(true);
                 } catch (Exception e) {
+                    enableButtons();
                     e.printStackTrace();
                 }
                 enableButtons();

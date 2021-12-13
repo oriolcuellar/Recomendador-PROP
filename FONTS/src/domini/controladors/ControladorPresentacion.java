@@ -44,6 +44,18 @@ public class ControladorPresentacion {
         showAtributes.showWindow(x,y);
     }
 
+    public static void changeAdminMainView(int x, int y)  {
+        AdminMainPage adminMainPage = new AdminMainPage();
+        adminMainPage.showWindow(x,y);
+    }
+
+    public static void changeUploadItemsView(int x, int y)  {
+        UploadItems uploadItems = new UploadItems();
+        uploadItems.showWindow(x,y);
+    }
+
+
+
     public static Vector<String> getAllItems(){
         Vector<String> s = new Vector<>();
         try {
@@ -75,5 +87,13 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null,"No items Recomended");
         }
         return s;
+    }
+
+    public void loadItems(String path) {
+       try {
+           CtrlDom.loadItems(path);
+       } catch (Exception e) {
+           System.out.println(e);
+       }
     }
 }

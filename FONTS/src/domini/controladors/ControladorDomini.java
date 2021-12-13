@@ -5,7 +5,9 @@ import FONTS.src.domini.model.*;
 import FONTS.src.persistencia.ControladorPersistenciaItem;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
+import com.sun.jdi.event.BreakpointEvent;
 
+import javax.swing.*;
 import java.util.*;
 
 public class ControladorDomini {
@@ -625,9 +627,9 @@ public class ControladorDomini {
             } else throw new NotAnAdministratorException("loadItems");
         }
         catch (Exception e){
+            //JOptionPane.showMessageDialog(null,"El fichero introducido no tiene el formato válido");
             throw e;
         }
-
     }
     //"Entradas_CSV/ratings.db.csv" = path
     public void loadRates(String path) throws Exception{//falta añadir item usado a la lista de items usados

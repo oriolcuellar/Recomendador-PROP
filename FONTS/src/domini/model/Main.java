@@ -113,7 +113,7 @@ public class Main {
     /** Función que ejecuta el K Nearest Neighbour.
      */
     static void execute_KNeares_Neighbour(){
-        DriverKND.main(null);
+        //DriverKND.main(null);
     }
     /** Función que ejecuta el K Means.
      */
