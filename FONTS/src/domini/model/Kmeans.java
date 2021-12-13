@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 
 /** \brief Clase que implementa el algoritmo Kmeans.
@@ -84,13 +85,21 @@ public class Kmeans {
             // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
             boolean equilibrated = false;
             int i = 0;
-            while(!equilibrated && i < 5) {
+            float WCSS = 0;
+            float WCSSold = Float.POSITIVE_INFINITY;
+            float WCSSold2 = Float.POSITIVE_INFINITY;
+            int threshold = 5;
+            while(!equilibrated && WCSSold2 != WCSS && i < 10) {
+                WCSSold2 = WCSSold;
+                WCSS = 0;
+                WCSSold = 0;
                 ArrayList<User> centroids = new ArrayList<>();
                 for(int j = 0; j < k; ++j) {
                     clusters.get(j).getCluster().removeAll(clusters.get(j).getCluster());
                     clusters.get(j).clearSumDistances();
                     centroids.add(clusters.get(j).getcentroid());
                     //System.out.print(centroids.get(j).getUserID() + " ");
+                    WCSSold += clusters.get(j).getWCSS();
                 }
                 //System.out.println();
 
@@ -101,9 +110,11 @@ public class Kmeans {
                 for(int j = 0; j < k; ++j) {
                     if(clusters.get(j).getcentroid().getUserID() != centroids.get(j).getUserID()) equilibrated = false;
                     //System.out.print(clusters.get(j).getcentroid().getUserID() + " ");
+                    clusters.get(j).calculateWCSS();
+                    WCSS += clusters.get(j).getWCSS();
                 }
 
-                System.out.println("La iteración es " + ++i);
+                System.out.println("La iteración es " + ++i + " " + WCSS + " " + WCSSold + " " + WCSSold2);
             }
     }
 

@@ -29,6 +29,7 @@ public class Cluster {
         centroid = new User();
         cluster = new ArrayList<User>();
         sumDistances = new ArrayList<Float>();
+        WCSS = 0;
     }
 
     /** @return Centroide del clúster. */

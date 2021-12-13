@@ -35,7 +35,6 @@ public class ShowRecomendedItems {
 
         scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
         scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
-
         DefaultListModel demoList = new DefaultListModel();
         ArrayList<myPair> items = CtrlPres.getRecomendedItemsSlope();
         for(int i = 0; i < 50; ++i) {
@@ -74,9 +73,5 @@ public class ShowRecomendedItems {
         frame.setBounds(x,y,600,600);
         frame.setResizable(false);
         frame.setVisible(true);
-    }
-
-    public void setInvisible() {
-        frame.setVisible(false);
     }
 }

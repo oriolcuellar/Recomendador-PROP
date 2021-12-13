@@ -5,7 +5,9 @@ import FONTS.src.domini.model.*;
 import FONTS.src.persistencia.ControladorPersistenciaItem;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
+import com.sun.jdi.event.BreakpointEvent;
 
+import javax.swing.*;
 import java.util.*;
 
 public class ControladorDomini {
@@ -176,12 +178,14 @@ public class ControladorDomini {
         catch (Exception e){
             throw e;
         }
-
+        ArrayList <String> validador = new ArrayList<String>();
         for (Vector<String> vs : readed_ratings) {
             Item nou_it= new Item(Integer.valueOf(vs.get(1)));
-            if (!it.contains(nou_it)) {//No existeix item
+            String aux = String.valueOf(nou_it.getID());
+            if (!validador.contains(aux)) {//No existeix item
                 it.add(nou_it);
                 va.add(Double.valueOf(vs.get(2)));
+                validador.add(aux);
             }
         }
         //k-neighbours
@@ -370,7 +374,13 @@ public class ControladorDomini {
         return valorations;
     }
     public Vector <Vector<String>> showRatedItems() throws Exception{//vector de vectores de strings de 3 posiciones user id, item id, valoracion
+        Vector <Vector<String>> a = new Vector <Vector<String>> ();
+        Vector<String> v = new Vector<String>();
+        String s =" ";
+        v.add(s);
+        a.add(v);
         if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
+        else if(actualUser==admin) return a;
         else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
         Vector <Vector<String>> valorations = new Vector<Vector<String>>();
         try {
@@ -420,7 +430,7 @@ public class ControladorDomini {
     }
 
     public void createItem(String atributs, String valors) throws Exception{
-        if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
+        if (actualUser==null) throw new NoUserLogedInException("createItem");
         try {
             createItemPath(atributs, valors, itemList, itemTypeList);
             recomendationChanged=true;
@@ -430,7 +440,7 @@ public class ControladorDomini {
         }
     }
     private void createItemKNN(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
-        if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
+        if (actualUser==null) throw new NoUserLogedInException("createItemKNN");
         try {
             createItemPath(atributs, valors,ListaItems,ListaTiposItems);
         }
@@ -438,7 +448,7 @@ public class ControladorDomini {
             throw e;
         }
     }
-    private void createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems){
+    private void createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
         //dado una lista de items lo mete ahi si no existe
 
         //string to arraylist de valors
@@ -471,7 +481,7 @@ public class ControladorDomini {
         //System.out.println(datos.length);
         ArrayList <Atribute> va = new ArrayList<Atribute>();
         ArrayList <String> vsa = new ArrayList<String>();//solo para definir el tipo de item
-        int pos_id=0;
+        int pos_id=-1;
         for (int i = 0; i <datos.length; ++i) {
             if(datos[i].equals("id")) pos_id=i;
             else{
@@ -483,7 +493,7 @@ public class ControladorDomini {
         }
 
         //miramos si no existe item
-
+        if (pos_id==-1) throw new IsNotItemException("create item");
         int comp = Integer.valueOf(datos_valors.get(pos_id));
         if (ListaItems.existeix_item(comp)){
             System.out.println("ja existeix id");
@@ -625,9 +635,9 @@ public class ControladorDomini {
             } else throw new NotAnAdministratorException("loadItems");
         }
         catch (Exception e){
+            //JOptionPane.showMessageDialog(null,"El fichero introducido no tiene el formato válido");
             throw e;
         }
-
     }
     //"Entradas_CSV/ratings.db.csv" = path
     public void loadRates(String path) throws Exception{//falta añadir item usado a la lista de items usados

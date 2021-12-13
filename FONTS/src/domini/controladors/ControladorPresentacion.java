@@ -4,6 +4,7 @@ import FONTS.src.domini.model.myPair;
 import FONTS.src.domini.model.valoratedItem;
 import FONTS.src.presentacion.*;
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthLookAndFeel;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -12,6 +13,7 @@ public class ControladorPresentacion {
     private static ControladorPresentacion CtrlPres;
     private static ControladorDomini CtrlDom = ControladorDomini.getInstance();
     static MainMenu principalView = new MainMenu();
+    static UploadItems uploadItems = new UploadItems();
     private ControladorPresentacion() {
     }
 
@@ -44,6 +46,17 @@ public class ControladorPresentacion {
         showAtributes.showWindow(x,y);
     }
 
+    public static void changeAdminMainView(int x, int y)  {
+        AdminMainPage adminMainPage = new AdminMainPage();
+        adminMainPage.showWindow(x,y);
+    }
+
+    public static void changeLoadingView(int x, int y)  {
+        uploadItems.showWindow(x,y);
+    }
+
+
+
     public static Vector<String> getAllItems(){
         Vector<String> s = new Vector<>();
         try {
@@ -75,5 +88,25 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null,"No items Recomended");
         }
         return s;
+    }
+
+    public void loadItems(String path) {
+       try {
+           CtrlDom.loadItems(path);
+       } catch (Exception e) {
+           System.out.println(e);
+       }
+    }
+
+    public void loadRates(String path) {
+        try {
+            CtrlDom.loadRates(path);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void setInvisible() {
+        uploadItems.setInvisible();
     }
 }

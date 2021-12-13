@@ -113,7 +113,7 @@ public class Main {
     /** Función que ejecuta el K Nearest Neighbour.
      */
     static void execute_KNeares_Neighbour(){
-        DriverKND.main(null);
+        //DriverKND.main(null);
     }
     /** Función que ejecuta el K Means.
      */
@@ -300,6 +300,7 @@ public class Main {
             dom.login("-1", "-1");
             dom.loadItems("EXE/Entradas_CSV/items.csv");
             dom.loadRates("EXE/Entradas_CSV/ratings.test.known.csv");
+            dom.showRatedItems();
             dom.logout();
             /*for (String u: dom.showAllUsers()){
                 dom.login(u, u);
@@ -317,8 +318,8 @@ public class Main {
             //dom.saveRecomendation("EXE/Entradas_CSV/recom5.csv");
             //dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv");
             //System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
-            dom.login("-1", "-1");
-            dom.showAllItems();
+            //dom.login("-1", "-1");
+            //dom.showAllItems();
         }
         catch (Exception e){
             System.out.println(e);
