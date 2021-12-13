@@ -374,7 +374,13 @@ public class ControladorDomini {
         return valorations;
     }
     public Vector <Vector<String>> showRatedItems() throws Exception{//vector de vectores de strings de 3 posiciones user id, item id, valoracion
+        Vector <Vector<String>> a = new Vector <Vector<String>> ();
+        Vector<String> v = new Vector<String>();
+        String s =" ";
+        v.add(s);
+        a.add(v);
         if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
+        else if(actualUser==admin) return a;
         else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
         Vector <Vector<String>> valorations = new Vector<Vector<String>>();
         try {
@@ -424,7 +430,7 @@ public class ControladorDomini {
     }
 
     public void createItem(String atributs, String valors) throws Exception{
-        if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
+        if (actualUser==null) throw new NoUserLogedInException("createItem");
         try {
             createItemPath(atributs, valors, itemList, itemTypeList);
             recomendationChanged=true;
@@ -434,7 +440,7 @@ public class ControladorDomini {
         }
     }
     private void createItemKNN(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
-        if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
+        if (actualUser==null) throw new NoUserLogedInException("createItemKNN");
         try {
             createItemPath(atributs, valors,ListaItems,ListaTiposItems);
         }

@@ -300,12 +300,8 @@ public class Main {
             dom.login("-1", "-1");
             dom.loadItems("EXE/Entradas_CSV/items.csv");
             dom.loadRates("EXE/Entradas_CSV/ratings.test.known.csv");
+            dom.showRatedItems();
             dom.logout();
-            ArrayList <Integer> it = new ArrayList<Integer>();
-            int i = 1;
-            int b = 1;
-            it.add(b);
-            if (it.contains(i)) System.out.println(1111);
             /*for (String u: dom.showAllUsers()){
                 dom.login(u, u);
                 dom.doSlope(5, 10);
