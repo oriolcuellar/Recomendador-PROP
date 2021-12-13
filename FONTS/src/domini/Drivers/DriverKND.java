@@ -297,7 +297,7 @@ public class DriverKND {
                     while (s.hasNext())
                         Valoracions.add(s.nextDouble());
 
-                    System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que és un entero: ");
+                    System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que k és un entero: ");
 
                     int k = s.nextInt();
 
@@ -339,15 +339,15 @@ public class DriverKND {
                 TipusItem T1 = new TipusItem(Tipus1);
                 TipusItem T2 = new TipusItem(Tipus2);
 
-                ArrayList<String> Valors2 = new ArrayList<String>(Arrays.asList("Verde", "true", "1992-04-12", "hola;que;tal", "32.4"));
-                ArrayList<String> Valors3 = new ArrayList<String>(Arrays.asList("Verde", "false", "1960-05-03", "Buenos;dias;señorita", "75.8"));
-                ArrayList<String> Valors4 = new ArrayList<String>(Arrays.asList("Rojo", "false", "2000-12-04", "Habia;una;vez;un;varquito;chuiquito;dias", "32.4"));
-                ArrayList<String> Valors5 = new ArrayList<String>(Arrays.asList("Azul", "", "1999-00-00", "hola;que;tal", "46.8"));
+                ArrayList<String> Valors2 = new ArrayList<String>(Arrays.asList("32.4", "Verde", "1992-04-12", "true", "hola;que;tal" ));
+                ArrayList<String> Valors3 = new ArrayList<String>(Arrays.asList("75.8", "Verde", "1960-05-03","false", "Buenos;dias;señorita"));
+                ArrayList<String> Valors4 = new ArrayList<String>(Arrays.asList("32.4", "Rojo", "2000-12-04", "false", "Habia;una;vez;un;varquito;chuiquito;dias"));
+                ArrayList<String> Valors5 = new ArrayList<String>(Arrays.asList("46.8", "Azul", "1999-00-00", "", "hola;que;tal"));
 
-                ArrayList<String> Valors6 = new ArrayList<String>(Arrays.asList("true", "120", "1992-04-12", "Ingles"));
-                ArrayList<String> Valors7 = new ArrayList<String>(Arrays.asList("false", "712", "1960-05-03", "Español"));
-                ArrayList<String> Valors8 = new ArrayList<String>(Arrays.asList("", "240", "2000-12-04", "Ingles"));
-                ArrayList<String> Valors9 = new ArrayList<String>(Arrays.asList("true", "60", "1999-00-00", "Espa"));
+                ArrayList<String> Valors6 = new ArrayList<String>(Arrays.asList("120", "Ingles", "true", "1992-04-12"));
+                ArrayList<String> Valors7 = new ArrayList<String>(Arrays.asList("712", "Español", "false", "1960-05-03"));
+                ArrayList<String> Valors8 = new ArrayList<String>(Arrays.asList("240", "Ingles", "", "2000-12-04"));
+                ArrayList<String> Valors9 = new ArrayList<String>(Arrays.asList("60", "Espa", "true", "1999-00-00"));
 
                 Item a2 = new Item(2, T1, Valors2);
                 Item a3 = new Item(3, T1, Valors3);
@@ -365,8 +365,18 @@ public class DriverKND {
                 ArrayList<Item> ItemsUsats = new ArrayList<Item>(Arrays.asList(a9, a7, a8, a6));
                 ArrayList<Double> Valoracions = new ArrayList<Double>(Arrays.asList(2.1, 4.1, 1.0, 3.2));
 
+                for (int i = 0; i < ItemsUsats.size(); ++i) {
+
+                    Ct.anyadir_item(ItemsUsats.get(i));
+                }
+
+                System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que k és un entero: ");
+
+                Scanner s = new Scanner(System.in);
+                int k = s.nextInt();
+
                 K_Neareast_Neightbour prueba = new K_Neareast_Neightbour ();
-                ArrayList<Item> Resultado = prueba.Algorithm(3, Ct, ItemsUsats, Valoracions);
+                ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, ItemsUsats, Valoracions);
 
                 long end_time = System.currentTimeMillis();
                 long ex_time = (end_time - start_time);

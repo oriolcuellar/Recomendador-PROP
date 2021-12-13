@@ -1,6 +1,7 @@
 package FONTS.src.domini.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /** \brief Clase que implementa el algoritmo K_Neareast_Neightbour.
  *  @author Jordi Olmo
@@ -37,31 +38,16 @@ public class K_Neareast_Neightbour {
 
     public ArrayList<Item> Algorithm(int k,Conjunt_Items C_Items, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
 
-        ArrayList<Double> Valors = new ArrayList<Double>();
-        ArrayList <Integer> Posicions = new ArrayList<Integer>();
-
-        for(int i = 0; i < C_Items.n_Items(); ++i)
-            Valors.add(i, 0.0);
-
-        for (int i = 0; i < itemsUsats.size(); ++i) {
-            boolean anyadit = C_Items.anyadir_item(itemsUsats.get(i));
-            if (anyadit) Valors.add(0.0);
-            Posicions.add(C_Items.get_position(itemsUsats.get(i)));
-        }
-
         for (int i = 0; i < itemsUsats.size(); ++i) {
 
-            int pos1 = C_Items.get_position(itemsUsats.get(i));
-            Valors.set((pos1), Valoracions.get(i));
+            C_Items.anyadir_item(itemsUsats.get(i));
         }
-
-        C_Items.omplir_matriu();
 
         ArrayList <ArrayList<Item>> M_de_Items = new ArrayList<ArrayList<Item>>();
         ArrayList <ArrayList<Double>> Dis = new ArrayList<ArrayList<Double>>();
 
 
-        for (int j = 0; j < Posicions.size(); ++j) {
+        for (int j = 0; j < itemsUsats.size(); ++j) {
 
             ArrayList<Item> Items_Aux = new ArrayList<Item>();
             ArrayList<Double> Dis_Aux = new ArrayList<Double>();
@@ -73,11 +59,10 @@ public class K_Neareast_Neightbour {
             Dis.add(Dis_Aux);
 
             ordenar_Items(Dis.get(j), M_de_Items.get(j),0, Dis.get(j).size()-1);
-
         }
 
         ArrayList<Item> Items_a_devolver = new ArrayList<>(k);
-        comparar_conjunts(Valors,Items_a_devolver, Dis, M_de_Items, k);
+        comparar_conjunts(Valoracions,Items_a_devolver, Dis, M_de_Items, k);
 
         return Items_a_devolver;
     }
@@ -86,7 +71,7 @@ public class K_Neareast_Neightbour {
 
     /** Dadas las matrizes de los parametros, devuelve una ArrayList con los items recomendados de medida k, siguiendo
      la siguiente fórmula: Siendo las matrices en orden de los parámetros X,Y y el vector V -> por unos Item i, j cualquiera.
-     Valors_i = Sumatorio(Xij * Vi)
+     Valors_i = Sumatorio(Xij * (1 + Vi/Max(v))
      * @param Val ArrayList con las valoraciones de todos los Item de itemsUsats.
      * @param I_Finals  ArrayList de los Items que se devolverán.
      * @param Distances Matriz de ArrayList con las distancias de todos los item. La posicion de los items coincidira
@@ -99,21 +84,23 @@ public class K_Neareast_Neightbour {
     private void comparar_conjunts (ArrayList<Double> Val, ArrayList<Item> I_Finals, ArrayList<ArrayList<Double>> Distances,
                                     ArrayList <ArrayList<Item>> M_de_Items, int k) {
 
+        Double max_valoracio = Collections.max(Val);
         ArrayList <Double> Valors = new ArrayList<Double>();
+
         for (int i = 0; i < M_de_Items.size(); ++i)
             for (int j = 0; j < M_de_Items.get(i).size() && Distances.get(i).get(j) > 0; ++j) {
+
+                Double Val_norma = Val.get(i) / max_valoracio;
+                Double multiplicacio =  Distances.get(i).get(j) * (1 + Val_norma);
 
                 if (!I_Finals.contains(M_de_Items.get(i).get(j))) {
 
                     I_Finals.add(i, M_de_Items.get(i).get(j));
-                    Double multiplicacio =  Distances.get(i).get(j) * Val.get(i);
                     Valors.add(i, multiplicacio);
                 }
                 else {
 
                     int p = I_Finals.indexOf(M_de_Items.get(i).get(j));
-                    double V = Val.get(i);
-                    Double multiplicacio =  Distances.get(i).get(j) * V;
                     Double nou = Valors.get(p) + multiplicacio;
                     Valors.set(p, nou);
                 }
@@ -123,7 +110,6 @@ public class K_Neareast_Neightbour {
 
         for (int i = I_Finals.size()-1; i >= k ; --i)
             I_Finals.remove(i);
-
     }
 
     /** Ordena toda la ArrayList de los parametros, de forma creciente para los items con mayor valor en el parametro,

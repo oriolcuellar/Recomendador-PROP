@@ -112,21 +112,23 @@ public class Conjunt_Items {
         int pos_b = get_position(b);
         if (a.getID() != b.getID()) {
 
-
-            Double aux = Distances.get(pos_a).get(pos_b);
-            if (aux != -1.0)
-                return aux;
-            else {
+            if (existeix_item(a.getID()) && existeix_item(b.getID())){
 
                 double d = a.Distance(b);
-                Distances.get(pos_a).set(pos_b, d);
-                Distances.get(pos_b).set(pos_a, d);
+                if (pos_a <= Distances.size() - 1 && pos_b <= Distances.size() - 1) {
+
+                    Distances.get(pos_a).set(pos_b, d);
+                    Distances.get(pos_b).set(pos_a, d);
+                }
                 return d;
             }
+            else return -1.0;
         }
+
         else{
 
-            Distances.get(pos_a).set(pos_b, 0.0);
+            if (pos_a <= Distances.size() - 1 && pos_b <= Distances.size() - 1)
+                Distances.get(pos_a).set(pos_b, 0.0);
             return 0.0;
         }
     }
@@ -148,7 +150,6 @@ public class Conjunt_Items {
             }
         });
         initzialitzar_matriu();
-        omplir_matriu();
         return true;
     }
 
@@ -185,7 +186,7 @@ public class Conjunt_Items {
         if (!existeix_item(a.getID())) {
             int i = BinaryInsertionPos(Items, 0, Items.size()-1, a.getID());
             Items.add(i+1, a);
-            anyadir_elements( i+1);
+            anyadir_elements( i+1, a);
             return true;
         }
         else return false;//falta exception creo
@@ -218,8 +219,18 @@ public class Conjunt_Items {
         for (int i = 0; i < n_Items(); ++i) {
 
             ArrayList<Double> Aux = new ArrayList<Double>();
-            for (int j = 0; j < n_Items(); ++j)
-                Aux.add(-1.0);
+            for (int j = 0; j < n_Items(); ++j){
+
+                if (i == j) Aux.add(0.0);
+                else {
+
+                    Double d;
+                    if (i <= j) d = Distance(Items.get(i), Items.get(j));
+                    else d = Distances.get(j).get(i);
+                    Aux.add(d);
+                }
+            }
+
             Distances.add(Aux);
         }
 
@@ -228,29 +239,36 @@ public class Conjunt_Items {
 
 
     /** Añades el Item a Distance con -1.0, si este no pertenecía a Conjunt_Items.
-     * @param i pos-1 donde se insertó el Item
+     * @param i posision donde se insertó el Item
      */
 
-    private void anyadir_elements(int i) {
+    private void anyadir_elements(int i, Item a) {
 
         ArrayList<Double> Aux = new ArrayList<Double>();
-        if (n_Items() > 1) {
+        if (n_Items() > 0) {
 
-            for (int j = 0; j < n_Items() - 1; ++j)
-                Aux.add(-1.0);
+            for (int j = 0; j < n_Items(); ++j){
+
+                Item b = Items.get(j);
+                Double d = Distance(a,b);
+                Aux.add(d);
+            }
+
             Distances.add(i, Aux);
 
-            for (int j = 0; j < n_Items(); ++j)
-                Distances.get(j).add(i, -1.0);
+            for (int j = 0; j < n_Items(); ++j) {
+
+                Double d = Distances.get(i).get(j);
+                if (i != j) Distances.get(j).add(i, d);
+            }
         }
         else {
 
             ArrayList<ArrayList<Double>> Dis_Aux = new ArrayList<ArrayList<Double>>();
-            Aux.add(-1.0);
+            Aux.add(0.0);
             Dis_Aux.add(Aux);
             Distances = Dis_Aux;
         }
-
     }
 
     /** Añades el Item a Distance con -1.0, si este no pertenecía a Conjunt_Items.

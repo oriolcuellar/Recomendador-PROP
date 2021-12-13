@@ -743,9 +743,6 @@ public class DriverConjuntItems {
                         System.out.print("\n");
                     }
 
-                    System.out.println("Ahora se ejecutara omplir_matriu y se comprovara el resultado: \n");
-                    Ct.omplir_matriu();
-
                     System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
                     A1 = Ct.getItems();
                     for (int i = 0; i < A1.size(); ++i)
@@ -791,9 +788,6 @@ public class DriverConjuntItems {
 
                         System.out.print("\n");
                     }
-
-                    System.out.println("Ahora se ejecutara omplir_matriu y se comprovara el resultado: \n");
-                    Ct.omplir_matriu();
 
                     System.out.println("El ConjuntItems se ha actualizado correctamente y estos son los ID de los items del conjunto: \n");
                     A1 = Ct.getItems();
