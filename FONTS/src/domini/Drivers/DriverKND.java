@@ -239,7 +239,6 @@ public class DriverKND {
                 if(!prueba_static){
 
                     long mil = (long) 1000.0;
-                    long start_time = System.currentTimeMillis();
                     System.out.println("================================================================================================");
                     System.out.println("Prueba de la funcion Algorithm()");
                     System.out.println("Introduce los siguientes dos ficheros de Items de la siguiente forma: ./path/file.csv ./path/file.csv");
@@ -258,9 +257,11 @@ public class DriverKND {
                     for (int i = 0; i < A2.size(); ++i)
                         Valoracions.add(s.nextDouble());
 
-                    System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que és un entero: ");
+                    System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que k és un entero: ");
 
                     int k = s.nextInt();
+
+                    long start_time = System.currentTimeMillis();
 
                     Conjunt_Items Ct = new Conjunt_Items(A1);
                     K_Neareast_Neightbour prueba = new K_Neareast_Neightbour();
@@ -279,6 +280,7 @@ public class DriverKND {
                 }
                 else {
 
+                    long mil = (long) 1000.0;
                     System.out.println("================================================================================================");
                     System.out.println("Prueba de la funcion Algorithm() con el Connjunt_Items Static");
                     System.out.println("Introduce un fichero de Items de la siguiente forma: ./path/file.csv");
@@ -301,9 +303,16 @@ public class DriverKND {
 
                     int k = s.nextInt();
 
+                    long start_time = System.currentTimeMillis();
+
                     Conjunt_Items Ct = CI_Static;
                     K_Neareast_Neightbour prueba = new K_Neareast_Neightbour();
                     ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, A2, Valoracions);
+
+                    long end_time = System.currentTimeMillis();
+                    long ex_time = (end_time - start_time)/mil;
+
+                    System.out.println("\n Se ejecuta en: " + ex_time + " segundos\n");
 
                     System.out.println("El K_Neareast_Neightbour se ha creado correctamente y estos son los k items recomendados: \n");
                     for (int i = 0; i < Resultado.size(); ++i)
@@ -321,7 +330,7 @@ public class DriverKND {
                 System.out.println("Prueba del algrotimo con un conjunto de Items sencillo predefinido");
 
                 long mil = (long) 1000.0;
-                long start_time = System.currentTimeMillis();
+
                 Ranged_Atribute AT = new Ranged_Atribute("Peso", "Rang", 32.4, 75.8);
                 Atribute AT2 = new Atribute("Color", "String");
                 Atribute AT3 = new Atribute("Fecha", "Data");
@@ -361,6 +370,13 @@ public class DriverKND {
 
                 ArrayList<Item> Items = new ArrayList<Item>(Arrays.asList(a2, a3, a4, a5));
 
+                System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que k és un entero: ");
+
+                Scanner s = new Scanner(System.in);
+                int k = s.nextInt();
+
+                long start_time = System.currentTimeMillis();
+
                 Conjunt_Items Ct = new Conjunt_Items(Items);
                 ArrayList<Item> ItemsUsats = new ArrayList<Item>(Arrays.asList(a9, a7, a8, a6));
                 ArrayList<Double> Valoracions = new ArrayList<Double>(Arrays.asList(2.1, 4.1, 1.0, 3.2));
@@ -369,11 +385,6 @@ public class DriverKND {
 
                     Ct.anyadir_item(ItemsUsats.get(i));
                 }
-
-                System.out.println("Finalmente introduce el valor de k, teniendo en cuenta que k és un entero: ");
-
-                Scanner s = new Scanner(System.in);
-                int k = s.nextInt();
 
                 K_Neareast_Neightbour prueba = new K_Neareast_Neightbour ();
                 ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, ItemsUsats, Valoracions);
