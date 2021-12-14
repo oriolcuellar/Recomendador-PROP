@@ -84,7 +84,7 @@ public class AdminMainPage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setBounds(x,y,600,600);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 

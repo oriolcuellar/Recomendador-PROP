@@ -61,6 +61,11 @@ public class ControladorPresentacion {
         profileView.showWindow(x,y);
     }
 
+    public static void changeStatsView(int x, int y){
+        StatsView statsView = new StatsView();
+        statsView.showWindow(x,y);
+    }
+
     public static void changeLoadingView(int x, int y)  {
         uploadItems.showWindow(x,y);
     }
