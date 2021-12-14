@@ -88,7 +88,9 @@ public class Kmeans {
             float WCSS = 0;
             float WCSSold = Float.POSITIVE_INFINITY;
             float WCSSold2 = Float.POSITIVE_INFINITY;
-            while(!equilibrated && WCSSold2 != WCSS && i < 10) {
+            float threshold = (float)0.995;
+            boolean first = true;
+            while(!equilibrated && WCSSold2*threshold > WCSS && WCSSold*threshold > WCSS && i < 10) {
                 WCSSold2 = WCSSold;
                 WCSS = 0;
                 WCSSold = 0;
@@ -98,7 +100,10 @@ public class Kmeans {
                     clusters.get(j).clearSumDistances();
                     centroids.add(clusters.get(j).getcentroid());
                     //System.out.print(centroids.get(j).getUserID() + " ");
-                    WCSSold += clusters.get(j).getWCSS();
+                    if(first) {
+                        WCSSold = Float.POSITIVE_INFINITY;
+                        first = false;
+                    } else WCSSold += clusters.get(j).getWCSS();
                 }
                 //System.out.println();
 

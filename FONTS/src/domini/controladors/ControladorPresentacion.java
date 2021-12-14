@@ -120,7 +120,7 @@ public class ControladorPresentacion {
         try {
             CtrlDom.login(username,password);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"The username or password are not correct");
+            System.out.println(e);
         }
     }
 
