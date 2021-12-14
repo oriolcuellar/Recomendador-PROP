@@ -11,8 +11,10 @@ public class ProfileView {
     private static JFrame frame;
     private JPanel panel;
     private JButton logoutButton;
-    private JLabel username;
     private JLabel id;
+    private JLabel username;
+    private JButton backButton;
+    private JButton statsButton;
 
     public ProfileView(){
         id.setText("ASDFA");
@@ -25,6 +27,39 @@ public class ProfileView {
                     int y = frame.getY();
                     CtrlPres.logout();
                     CtrlPres.changeLogInView(x,y);
+                    frame.dispose();
+                } catch (Exception e) {
+                    enableButtons();
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+        statsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    int x = frame.getX();
+                    int y = frame.getY();
+                    CtrlPres.changeStatsView(x,y);
+                    frame.dispose();
+                } catch (Exception e) {
+                    enableButtons();
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    int x = frame.getX();
+                    int y = frame.getY();
+                    if(CtrlPres.isAdmin()) CtrlPres.changeAdminMainView(x,y);
+                    else CtrlPres.inicializePresentation(x,y);
                     frame.dispose();
                 } catch (Exception e) {
                     enableButtons();
@@ -48,10 +83,14 @@ public class ProfileView {
 
     public void disableButtons() {
         logoutButton.setEnabled(false);
+        backButton.setEnabled(false);
+        statsButton.setEnabled(false);
     }
 
     public void enableButtons() {
         logoutButton.setEnabled(true);
+        backButton.setEnabled(true);
+        statsButton.setEnabled(true);
     }
     public void setInvisible() {
         frame.dispose();

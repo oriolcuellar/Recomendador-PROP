@@ -60,6 +60,11 @@ public class ControladorPresentacion {
         profileView.showWindow(x,y);
     }
 
+    public static void changeStatsView(int x, int y){
+        StatsView statsView = new StatsView();
+        statsView.showWindow(x,y);
+    }
+
     public static void changeLoadingView(int x, int y)  {
         uploadItems.showWindow(x,y);
     }
@@ -119,7 +124,7 @@ public class ControladorPresentacion {
         try {
             CtrlDom.login(username,password);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"The username or password are not correct");
+            System.out.println(e);
         }
     }
 

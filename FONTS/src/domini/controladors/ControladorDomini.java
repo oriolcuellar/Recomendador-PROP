@@ -98,10 +98,11 @@ public class ControladorDomini {
             else throw new UserNotExistsException(struserId);
         }
         catch (Exception e){
+            JOptionPane.showMessageDialog(null,"The username or password are not correct");
             System.out.println(e);
         }
     }
-    public  void logout()throws Exception{
+    public void logout()throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("logout");
         else{
             actualUser=null;

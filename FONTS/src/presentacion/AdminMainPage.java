@@ -18,6 +18,8 @@ public class AdminMainPage {
     private JButton uploadUsersRatingsButton;
     private JButton uploadItemsButton;
     private JFileChooser fileChooser = new JFileChooser();
+    private boolean items = false;
+    private boolean ratings = false;
 
     public AdminMainPage(){
         uploadItemsButton.addActionListener(new ActionListener() {
@@ -28,9 +30,11 @@ public class AdminMainPage {
                     fileChooser.showOpenDialog(fileChooser);
                     String path = fileChooser.getSelectedFile().getAbsolutePath();
                     CtrlPres.loadItems(path);
+                    items = true;
                 } catch (Exception e) {
                     enableButtons();
-                    JOptionPane.showMessageDialog(null,"El fichero introducido no tiene el formato válido");
+                    items = CtrlPres.getAllItems().size() != 0;
+                    JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
                     e.printStackTrace();
                 }
                 enableButtons();
@@ -41,12 +45,17 @@ public class AdminMainPage {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
-                    fileChooser.showOpenDialog(fileChooser);
-                    String path = fileChooser.getSelectedFile().getAbsolutePath();
-                    CtrlPres.loadRates(path);
+                    if(items) {
+                        fileChooser.showOpenDialog(fileChooser);
+                        String path = fileChooser.getSelectedFile().getAbsolutePath();
+                        CtrlPres.loadRates(path);
+                        ratings = true;
+                    } else JOptionPane.showMessageDialog(null,"You have to load items before doing anything else");
+
                 } catch (Exception e) {
                     enableButtons();
-                    JOptionPane.showMessageDialog(null,"El fichero introducido no tiene el formato válido");
+                    ratings = false;
+                    JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
                     e.printStackTrace();
                 }
                 enableButtons();
@@ -58,8 +67,11 @@ public class AdminMainPage {
             public void actionPerformed(ActionEvent actionEvent) {
                 int x = frame.getX();
                 int y = frame.getY();
-                CtrlPres.changeProfileView(x,y);
-                frame.dispose();
+                if(items && ratings) {
+                    CtrlPres.changeProfileView(x, y);
+                    frame.dispose();
+                } else if(items) JOptionPane.showMessageDialog(null,"You have to load ratings before doing anything else");
+                else JOptionPane.showMessageDialog(null,"You have to load items and ratings before doing anything else");
             }
         });
 
@@ -72,7 +84,7 @@ public class AdminMainPage {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setBounds(x,y,600,600);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 
