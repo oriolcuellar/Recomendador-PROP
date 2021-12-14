@@ -11,14 +11,13 @@ public class KExperimentation {
         ControladorDomini Ctrl = ControladorDomini.getInstance();
         try {
             Ctrl.login("-1", "-1");
-            Ctrl.loadRates("EXE/Entradas_CSV/ratings.db.csv");
+            Ctrl.loadRates("EXE/Entradas_CSV/ratings.test.known.csv");
         } catch (Exception e) {
             throw e;
         }
         Kmeans k = new Kmeans();
         for(int i = 1; i <= 10; ++i) {
-            k.run(Ctrl.getUsersList(),9);
-            System.out.println("HOLA");
+            k.run(Ctrl.getUsersList(),i);
             System.out.println(i + " " + k.obtainWCSS());
         }
     }

@@ -201,7 +201,7 @@ public class ControladorDomini {
     public ArrayList<myPair> doSlope(int k_slope, int max_slope) throws Exception{
         try{
             if (recomendationChanged)
-                lastRecomendation= dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+                lastRecomendation = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
             recomendationChanged=false;
             return lastRecomendation;
         }
@@ -763,5 +763,11 @@ public class ControladorDomini {
     public User getActualUser() {
         return actualUser;
     }
+
+    public String getTypeActualUser() {
+        if(actualUser.getRol() == TipusRol.Administrador) return "admin";
+        else return "user";
+    }
+
     public Map<Integer,User> getUsersList() { return usersList; }
 }

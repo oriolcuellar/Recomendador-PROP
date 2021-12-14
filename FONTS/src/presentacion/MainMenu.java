@@ -28,10 +28,9 @@ public class MainMenu {
                 ControladorDomini dom = ControladorDomini.getInstance();
                 try {
                     disableButtons();
-                    dom.login("-1", "-1");
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.changeAdminMainView(x,y);
+                    CtrlPres.changeProfileView(x,y);
                     frame.dispose();
                     settingsButton.setEnabled(true);
                 } catch (Exception e) {

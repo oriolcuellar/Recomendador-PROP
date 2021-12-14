@@ -46,9 +46,19 @@ public class ControladorPresentacion {
         showAtributes.showWindow(x,y);
     }
 
-    public static void changeAdminMainView(int x, int y)  {
+    public static void changeAdminMainView(int x, int y){
         AdminMainPage adminMainPage = new AdminMainPage();
         adminMainPage.showWindow(x,y);
+    }
+
+    public static void changeLogInView(int x, int y){
+        LoginView loginView = new LoginView();
+        loginView.showWindow(x,y);
+    }
+
+    public static void changeProfileView(int x, int y){
+        ProfileView profileView = new ProfileView();
+        profileView.showWindow(x,y);
     }
 
     public static void changeLoadingView(int x, int y)  {
@@ -101,6 +111,26 @@ public class ControladorPresentacion {
     public void loadRates(String path) {
         try {
             CtrlDom.loadRates(path);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void login(String username, String password) {
+        try {
+            CtrlDom.login(username,password);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"The username or password are not correct");
+        }
+    }
+
+    public boolean isAdmin() {
+        return CtrlDom.getTypeActualUser() == "admin";
+    }
+
+    public void logout() {
+        try {
+            CtrlDom.logout();
         } catch (Exception e) {
             System.out.println(e);
         }

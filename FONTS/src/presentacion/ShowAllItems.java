@@ -53,6 +53,16 @@ public class ShowAllItems {
             }
         });
 
+        settingsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int x = frame.getX();
+                int y = frame.getY();
+                CtrlPres.changeProfileView(x,y);
+                frame.dispose();
+            }
+        });
+
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {

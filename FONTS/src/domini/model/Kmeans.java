@@ -88,7 +88,6 @@ public class Kmeans {
             float WCSS = 0;
             float WCSSold = Float.POSITIVE_INFINITY;
             float WCSSold2 = Float.POSITIVE_INFINITY;
-            int threshold = 5;
             while(!equilibrated && WCSSold2 != WCSS && i < 10) {
                 WCSSold2 = WCSSold;
                 WCSS = 0;
@@ -108,6 +107,7 @@ public class Kmeans {
                 }
                 equilibrated = true;
                 for(int j = 0; j < k; ++j) {
+                    clusters.get(j).recalculateCentroid();
                     if(clusters.get(j).getcentroid().getUserID() != centroids.get(j).getUserID()) equilibrated = false;
                     //System.out.print(clusters.get(j).getcentroid().getUserID() + " ");
                     clusters.get(j).calculateWCSS();

@@ -88,13 +88,12 @@ public class Cluster {
                 }
             }
             sumDistances.set(cluster.size() - 1, d);
-            recalculateCentroid();
         }
     }
 
     /** Función que recalcula el centroide del cluster, buscando aquel cuyas distancias con los
      * demás sean más pequeñas. Devuelva true si ha cambiado el centroide y false en caso contrario. */
-    private void recalculateCentroid() {
+    public void recalculateCentroid() {
         float sumMin = 0;
         int iMin = 0;
         for(int i = 0; i < sumDistances.size(); ++i) {

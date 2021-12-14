@@ -4,6 +4,7 @@ import FONTS.src.domini.controladors.ControladorDomini;
 import FONTS.src.domini.controladors.ControladorPresentacion;
 
 import javax.swing.*;
+import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,11 +17,9 @@ public class AdminMainPage {
     private JButton deleteUserButton;
     private JButton uploadUsersRatingsButton;
     private JButton uploadItemsButton;
-    private JButton backButton;
     private JFileChooser fileChooser = new JFileChooser();
 
-    public AdminMainPage() {
-
+    public AdminMainPage(){
         uploadItemsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -54,21 +53,12 @@ public class AdminMainPage {
             }
         });
 
-        backButton.addActionListener(new ActionListener() {
+        settingsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                try {
-
-                    ControladorDomini dom = ControladorDomini.getInstance();
-                    dom.logout();
-                    dom.login("1","1");
-                    System.out.println(dom.getActualUser().getUserID());
-                } catch (Exception e) {
-
-                }
                 int x = frame.getX();
                 int y = frame.getY();
-                CtrlPres.inicializePresentation(x,y);
+                CtrlPres.changeProfileView(x,y);
                 frame.dispose();
             }
         });
