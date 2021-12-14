@@ -92,7 +92,9 @@ public class Conjunt_Items {
 
     public ArrayList<ArrayList<Double>> getDistances() { return Distances; }
 
-    /** Devuelve el vector con las distancias
+    /** Devuelve el vector con las distancias del item a
+     * * @see Item
+     * * @param a Item del que se quieren saber sus distancias.
      */
 
     public ArrayList<Double> getDistancesofItem(Item a) {
@@ -125,7 +127,7 @@ public class Conjunt_Items {
             else return -1.0;
         }
 
-        else{
+        else {
 
             if (pos_a <= Distances.size() - 1 && pos_b <= Distances.size() - 1)
                 Distances.get(pos_a).set(pos_b, 0.0);
@@ -154,11 +156,11 @@ public class Conjunt_Items {
     }
 
     //Operacions
-
+/*
     /** Rellena la matriz Distances con las respectivas distancias de los items. La matriz ya debe ser del tamaño del
      conjunt d'Items.
      */
-
+/*
     public void omplir_matriu() {
 
         for (int i = 0; i < n_Items(); ++i)
@@ -174,7 +176,7 @@ public class Conjunt_Items {
                     Distances.get(j).set(i, aux);
                 }
             }
-    }
+    }*/
 
     /** Añade el item del parametro al Conjunt. También añade las filas y columnas correspondientes a la matriz de distancias.
      * @see Item
@@ -210,8 +212,7 @@ public class Conjunt_Items {
 
     //Operacions Auxiliars
 
-    /** Inicializa la matriz Distances con -1.0 en todos los items. La matriz ya debe ser del tamaño del
-     conjunt d'Items.
+    /** Inicializa la matriz Distances con sus respectivas distancias en todos los items.
      */
 
     private void initzialitzar_matriu() {
@@ -233,7 +234,6 @@ public class Conjunt_Items {
 
             Distances.add(Aux);
         }
-
     }
 
 

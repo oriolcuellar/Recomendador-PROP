@@ -95,8 +95,9 @@ public class K_Neareast_Neightbour {
 
                 if (!I_Finals.contains(M_de_Items.get(i).get(j))) {
 
-                    I_Finals.add(i, M_de_Items.get(i).get(j));
-                    Valors.add(i, multiplicacio);
+
+                    I_Finals.add(M_de_Items.get(i).get(j));
+                    Valors.add(multiplicacio);
                 }
                 else {
 

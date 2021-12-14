@@ -346,7 +346,7 @@ public class DriverKND {
 
                 ArrayList<String> Valors6 = new ArrayList<String>(Arrays.asList("120", "Ingles", "true", "1992-04-12"));
                 ArrayList<String> Valors7 = new ArrayList<String>(Arrays.asList("712", "Español", "false", "1960-05-03"));
-                ArrayList<String> Valors8 = new ArrayList<String>(Arrays.asList("240", "Ingles", "", "2000-12-04"));
+                ArrayList<String> Valors8 = new ArrayList<String>(Arrays.asList("240", "Ingle", "", "2000-12-04"));
                 ArrayList<String> Valors9 = new ArrayList<String>(Arrays.asList("60", "Espa", "true", "1999-00-00"));
 
                 Item a2 = new Item(2, T1, Valors2);

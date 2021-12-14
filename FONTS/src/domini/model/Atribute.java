@@ -36,7 +36,7 @@ public class Atribute {
         Rellevant = true;
     }
 
-    /** Creadora de la classe, con el nomnbre y tipo de los parametros, rellevant por defecto es true.
+    /** Creadora de la classe, con el nomnbre, tipo de los parametros y rellevant.
      * @param name Nombre del atributo.
      * @param type Tipo del Atributo.
      * @param R Indica si el atributo es relevante

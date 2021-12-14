@@ -10,33 +10,40 @@ import java.util.Vector;
 public class Item {
 
     //Atributes
-    /** Identidicador del Item.
+    /**
+     * Identidicador del Item.
      */
     private int ID;
 
-    /** Tipus del Item
+    /**
+     * Tipus del Item
+     *
      * @see TipusItem
      */
     private TipusItem tipus;
 
-    /** ArrayList de String que contiene los valores de los Atributo de su tipo, las posiciones de los valores debe
-     coincidir con las posiciones de los atributos de la ArrayList del tipo.
+    /**
+     * ArrayList de String que contiene los valores de los Atributo de su tipo, las posiciones de los valores debe
+     * coincidir con las posiciones de los atributos de la ArrayList del tipo.
+     *
      * @see TipusItem
      */
-    private ArrayList <String> valors;
+    private ArrayList<String> valors;
 
     //Constructors
 
-    /** Creadora de la classe. Crea un item con los parametros dados.
-     * @see TipusItem
-     * @param ID identificador del item, no puede coincidir el de ningun item.
-     * @param tipus Tipo del item.
+    /**
+     * Creadora de la classe. Crea un item con los parametros dados.
+     *
+     * @param ID     identificador del item, no puede coincidir el de ningun item.
+     * @param tipus  Tipo del item.
      * @param valors ArrayList de String con el valor de los atributos del tipo del item, las posiciones de los valores debe
-     coincidir con las posiciones de los atributos de la ArrayList del tipo.
+     *               coincidir con las posiciones de los atributos de la ArrayList del tipo.
+     * @see TipusItem
      */
 
     /* El indice del valor debe coincidir con el indice del atributo para funcionar*/
-    public Item(int ID, TipusItem tipus, ArrayList <String> valors) {
+    public Item(int ID, TipusItem tipus, ArrayList<String> valors) {
         //    if (!Conjunt_Items.existeix_item(ID)) {
         this.ID = ID;
         this.tipus = tipus;
@@ -44,38 +51,48 @@ public class Item {
         //   }
     }
 
-    /** Creadora de la classe. Crea un item con los parametros dados.
-     * @see TipusItem
+    /**
+     * Creadora de la classe. Crea un item con los parametros dados.
+     *
      * @param ID identificador del item, no puede coincidir el de ningun item.
-    coincidir con las posiciones de los atributos de la ArrayList del tipo.
+     *           coincidir con las posiciones de los atributos de la ArrayList del tipo.
+     * @see TipusItem
      */
 
-    public Item(int ID) {this.ID = ID;}
+    public Item(int ID) {
+        this.ID = ID;
+    }
 
     //Getters
 
-    /** Devuelve el ID, del item.
+    /**
+     * Devuelve el ID, del item.
      */
 
     public int getID() {
         return ID;
     }
 
-    /** Devuelve el tipo del Item.
+    /**
+     * Devuelve el tipo del Item.
      */
 
     public TipusItem getTipus() {
         return tipus;
     }
 
-    /** Devuelve la ArrayList de valors del Item.
+    /**
+     * Devuelve la ArrayList de valors del Item.
      */
 
-    public ArrayList<String> getValors() { return valors; }
+    public ArrayList<String> getValors() {
+        return valors;
+    }
 
     //Setters
 
-    /** Establece el valor del id del Item.
+    /**
+     * Establece el valor del id del Item.
      */
 
     public void setID(int ID) {
@@ -86,27 +103,34 @@ public class Item {
 
     //mirar desacoplament de Atribute
 
-    /** Devuelve la distancia del Item implicito y el del parametro. Los dos Item deben ser del mismo tipo
+    /**
+     * Devuelve la distancia del Item implicito y el del parametro. Los dos Item deben ser del mismo tipo
+     *
      * @param b Item del que se quiere saber la distancia.
      */
 
-    public Double Distance (Item b) {
+    public Double Distance(Item b) {
 
-        ArrayList<Atribute>  V_A = new ArrayList<Atribute>();
-        ArrayList<Atribute>  V_B = new ArrayList<Atribute>();
+        ArrayList<Atribute> V_A = new ArrayList<Atribute>();
+        ArrayList<Atribute> V_B = new ArrayList<Atribute>();
 
-        ArrayList <String> Valors_A = new ArrayList<String>();
-        ArrayList <String> Valors_B = new ArrayList<String>();
+        ArrayList<String> Valors_A = new ArrayList<String>();
+        ArrayList<String> Valors_B = new ArrayList<String>();
 
         clonador_ArrayList(V_A, tipus.getAtributes());
         clonador_ArrayList(V_B, b.getTipus().getAtributes());
-        clonador_ArrayList(Valors_A, valors);
-        clonador_ArrayList(Valors_B, b.getValors());
 
-        int n_dimensions = V_A.size();
         if (V_A.size() > 0 && V_B.size() > 0 && tipus == b.getTipus() && !tipus.equals("[]")) {
 
+            clonador_ArrayList(Valors_A, valors);
+            clonador_ArrayList(Valors_B, b.getValors());
+
+            int n_dimensions = V_A.size();
+            if(ID == 1 && b.getID() == 21)
+                n_dimensions = V_A.size();
             Double Distancia = comparador_tipus_iguals(V_A, V_B, Valors_A, Valors_B, n_dimensions);
+            if (Distancia > 1E6)
+                n_dimensions = 1;
             return Distancia;
         }
         return 0.0;
@@ -114,23 +138,25 @@ public class Item {
 
     //Operacions Auxiliars
 
-    /** Compara todos los atrubutos de los ArrayList y evuelve un Double que serà mayor cuanto más se parezcan. Se
-     presupone que que todas las ArrayList son del mismo tamaño = n_d, ya que tan sólo funciona si los dos items
-     tienen los mismos atributos.
-     * @param V_A ArrayList de Atribute del Item a.
-     * @param V_B ArrayList de Atribute del Item b, tiene que ser del mismo tamaño de V_A.
+    /**
+     * Compara todos los atrubutos de los ArrayList y evuelve un Double que serà mayor cuanto más se parezcan. Se
+     * presupone que que todas las ArrayList son del mismo tamaño = n_d, ya que tan sólo funciona si los dos items
+     * tienen los mismos atributos.
+     *
+     * @param V_A      ArrayList de Atribute del Item a.
+     * @param V_B      ArrayList de Atribute del Item b, tiene que ser del mismo tamaño de V_A.
      * @param Valors_A ArrayList de String, con los valores que representan los Atributes del item a.
      * @param Valors_B ArrayList de String, con los valores que representan los Atributes del item b.
-     * @param n_d numero de dimensiones de las dos tipus, (numero de atributos, tienen que ser igual).
+     * @param n_d      numero de dimensiones de las dos tipus, (numero de atributos, tienen que ser igual).
      */
 
     /* Es presoposa que que totels les ArrayList son de la mateixa mida = n_d, ja que tan sols funciona si els dos items tenen els mateixos atributs */
-    private Double comparador_tipus_iguals (ArrayList<Atribute>  V_A, ArrayList<Atribute>  V_B, ArrayList <String> Valors_A, ArrayList <String> Valors_B, int n_d) {
+    private Double comparador_tipus_iguals(ArrayList<Atribute> V_A, ArrayList<Atribute> V_B, ArrayList<String> Valors_A, ArrayList<String> Valors_B, int n_d) {
 
         Double distance = 0.0;
-        for (int i = 0; i < n_d; ++i){
+        for (int i = 0; i < n_d; ++i) {
 
-            if(!(Valors_A.get(i).equals("")) && !(Valors_B.get(i).equals("")) && V_A.get(i).isRellevant() && V_B.get(i).isRellevant()) {
+            if (!(Valors_A.get(i).equals("")) && !(Valors_B.get(i).equals("")) && V_A.get(i).isRellevant() && V_B.get(i).isRellevant()) {
 
                 if (V_A.get(i) == V_B.get(i)) {
 
@@ -140,8 +166,7 @@ public class Item {
                             distance += 1.0;
                         else
                             distance += 0.0;
-                    }
-                    else if (V_A.get(i).getType().equals("Vector de String")) {
+                    } else if (V_A.get(i).getType().equals("Vector de String")) {
 
                         Vector<String> S_A = Construc_Vector(Valors_A.get(i), ';');
                         Vector<String> S_B = Construc_Vector(Valors_B.get(i), ';');
@@ -213,7 +238,9 @@ public class Item {
         return Math.sqrt(distance);
     }
 
-    /** Funcion auxiliar que devuelve el string con la fecha YYYY-MM-DD, en un vector de string (3), donde [0] == YYYY, [1] = MM, [2] = DD.
+    /**
+     * Funcion auxiliar que devuelve el string con la fecha YYYY-MM-DD, en un vector de string (3), donde [0] == YYYY, [1] = MM, [2] = DD.
+     *
      * @param s String con la fecha YYYY-MM-DD.
      * @param c Char que se usa para separar en los String, en el caso de fecha `-`.
      */
@@ -222,11 +249,11 @@ public class Item {
     private Vector<String> Construc_Vector(String s, char c) {
 
         Vector<String> v = new Vector<String>(0);
-        for (int i = 0;i < s.length(); i++ ){
+        for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == c) {
 
                 v.add(s.substring(0, i));
-                s = s.substring(i+1, s.length());
+                s = s.substring(i + 1, s.length());
                 i = 0;
             }
         }
@@ -235,17 +262,16 @@ public class Item {
         return v;
     }
 
-    /** Copia todos los valores de la segunda ArrayList y los añade en la primera. Las ArrayList tienen que ser de los mismos tipos.
+    /**
+     * Copia todos los valores de la segunda ArrayList y los añade en la primera. Las ArrayList tienen que ser de los mismos tipos.
+     *
      * @param A ArrayList donde se copiara B, para que queden iguales debe ser vacía.
      * @param B ArrayList de origen que ser clonada en A.
      */
 
-    private void clonador_ArrayList (ArrayList  A, ArrayList  B) {
+    private void clonador_ArrayList(ArrayList A, ArrayList B) {
 
-            for(int i = 0; i< B.size(); ++i)
-                A.add(i, B.get(i));
+        for (int i = 0; i < B.size(); ++i)
+            A.add(i, B.get(i));
     }
-
-
-
 }
