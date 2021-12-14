@@ -71,7 +71,7 @@ public class K_Neareast_Neightbour {
 
     /** Dadas las matrizes de los parametros, devuelve una ArrayList con los items recomendados de medida k, siguiendo
      la siguiente fórmula: Siendo las matrices en orden de los parámetros X,Y y el vector V -> por unos Item i, j cualquiera.
-     Valors_i = Sumatorio(Xij * (1 + Vi/Max(v))
+     Valors_i = Sumatorio(Xij * (1 + Vi/Max(V))
      * @param Val ArrayList con las valoraciones de todos los Item de itemsUsats.
      * @param I_Finals  ArrayList de los Items que se devolverán.
      * @param Distances Matriz de ArrayList con las distancias de todos los item. La posicion de los items coincidira

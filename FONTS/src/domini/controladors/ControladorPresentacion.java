@@ -4,7 +4,6 @@ import FONTS.src.domini.model.myPair;
 import FONTS.src.domini.model.valoratedItem;
 import FONTS.src.presentacion.*;
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthLookAndFeel;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -41,8 +40,8 @@ public class ControladorPresentacion {
         showRatedItems.showWindow(x,y);
     }
 
-    public static void changeShowAtributesView(int x, int y)  {
-        showAtributes showAtributes = new showAtributes();
+    public static void changeShowAtributesView(int x, int y, int id)  {
+        showAtributes showAtributes = new showAtributes(id);
         showAtributes.showWindow(x,y);
     }
 

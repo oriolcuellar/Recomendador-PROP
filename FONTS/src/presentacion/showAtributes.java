@@ -18,7 +18,7 @@ public class showAtributes {
     private JList list1;
     private JScrollPane scrollPane;
 
-    public showAtributes() {
+    public showAtributes(int id) {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
