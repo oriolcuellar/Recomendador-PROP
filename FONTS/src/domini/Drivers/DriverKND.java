@@ -9,7 +9,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-/** \brief Driver de la clase DriverKND.
+/** \brief Driver de la clase K_Nearest_Neigthbour.
  *  @author Jordi Olmo
  */
 public class DriverKND {
