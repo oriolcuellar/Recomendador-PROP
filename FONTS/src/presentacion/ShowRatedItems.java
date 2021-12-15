@@ -69,7 +69,7 @@ public class ShowRatedItems {
                     String selectedItem = (String) list1.getSelectedValue();
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.changeShowAtributesView(x,y, Integer.getInteger(selectedItem));
+                    CtrlPres.changeShowAtributesView(x,y, selectedItem);
                     frame.dispose();
                 }
             }
