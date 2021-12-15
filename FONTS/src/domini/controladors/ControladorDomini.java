@@ -24,6 +24,7 @@ public class ControladorDomini {
     private static Map<Integer, ArrayList<User>> itemValoratedBy;
     private static ArrayList<myPair> lastRecomendation;
     private static boolean recomendationChanged;
+    private static String ratingPath;
 
     //CtrlDomini control= CtrlDomini.getInstance();
 //control.getAllUsers();
@@ -215,10 +216,10 @@ public class ControladorDomini {
             throw e;
         }
     }
-    public ArrayList<Integer> doKNN(int num_elem,String path) throws Exception{
+    public ArrayList<Integer> doKNN(int num_elem) throws Exception{
         try{
             if (recomendationChanged)
-                lastRecomendation = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
+                lastRecomendation = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
             recomendationChanged=false;
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < lastRecomendation.size(); ++i) {
@@ -230,11 +231,11 @@ public class ControladorDomini {
             throw e;
         }
     }
-    public ArrayList<Integer> doRecomendation(int k_slope, int max_slope, int num_elem,String path ) throws Exception{
+    public ArrayList<Integer> doRecomendation(int k_slope, int max_slope, int num_elem) throws Exception{
         try{
             if (recomendationChanged) {
                 ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
-                ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
+                ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
                 ArrayList<myPair> tot = new ArrayList<myPair>();
                 int itSlope = 0;
                 int itKnn = 0;
@@ -428,7 +429,7 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
             ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
-            ctrlRating.Escritor_Ratings(path,usersList );
+            ctrlRating.Escritor_Ratings(path,usersList);
         }
         catch (Exception e){
             throw e;
@@ -663,6 +664,7 @@ public class ControladorDomini {
             else if(!actualUser.getRol().equals(TipusRol.Administrador))
                 throw new NotAnAdministratorException((String.valueOf(actualUser.getUserID())));
             else{
+                ratingPath = path;
                 recomendationChanged=true;
                 ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 

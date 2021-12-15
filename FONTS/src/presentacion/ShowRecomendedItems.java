@@ -22,7 +22,7 @@ public class ShowRecomendedItems {
     private JList list1;
     private JScrollPane scrollPane;
 
-    public ShowRecomendedItems() {
+    public ShowRecomendedItems(String s) {
 
         scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
@@ -36,7 +36,11 @@ public class ShowRecomendedItems {
         scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
         scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
         DefaultListModel demoList = new DefaultListModel();
-        ArrayList<Integer> items = CtrlPres.getRecomendedItemsSlope();
+        ArrayList<Integer> items;
+        if(s == "CF") items = CtrlPres.getRecomendedItemsSlope();
+        else if(s == "CB") items = CtrlPres.getRecomendedItemsCB();
+        else items = CtrlPres.getRecomendedItemsHybrid();
+
         for(int i = 0; i < items.size(); ++i) {
             demoList.addElement(items.get(i));
         }
