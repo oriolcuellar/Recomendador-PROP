@@ -10,7 +10,8 @@ public class Ranged_Atribute  extends Atribute{
     //Atributes
 
     /** Double de los minimos y maximos del atributo, teniendo en cuenta los valores de todos los items que tienen
-     este Atribute en su Tipus.
+     este Atribute en su Tipus, por lo que representa el maximo y minimo de los valores que estan en el sistema, no
+     los maximos y minimos que pueden alcancar, se usan para normalizar valores en el calculo de distancias.
      */
     private Double lower, upper;
 

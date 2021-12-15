@@ -74,10 +74,10 @@ public class K_Neareast_Neightbour {
      Valors_i = Sumatorio(Xij * (1 + Vi/Max(V))
      * @param Val ArrayList con las valoraciones de todos los Item de itemsUsats.
      * @param I_Finals  ArrayList de los Items que se devolverán.
-     * @param Distances Matriz de ArrayList con las distancias de todos los item. La posicion de los items coincidira
-     con M_de_Items.
+     * @param Distances Matriz de ArrayList con las distancias de todos los item. Las posiciones de los items coincidira
+     con M_de_Items, tanto en filas como en columnas.
      * @param M_de_Items  Matriz con todos los Items ordenados con los que tengan mayor valor de distancia antes en las
-       columnas. Esta ordenación se debe respetar en las otras dos matrices de los parametros.
+       columnas y solo los items_usats een las filas. Esta ordenación se debe respetar en la otra  matriz de los parametros y en Val.
      * @param k Número de items que se devuelven.
      */
 

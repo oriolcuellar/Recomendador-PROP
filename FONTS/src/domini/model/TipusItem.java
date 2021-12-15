@@ -19,7 +19,7 @@ public class TipusItem {
 
     //contructores
 
-    /** Constructora de la clase. Copia la ArrayList de atributes y la ordena crecientemente por nombre de atributo,
+    /** Constructora de la clase. Copia la ArrayList de atributes,
      para el id coje todos los nonmbres de atributs y los combina en un String.
      * @param atributes ArrayList de los atributos que definen este tipo.
      */
@@ -93,16 +93,19 @@ public class TipusItem {
         }
         return Rellevants;
     }
+}
 
-    //operacions
+
+   /* //operacions
     public boolean afegir_atribut( Atribute a) {
         binary_insertion(atributes, a, 0 , atributes.size());
         return true;
-    }
+    }*/
 
 
     //operacions auxiliars
 
+    /*
     /** Funcion auxiliar que inserta un Atribute en la ArrayList de Atribute en la posicion idonea,
       para que siga estando ordenado per Name de Atribute. Usa una variacion del algoritmo merge-sort.
      * @see Atribute
@@ -113,7 +116,7 @@ public class TipusItem {
      */
 
     //vigilar porque el de conjunt de item me daba mal sin tocarlo
-    private void binary_insertion(ArrayList<Atribute> atributes, Atribute a, int l, int r){
+  /*  private void binary_insertion(ArrayList<Atribute> atributes, Atribute a, int l, int r){
 
         String nombre = a.getName();
         if (r >= l) {
@@ -134,4 +137,4 @@ public class TipusItem {
         }
     }
 
-}
+}*/

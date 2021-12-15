@@ -92,7 +92,7 @@ public class Conjunt_Items {
 
     public ArrayList<ArrayList<Double>> getDistances() { return Distances; }
 
-    /** Devuelve el vector con las distancias del item a
+    /** Devuelve el vector con las distancias del item indicado en el parametro.
      * * @see Item
      * * @param a Item del que se quieren saber sus distancias.
      */
@@ -103,7 +103,7 @@ public class Conjunt_Items {
         return Distances.get(pos);
     }
 
-    /** Devuelve la distancia entre dos items. Al finalizar si esta no estaba en la matriz se añade.
+    /** Devuelve la distancia entre dos items. Al finalizar si esta no estaba en la matriz se añade si es que estaban ya inizialidas en la matriz las posiciones correspondientes.
      * @param a  Primer Item.
      * @param b  Segundo Item.
      */
@@ -178,7 +178,7 @@ public class Conjunt_Items {
             }
     }*/
 
-    /** Añade el item del parametro al Conjunt. También añade las filas y columnas correspondientes a la matriz de distancias.
+    /** Añade el item del parametro al Conjunt. También añade las distancias correspondientes a la matriz de distancias Distance.
      * @see Item
      * @param a Item a añadir en el conjunt.
      */
@@ -194,7 +194,7 @@ public class Conjunt_Items {
         else return false;//falta exception creo
     }
 
-    /** Elimina el item del parametro al Conjunt.
+    /** Elimina el item del parametro del Conjunt, incluidas sus distancias.
      * @see Item
      * @param a Item a eliminar en el conjunt.
      */
@@ -212,7 +212,7 @@ public class Conjunt_Items {
 
     //Operacions Auxiliars
 
-    /** Inicializa la matriz Distances con sus respectivas distancias en todos los items.
+    /** Inicializa la matriz Distance con sus respectivas distancias con todos los items.
      */
 
     private void initzialitzar_matriu() {
@@ -238,8 +238,9 @@ public class Conjunt_Items {
 
 
 
-    /** Añades el Item a Distance con -1.0, si este no pertenecía a Conjunt_Items.
+    /** Añades el Item a la matriz de distancias Distance con sus respectivas distancias a los otros items.
      * @param i posision donde se insertó el Item
+     *  @param a Item que se insertó.
      */
 
     private void anyadir_elements(int i, Item a) {
