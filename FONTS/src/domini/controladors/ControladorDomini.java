@@ -162,19 +162,6 @@ public class ControladorDomini {
 
     }
 
-    public ArrayList<Integer> getPredictionsSlope(int x, int y) throws Exception {
-        ArrayList<myPair> s;
-        try {
-           s = showRecommendedItemsSlope(x,y);
-       } catch (Exception e)  {
-           throw e;
-       }
-       ArrayList<Integer> r = new ArrayList<>();
-       for(int i = 0; i < s.size(); ++i) {
-           r.add(s.get(i).getItemID());
-       }
-       return r;
-    }
 
     public ArrayList<myPair> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
@@ -213,29 +200,37 @@ public class ControladorDomini {
         }
         return pair;
     }
-    public ArrayList<myPair> doSlope(int k_slope, int max_slope) throws Exception{
+    public ArrayList<Integer> doSlope(int k_slope, int max_slope) throws Exception{
         try{
             if (recomendationChanged)
                 lastRecomendation = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
             recomendationChanged=false;
-            return lastRecomendation;
+            ArrayList<Integer> r = new ArrayList<>();
+            for(int i = 0; i < lastRecomendation.size(); ++i) {
+                r.add(lastRecomendation.get(i).getItemID());
+            }
+            return r;
         }
         catch (Exception e){
             throw e;
         }
     }
-    public ArrayList<myPair> doKNN(int num_elem,String path) throws Exception{
+    public ArrayList<Integer> doKNN(int num_elem,String path) throws Exception{
         try{
             if (recomendationChanged)
                 lastRecomendation = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
             recomendationChanged=false;
-            return lastRecomendation;
+            ArrayList<Integer> r = new ArrayList<>();
+            for(int i = 0; i < lastRecomendation.size(); ++i) {
+                r.add(lastRecomendation.get(i).getItemID());
+            }
+            return r;
         }
         catch (Exception e){
             throw e;
         }
     }
-    public ArrayList<myPair> doRecomendation(int k_slope, int max_slope, int num_elem,String path ) throws Exception{
+    public ArrayList<Integer> doRecomendation(int k_slope, int max_slope, int num_elem,String path ) throws Exception{
         try{
             if (recomendationChanged) {
                 ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
@@ -257,7 +252,11 @@ public class ControladorDomini {
                 lastRecomendation = tot;
                 recomendationChanged=false;
             }
-            return lastRecomendation;
+            ArrayList<Integer> r = new ArrayList<>();
+            for(int i = 0; i < lastRecomendation.size(); ++i) {
+                r.add(lastRecomendation.get(i).getItemID());
+            }
+            return r;
         }
         catch (Exception e){
             throw e;

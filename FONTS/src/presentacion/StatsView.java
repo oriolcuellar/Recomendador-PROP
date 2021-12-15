@@ -11,11 +11,21 @@ public class StatsView {
     private static JFrame frame;
     private JPanel panel;
     private JButton favouriteItem;
-    private JPanel AvgRating;
-    private JPanel numRated;
+    private JLabel avgRating;
+    private JLabel numRated;
+    private JButton backButton;
 
     public StatsView(){
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
 
+                int x = frame.getX();
+                int y = frame.getY();
+                CtrlPres.inicializePresentation(x,y);
+                frame.dispose();
+            }
+        });
     }
 
     public void showWindow(int x, int y) {

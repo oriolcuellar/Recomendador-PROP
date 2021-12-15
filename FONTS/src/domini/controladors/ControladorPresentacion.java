@@ -86,7 +86,6 @@ public class ControladorPresentacion {
             s = CtrlDom.getRatedItems();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"No items Rated");
-            System.out.println(s.get(0));
         }
         return s;
     }
@@ -94,7 +93,29 @@ public class ControladorPresentacion {
     public static ArrayList<Integer> getRecomendedItemsSlope(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.getPredictionsSlope(6,10);
+            s = CtrlDom.doSlope(6,10);
+        } catch (Exception e) {
+            principalView.enableButtons();
+            JOptionPane.showMessageDialog(null,"No items Recomended");
+        }
+        return s;
+    }
+
+    public static ArrayList<Integer> getRecomendedItemsCB(){
+        ArrayList<Integer> s = new ArrayList<>();
+        try {
+            s = CtrlDom.doSlope(6,10);
+        } catch (Exception e) {
+            principalView.enableButtons();
+            JOptionPane.showMessageDialog(null,"No items Recomended");
+        }
+        return s;
+    }
+
+    public static ArrayList<Integer> getRecomendedItemsHybrid(){
+        ArrayList<Integer> s = new ArrayList<>();
+        try {
+            s = CtrlDom.doSlope(6,10);
         } catch (Exception e) {
             principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended");
