@@ -62,9 +62,11 @@ public class ControladorDomini {
     private static ArrayList<myPair> lastRecomendation;
     /**
      * Booleano que indica si se tiene que volver a calcular una recomendación.
-     * @see myPair
      */
     private static boolean recomendationChanged;
+    /**
+     * String que indica el path al fichero de ratings para su posterior utilización eln algoritmos
+     */
     private static String ratingPath;
 
     //CtrlDomini control= CtrlDomini.getInstance();
