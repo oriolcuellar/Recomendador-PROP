@@ -38,7 +38,7 @@ public class ControladorPresentacion {
         showRatedItems.showWindow(x,y);
     }
 
-    public static void changeShowAtributesView(int x, int y, int id)  {
+    public static void changeShowAtributesView(int x, int y, String id)  {
         showAtributes showAtributes = new showAtributes(id);
         showAtributes.showWindow(x,y);
     }
@@ -104,7 +104,7 @@ public class ControladorPresentacion {
     public static ArrayList<Integer> getRecomendedItemsCB(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.doKNN(10);
+            s = CtrlDom.doKNN(1000000);
         } catch (Exception e) {
             principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended");
@@ -115,7 +115,7 @@ public class ControladorPresentacion {
     public static ArrayList<Integer> getRecomendedItemsHybrid(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.doRecomendation(4,10, 10);
+            s = CtrlDom.doRecomendation(4,10, 50);
         } catch (Exception e) {
             principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended");

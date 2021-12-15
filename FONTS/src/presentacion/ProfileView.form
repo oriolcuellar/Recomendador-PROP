@@ -30,7 +30,7 @@
               <font name="Noto Sans Mono CJK JP" size="18" style="1"/>
               <foreground color="-16777216"/>
               <hideActionText value="false"/>
-              <text value="🏠"/>
+              <text value="←"/>
             </properties>
           </component>
           <component id="e1fab" class="javax.swing.JButton" binding="statsButton">
