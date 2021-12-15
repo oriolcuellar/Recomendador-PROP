@@ -205,10 +205,10 @@ public class ControladorDomini {
 
     }
     /**
-     * El Usuario actual quiere una recomendacion para el utilizando el algoritmo Slope
-     * @param k  k es el numero de elementos que se quiere
+     * El Usuario actual quiere una recomendación para el utilizando el algoritmo Slope
+     * @param k  k es el numero de clusters que se quiere
      * @param maxValue maxValue es el numero maximo de las valoraciones
-     * @return ArrayList<myPair>con las recomendacion generada
+     * @return ArrayList<myPair>con las recomendación generada
      * @see myPair
      */
     public ArrayList<myPair> showRecommendedItemsSlope(int k, int maxValue) throws Exception{// to do------------------
@@ -238,9 +238,10 @@ public class ControladorDomini {
 
     }
      /**
-     * El Usuario actual quiere una recomendacion para el utilizando el algoritmo KNN
+     * El Usuario actual quiere una recomendación para el utilizando el algoritmo KNN
      * @param num_elem num_elem es el numero de elementos que se quiere
-     * @return ArrayList<myPair> con las recomendacion generada
+      * @param path path el el documento donde queremos leer los ratings
+     * @return ArrayList<myPair> con las recomendación generada
      * @see myPair
      */
     public ArrayList<myPair> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
@@ -281,9 +282,10 @@ public class ControladorDomini {
         return pair;
     }
     /**
-     * El Usuario actual quiere una recomendacion para el
-     * @param num_elem num_elem es el numero de elementos que se quiere
-     * @return ArrayList<myPair> con las recomendacion generada
+     * El Usuario actual quiere una recomendación para el utilizando el algoritmo Slope
+     * @param k_slope num_elem es el número de clusters que se quiere
+     * @param max_slope max_slope es el valor maximo de una valoración
+     * @return ArrayList<myPair> con las recomendación generada
      * @see myPair
      */
     public ArrayList<myPair> doSlope(int k_slope, int max_slope) throws Exception{
@@ -301,6 +303,12 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * El Usuario actual quiere una recomendación para el utilizando el algoritmo KNN
+     * @param num_elem num_elem es el numero de elementos que se quiere
+     * @return ArrayList<myPair> con las recomendación generada
+     * @see myPair
+     */
     public ArrayList<Integer> doKNN(int num_elem) throws Exception{
         try{
             if (recomendationChanged)
@@ -316,11 +324,19 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * El Usuario actual quiere una recomendación para el utilizando los dos algoritmos
+     * @param num_elem num_elem es el numero de elementos que se quiere para el knn
+     * @param k_slope k_slope es el numero de clusters que se quiere para el Slope
+     * @param max_slope max_slope es el valor maximo de una recomendación
+     * @return ArrayList<myPair> con las recomendación generada
+     * @see myPair
+     */
     public ArrayList<Integer> doRecomendation(int k_slope, int max_slope, int num_elem) throws Exception{
         try{
             if (recomendationChanged) {
                 ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
-                ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
+                ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
                 ArrayList<myPair> tot = new ArrayList<myPair>();
                 int itSlope = 0;
                 int itKnn = 0;
@@ -348,6 +364,11 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * El Usuario actual quiere comparar la recomendación que ha obtenido con una ideal utilizando un algoritmo DCG
+     * @param path num_elem path el path al fichero que contiene la recomendación ideal
+     * @return float con la calidad de la recomendación
+     */
     public float evaluateRecomendation(String path) throws Exception{ //co
         if (actualUser==null) throw new NoUserLogedInException("evaluateRecomendation");
         else if (lastRecomendation.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
@@ -407,7 +428,10 @@ public class ControladorDomini {
             throw e;
         }
     }
-
+    /**
+     * El Usuario actual quiere seleccionar un item para interactuar con el.
+     * @param id id del item
+     */
     public void selectItem(String id)throws Exception{
         for (Item m: itemList.getItems()){
             if (String.valueOf(m.getID()).equals(id)){
@@ -416,10 +440,20 @@ public class ControladorDomini {
         }
         throw new ItemNotExistsException("selectItem");
     }
+    /**
+     * El Usuario actual quiere ver los valores del item seleccionado
+     * @return ArrayList<String> con los valores
+     * @see Item
+     */
     public ArrayList<String> showItemInfoValues()throws Exception{
         if (selectedItem==null) throw new NoItemSelectedException("showItemInfoValues");
         return selectedItem.getValors();
     }
+    /**
+     * El Usuario actual quiere ver los Atributos del item seleccionado
+     * @return ArrayList<String> con los valores
+     * @see Item
+     */
     public ArrayList<String> showItemInfoAtributes()throws Exception{
         if (selectedItem==null) throw new NoItemSelectedException("showItemInfoAtributes");
         ArrayList <String> lista=new ArrayList<String>();
@@ -429,6 +463,12 @@ public class ControladorDomini {
         return lista;
     }
 
+    /**
+     * El Usuario actual quiere valorar un item
+     * @param idItem idItem es el id del item
+     * @param val val es la valoración del item
+     * @see Item
+     */
     public void rateItem(String idItem, float val) throws Exception{
         if(actualUser==null) throw new NoUserLogedInException("rateItem");
         boolean hay=false;
@@ -452,7 +492,11 @@ public class ControladorDomini {
             recomendationChanged=true;
         }
     }
-
+    /**
+     * Se quieren ver todos los items del sistema
+     * @return Vector<String> son los id de todos los items
+     * @see Item
+     */
     public Vector<String> showAllItems()throws Exception{
         if (itemList.n_Items()==0) throw new NoItemsException("showAllItems");
         Vector <String> totsItems = new Vector<String>();
@@ -462,6 +506,11 @@ public class ControladorDomini {
         }
         return totsItems;
     }
+    /**
+     * Se quieren ver todos los items valorados
+     * @return Vector<Integer> son los id de todos los items
+     * @see Item
+     */
     public ArrayList<Integer> getRatedItems() throws Exception {
         if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
         else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
@@ -475,31 +524,10 @@ public class ControladorDomini {
         }
         return valorations;
     }
-    public Vector <Vector<String>> showRatedItems() throws Exception{//vector de vectores de strings de 3 posiciones user id, item id, valoracion
-        Vector <Vector<String>> a = new Vector <Vector<String>> ();
-        Vector<String> v = new Vector<String>();
-        String s =" ";
-        v.add(s);
-        a.add(v);
-        if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
-        else if(actualUser==admin) return a;
-        else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
-        Vector <Vector<String>> valorations = new Vector<Vector<String>>();
-        try {
-            for (valoratedItem i : usersList.get(actualUser).getValoratedItems()) {
-                System.out.println("\n" + actualUser.getUserID() + " " + i.getItem().getID() + " " + i.getValoracio() + "\n");
-                Vector<String> aux = new Vector<String>();
-                aux.add(String.valueOf(actualUser.getUserID()));
-                aux.add(String.valueOf(i.getItem().getID()));
-                aux.add(String.valueOf(i.getValoracio()));
-                valorations.add(aux);
-            }
-        }
-        catch (Exception e){
-            throw e;
-        }
-        return valorations;
-    }
+    /**
+     * Se quieren guardar los cambios de los items en el sistema
+     * @param path path es el documento donde se quiere guardar
+     */
     public void saveItems(String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
@@ -510,6 +538,10 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * Se quieren guardar los cambios de los ratings en el sistema
+     * @param path path es el documento donde se quiere guardar
+     */
     public void saveRatings(String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
@@ -520,6 +552,10 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * Se quieren guardar los cambios de las recomendaciones en el sistema
+     * @param path path es el documento donde se quiere guardar
+     */
     public void saveRecomendation(String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
@@ -530,7 +566,11 @@ public class ControladorDomini {
             throw e;
         }
     }
-
+    /**
+     * El administrador quiere crear un item nuevo
+     * @param atributs atributs es el string de atributos
+     * @param valors valors es el string de valores
+     */
     public void createItem(String atributs, String valors) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("createItem");
         try {
@@ -541,6 +581,9 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * Función privada del algoritmo knn
+     */
     private void createItemKNN(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("createItemKNN");
         try {
@@ -550,6 +593,11 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * El administrador quiere crear un item nuevo guardandolo en una lista en concreto
+     * @param atributs atributs es el string de atributos
+     * @param valors valors es el string de valores
+     */
     private void createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
         //dado una lista de items lo mete ahi si no existe
 
@@ -701,6 +749,10 @@ public class ControladorDomini {
 
 
     }
+    /**
+     * El administrador quiere borrar un item
+     * @param deleteme deleteme es el id del item que se quiere eliminar
+     */
     public void deleteItem(String deleteme) throws Exception{
         if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
         else if (!itemList.existeix_item(Integer.valueOf(deleteme))) throw new ItemNotExistsException(deleteme);
@@ -720,6 +772,10 @@ public class ControladorDomini {
         recomendationChanged=true;
         if (selectedItem==it) selectedItem=null;
     }
+    /**
+     * El administrador quiere cargar items
+     * @param path path es la direccion al fichero que se quiere cargar
+     */
     public void loadItems(String path) throws Exception{//"Entradas_CSV/items.csv"
         //pre: actualUser es admin
         try {
@@ -741,7 +797,10 @@ public class ControladorDomini {
             throw e;
         }
     }
-    //"Entradas_CSV/ratings.db.csv" = path
+    /**
+     * El administrador quiere cargar valoraciones
+     * @param path path es la direccion al fichero que se quiere cargar
+     */
     public void loadRates(String path) throws Exception{//falta añadir item usado a la lista de items usados
         //pre: actualUser es admin
         try {
@@ -786,6 +845,10 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * El administrador quiere cargar una recomendación
+     * @param path path es la direccion al fichero que se quiere cargar
+     */
     public void loadRecomendation(String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("loadRecomendation");
         try {
@@ -823,25 +886,31 @@ public class ControladorDomini {
 
     }
 
-    //Necesario?--------------------------------------------------
-    /*
+    /**
+     * El administrador quiere eliminar un usuario
+     * @param delete_me delete_me es el usuario  que se quiere eliminar
+     */
     public void deleteUser(String delete_me){
         //pre: actualUser admin
         if(actualUser!=null && actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1")){//no esborres l'admin
 
 
 
-
+/*
             for (ItemUsat i: ratesList){
                 if ( delete_me.equals(StringValueOf(i.getUsuari().getUserID())) ratesList.delete(i);
             }
             usersList.delete(delete_me);
+            */
+
 
         }
     }
-    -----------------------------------------------------------------------
-*/
 
+    /**
+     * El administrador quiere crear un usuario
+     * @param create_me create_me es el usuario y contraseña que se le asignan
+     */
     public void createUser( String create_me) throws Exception{
         if(actualUser.getRol().equals(TipusRol.Administrador) ){
             if (!usersList.containsKey(create_me)){
@@ -853,6 +922,10 @@ public class ControladorDomini {
         }
         else throw new NotAnAdministratorException("createUser");
     }
+    /**
+     * Se quiere ver todos los usuarios guardados en el sistema
+     * @return Vector <String> con el id de todos los usuarios
+     */
     public Vector <String> showAllUsers( )throws Exception{
         if (usersList.size()==0) throw new NoUsersException("showAllUsers");
         Vector <String> vs = new Vector<String>();
@@ -862,15 +935,24 @@ public class ControladorDomini {
         }
         return vs;
     }
-
+    /**
+     * Se devuelve el usuario actual
+     * @return User
+     */
     public User getActualUser() {
         return actualUser;
     }
-
+    /**
+     * Se devuelve el tipo del usuario actual
+     * @return User
+     */
     public String getTypeActualUser() {
         if(actualUser.getRol() == TipusRol.Administrador) return "admin";
         else return "user";
     }
-
+    /**
+     * Se devuelve el un map con todos los usuarios del sistema
+     * @return Map<Integer,User> donde el integer es el usuario
+     */
     public Map<Integer,User> getUsersList() { return usersList; }
 }
