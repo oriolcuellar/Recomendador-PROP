@@ -18,13 +18,6 @@ public class K_Neareast_Neightbour {
     public K_Neareast_Neightbour() {
     }
 
-    //Getters
-
-    /** Devuelve la distancia entre dos items.
-     * @param a  Primer Item.
-     * @param b  Segundo Item.
-     */
-
     //Algorisme
 
     /** Algoritmo de recomendación, devuelve una ArraList con los k items mas parecidos a itemsUsats, (itemsUsats quedan
