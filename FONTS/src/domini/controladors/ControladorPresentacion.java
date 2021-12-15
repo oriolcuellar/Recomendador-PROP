@@ -1,7 +1,5 @@
 package FONTS.src.domini.controladors;
 
-import FONTS.src.domini.model.myPair;
-import FONTS.src.domini.model.valoratedItem;
 import FONTS.src.presentacion.*;
 import javax.swing.*;
 import java.util.ArrayList;
@@ -30,7 +28,7 @@ public class ControladorPresentacion {
         showAllItems.showWindow(x,y);
     }
 
-    public static void changeShowRecomendedItemsView(int x, int y) {
+    public static void changeShowRecomendedItemsView(int x, int y,String s) {
         ShowRecomendedItems showRecomendedItems = new ShowRecomendedItems();
         showRecomendedItems.showWindow(x,y);
     }
@@ -82,10 +80,10 @@ public class ControladorPresentacion {
         return s;
     }
 
-    public static ArrayList<valoratedItem> getRatedItems(){
-        ArrayList<valoratedItem> s = new ArrayList<valoratedItem>();
+    public static ArrayList<Integer> getRatedItems(){
+        ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.getActualUser().getValoratedItems();
+            s = CtrlDom.getRatedItems();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"No items Rated");
             System.out.println(s.get(0));
@@ -93,10 +91,10 @@ public class ControladorPresentacion {
         return s;
     }
 
-    public static ArrayList<myPair> getRecomendedItemsSlope(){
-        ArrayList<myPair> s = new ArrayList<>();
+    public static ArrayList<Integer> getRecomendedItemsSlope(){
+        ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.doSlope(6,10);
+            s = CtrlDom.getPredictionsSlope(6,10);
         } catch (Exception e) {
             principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended");

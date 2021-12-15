@@ -4,7 +4,6 @@ import FONTS.src.domini.controladors.ControladorDomini;
 import FONTS.src.domini.controladors.ControladorPresentacion;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -16,8 +15,10 @@ public class MainMenu {
     private JButton settingsButton;
     private JButton showRatedItemsButton;
     private JButton showAllItemsButton;
-    private JButton showRecomendedItemsButton;
+    private JButton showRecomendedItemsByCFButton;
     private JLabel Label;
+    private JButton ShowRecomendedItemsByHybridButton;
+    private JButton showRecomendedItemsByCBButton;
 
     public MainMenu() {
 
@@ -56,14 +57,47 @@ public class MainMenu {
                 }
             }
         });
-        showRecomendedItemsButton.addActionListener(new ActionListener() {
+        showRecomendedItemsByCFButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.changeShowRecomendedItemsView(x,y);
+                    CtrlPres.changeShowRecomendedItemsView(x,y,"CF");
+                    frame.dispose();
+                    showRatedItemsButton.setEnabled(true);
+                } catch (Exception e) {
+                    enableButtons();
+                    e.printStackTrace();
+                }
+            }
+        });
+        showRecomendedItemsByCBButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    int x = frame.getX();
+                    int y = frame.getY();
+                    CtrlPres.changeShowRecomendedItemsView(x,y,"CB");
+                    frame.dispose();
+                    showRatedItemsButton.setEnabled(true);
+                } catch (Exception e) {
+                    enableButtons();
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        ShowRecomendedItemsByHybridButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    int x = frame.getX();
+                    int y = frame.getY();
+                    CtrlPres.changeShowRecomendedItemsView(x,y,"Hybrid");
                     frame.dispose();
                     showRatedItemsButton.setEnabled(true);
                 } catch (Exception e) {
@@ -101,7 +135,7 @@ public class MainMenu {
     }
 
     public void disableButtons() {
-        showRecomendedItemsButton.setEnabled(false);
+        showRecomendedItemsByCFButton.setEnabled(false);
         settingsButton.setEnabled(false);
         showAllItemsButton.setEnabled(false);
         showRatedItemsButton.setEnabled(false);
@@ -111,6 +145,6 @@ public class MainMenu {
         settingsButton.setEnabled(true);
         showRatedItemsButton.setEnabled(true);
         showAllItemsButton.setEnabled(true);
-        showRecomendedItemsButton.setEnabled(true);
+        showRecomendedItemsByCFButton.setEnabled(true);
     }
 }

@@ -10,13 +10,11 @@ public class StatsView {
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
     private static JFrame frame;
     private JPanel panel;
-    private JButton logoutButton;
-    private JLabel id;
-    private JLabel username;
-    private JButton a123Button;
+    private JButton favouriteItem;
+    private JPanel AvgRating;
+    private JPanel numRated;
 
     public StatsView(){
-        id.setText("ASDFA");
 
     }
 

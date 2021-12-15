@@ -1,8 +1,6 @@
 package FONTS.src.presentacion;
 
 import FONTS.src.domini.controladors.ControladorPresentacion;
-import FONTS.src.domini.model.myPair;
-import FONTS.src.domini.model.valoratedItem;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -36,9 +34,9 @@ public class ShowRatedItems {
         scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
 
         DefaultListModel demoList = new DefaultListModel();
-        ArrayList<valoratedItem> items = CtrlPres.getRatedItems();
+        ArrayList<Integer> items = CtrlPres.getRatedItems();
         for(int i = 0; i < items.size(); ++i) {
-            demoList.addElement(items.get(i).getItem().getID());
+            demoList.addElement(items.get(i));
         }
         list1.setModel(demoList);
 

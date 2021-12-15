@@ -23,6 +23,6 @@ public class KExperimentation {
     }
 
     public static void main(String[] args) throws Exception {
-        calculateOptimK();
+
     }
 }

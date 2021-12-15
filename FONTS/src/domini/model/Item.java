@@ -1,5 +1,4 @@
 package FONTS.src.domini.model;
-import FONTS.src.domini.model.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -67,6 +66,7 @@ public class Item {
 
     /**
      * Devuelve el ID, del item.
+     * @return
      */
 
     public int getID() {

@@ -111,7 +111,7 @@ public class DriverKmeans {
                 "por comas: [userId, itemId, rating].");
         System.out.println("\nOpciones del driver:\n");
         System.out.println("    1. Seleccionar fichero por defecto\n    2. Seleccionar otro fichero\n    3. Ejecutar" +
-                " algoritmo\n    4. FINALIZAR PRUEBA\n ");
+                " algoritmo\n    4. Encontrar K óptima\n    5. FINALIZAR PRUEBA\n ");
     }
 
     static void testFunction(int f){
@@ -162,8 +162,15 @@ public class DriverKmeans {
                 kmeans.printAllClusters();
                 break;
             }
-
-            case 4: break;
+            case 4: {
+                Kmeans k = new Kmeans();
+                for(int i = 1; i <= 10; ++i) {
+                    k.run(readData(path),i);
+                    System.out.println(i + " " + k.obtainWCSS());
+                }
+                break;
+            }
+            case 5: break;
 
             default : System.out.print("Porfavor introduce un valor correcto\n ");
         }
@@ -186,6 +193,6 @@ public class DriverKmeans {
             f = s.nextInt();
             testFunction(f);
 
-        }while(f != 4);
+        }while(f != 5);
     }
 }

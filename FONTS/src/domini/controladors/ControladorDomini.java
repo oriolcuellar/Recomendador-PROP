@@ -5,7 +5,6 @@ import FONTS.src.domini.model.*;
 import FONTS.src.persistencia.ControladorPersistenciaItem;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
-import com.sun.jdi.event.BreakpointEvent;
 
 import javax.swing.*;
 import java.util.*;
@@ -162,6 +161,21 @@ public class ControladorDomini {
         }
 
     }
+
+    public ArrayList<Integer> getPredictionsSlope(int x, int y) throws Exception {
+        ArrayList<myPair> s;
+        try {
+           s = showRecommendedItemsSlope(x,y);
+       } catch (Exception e)  {
+           throw e;
+       }
+       ArrayList<Integer> r = new ArrayList<>();
+       for(int i = 0; i < s.size(); ++i) {
+           r.add(s.get(i).getItemID());
+       }
+       return r;
+    }
+
     public ArrayList<myPair> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
         else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
@@ -363,12 +377,14 @@ public class ControladorDomini {
         }
         return totsItems;
     }
-    public ArrayList<valoratedItem> getRatedItems() throws Exception {
+    public ArrayList<Integer> getRatedItems() throws Exception {
         if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
         else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
-        ArrayList<valoratedItem> valorations;
+        ArrayList<Integer> valorations = new ArrayList<>();
         try {
-            valorations = actualUser.getValoratedItems();
+            for(int i = 0; i < actualUser.getValoratedItems().size(); ++i) {
+                valorations.add(actualUser.getValoratedItems().get(i).getItem().getID());
+            }
         } catch (Exception e) {
             throw e;
         }
