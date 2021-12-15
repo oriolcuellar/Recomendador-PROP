@@ -5,30 +5,74 @@ import FONTS.src.domini.model.*;
 import FONTS.src.persistencia.ControladorPersistenciaItem;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
+import com.sun.jdi.event.BreakpointEvent;
 
 import javax.swing.*;
 import java.util.*;
 
+/** \brief Clase que implementa el controlador de dominio.
+ *  @author  Oriol Cuellar
+ */
 public class ControladorDomini {
 
 // Atributes
-
+    /**
+     * Instancia singelton del controlador
+     */
     private static ControladorDomini dominiSingelton = null;
-
+    /**
+     * Usuario logeado en el sistema
+     * @see User
+     */
     private static User actualUser;
+    /**
+     * Usuario administrador del sistema
+     * @see User
+     */
     private static User admin;
+    /**
+     * Item seleccionado del sistema
+     * @see Item
+     */
     private static Item selectedItem;
+    /**
+     * Map con todos los usuarios cargados en el sistema
+     * @see User
+     */
     private static Map <Integer, User> usersList;
+    /**
+     * Conjunt_Items con todos los items cargados en el sistema
+     * @see Conjunt_Items
+     */
     private static Conjunt_Items itemList;
+    /**
+     * Map con todos los tipos de items cargados en el sistema
+     * @see TipusItem
+     */
     private static Map<String, TipusItem> itemTypeList;
+    /**
+     * Map con todos los items y un vector con los usuarios que lo han valorado
+     * @see User
+     */
     private static Map<Integer, ArrayList<User>> itemValoratedBy;
+    /**
+     * ArrayList con todos los items de la ultima valoración
+     * @see myPair
+     */
     private static ArrayList<myPair> lastRecomendation;
+    /**
+     * Booleano que indica si se tiene que volver a calcular una recomendación.
+     * @see myPair
+     */
     private static boolean recomendationChanged;
     private static String ratingPath;
 
     //CtrlDomini control= CtrlDomini.getInstance();
 //control.getAllUsers();
 //constructor
+    /**
+     * Devuelve la instancia singelton del controlador
+     */
     public static ControladorDomini getInstance(){
         if (dominiSingelton == null)
         {
@@ -36,7 +80,9 @@ public class ControladorDomini {
         }
         return dominiSingelton;
     }
-
+    /**
+     * Inicializa el controlador de dominio
+     */
     private void iniCtrlDomini(){
         usersList = new HashMap<Integer, User>();
         actualUser = null;
@@ -49,13 +95,19 @@ public class ControladorDomini {
         admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
     }
-
+    /**
+     * Constructora del controlador de dominio
+     */
     private ControladorDomini(){
         iniCtrlDomini();
     }
 
 //Profile controller
-
+    /**
+     * Registra un nuevo usuario en el sistema
+     * @param struserId  struserId es el nombre se usuario
+     * @param password  password es la contraseña
+     */
     public void register(String struserId, String password) throws Exception {
         //post: es crea un usuari i es posa d'usuari actiu.
         //err: Usuari actiu null, userId not exists, id o passw son strings buits
@@ -76,6 +128,11 @@ public class ControladorDomini {
         }
 
     }
+    /**
+     * Logea en el sistema un usuario
+     * @param struserId  struserId es el nombre se usuario
+     * @param password  password es la contraseña
+     */
     public void login(String struserId, String password) throws Exception{
         //post: es crea un usuari i es posa d'usuari actiu.
         try {
@@ -102,6 +159,9 @@ public class ControladorDomini {
             System.out.println(e);
         }
     }
+    /**
+     * Saca del sistema al usuario activo
+     */
     public void logout()throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("logout");
         else{
@@ -110,6 +170,10 @@ public class ControladorDomini {
         }
 
     }
+    /**
+     * Cambia la contraseña del usuario activo
+     * @param newPass  newPass es la nueva contraseña
+     */
     public  void editProfile(String newPass) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("editProfile");
         else{
@@ -117,6 +181,10 @@ public class ControladorDomini {
             System.out.println("Password changed Out");
         }
     }
+    /**
+     * El administrador elimina al usuario delete_me
+     * @param delete_me  delete_me es el usuario
+     */
     public void deleteProfile(String delete_me) throws Exception{
         try {
             if(actualUser == null) throw new NoUserLogedInException("deleteProfile");
@@ -136,6 +204,13 @@ public class ControladorDomini {
         }
 
     }
+    /**
+     * El Usuario actual quiere una recomendacion para el utilizando el algoritmo Slope
+     * @param k  k es el numero de elementos que se quiere
+     * @param maxValue maxValue es el numero maximo de las valoraciones
+     * @return ArrayList<myPair>con las recomendacion generada
+     * @see myPair
+     */
     public ArrayList<myPair> showRecommendedItemsSlope(int k, int maxValue) throws Exception{// to do------------------
         try {
             if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
@@ -162,8 +237,12 @@ public class ControladorDomini {
         }
 
     }
-
-
+     /**
+     * El Usuario actual quiere una recomendacion para el utilizando el algoritmo KNN
+     * @param num_elem num_elem es el numero de elementos que se quiere
+     * @return ArrayList<myPair> con las recomendacion generada
+     * @see myPair
+     */
     public ArrayList<myPair> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
         else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
@@ -201,7 +280,13 @@ public class ControladorDomini {
         }
         return pair;
     }
-    public ArrayList<Integer> doSlope(int k_slope, int max_slope) throws Exception{
+    /**
+     * El Usuario actual quiere una recomendacion para el
+     * @param num_elem num_elem es el numero de elementos que se quiere
+     * @return ArrayList<myPair> con las recomendacion generada
+     * @see myPair
+     */
+    public ArrayList<myPair> doSlope(int k_slope, int max_slope) throws Exception{
         try{
             if (recomendationChanged)
                 lastRecomendation = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
@@ -235,7 +320,7 @@ public class ControladorDomini {
         try{
             if (recomendationChanged) {
                 ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
-                ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
+                ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, path);
                 ArrayList<myPair> tot = new ArrayList<myPair>();
                 int itSlope = 0;
                 int itKnn = 0;
