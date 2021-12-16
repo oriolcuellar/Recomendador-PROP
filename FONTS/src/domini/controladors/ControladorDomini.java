@@ -65,6 +65,14 @@ public class ControladorDomini {
      */
     private static boolean recomendationChanged;
     /**
+     * Booleano que indica si se tiene que volver a calcular una recomendación con el algortimo SLOPE.
+     */
+    private static boolean recomendationChangedSlope;
+    /**
+     * Booleano que indica si se tiene que volver a calcular una recomendación con el algortimo KNN.
+     */
+    private static boolean recomendationChangedKNN;
+    /**
      * String que indica el path al fichero de ratings para su posterior utilización eln algoritmos
      */
     private static String ratingPath;
@@ -94,6 +102,8 @@ public class ControladorDomini {
         itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
         lastRecomendation = new ArrayList<myPair>();
         recomendationChanged=true;
+        recomendationChangedSlope=true;
+        recomendationChangedKNN=true;
         admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
     }
@@ -139,6 +149,8 @@ public class ControladorDomini {
         //post: es crea un usuari i es posa d'usuari actiu.
         try {
             recomendationChanged=true;
+            recomendationChangedSlope=true;
+            recomendationChangedKNN=true;
             int userId = Integer.valueOf((struserId));
             if (actualUser != null) {
                 throw new ImpossibleStateException("login");
@@ -290,11 +302,13 @@ public class ControladorDomini {
      * @return ArrayList<myPair> con las recomendación generada
      * @see myPair
      */
-    public ArrayList<myPair> doSlope(int k_slope, int max_slope) throws Exception{
+    public ArrayList<Integer> doSlope(int k_slope, int max_slope) throws Exception{
         try{
-            if (recomendationChanged)
+            if (recomendationChangedSlope)
                 lastRecomendation = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
-            recomendationChanged=false;
+            recomendationChangedSlope=false;
+            recomendationChanged=true;
+            recomendationChangedKNN=true;
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < lastRecomendation.size(); ++i) {
                 r.add(lastRecomendation.get(i).getItemID());
@@ -313,9 +327,11 @@ public class ControladorDomini {
      */
     public ArrayList<Integer> doKNN(int num_elem) throws Exception{
         try{
-            if (recomendationChanged)
+            if (recomendationChangedKNN)
                 lastRecomendation = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
-            recomendationChanged=false;
+            recomendationChangedKNN=false;
+            recomendationChangedSlope=true;
+            recomendationChanged=true;
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < lastRecomendation.size(); ++i) {
                 r.add(lastRecomendation.get(i).getItemID());
@@ -355,6 +371,8 @@ public class ControladorDomini {
                 //mix los 2 algoritmos
                 lastRecomendation = tot;
                 recomendationChanged=false;
+                recomendationChangedSlope=true;
+                recomendationChangedKNN=true;
             }
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < lastRecomendation.size(); ++i) {
@@ -487,11 +505,15 @@ public class ControladorDomini {
                 actualUser.getValoratedItems().remove(m);
                 actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
                 recomendationChanged=true;
+                recomendationChangedSlope=true;
+                recomendationChangedKNN=true;
             }
         }
         if(!hay){
             actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
             recomendationChanged=true;
+            recomendationChangedSlope=true;
+            recomendationChangedKNN=true;
         }
     }
     /**
@@ -515,8 +537,8 @@ public class ControladorDomini {
      */
     public ArrayList<Integer> getRatedItems() throws Exception {
         if (actualUser==null) throw new NoUserLogedInException("ShowRatedItems");
-        else if(usersList.get(actualUser).getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
-        ArrayList<Integer> valorations = new ArrayList<>();
+        else if(actualUser.getValoratedItems().size()==0) throw new NoRatedItemsException(String.valueOf(actualUser.getUserID()));
+        ArrayList<Integer> valorations = new ArrayList<Integer>();
         try {
             for(int i = 0; i < actualUser.getValoratedItems().size(); ++i) {
                 valorations.add(actualUser.getValoratedItems().get(i).getItem().getID());
@@ -578,6 +600,8 @@ public class ControladorDomini {
         try {
             createItemPath(atributs, valors, itemList, itemTypeList);
             recomendationChanged=true;
+            recomendationChangedSlope=true;
+            recomendationChangedKNN=true;
         }
         catch (Exception e){
             throw e;
@@ -772,6 +796,8 @@ public class ControladorDomini {
         itemList.eliminar_item(it);
         //si es item selected==null
         recomendationChanged=true;
+        recomendationChangedSlope=true;
+        recomendationChangedKNN=true;
         if (selectedItem==it) selectedItem=null;
     }
     /**
@@ -791,6 +817,8 @@ public class ControladorDomini {
                     dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
                 }
                 recomendationChanged=true;
+                recomendationChangedSlope=true;
+                recomendationChangedKNN=true;
 
             } else throw new NotAnAdministratorException("loadItems");
         }
@@ -812,6 +840,8 @@ public class ControladorDomini {
             else{
                 ratingPath = path;
                 recomendationChanged=true;
+                recomendationChangedSlope=true;
+                recomendationChangedKNN=true;
                 ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 
                 ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
@@ -855,6 +885,8 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("loadRecomendation");
         try {
             recomendationChanged = true;
+            recomendationChangedSlope=true;
+            recomendationChangedKNN=true;
             ControladorPersistenciaRecomendation reader = new ControladorPersistenciaRecomendation();
             ArrayList <String> leido = reader.Lector_Recomendation(path);
             ArrayList <myPair> creado = new ArrayList<myPair>();
@@ -919,6 +951,8 @@ public class ControladorDomini {
                 User nou = new User(Integer.valueOf(create_me));
                 usersList.put(Integer.valueOf(create_me), nou);
                 recomendationChanged=true;
+                recomendationChangedSlope=true;
+                recomendationChangedKNN=true;
             }
 
         }

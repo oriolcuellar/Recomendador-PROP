@@ -75,8 +75,8 @@ public class ControladorPersistenciaRatings {
     public void Escritor_Ratings(String csvFile, Map <Integer, User> list_users) throws Exception{
         File fichero = new File(csvFile);
 
-        if (fichero.exists()) throw new FileExistsException(csvFile);
-        else {
+        //if (fichero.exists()) throw new FileExistsException(csvFile);
+        //else {
             try{
                 BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
 
@@ -96,6 +96,6 @@ public class ControladorPersistenciaRatings {
             } catch (Exception e){
                 throw e;
             }
-        }
+        //}
     }
 }
