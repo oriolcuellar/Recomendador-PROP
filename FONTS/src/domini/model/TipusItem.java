@@ -17,6 +17,7 @@ public class TipusItem {
      */
     private ArrayList<Atribute> atributes;
 
+
     //contructores
 
     /** Constructora de la clase. Copia la ArrayList de atributes,

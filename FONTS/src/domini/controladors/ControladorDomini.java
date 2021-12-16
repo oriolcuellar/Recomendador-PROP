@@ -497,24 +497,20 @@ public class ControladorDomini {
                 hay=true;
             }
         }
-        if (!hay) throw new ItemNotExistsException("rateItem");
+        if (!hay) throw new ItemNotExistsException("rateItem,"+idItem);
         hay=false;
-        for(valoratedItem m: actualUser.getValoratedItems()){
-            if(String.valueOf(m.getItem().getID()).equals(idItem)) {
-                hay = true;
-                actualUser.getValoratedItems().remove(m);
-                actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
-                recomendationChanged=true;
-                recomendationChangedSlope=true;
-                recomendationChangedKNN=true;
-            }
+        if(actualUser.searchUsedItem(Integer.valueOf(idItem))!=null){
+            valoratedItem m=actualUser.searchUsedItem(Integer.valueOf(idItem));
+            actualUser.getValoratedItems().remove(m);
+            actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
+            hay = true;
         }
         if(!hay){
             actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
-            recomendationChanged=true;
-            recomendationChangedSlope=true;
-            recomendationChangedKNN=true;
         }
+        recomendationChanged=true;
+        recomendationChangedSlope=true;
+        recomendationChangedKNN=true;
     }
     /**
      * Se quieren ver todos los items del sistema
@@ -769,6 +765,7 @@ public class ControladorDomini {
         //creamos item
         int id = Integer.valueOf(datos_valors.get(pos_id));
         Item i =new Item(id, ti, vsv);
+        i.setDadesInicials(atributs, valors);
         if (!(ListaItems.existeix_item(id))){
             ListaItems.anyadir_item(i);
         }

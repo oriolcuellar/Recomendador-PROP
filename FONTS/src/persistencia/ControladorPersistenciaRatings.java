@@ -79,13 +79,14 @@ public class ControladorPersistenciaRatings {
         //else {
             try{
                 BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
-
+                String s ="userId,itemId,rating\n";
+                bw.write(s);
                 for (int i: list_users.keySet()){
                     ArrayList<valoratedItem> valoraciones_usuario = list_users.get(i).getValoratedItems();
                     for (valoratedItem j: valoraciones_usuario){
                         String linea="";
-                        linea+= i+ ", ";
-                        linea+= j.getItem().getID()+ ", ";
+                        linea+= i+ ",";
+                        linea+= j.getItem().getID()+ ",";
                         linea+= j.getValoracio()+"\n";
                         bw.write(linea);
                     }

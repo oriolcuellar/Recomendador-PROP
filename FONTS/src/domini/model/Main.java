@@ -299,11 +299,11 @@ public class Main {
         try {
             dom.login("-1", "-1");
             dom.loadItems("EXE/Entradas_CSV/items.csv");
-            dom.loadRates("EXE/Entradas_CSV/ratings.db.csv");
+            dom.loadRates("EXE/Entradas_CSV/ratings.oriol.csv");
             dom.logout();
-            dom.login("1", "1");
+            dom.login("2", "2");
 
-            dom.getRatedItems();
+            dom.saveItems("EXE/Entradas_CSV/itemsoriol.csv");
             dom.logout();
             /*for (String u: dom.showAllUsers()){
                 dom.login(u, u);

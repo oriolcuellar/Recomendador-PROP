@@ -3,13 +3,11 @@ package FONTS.src.persistencia;
 import FONTS.src.domini.exceptions.EmptyFileException;
 import FONTS.src.domini.exceptions.FileExistsException;
 import FONTS.src.domini.exceptions.FileNotExistsException;
-import FONTS.src.domini.model.Conjunt_Items;
-import FONTS.src.domini.model.Item;
-import FONTS.src.domini.model.User;
-import FONTS.src.domini.model.valoratedItem;
+import FONTS.src.domini.model.*;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
@@ -49,24 +47,55 @@ public class ControladorPersistenciaItem {
     }
 
     public void Escritor_Items(String csvFile, Conjunt_Items list_items) throws Exception{
-        File fichero = new File(csvFile);
+        //File fichero = new File(csvFile);
 
-        if (fichero.exists()) throw new FileExistsException(csvFile);
-        else {
+        //if (fichero.exists()) throw new FileExistsException(csvFile);
+        //else {
             try{
-                BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
+                Map <String, ArrayList <String> > todo = new HashMap <String, ArrayList <String> > ();
+
                 for (Item i: list_items.getItems()){
-                    String linea;
-                    linea =  Integer.toString(i.getID());
-                    bw.write(linea);
+                    String atr=i.getDadesInicials().get(0);
+                    String val=i.getDadesInicials().get(1);
+                    if (todo.containsKey(atr)){//ya hay items de este tipo
+                        todo.get(atr).add(val);
+                    }
+                    else{// este tipo de item es el primero del map
+                        ArrayList <String> nou = new ArrayList<String>();
+                        nou.add(val);
+                        todo.put(atr, nou);
+                    }
+                }
+                int n=0;
+                for(String s: todo.keySet()){//para cada tipo de item
+                    n++;
+                    String fileName = "";
+                    boolean punto=false;
+                    for (char c: csvFile.toCharArray()){
+                        if (c!='.' && !punto){
+                            fileName+=c;
+                        }
+                        else{
+                            punto=true;
+                        }
+                    }
+                    fileName+=String.valueOf(n) + ".csv";
+                    File fichero = new File(fileName);
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+                    //String nomFile ="Items tipo "+ String.valueOf(n);
+                    //File fichero = new File(nomFile);
+                    //BufferedWriter bw = new BufferedWriter(new FileWriter(nomFile));
+                    bw.write(s+"\n");
+                    for (String it: todo.get(s)){
+                        bw.write(it+"\n");
+                    }
+                    bw.close();
                 }
 
-                // Hay que cerrar el fichero
-                bw.close();
             } catch (Exception e){
                 throw e;
             }
-        }
+        //}
     }
 
 }

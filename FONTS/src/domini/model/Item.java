@@ -29,6 +29,9 @@ public class Item {
      */
     private ArrayList<String> valors;
 
+    private String valorsInicials;
+    private String tipusInicial;
+
     //Constructors
 
     /**
@@ -97,6 +100,19 @@ public class Item {
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+    /**
+     * Establece los datos inicales del item para su posterior escritura.
+     */
+    public void setDadesInicials(String a, String v) {
+        this.valorsInicials = v;
+        this.tipusInicial = a;
+    }
+    public ArrayList<String> getDadesInicials(){
+        ArrayList<String> ret = new ArrayList<String>();
+        ret.add(this.tipusInicial);
+        ret.add(this.valorsInicials);
+        return ret;
     }
 
     //Operacions
