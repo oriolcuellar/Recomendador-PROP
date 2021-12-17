@@ -126,7 +126,7 @@ public class ControladorDomini {
         try {
             int userId = Integer.valueOf(struserId);
             if (usersList.containsKey(userId) || String.valueOf(admin.getUserID()).equals(struserId)) throw new UserExistsException(struserId);
-            else if ( actualUser != null) throw new ImpossibleStateException("register");
+            else if (actualUser != null) throw new ImpossibleStateException("register");
             else if (struserId.equals("") || password.equals("")) {
                 throw new NotValidUserorPasswException(struserId +" "+ password);
             } else {
@@ -998,4 +998,38 @@ public class ControladorDomini {
      * @return Map<Integer,User> donde el integer es el usuario
      */
     public Map<Integer,User> getUsersList() { return usersList; }
+
+    public Integer itemFavourite() throws Exception{
+        int maxID = 0;
+        if(actualUser == null) throw new NoUserLogedInException("loadRecomendation");
+        else {
+            ArrayList<valoratedItem> listaValorados = actualUser.getValoratedItems();
+            float maxValue = 0;
+            for(valoratedItem v : listaValorados) {
+                if(maxValue < v.getValoracio()) {
+                    maxValue = v.getValoracio();
+                    maxID = v.getItem().getID();
+                }
+            }
+        }
+        return maxID;
+    }
+    public Integer avgRating() throws Exception{
+        int avg = 0;
+        if(actualUser == null) throw new NoUserLogedInException("loadRecomendation");
+        else {
+            ArrayList<valoratedItem> listaValorados = actualUser.getValoratedItems();
+            for(valoratedItem v : listaValorados) {
+                avg += v.getValoracio();
+            }
+        }
+        return avg/numRated();
+    }
+
+    public Integer numRated() throws Exception{
+        if(actualUser == null) throw new NoUserLogedInException("loadRecomendation");
+        else {
+            return actualUser.getValoratedItems().size();
+        }
+    }
 }

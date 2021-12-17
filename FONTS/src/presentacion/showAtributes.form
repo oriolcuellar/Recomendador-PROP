@@ -47,7 +47,7 @@
               <focusable value="false"/>
               <font name="Noto Sans Mono CJK KR" size="18" style="1"/>
               <foreground color="-16777216"/>
-              <text value="←"/>
+              <text value="Main Menu"/>
             </properties>
           </component>
         </children>

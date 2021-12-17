@@ -5,52 +5,49 @@ import FONTS.src.domini.controladors.ControladorPresentacion;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
-public class LoginView {
+public class SignUp{
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
     private static JFrame frame;
     private JPanel panel;
     private JPasswordField passwordPasswordField;
     private JTextField usernameTextField;
-    private JButton signupButton;
+    private JButton backButton;
     private JLabel username;
     private JLabel password;
-    private JButton signinButton;
+    private JButton SignUpButton;
+    private JPasswordField repeatPasswordField;
+    private JLabel RepeatPasswordLabel;
 
-    public LoginView(){
-        signinButton.addActionListener(new ActionListener() {
+    public SignUp(){
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int x = frame.getX();
+                int y = frame.getY();
+                CtrlPres.changeLogInView(x,y);
+                frame.dispose();
+            }
+        });
+        SignUpButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
-                    CtrlPres.login(usernameTextField.getText(), passwordPasswordField.getText());
-                    int x = frame.getX();
-                    int y = frame.getY();
-                    if(CtrlPres.isAdmin()) CtrlPres.changeAdminMainView(x,y);
-                    else CtrlPres.inicializePresentation(x,y);
-                    frame.dispose();
-                } catch (Exception e) {
-                    enableButtons();
-                    e.printStackTrace();
-                }
-                enableButtons();
-            }
-        });
-        signupButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    if(CtrlPres.getUsers() == 0)
-                        JOptionPane.showMessageDialog(null,"An Administrador should enter before doing this option");
-                    else {
-                        disableButtons();
+                    if (Objects.equals(passwordPasswordField.getText(), repeatPasswordField.getText())) {
+                        CtrlPres.singUp(usernameTextField.getText(), passwordPasswordField.getText());
                         int x = frame.getX();
                         int y = frame.getY();
-                        CtrlPres.changeSignUpView(x, y);
+                        CtrlPres.changeLogInView(x, y);
                         frame.dispose();
                     }
+                    else JOptionPane.showMessageDialog(null,"The password does not match");
                 } catch (Exception e) {
                     enableButtons();
+                    if(passwordPasswordField.getText().isEmpty() && repeatPasswordField.getText().isEmpty())
+                        JOptionPane.showMessageDialog(null,"password field is empty");
+                    else JOptionPane.showMessageDialog(null,"The username already exists or is composed by characters");
                     e.printStackTrace();
                 }
                 enableButtons();
@@ -70,13 +67,10 @@ public class LoginView {
     }
 
     public void disableButtons() {
-        signupButton.setEnabled(false);
+        backButton.setEnabled(false);
     }
 
     public void enableButtons() {
-        signupButton.setEnabled(true);
-    }
-    public void setInvisible() {
-        frame.dispose();
+        backButton.setEnabled(true);
     }
 }

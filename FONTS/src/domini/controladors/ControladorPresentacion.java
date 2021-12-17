@@ -63,6 +63,11 @@ public class ControladorPresentacion {
         statsView.showWindow(x,y);
     }
 
+    public static void changeSignUpView(int x, int y){
+        SignUp signUp = new SignUp();
+        signUp.showWindow(x,y);
+    }
+
     public static void changeLoadingView(int x, int y)  {
         uploadItems.showWindow(x,y);
     }
@@ -85,6 +90,8 @@ public class ControladorPresentacion {
         try {
             s = CtrlDom.getRatedItems();
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"No items Rated");
+            System.out.println(s.get(0));
             JOptionPane.showMessageDialog(null,"No items Rated", "Error ", JOptionPane.ERROR_MESSAGE);
         }
         return s;
@@ -95,8 +102,8 @@ public class ControladorPresentacion {
         try {
             s = CtrlDom.doSlope(4,10);
         } catch (Exception e) {
-            principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
+            System.out.println(s.get(0));
         }
         return s;
     }
@@ -106,8 +113,8 @@ public class ControladorPresentacion {
         try {
             s = CtrlDom.doKNN(1000000);
         } catch (Exception e) {
-            principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
+            System.out.println(s.get(0));
         }
         return s;
     }
@@ -117,8 +124,8 @@ public class ControladorPresentacion {
         try {
             s = CtrlDom.doRecomendation(4,10, 50);
         } catch (Exception e) {
-            principalView.enableButtons();
             JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
+            System.out.println(s.get(0));
         }
         return s;
     }
@@ -146,6 +153,14 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
     }
+    public void singUp(String username, String password) {
+        try {
+            CtrlDom.register(username,password);
+        } catch (Exception e) {
+            System.out.println(e);
+            CtrlDom.getActualUser().getUserID();
+        }
+    }
 
     public boolean isAdmin() {
         return CtrlDom.getTypeActualUser() == "admin";
@@ -157,6 +172,46 @@ public class ControladorPresentacion {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public int getUsers() {
+        int d = 0;
+        try {
+            d = CtrlDom.getUsersList().size();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return d;
+    }
+
+    public int itemFavourite() {
+        int d = 0;
+        try {
+            d = CtrlDom.itemFavourite();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return d;
+    }
+
+    public int avgRating() {
+        int d = 0;
+        try {
+            d = CtrlDom.avgRating();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return d;
+    }
+
+    public int numRated() {
+        int d = 0;
+        try {
+            d = CtrlDom.numRated();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return d;
     }
 
     public void setInvisible() {
