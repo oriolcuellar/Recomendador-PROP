@@ -482,6 +482,13 @@ public class ControladorDomini {
         }
         return lista;
     }
+    public String showItemInfoValoration(String id) throws Exception{
+        if (selectedItem==null) throw new NoItemSelectedException("showItemInfoAtributes");
+        for (valoratedItem va: actualUser.getValoratedItems()){
+            if(va.getItem().getID()==selectedItem.getID()) return String.valueOf(va.getItem().getID());
+        }
+        throw new NoItemsException("showItemInfoValoration");
+    }
 
     /**
      * El Usuario actual quiere valorar un item
@@ -517,7 +524,7 @@ public class ControladorDomini {
      * @return Vector<String> son los id de todos los items
      * @see Item
      */
-    public Vector<String> showAllItems()throws Exception{
+    public Vector<String> AllItems()throws Exception{
         if (itemList.n_Items()==0) throw new NoItemsException("showAllItems");
         Vector <String> totsItems = new Vector<String>();
         for(Item i: itemList.getItems()){
