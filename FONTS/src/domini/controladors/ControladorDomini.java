@@ -126,7 +126,7 @@ public class ControladorDomini {
         try {
             int userId = Integer.valueOf(struserId);
             if (usersList.containsKey(userId) || String.valueOf(admin.getUserID()).equals(struserId)) throw new UserExistsException(struserId);
-            else if ( actualUser != null) throw new ImpossibleStateException("register");
+            else if (actualUser != null) throw new ImpossibleStateException("register");
             else if (struserId.equals("") || password.equals("")) {
                 throw new NotValidUserorPasswException(struserId +" "+ password);
             } else {

@@ -114,7 +114,7 @@ public class Cluster {
         for(User u : cluster) {
             //hacemos 1 - para que 0 sea cerca y 1 sea lejos
             float dist = u.calculateSimilarity(this.centroid);
-            sum += (1 - dist)*100*(1 - dist);
+            if(u.getValoratedItems().size() != 0) sum += (1 - dist)*100*(1 - dist);
         }
         WCSS = sum;
     }
