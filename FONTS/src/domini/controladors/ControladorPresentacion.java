@@ -183,6 +183,36 @@ public class ControladorPresentacion {
         return d;
     }
 
+    public int itemFavourite() {
+        int d = 0;
+        try {
+            d = CtrlDom.itemFavourite();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return d;
+    }
+
+    public int avgRating() {
+        int d = 0;
+        try {
+            d = CtrlDom.avgRating();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return d;
+    }
+
+    public int numRated() {
+        int d = 0;
+        try {
+            d = CtrlDom.numRated();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return d;
+    }
+
     public void setInvisible() {
         uploadItems.setInvisible();
     }
