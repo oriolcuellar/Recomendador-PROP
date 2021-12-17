@@ -992,6 +992,7 @@ public class ControladorDomini {
         if(actualUser.getRol() == TipusRol.Administrador) return "admin";
         else return "user";
     }
+
     /**
      * Se devuelve el un map con todos los usuarios del sistema
      * @return Map<Integer,User> donde el integer es el usuario
