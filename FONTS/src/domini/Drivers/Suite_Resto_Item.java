@@ -33,7 +33,7 @@ public class Suite_Resto_Item {
         AT3 = new Atribute("Longitud", "String", false);
         Tipus1 = new ArrayList<Atribute>(Arrays.asList(AT, AT2, AT3));
         STRING = new TipusItem(Tipus1);
-        Valors = new ArrayList<String>(Arrays.asList("Verde"));
+        Valors = new ArrayList<String>(Arrays.asList("Verde", "Redondo", "32.7"));
     }
 
     @Test
@@ -54,6 +54,15 @@ public class Suite_Resto_Item {
     public void getValors(){
 
         Item I = new Item(332, STRING , Valors);
+        assertEquals(I.getValors(),Valors);
+    }
+
+    @Test
+    public void getString(){
+
+        Item I = new Item(332, STRING , Valors);
+        String s = I.getString();
+        //System.out.println(s);
         assertEquals(I.getValors(),Valors);
     }
 

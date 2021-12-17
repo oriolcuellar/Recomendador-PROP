@@ -558,7 +558,7 @@ public class ControladorDomini {
      * Se quieren guardar los cambios de los items en el sistema
      * @param path path es el documento donde se quiere guardar
      */
-    public void saveItems(String path) throws Exception{
+  /*  public void saveItems(String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
@@ -567,7 +567,7 @@ public class ControladorDomini {
         catch (Exception e){
             throw e;
         }
-    }
+    }*/
     /**
      * Se quieren guardar los cambios de los ratings en el sistema
      * @param path path es el documento donde se quiere guardar
@@ -777,7 +777,7 @@ public class ControladorDomini {
         //creamos item
         int id = Integer.valueOf(datos_valors.get(pos_id));
         Item i =new Item(id, ti, vsv);
-        i.setDadesInicials(atributs, valors);
+        //i.setDadesInicials(atributs, valors);
         if (!(ListaItems.existeix_item(id))){
             ListaItems.anyadir_item(i);
         }

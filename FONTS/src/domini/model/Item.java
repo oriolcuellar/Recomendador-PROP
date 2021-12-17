@@ -29,9 +29,6 @@ public class Item {
      */
     private ArrayList<String> valors;
 
-    private String valorsInicials;
-    private String tipusInicial;
-
     //Constructors
 
     /**
@@ -92,6 +89,24 @@ public class Item {
         return valors;
     }
 
+    /**
+     * Devuelve el String resultado de combinar los nombres de los atributos y sus repectivos valores en el Item.
+     */
+
+    public String getString(){
+
+        String s = tipus.getID();
+        s = s.substring(1, s.length()-1);
+        s = s+ ",ID";
+        String v = valors.toString();
+        v = v.substring(1, v.length()-1);
+        System.out.println(v);
+        s = s + ", " + v;
+        s = s.replace(" ","") + ","+String.valueOf(ID);
+        //System.out.println(s);
+        return s;
+    }
+
     //Setters
 
     /**
@@ -100,19 +115,6 @@ public class Item {
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-    /**
-     * Establece los datos inicales del item para su posterior escritura.
-     */
-    public void setDadesInicials(String a, String v) {
-        this.valorsInicials = v;
-        this.tipusInicial = a;
-    }
-    public ArrayList<String> getDadesInicials(){
-        ArrayList<String> ret = new ArrayList<String>();
-        ret.add(this.tipusInicial);
-        ret.add(this.valorsInicials);
-        return ret;
     }
 
     //Operacions
