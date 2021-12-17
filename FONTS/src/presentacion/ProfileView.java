@@ -17,7 +17,9 @@ public class ProfileView {
     private JButton statsButton;
 
     public ProfileView(){
-        id.setText("ASDFA");
+        Integer userID = CtrlPres.getActualUserId();
+        String s = userID.toString();
+        id.setText(s);
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

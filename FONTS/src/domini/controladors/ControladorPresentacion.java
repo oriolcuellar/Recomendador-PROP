@@ -174,7 +174,7 @@ public class ControladorPresentacion {
         }
     }
 
-    public int getUsers() {
+    public int getUsersSize() {
         int d = 0;
         try {
             d = CtrlDom.getUsersList().size();
@@ -212,6 +212,15 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
         return d;
+    }
+
+    public Integer getActualUserId() {
+        try {
+            return CtrlDom.getActualUserID();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
     }
 
     public void setInvisible() {
