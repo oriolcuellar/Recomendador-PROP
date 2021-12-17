@@ -482,14 +482,14 @@ public class ControladorDomini {
         }
         return lista;
     }
-    public String showItemInfoValoration(String id) throws Exception{
+    public String showItemInfoValoration() throws Exception{
         if (selectedItem==null) throw new NoItemSelectedException("showItemInfoAtributes");
-        for (Item m: itemList.getItems()){
+        /*for (Item m: itemList.getItems()){
             if(m.getID()==selectedItem.getID()) return String.valueOf(m.getID());
-        }
-        /*for (valoratedItem va: actualUser.getValoratedItems()){
-            if(va.getItem().getID()==selectedItem.getID()) return String.valueOf(va.getItem().getID());
         }*/
+        for (valoratedItem va: actualUser.getValoratedItems()){
+            if(va.getItem().getID()==selectedItem.getID()) return String.valueOf(va.getValoracio());
+        }
         throw new NoItemsException("showItemInfoValoration");
     }
 
@@ -1001,6 +1001,11 @@ public class ControladorDomini {
     public String getTypeActualUser() {
         if(actualUser.getRol() == TipusRol.Administrador) return "admin";
         else return "user";
+    }
+
+    public boolean itemsLoaded(){
+        if (itemList.n_Items()==0) return false;
+        return true;
     }
 
     /*

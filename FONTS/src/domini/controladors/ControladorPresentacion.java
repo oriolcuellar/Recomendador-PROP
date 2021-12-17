@@ -231,7 +231,7 @@ public class ControladorPresentacion {
         String s;
         try {
 
-            s =  CtrlDom.showItemInfoValoration(id);
+            s =  CtrlDom.showItemInfoValoration();
         } catch (Exception e) {
             s = "No té valoració";
         }
