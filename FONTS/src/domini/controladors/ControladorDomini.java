@@ -711,7 +711,7 @@ public class ControladorDomini {
             String i = vsv.get(pos);
             Boolean ranged = true;
             Atribute a = va.get(pos);
-            if (i.equals("False") || i.equals("True")){
+            if ((i.equals("False") || i.equals("True")) && a.getType()!="String" && a.getType()!="Vector de String"){
                 a.setTipus("Boolean");
                 a.setRellevant(true);
             }
@@ -721,11 +721,11 @@ public class ControladorDomini {
             }
             else if(i.length()==10 && i.charAt(0)<='9' && i.charAt(0)>='0' && i.charAt(1)<='9' && i.charAt(1)>='0' && i.charAt(2)<='9' && i.charAt(2)>='0'
                     && i.charAt(3)<='9' && i.charAt(3)>='0' && i.charAt(4)=='-' && i.charAt(5)<='9' && i.charAt(5)>='0' && i.charAt(6)<='9' && i.charAt(6)>='0'
-                    && i.charAt(7)=='-' && i.charAt(8)>='0' && i.charAt(8)<='9' && i.charAt(9)<='9' && i.charAt(9)>='0' ){
+                    && i.charAt(7)=='-' && i.charAt(8)>='0' && i.charAt(8)<='9' && i.charAt(9)<='9' && i.charAt(9)>='0'  && a.getType()!="String" && a.getType()!="Vector de String"){
                 a.setTipus("Data");
                 a.setRellevant(true);
             }
-            else if(i.equals("")){
+            else if(i.equals("")  && a.getType()!="String" && a.getType()!="Vector de String"){
                 if (a.getType().equals("")){
                     a.setTipus("Buit");
                     a.setRellevant(false);
@@ -735,7 +735,7 @@ public class ControladorDomini {
                 for (int p=0;p<i.length();++p){
                     if (!((i.charAt(p)>='0' && i.charAt(p)<='9') || i.charAt(p)=='.')) ranged = false;
                 }
-                if(ranged){
+                if(ranged  && a.getType()!="String" && a.getType()!="Vector de String"){
                     if (new_type_item) {
                         double min=Double.valueOf(vsv.get(pos));
                         double max=Double.valueOf(vsv.get(pos));
@@ -762,8 +762,10 @@ public class ControladorDomini {
 
                 }
                 else {//si la estaba creado y no tenia valor de string
-                    a.setTipus("String");
-                    a.setRellevant(true);
+                    if( a.getType()!="Vector de String") {
+                        a.setTipus("String");
+                        a.setRellevant(true);
+                    }
                 }
             }
         }
