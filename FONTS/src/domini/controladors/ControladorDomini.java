@@ -524,12 +524,12 @@ public class ControladorDomini {
      * @return Vector<String> son los id de todos los items
      * @see Item
      */
-    public Vector<String> AllItems()throws Exception{
+    public Vector<Integer> AllItems()throws Exception{
         if (itemList.n_Items()==0) throw new NoItemsException("showAllItems");
-        Vector <String> totsItems = new Vector<String>();
+        Vector <Integer> totsItems = new Vector<Integer>();
         for(Item i: itemList.getItems()){
             System.out.println(i.getID());
-            totsItems.add(String.valueOf(i.getID()));
+            totsItems.add(i.getID());
         }
         return totsItems;
     }

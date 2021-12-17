@@ -38,7 +38,7 @@ public class ControladorPresentacion {
         showRatedItems.showWindow(x,y);
     }
 
-    public static void changeShowAtributesView(int x, int y, String id)  {
+    public static void changeShowAtributesView(int x, int y, Integer id)  {
         showAtributes showAtributes = new showAtributes(id);
         showAtributes.showWindow(x,y);
     }
@@ -69,10 +69,10 @@ public class ControladorPresentacion {
 
 
 
-    public static Vector<String> getAllItems(){
-        Vector<String> s = new Vector<>();
+    public static Vector<Integer> getAllItems(){
+        Vector<Integer> s = new Vector<>();
         try {
-            s = CtrlDom.showAllItems();
+            s = CtrlDom.AllItems();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,e + "\nNo items Loaded");
             System.out.println(s.get(0));
