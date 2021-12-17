@@ -40,7 +40,7 @@ public class LoginView {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    if(CtrlPres.getUsers() == 0)
+                    if(CtrlPres.getUsersSize() == 0)
                         JOptionPane.showMessageDialog(null,"An Administrador should enter before doing this option");
                     else {
                         disableButtons();

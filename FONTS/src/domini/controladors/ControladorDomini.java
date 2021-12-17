@@ -985,6 +985,13 @@ public class ControladorDomini {
         return actualUser;
     }
     /**
+     * Se devuelve el id del usuario actual
+     * @return Integer
+     */
+    public Integer getActualUserID() {
+        return actualUser.getUserID();
+    }
+    /**
      * Se devuelve el tipo del usuario actual
      * @return User
      */
