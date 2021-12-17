@@ -484,9 +484,12 @@ public class ControladorDomini {
     }
     public String showItemInfoValoration(String id) throws Exception{
         if (selectedItem==null) throw new NoItemSelectedException("showItemInfoAtributes");
-        for (valoratedItem va: actualUser.getValoratedItems()){
-            if(va.getItem().getID()==selectedItem.getID()) return String.valueOf(va.getItem().getID());
+        for (Item m: itemList.getItems()){
+            if(m.getID()==selectedItem.getID()) return String.valueOf(m.getID());
         }
+        /*for (valoratedItem va: actualUser.getValoratedItems()){
+            if(va.getItem().getID()==selectedItem.getID()) return String.valueOf(va.getItem().getID());
+        }*/
         throw new NoItemsException("showItemInfoValoration");
     }
 
@@ -525,7 +528,7 @@ public class ControladorDomini {
      * @see Item
      */
     public Vector<Integer> AllItems()throws Exception{
-        if (itemList.n_Items()==0) throw new NoItemsException("showAllItems");
+        if (itemList.n_Items()==0) throw new NoItemsException("AllItems");
         Vector <Integer> totsItems = new Vector<Integer>();
         for(Item i: itemList.getItems()){
             System.out.println(i.getID());
