@@ -18,7 +18,6 @@ public class showAtributes {
     private JButton settingsButton;
     private JButton valorate;
     private JList valors;
-    private JList valors1;
     private JList atributes;
     private JLabel valoration;
     private JLabel item;
@@ -26,7 +25,7 @@ public class showAtributes {
 
     public showAtributes(String id) {
 
-        item.setText(id);
+        item.setText("ID: " + id);
 
         scrollPane.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
@@ -44,6 +43,7 @@ public class showAtributes {
         }
 
         atributes.setModel(atributosList);
+        atributes.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 
         DefaultListModel ValoresList = new DefaultListModel();
         ArrayList<String> valores = CtrlPres.getValors();
@@ -53,9 +53,10 @@ public class showAtributes {
         }
 
         valors.setModel(ValoresList);
+        valors.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 
         String valoracion = CtrlPres.getValoration(String.valueOf(id));
-        valoration.setText(valoracion);
+        valoration.setText("valoration: " + valoracion);
 
         scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
         scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
