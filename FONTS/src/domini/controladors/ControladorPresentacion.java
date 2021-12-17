@@ -38,7 +38,7 @@ public class ControladorPresentacion {
         showRatedItems.showWindow(x,y);
     }
 
-    public static void changeShowAtributesView(int x, int y, int id)  {
+    public static void changeShowAtributesView(int x, int y, String id)  {
         showAtributes showAtributes = new showAtributes(id);
         showAtributes.showWindow(x,y);
     }
@@ -228,7 +228,6 @@ public class ControladorPresentacion {
     }
 
     public String getValoration(String id) {
-
         String s;
         try {
 
@@ -260,6 +259,14 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
         return a;
+    }
+
+    public void selectItem(String id) {
+        try {
+            CtrlDom.selectItem(id);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     public void SetValoration(String id, String nv) {

@@ -8,9 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Vector;
-
-import static FONTS.src.domini.controladors.ControladorPresentacion.*;
 
 public class showAtributes {
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
@@ -21,14 +18,14 @@ public class showAtributes {
     private JButton settingsButton;
     private JButton valorate;
     private JList valors;
-    private JList atributtes;
+    private JList atributes;
     private JLabel valoration;
     private JLabel item;
     private JScrollPane scrollPane;
 
-    public showAtributes(int id) {
+    public showAtributes(String id) {
 
-        item.setText(String.valueOf(id));
+        item.setText(id);
 
         scrollPane.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
@@ -40,14 +37,16 @@ public class showAtributes {
 
         DefaultListModel atributosList = new DefaultListModel();
         ArrayList<String> atributos = CtrlPres.getAtributos();
+        System.out.println(atributos.size());
         for(int i = 0; i < atributos.size(); ++i) {
             atributosList.addElement(atributos.get(i));
         }
 
-        atributtes.setModel(atributosList);
+        atributes.setModel(atributosList);
 
         DefaultListModel ValoresList = new DefaultListModel();
         ArrayList<String> valores = CtrlPres.getValors();
+        System.out.println(valores.size());
         for(int i = 0; i < valores.size(); ++i) {
             atributosList.addElement(valores.get(i));
         }

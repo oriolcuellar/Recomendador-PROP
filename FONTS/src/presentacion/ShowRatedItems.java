@@ -66,7 +66,8 @@ public class ShowRatedItems {
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    Integer selectedItem = (Integer) list1.getSelectedValue();
+                    String selectedItem = String.valueOf(list1.getSelectedValue());
+                    CtrlPres.selectItem(selectedItem);
                     int x = frame.getX();
                     int y = frame.getY();
                     CtrlPres.changeShowAtributesView(x,y, selectedItem);
