@@ -38,7 +38,7 @@ public class ControladorPresentacion {
         showRatedItems.showWindow(x,y);
     }
 
-    public static void changeShowAtributesView(int x, int y, Integer id)  {
+    public static void changeShowAtributesView(int x, int y, int id)  {
         showAtributes showAtributes = new showAtributes(id);
         showAtributes.showWindow(x,y);
     }
@@ -74,7 +74,7 @@ public class ControladorPresentacion {
         try {
             s = CtrlDom.AllItems();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,e + "\nNo items Loaded");
+            JOptionPane.showMessageDialog(null,e + "\nNo items Loaded", "Error ", JOptionPane.ERROR_MESSAGE);
             System.out.println(s.get(0));
         }
         return s;
@@ -85,7 +85,7 @@ public class ControladorPresentacion {
         try {
             s = CtrlDom.getRatedItems();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"No items Rated");
+            JOptionPane.showMessageDialog(null,"No items Rated", "Error ", JOptionPane.ERROR_MESSAGE);
         }
         return s;
     }
@@ -96,7 +96,7 @@ public class ControladorPresentacion {
             s = CtrlDom.doSlope(4,10);
         } catch (Exception e) {
             principalView.enableButtons();
-            JOptionPane.showMessageDialog(null,"No items Recomended");
+            JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
         }
         return s;
     }
@@ -107,7 +107,7 @@ public class ControladorPresentacion {
             s = CtrlDom.doKNN(1000000);
         } catch (Exception e) {
             principalView.enableButtons();
-            JOptionPane.showMessageDialog(null,"No items Recomended");
+            JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
         }
         return s;
     }
@@ -118,7 +118,7 @@ public class ControladorPresentacion {
             s = CtrlDom.doRecomendation(4,10, 50);
         } catch (Exception e) {
             principalView.enableButtons();
-            JOptionPane.showMessageDialog(null,"No items Recomended");
+            JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
         }
         return s;
     }
@@ -161,5 +161,50 @@ public class ControladorPresentacion {
 
     public void setInvisible() {
         uploadItems.setInvisible();
+    }
+
+    public String getValoration(String id) {
+
+        String s;
+        try {
+
+            s =  CtrlDom.showItemInfoValoration(id);
+        } catch (Exception e) {
+            s = "No té valoració";
+        }
+        return s;
+    }
+
+    public ArrayList<String> getAtributos() {
+
+        ArrayList<String> a = new ArrayList<String> ();
+        try {
+
+            a =  CtrlDom.showItemInfoAtributes();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return a;
+    }
+
+    public ArrayList<String> getValors() {
+
+        ArrayList<String> a = new ArrayList<String> ();
+        try {
+            a =  CtrlDom.showItemInfoValues();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return a;
+    }
+
+    public void SetValoration(String id, String nv) {
+
+        float new_valoration = Float.valueOf(nv);
+        try {
+            CtrlDom.rateItem(id, new_valoration);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"No s'ha pogut cambiar la valoració","Error ", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
