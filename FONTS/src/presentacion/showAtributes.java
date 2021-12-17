@@ -18,6 +18,7 @@ public class showAtributes {
     private JButton settingsButton;
     private JButton valorate;
     private JList valors;
+    private JList valors1;
     private JList atributes;
     private JLabel valoration;
     private JLabel item;
