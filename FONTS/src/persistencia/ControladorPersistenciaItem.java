@@ -45,7 +45,7 @@ public class ControladorPersistenciaItem {
         if (items.size()==0) throw new EmptyFileException("Lector_Items");
         return items;
     }
-
+/*
     public void Escritor_Items(String csvFile, Conjunt_Items list_items) throws Exception{
         //File fichero = new File(csvFile);
 
@@ -96,6 +96,6 @@ public class ControladorPersistenciaItem {
                 throw e;
             }
         //}
-    }
+    }*/
 
 }

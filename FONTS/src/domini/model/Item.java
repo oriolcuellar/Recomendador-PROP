@@ -1,5 +1,6 @@
 package FONTS.src.domini.model;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Vector;
 
 /** \brief Clase que representa un Item.
@@ -292,4 +293,6 @@ public class Item {
         for (int i = 0; i < B.size(); ++i)
             A.add(i, B.get(i));
     }
+
+
 }

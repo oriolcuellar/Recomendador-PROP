@@ -558,16 +558,16 @@ public class ControladorDomini {
      * Se quieren guardar los cambios de los items en el sistema
      * @param path path es el documento donde se quiere guardar
      */
-  /*  public void saveItems(String path) throws Exception{
+  public void saveItems(String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
-            ctrlItem.Escritor_Items(path, itemList);
+            //ctrlItem.Escritor_Items(path, itemList);
         }
         catch (Exception e){
             throw e;
         }
-    }*/
+    }
     /**
      * Se quieren guardar los cambios de los ratings en el sistema
      * @param path path es el documento donde se quiere guardar

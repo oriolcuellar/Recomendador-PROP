@@ -18,7 +18,6 @@ public class SignUp{
     private JLabel password;
     private JButton SignUpButton;
     private JPasswordField repeatPasswordField;
-    private JLabel RepeatPasswordLabel;
 
     public SignUp(){
         backButton.addActionListener(new ActionListener() {
