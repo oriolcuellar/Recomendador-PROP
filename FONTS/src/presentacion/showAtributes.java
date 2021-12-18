@@ -4,6 +4,7 @@ import FONTS.src.domini.controladors.ControladorPresentacion;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +23,7 @@ public class showAtributes {
     private JLabel valoration;
     private JLabel item;
     private JScrollPane scrollPane;
+    private JTable tabla;
 
     public showAtributes(String id) {
 
@@ -35,31 +37,36 @@ public class showAtributes {
             }
         });
 
-        DefaultListModel atributosList = new DefaultListModel();
+       // DefaultListModel atributosList = new DefaultListModel();
         ArrayList<String> atributos = CtrlPres.getAtributos();
-        System.out.println(atributos.size());
+        /*System.out.println(atributos.size());
         for(int i = 0; i < atributos.size(); ++i) {
             atributosList.addElement(atributos.get(i));
-        }
+        }*/
 
-        atributes.setModel(atributosList);
-        atributes.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        //atributes.setModel(atributosList);
+        //atributes.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 
-        DefaultListModel ValoresList = new DefaultListModel();
+        //DefaultListModel ValoresList = new DefaultListModel();
         ArrayList<String> valores = CtrlPres.getValors();
-        System.out.println(valores.size());
+        /*System.out.println(valores.size());
         for(int i = 0; i < valores.size(); ++i) {
             atributosList.addElement(valores.get(i));
-        }
+        }*/
 
-        valors.setModel(ValoresList);
-        valors.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+        //valors.setModel(ValoresList);
+        //valors.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 
         String valoracion = CtrlPres.getValoration(String.valueOf(id));
         valoration.setText("valoration: " + valoracion);
 
         scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
         scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
+
+        DefaultTableModel model = new DefaultTableModel(null, atributos.toArray());
+        model.addRow(valores.stream().toArray());
+        tabla = new JTable(model);
+        scrollPane.setViewportView(tabla);
 
         backButton.addActionListener(new ActionListener() {
             @Override
