@@ -94,6 +94,18 @@ public class TipusItem {
         }
         return Rellevants;
     }
+
+    /**
+     * Devuelve el String resultado de combinar los valores del id del tipo y el String ID.
+     */
+
+    public String getTipusString (){
+
+        String s = ID;
+        s = s.substring(1, s.length()-1);
+        s = s.replace(" ","") + ",ID";
+        return s;
+    }
 }
 
 

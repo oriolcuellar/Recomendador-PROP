@@ -91,21 +91,16 @@ public class Item {
     }
 
     /**
-     * Devuelve el String resultado de combinar los nombres de los atributos y sus repectivos valores en el Item.
+     * Devuelve el String resultado de combinar los valores del atributo en el Item i su id.
      */
 
     public String getString(){
 
-        String s = tipus.getID();
-        s = s.substring(1, s.length()-1);
-        s = s+ ",ID";
         String v = valors.toString();
         v = v.substring(1, v.length()-1);
-        System.out.println(v);
-        s = s + ", " + v;
-        s = s.replace(" ","") + ","+String.valueOf(ID);
+        v = v.replace(" ","") + ","+String.valueOf(ID);
         //System.out.println(s);
-        return s;
+        return v;
     }
 
     //Setters
