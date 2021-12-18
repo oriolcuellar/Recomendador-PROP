@@ -89,6 +89,7 @@ public class showAtributes {
                     String new_valoration = JOptionPane.showInputDialog(null,
                             "Escriu la nova valoració", null);
                     CtrlPres.SetValoration(String.valueOf(id), new_valoration);
+                    valoration.setText("valoration: " + new_valoration);
                 }
             }
         });
