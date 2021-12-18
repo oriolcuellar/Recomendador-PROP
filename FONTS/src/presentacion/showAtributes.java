@@ -5,6 +5,7 @@ import FONTS.src.domini.controladors.ControladorPresentacion;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,6 +67,17 @@ public class showAtributes {
         DefaultTableModel model = new DefaultTableModel(null, atributos.toArray());
         model.addRow(valores.stream().toArray());
         tabla = new JTable(model);
+
+        tabla.setRowHeight(20);
+
+        TableColumnModel columnModel = tabla.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(100);
+        columnModel.getColumn(1).setPreferredWidth(100);
+        int width = 100 * valores.size();
+        System.out.println(width);
+        tabla.setMinimumSize(new Dimension(width, 40));
+        tabla.setMaximumSize(new Dimension(width, 40));
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         scrollPane.setViewportView(tabla);
 
         backButton.addActionListener(new ActionListener() {
