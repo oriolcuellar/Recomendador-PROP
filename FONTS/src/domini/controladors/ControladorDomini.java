@@ -353,8 +353,16 @@ public class ControladorDomini {
     public ArrayList<Integer> doRecomendation(int k_slope, int max_slope, int num_elem) throws Exception{
         try{
             if (recomendationChanged) {
-                ArrayList<myPair> slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
-                ArrayList<myPair> knn = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
+                ArrayList<myPair> slope = lastRecomendation;
+                ArrayList<myPair> knn = lastRecomendation;
+                if (recomendationChangedSlope){
+                    slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+                }
+                if (recomendationChangedKNN){
+                    knn = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
+                }
+
+
                 ArrayList<myPair> tot = new ArrayList<myPair>();
                 int itSlope = 0;
                 int itKnn = 0;
@@ -562,7 +570,7 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
-            //ctrlItem.Escritor_Items(path, itemList);
+            ctrlItem.Escritor_Items(path, itemList);
         }
         catch (Exception e){
             throw e;
@@ -1045,6 +1053,12 @@ public class ControladorDomini {
         if(actualUser == null) throw new NoUserLogedInException("loadRecomendation");
         else {
             return actualUser.getValoratedItems().size();
+        }
+    }
+
+    public void aux(){
+        for (Item m: itemList.getItems()){
+            System.out.println(m.getString());
         }
     }
 }
