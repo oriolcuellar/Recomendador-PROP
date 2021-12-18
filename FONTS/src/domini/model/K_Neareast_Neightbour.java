@@ -20,8 +20,7 @@ public class K_Neareast_Neightbour {
 
     //Algorisme
 
-    /** Algoritmo de recomendación, devuelve una ArraList con los k items mas parecidos a itemsUsats, (itemsUsats quedan
-     añadidos a C_Items si no lo estaban.
+    /** Algoritmo de recomendación, devuelve una ArraList con los k items mas parecidos a itemsUsats.
      * @param k  Número de items que se devuelven.
      * @param itemsUsats  ArrayList de los Items sobre los que se quiere la recomendación.
      * @param Valoracions  ArrayList con las valoraciones de los itemsUsat, la posicion de la valoración en la ArrayList,
@@ -30,11 +29,6 @@ public class K_Neareast_Neightbour {
      */
 
     public ArrayList<Item> Algorithm(int k,Conjunt_Items C_Items, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
-
-        for (int i = 0; i < itemsUsats.size(); ++i) {
-
-            C_Items.anyadir_item(itemsUsats.get(i));
-        }
 
         ArrayList <ArrayList<Item>> M_de_Items = new ArrayList<ArrayList<Item>>();
         ArrayList <ArrayList<Double>> Dis = new ArrayList<ArrayList<Double>>();

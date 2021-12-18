@@ -265,9 +265,13 @@ public class ControladorDomini {
         else if (itemList.n_Items()==0) throw new NoItemsException("showRecommendedItemsKNN") ;
         else if (num_elem<1) throw new WrongDataException("showRecommendedItemsKNN");
         //leer valoraciones know
-        ArrayList <Item> it = new ArrayList<Item>();
+        ArrayList <Item> v_items = new ArrayList<Item>();
+        ArrayList <Double> valorations = new ArrayList<Double>();
+
+        /*
         ArrayList <Double> va = new ArrayList<Double>();
         ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
+
         try {
             ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
             readed_ratings = reader.Lector_Ratings(path);
@@ -284,10 +288,18 @@ public class ControladorDomini {
                 va.add(Double.valueOf(vs.get(2)));
                 validador.add(aux);
             }
+        }*/
+        ArrayList <valoratedItem> va = actualUser.getValoratedItems();
+        for (int i = 0; i < va.size(); i++ ) {
+
+            valoratedItem aux = va.get(i);
+            v_items.add(aux.getItem());
+            valorations.add(Double.valueOf(aux.getValoracio()));
+
         }
         //k-neighbours
         K_Neareast_Neightbour knn = new K_Neareast_Neightbour();
-        ArrayList <Item> aux =knn.Algorithm(num_elem, itemList, it, va);
+        ArrayList <Item> aux = knn.Algorithm(num_elem, itemList, v_items, valorations);
         ArrayList<myPair> pair= new ArrayList<myPair>();
         for (Item m: aux){
             myPair nou = new myPair(m.getID(), 0);
@@ -361,7 +373,6 @@ public class ControladorDomini {
                 if (recomendationChangedKNN){
                     knn = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
                 }
-
 
                 ArrayList<myPair> tot = new ArrayList<myPair>();
                 int itSlope = 0;
@@ -566,7 +577,7 @@ public class ControladorDomini {
      * Se quieren guardar los cambios de los items en el sistema
      * @param path path es el documento donde se quiere guardar
      */
-  public void saveItems(String path) throws Exception{
+  /*public void saveItems(String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
@@ -575,7 +586,7 @@ public class ControladorDomini {
         catch (Exception e){
             throw e;
         }
-    }
+    }*/
     /**
      * Se quieren guardar los cambios de los ratings en el sistema
      * @param path path es el documento donde se quiere guardar
