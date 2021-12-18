@@ -1,5 +1,6 @@
 package FONTS.src.domini.controladors;
 
+import FONTS.src.domini.model.Item;
 import FONTS.src.presentacion.*;
 import javax.swing.*;
 import java.util.ArrayList;
@@ -52,7 +53,10 @@ public class ControladorPresentacion {
         LoginView loginView = new LoginView();
         loginView.showWindow(x,y);
     }
-
+    /**
+     * Función para canviar a la vista del Perfil
+     * @see ProfileView
+     */
     public static void changeProfileView(int x, int y){
         ProfileView profileView = new ProfileView();
         profileView.showWindow(x,y);
@@ -73,7 +77,11 @@ public class ControladorPresentacion {
     }
 
 
-
+    /**
+     * Función obtener todos los items que hay cargados
+     * @return Vector<Integer> son los id de todos los items
+     * @see Item
+     */
     public static Vector<Integer> getAllItems(){
         Vector<Integer> s = new Vector<>();
         try {
