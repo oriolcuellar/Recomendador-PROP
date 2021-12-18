@@ -301,9 +301,10 @@ public class Main {
             dom.loadItems("EXE/Entradas_CSV/items.csv");
             dom.loadRates("EXE/Entradas_CSV/ratings.oriol.csv");
             dom.logout();
-            dom.login("2", "2");
+            dom.login("1", "1");
 
-            dom.saveItems("EXE/Entradas_CSV/itemsoriol.csv");
+            //dom.saveItems("EXE/Entradas_CSV/itemsoriol.csv");
+            dom.aux();
             dom.logout();
             /*for (String u: dom.showAllUsers()){
                 dom.login(u, u);
