@@ -28,7 +28,7 @@ public class K_Neareast_Neightbour {
     debe coincidir con la posicion del Item en itemsUsats.
      */
 
-    public ArrayList<Item> Algorithm(int k,Conjunt_Items C_Items, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
+    public ArrayList<ArrayList> Algorithm(int k,Conjunt_Items C_Items, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
 
         ArrayList <ArrayList<Item>> M_de_Items = new ArrayList<ArrayList<Item>>();
         ArrayList <ArrayList<Double>> Dis = new ArrayList<ArrayList<Double>>();
@@ -48,7 +48,7 @@ public class K_Neareast_Neightbour {
             ordenar_Items(Dis.get(j), M_de_Items.get(j),0, Dis.get(j).size()-1);
         }
 
-        ArrayList<Item> Items_a_devolver = new ArrayList<>(k);
+        ArrayList<ArrayList> Items_a_devolver = new ArrayList<>(k);
         comparar_conjunts(Valoracions,Items_a_devolver, Dis, M_de_Items, k);
 
         return Items_a_devolver;
@@ -60,19 +60,20 @@ public class K_Neareast_Neightbour {
      la siguiente fórmula: Siendo las matrices en orden de los parámetros X,Y y el vector V -> por unos Item i, j cualquiera.
      Valors_i = Sumatorio(Xij * (1 + Vi/Max(V))
      * @param Val ArrayList con las valoraciones de todos los Item de itemsUsats.
-     * @param I_Finals  ArrayList de los Items que se devolverán.
+     * @param Result  ArrayList de los Items que se devolverán.
      * @param Distances Matriz de ArrayList con las distancias de todos los item. Las posiciones de los items coincidira
-     con M_de_Items, tanto en filas como en columnas.
+ con M_de_Items, tanto en filas como en columnas.
      * @param M_de_Items  Matriz con todos los Items ordenados con los que tengan mayor valor de distancia antes en las
-       columnas y solo los items_usats een las filas. Esta ordenación se debe respetar en la otra  matriz de los parametros y en Val.
+  columnas y solo los items_usats een las filas. Esta ordenación se debe respetar en la otra  matriz de los parametros y en Val.
      * @param k Número de items que se devuelven.
      */
 
-    private void comparar_conjunts (ArrayList<Double> Val, ArrayList<Item> I_Finals, ArrayList<ArrayList<Double>> Distances,
+    private void comparar_conjunts (ArrayList<Double> Val, ArrayList<ArrayList> Result, ArrayList<ArrayList<Double>> Distances,
                                     ArrayList <ArrayList<Item>> M_de_Items, int k) {
 
         Double max_valoracio = Collections.max(Val);
         ArrayList <Double> Valors = new ArrayList<Double>();
+        ArrayList <Item> I_Finals = new ArrayList<Item>();
 
         for (int i = 0; i < M_de_Items.size(); ++i)
             for (int j = 0; j < M_de_Items.get(i).size() && Distances.get(i).get(j) > 0; ++j) {
@@ -96,8 +97,14 @@ public class K_Neareast_Neightbour {
 
         ordenar_simplificado(I_Finals, Valors, 0, I_Finals.size()-1);
 
-        for (int i = I_Finals.size()-1; i >= k ; --i)
-            I_Finals.remove(i);
+        Result.add(I_Finals);
+        Result.add(Valors);
+
+        for (int i = I_Finals.size()-1; i >= k ; --i){
+
+            Result.get(0).remove(i);
+            Result.get(1).remove(i);
+        }
     }
 
     /** Ordena toda la ArrayList de los parametros, de forma creciente para los items con mayor valor en el parametro,

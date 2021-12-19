@@ -5,7 +5,6 @@ import FONTS.src.domini.model.*;
 import FONTS.src.persistencia.ControladorPersistenciaItem;
 import FONTS.src.persistencia.ControladorPersistenciaRatings;
 import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
-import com.sun.jdi.event.BreakpointEvent;
 
 import javax.swing.*;
 import java.util.*;
@@ -56,10 +55,10 @@ public class ControladorDomini {
      */
     private static Map<Integer, ArrayList<User>> itemValoratedBy;
     /**
-     * ArrayList con todos los items de la ultima valoración
+     * ArrayList con todos los items de la ultima valoración del Hibryd
      * @see myPair
      */
-    private static ArrayList<myPair> lastRecomendation;
+    private static ArrayList<ArrayList> lastRecomendation;
     /**
      * ArrayList con todos los items de la ultima valoración
      * @see myPair
@@ -69,7 +68,7 @@ public class ControladorDomini {
      * ArrayList con todos los items de la ultima valoración
      * @see myPair
      */
-    private static ArrayList<myPair> lastRecomendationKNN;
+    private static ArrayList<ArrayList> lastRecomendationKNN;
     /**
      * Booleano que indica si se tiene que volver a calcular una recomendación.
      */
@@ -112,9 +111,9 @@ public class ControladorDomini {
         itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
         itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
-        lastRecomendation = new ArrayList<myPair>();
+        lastRecomendation = new ArrayList<ArrayList>();
         lastRecomendationSlope = new ArrayList<myPair>();
-        lastRecomendationKNN = new ArrayList<myPair>();
+        lastRecomendationKNN = new ArrayList<ArrayList>();
         UnKnown = new ArrayList<>();
         recomendationChanged=true;
         recomendationChangedSlope=true;
@@ -274,7 +273,7 @@ public class ControladorDomini {
      * @return ArrayList<myPair> con las recomendación generada
      * @see myPair
      */
-    private ArrayList<myPair> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
+    private ArrayList<ArrayList> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
         else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
         else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
@@ -315,13 +314,8 @@ public class ControladorDomini {
         }
         //k-neighbours
         K_Neareast_Neightbour knn = new K_Neareast_Neightbour();
-        ArrayList <Item> aux = knn.Algorithm(num_elem, itemList, v_items, valorations);
-        ArrayList<myPair> pair= new ArrayList<myPair>();
-        for (Item m: aux){
-            myPair nou = new myPair(m.getID(), 0);
-            pair.add(nou);
-        }
-        return pair;
+        ArrayList<ArrayList > Result = knn.Algorithm(num_elem, itemList, v_items, valorations);
+        return Result;
     }
     /**
      * El Usuario actual quiere una recomendación para el utilizando el algoritmo Slope
@@ -355,10 +349,11 @@ public class ControladorDomini {
             if (recomendationChangedKNN)
                 lastRecomendationKNN = dominiSingelton.showRecommendedItemsKNN(itemList.n_Items(), ratingPath);
             recomendationChangedKNN=false;
+            ArrayList<Item> Aux = lastRecomendationKNN.get(0);
             ArrayList<Integer> r = new ArrayList<>();
-            for(int i = 0; i < lastRecomendationKNN.size(); ++i) {
-                r.add(lastRecomendationKNN.get(i).getItemID());
-            }
+            for(int i = 0; i < Aux.size(); ++i)
+                r.add(Aux.get(i).getID());
+
             return r;
         }
         catch (Exception e){
@@ -376,38 +371,30 @@ public class ControladorDomini {
         try{
             if (recomendationChanged) {
                 ArrayList<myPair> slope = lastRecomendationSlope;
-                ArrayList<myPair> knn = lastRecomendationKNN;
+                ArrayList<ArrayList> knn = lastRecomendationKNN;
+
                 if (recomendationChangedSlope){
                     slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
                     lastRecomendationSlope=slope;
                 }
+
                 if (recomendationChangedKNN){
                     knn = dominiSingelton.showRecommendedItemsKNN(itemList.n_Items(), ratingPath);
                     lastRecomendationKNN=knn;
                 }
 
-                ArrayList<myPair> tot = new ArrayList<myPair>();
-                int itSlope = 0;
-                int itKnn = 0;
-                while (itKnn < knn.size() || itSlope < slope.size()) {
-                    if (itKnn < knn.size()) {
-                        tot.add(knn.get(itKnn));
-                        itKnn++;
-                    }
-                    if (itSlope < slope.size()) {
-                        tot.add(slope.get(itSlope));
-                        itSlope++;
-                    }
-                }
+                ArrayList<ArrayList> tot = new ArrayList<ArrayList>();
                 //mix los 2 algoritmos
                 lastRecomendation = tot;
                 recomendationChanged=false;
                 recomendationChangedSlope=false;
                 recomendationChangedKNN=false;
             }
+            lastRecomendation = lastRecomendationKNN;
+            ArrayList<Item> Aux = lastRecomendationKNN.get(0);
             ArrayList<Integer> r = new ArrayList<>();
-            for(int i = 0; i < lastRecomendation.size(); ++i) {
-                r.add(lastRecomendation.get(i).getItemID());
+            for(int i = 0; i < Aux.size(); ++i) {
+                r.add(Aux.get(i).getID());
             }
             return r;
         }
@@ -417,7 +404,7 @@ public class ControladorDomini {
     }
     public float evaluateRecomendationGeneral() throws Exception{
         try{
-            return evaluateRecomendation(lastRecomendation);
+            return evaluateRecomendation(lastRecomendation.get(0));
         }
         catch (Exception e){
             throw e;
@@ -433,7 +420,7 @@ public class ControladorDomini {
     }
     public float evaluateRecomendationKNN() throws Exception{
         try{
-            return evaluateRecomendation(lastRecomendationKNN);
+            return evaluateRecomendation(lastRecomendationKNN.get(0));
         }
         catch (Exception e){
             throw e;
@@ -644,7 +631,7 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
             ControladorPersistenciaRecomendation ctrlRecomendation= new ControladorPersistenciaRecomendation();
-            ctrlRecomendation.Escritor_Recomendation(path, lastRecomendation);
+            ctrlRecomendation.Escritor_Recomendation(path, lastRecomendation.get(0));
         }
         catch (Exception e){
             throw e;
@@ -953,7 +940,11 @@ public class ControladorDomini {
             recomendationChangedKNN=true;
             ControladorPersistenciaRecomendation reader = new ControladorPersistenciaRecomendation();
             ArrayList <String> leido = reader.Lector_Recomendation(path);
-            ArrayList <myPair> creado = new ArrayList<myPair>();
+
+            ArrayList <ArrayList> creado = new ArrayList<ArrayList>();
+            ArrayList<Integer> i_Aux = new ArrayList<>();
+            ArrayList <Double> v_Aux = new ArrayList<Double>();
+
             for (String linea: leido){
                 boolean coma=false;
                 String item="";
@@ -973,9 +964,13 @@ public class ControladorDomini {
                         }
                     }
                 }
-                myPair m = new myPair(Integer.valueOf(item), Float.valueOf(val));
-                creado.add(m);
+                int Item = Integer.valueOf(item);
+                Double Value = Double.valueOf(val);
+                i_Aux.add(Item);
+                v_Aux.add(Value);
             }
+            creado.add(i_Aux);
+            creado.add(v_Aux);
             lastRecomendation=creado;
         }
         catch (Exception e){
@@ -1089,9 +1084,9 @@ public class ControladorDomini {
         itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
         itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
-        lastRecomendation = new ArrayList<myPair>();
+        lastRecomendation = new ArrayList<ArrayList>();
         lastRecomendationSlope = new ArrayList<myPair>();
-        lastRecomendationKNN = new ArrayList<myPair>();
+        lastRecomendationKNN = new ArrayList<ArrayList>();
         recomendationChanged=true;
         recomendationChangedSlope=true;
         recomendationChangedKNN=true;

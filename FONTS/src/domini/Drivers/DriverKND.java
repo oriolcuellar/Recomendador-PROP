@@ -265,7 +265,7 @@ public class DriverKND {
 
                     Conjunt_Items Ct = new Conjunt_Items(A1);
                     K_Neareast_Neightbour prueba = new K_Neareast_Neightbour();
-                    ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, A2, Valoracions);
+                    ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, A2, Valoracions).get(0);
 
                     long end_time = System.currentTimeMillis();
                     long ex_time = (end_time - start_time)/mil;
@@ -307,7 +307,7 @@ public class DriverKND {
 
                     Conjunt_Items Ct = CI_Static;
                     K_Neareast_Neightbour prueba = new K_Neareast_Neightbour();
-                    ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, A2, Valoracions);
+                    ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, A2, Valoracions).get(0);
 
                     long end_time = System.currentTimeMillis();
                     long ex_time = (end_time - start_time)/mil;
@@ -387,7 +387,7 @@ public class DriverKND {
                 }
 
                 K_Neareast_Neightbour prueba = new K_Neareast_Neightbour ();
-                ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, ItemsUsats, Valoracions);
+                ArrayList<Item> Resultado = prueba.Algorithm(k, Ct, ItemsUsats, Valoracions).get(0);
 
                 long end_time = System.currentTimeMillis();
                 long ex_time = (end_time - start_time);
