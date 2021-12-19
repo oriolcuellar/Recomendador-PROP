@@ -26,6 +26,13 @@ public class ProfileView {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
+                    if(CtrlPres.isAdmin()) {
+                        int input = JOptionPane.showConfirmDialog(null, "Do you want to save the changes?", "Choose",
+                                JOptionPane.OK_CANCEL_OPTION);
+                        if (input == 0) {
+                            CtrlPres.saveAll();
+                        }
+                    }
                     int x = frame.getX();
                     int y = frame.getY();
                     CtrlPres.logout();

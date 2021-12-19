@@ -116,6 +116,7 @@ public class ControladorDomini {
         lastRecomendationSlope = new ArrayList<myPair>();
         lastRecomendationKNN = new ArrayList<myPair>();
         UnKnown = new ArrayList<>();
+        UnKnown = new ArrayList<>();
         recomendationChanged=true;
         recomendationChangedSlope=true;
         recomendationChangedKNN=true;
@@ -612,7 +613,7 @@ public class ControladorDomini {
      * Se quieren guardar los cambios de los items en el sistema
      * @param path path es el documento donde se quiere guardar
      */
-  /*public void saveItems(String path) throws Exception{
+  public void saveItems(String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
@@ -621,7 +622,7 @@ public class ControladorDomini {
         catch (Exception e){
             throw e;
         }
-    }*/
+    }
     /**
      * Se quieren guardar los cambios de los ratings en el sistema
      * @param path path es el documento donde se quiere guardar
@@ -845,11 +846,12 @@ public class ControladorDomini {
      */
     public void deleteItem(String deleteme) throws Exception{
         if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
-        else if (!itemList.existeix_item(Integer.valueOf(deleteme))) throw new ItemNotExistsException(deleteme);
-        Item it = itemList.getItems().get(Integer.valueOf(deleteme));
+        else if (!itemList.existeix_item(Integer.parseInt(deleteme))) throw new ItemNotExistsException(deleteme);
+        Item it = itemList.getItems().get(Integer.parseInt(deleteme));
         for (Item m: itemList.getItems()){
             if(String.valueOf(m.getID()).equals(deleteme)) it=m;
         }
+        System.out.println(itemList.existeix_item(it.getID()));
         //borrar de cada usuario el item si lo ha valorado
         for (int i: usersList.keySet()){
             User u = usersList.get(i);
@@ -859,7 +861,8 @@ public class ControladorDomini {
         //borrar de el vector de itemValoratedBy
         itemValoratedBy.remove(it.getID());
         //borrar de itemList
-        itemList.eliminar_item(it);
+
+        System.out.println(itemList.eliminar_item(it));
         //si es item selected==null
         recomendationChanged=true;
         recomendationChangedSlope=true;
@@ -993,15 +996,12 @@ public class ControladorDomini {
     public void deleteUser(String delete_me){
         //pre: actualUser admin
         if(actualUser!=null && actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1")){//no esborres l'admin
-
-
-
 /*
             for (ItemUsat i: ratesList){
                 if ( delete_me.equals(StringValueOf(i.getUsuari().getUserID())) ratesList.delete(i);
             }
             usersList.delete(delete_me);
-            */
+*/
 
 
         }
@@ -1086,7 +1086,6 @@ public class ControladorDomini {
     }
     public void deleteAll(){
         usersList = new HashMap<Integer, User>();
-        actualUser = null;
         selectedItem = null;
         itemList = new Conjunt_Items();
         itemTypeList = new HashMap<String, TipusItem>();
@@ -1098,7 +1097,6 @@ public class ControladorDomini {
         recomendationChangedSlope=true;
         recomendationChangedKNN=true;
         UnKnown = new ArrayList <Vector<String>>();
-
     }
 
 
