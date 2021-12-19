@@ -426,7 +426,7 @@ public class ControladorDomini {
     }
     public float evaluateRecomendationSlope() throws Exception{
         try{
-            return evaluateRecomendation(lastRecomendation);
+            return evaluateRecomendation(lastRecomendationSlope);
         }
         catch (Exception e){
             throw e;
@@ -434,7 +434,7 @@ public class ControladorDomini {
     }
     public float evaluateRecomendationKNN() throws Exception{
         try{
-            return evaluateRecomendation(lastRecomendation);
+            return evaluateRecomendation(lastRecomendationKNN);
         }
         catch (Exception e){
             throw e;
