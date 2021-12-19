@@ -848,7 +848,9 @@ public class ControladorDomini {
         if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
         else if (!itemList.existeix_item(Integer.valueOf(deleteme))) throw new ItemNotExistsException(deleteme);
         Item it = itemList.getItems().get(Integer.valueOf(deleteme));
-
+        for (Item m: itemList.getItems()){
+            if(String.valueOf(m.getID()).equals(deleteme)) it=m;
+        }
         //borrar de cada usuario el item si lo ha valorado
         for (int i: usersList.keySet()){
             User u = usersList.get(i);
