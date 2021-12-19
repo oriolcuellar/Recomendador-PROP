@@ -335,8 +335,8 @@ public class ControladorDomini {
                 lastRecomendationSlope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
             recomendationChangedSlope=false;
             ArrayList<Integer> r = new ArrayList<>();
-            for(int i = 0; i < lastRecomendation.size(); ++i) {
-                r.add(lastRecomendation.get(i).getItemID());
+            for(int i = 0; i < lastRecomendationSlope.size(); ++i) {
+                r.add(lastRecomendationSlope.get(i).getItemID());
             }
             return r;
         }
@@ -356,8 +356,8 @@ public class ControladorDomini {
                 lastRecomendationKNN = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
             recomendationChangedKNN=false;
             ArrayList<Integer> r = new ArrayList<>();
-            for(int i = 0; i < lastRecomendation.size(); ++i) {
-                r.add(lastRecomendation.get(i).getItemID());
+            for(int i = 0; i < lastRecomendationKNN.size(); ++i) {
+                r.add(lastRecomendationSlope.get(i).getItemID());
             }
             return r;
         }
@@ -1077,6 +1077,7 @@ public class ControladorDomini {
             throw e;
         }
     }
+    public void deleteAllUsers
 
     /*
      * Se devuelve el un map con todos los usuarios del sistema
