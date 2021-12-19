@@ -494,7 +494,7 @@ public class ControladorDomini {
             //System.out.println(ratingsFiltrados.size());
             //System.out.println(lastRecomendation.size());
             //System.out.println(lastRecomendationAuxiliar.size());
-
+            if(lastRecomendationAuxiliar.size()==0 || ratingsFiltrados.size()==0) throw new UserWithoutRatingsException("evaluateRecomendation");
             RateRecomendation r = new RateRecomendation();
             return r.execute(lastRecomendationAuxiliar, ratingsFiltrados);
 
