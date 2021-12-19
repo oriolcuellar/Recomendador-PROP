@@ -71,8 +71,10 @@ public class showAtributes {
         tabla.setRowHeight(20);
 
         TableColumnModel columnModel = tabla.getColumnModel();
-        columnModel.getColumn(0).setPreferredWidth(100);
-        columnModel.getColumn(1).setPreferredWidth(100);
+        for (int i = 0; i < valores.size(); i++){
+
+            columnModel.getColumn(i).setPreferredWidth(100);
+        }
         int width = 100 * valores.size();
         System.out.println(width);
         tabla.setMinimumSize(new Dimension(width, 40));
