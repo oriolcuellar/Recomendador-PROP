@@ -115,6 +115,7 @@ public class ControladorDomini {
         lastRecomendation = new ArrayList<myPair>();
         lastRecomendationSlope = new ArrayList<myPair>();
         lastRecomendationKNN = new ArrayList<myPair>();
+        UnKnown = new ArrayList<>();
         recomendationChanged=true;
         recomendationChangedSlope=true;
         recomendationChangedKNN=true;
@@ -346,14 +347,13 @@ public class ControladorDomini {
     }
     /**
      * El Usuario actual quiere una recomendación para el utilizando el algoritmo KNN
-     * @param num_elem num_elem es el numero de elementos que se quiere
      * @return ArrayList<myPair> con las recomendación generada
      * @see myPair
      */
-    public ArrayList<Integer> doKNN(int num_elem) throws Exception{
+    public ArrayList<Integer> doKNN() throws Exception{
         try{
             if (recomendationChangedKNN)
-                lastRecomendationKNN = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
+                lastRecomendationKNN = dominiSingelton.showRecommendedItemsKNN(itemList.n_Items(), ratingPath);
             recomendationChangedKNN=false;
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < lastRecomendationKNN.size(); ++i) {
@@ -367,13 +367,12 @@ public class ControladorDomini {
     }
     /**
      * El Usuario actual quiere una recomendación para el utilizando los dos algoritmos
-     * @param num_elem num_elem es el numero de elementos que se quiere para el knn
      * @param k_slope k_slope es el numero de clusters que se quiere para el Slope
      * @param max_slope max_slope es el valor maximo de una recomendación
      * @return ArrayList<myPair> con las recomendación generada
      * @see myPair
      */
-    public ArrayList<Integer> doRecomendation(int k_slope, int max_slope, int num_elem) throws Exception{
+    public ArrayList<Integer> doRecomendation(int k_slope, int max_slope) throws Exception{
         try{
             if (recomendationChanged) {
                 ArrayList<myPair> slope = lastRecomendationSlope;
@@ -383,7 +382,7 @@ public class ControladorDomini {
                     lastRecomendationSlope=slope;
                 }
                 if (recomendationChangedKNN){
-                    knn = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
+                    knn = dominiSingelton.showRecommendedItemsKNN(itemList.n_Items(), ratingPath);
                     lastRecomendationKNN=knn;
                 }
 
@@ -1068,6 +1067,11 @@ public class ControladorDomini {
 
     public boolean usersLoaded(){
         if (usersList.size()==0) return false;
+        return true;
+    }
+
+    public boolean unknownLoaded(){
+        if (UnKnown.size()==0) return false;
         return true;
     }
 

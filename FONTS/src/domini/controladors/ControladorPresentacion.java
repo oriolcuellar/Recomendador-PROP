@@ -119,7 +119,7 @@ public class ControladorPresentacion {
     public static ArrayList<Integer> getRecomendedItemsCB(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.doKNN(50);
+            s = CtrlDom.doKNN();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
             System.out.println(s.get(0));
@@ -130,7 +130,7 @@ public class ControladorPresentacion {
     public static ArrayList<Integer> getRecomendedItemsHybrid(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.doRecomendation(4,10, 50);
+            s = CtrlDom.doRecomendation(4,10);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
             System.out.println(s.get(0));
@@ -162,15 +162,17 @@ public class ControladorPresentacion {
         }
     }
 
-    public float evaluateRecomendation(String s) {
+    public void evaluateRecomendation(String s) {
         try {
-            if(s == "Hybrid") return CtrlDom.evaluateRecomendationGeneral();
-            else if(s == "CB") return CtrlDom.evaluateRecomendationKNN();
-            else if(s == "CF") return CtrlDom.evaluateRecomendationSlope();
+            float f = 0;
+            if(s == "Hybrid") f = CtrlDom.evaluateRecomendationGeneral();
+            else if(s == "CB") f = CtrlDom.evaluateRecomendationKNN();
+            else if(s == "CF") f = CtrlDom.evaluateRecomendationSlope();
+            JOptionPane.showMessageDialog(null,f);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"It's impossible to evalute this recomendation","Error ", JOptionPane.ERROR_MESSAGE);
             System.out.println(e);
         }
-        return 0;
     }
 
     public void login(String username, String password) {
@@ -263,6 +265,22 @@ public class ControladorPresentacion {
             s = "No té valoració";
         }
         return s;
+    }
+
+    public boolean itemsLoaded() {
+        return CtrlDom.itemsLoaded();
+    }
+
+    public boolean usersLoaded() {
+        return CtrlDom.usersLoaded();
+    }
+
+    public boolean unknownLoaded() {
+        return CtrlDom.unknownLoaded();
+    }
+
+    public void deleteAllData() {
+         CtrlDom.deleteAll();
     }
 
     public ArrayList<String> getAtributos() {
