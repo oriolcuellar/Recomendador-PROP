@@ -87,6 +87,8 @@ public class ControladorDomini {
      */
     private static String ratingPath;
 
+    private static ArrayList <Vector<String>> UnKnown;
+
     //CtrlDomini control= CtrlDomini.getInstance();
 //control.getAllUsers();
 //constructor
@@ -116,6 +118,7 @@ public class ControladorDomini {
         recomendationChanged=true;
         recomendationChangedSlope=true;
         recomendationChangedKNN=true;
+        ArrayList <Vector<String>> UnKnown = new ArrayList <Vector<String>>();
         admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
     }
@@ -445,8 +448,7 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("evaluateRecomendation");
         else if (lastRecomendation1.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
-            ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
-            ArrayList <Vector<String>> ratings_leidos = ctrRec.Lector_Ratings(path);
+            ArrayList <Vector<String>> ratings_leidos = UnKnown;
             ArrayList <myPair> ratingsOrdenados = new ArrayList<myPair>();
             for (Vector<String> v: ratings_leidos){//ordenar y eliminar valoraciones que no son mias
                 if (String.valueOf(actualUser.getUserID()).equals(v.get(0))){
@@ -741,11 +743,12 @@ public class ControladorDomini {
             ti=ListaTiposItems.get(ID_ti);
             va=ti.getAtributes();
         }
-        else{//no existe
+        else if(ListaTiposItems.size()==0){//no existe
             ti = new TipusItem(va);
             ListaTiposItems.put(ID_ti, ti);
             new_type_item=true;
         }
+        else throw new TooManyItemTypeException("create Item");
 
         //DEFINIR TIPO ATRIBUTO
         //string de valores to vector
@@ -1063,6 +1066,16 @@ public class ControladorDomini {
     public boolean usersLoaded(){
         if (usersList.size()==0) return false;
         return true;
+    }
+
+    public void loadUnKnown(String path) throws Exception{
+        try {
+            ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
+            ArrayList<Vector<String>> ratings_leidos = ctrRec.Lector_Ratings(path);
+        }
+        catch (Exception e){
+            throw e;
+        }
     }
 
     /*
