@@ -64,6 +64,20 @@ public class Conjunt_Items {
         return binarySearch(Items, 0, Items.size()-1, id);
     }
 
+    /** Devuel el item con el id especificado.
+     * @see Item
+     * @param id identificador del Item que se quiere obtener.
+     */
+
+    public Item get_item(int id) {
+
+        if(existeix_item(id)) {
+            int pos = binarySearchPosition(Items, 0, Items.size() - 1, id);
+            return Items.get(pos);
+        }
+        else return null;
+    }
+
     /** Devuelve la posicion del Item en la ArrayList del conjunt.
      * @see Item
      * @param a Item del que se quiere saber la posicion.
