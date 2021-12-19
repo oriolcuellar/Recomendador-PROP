@@ -162,15 +162,17 @@ public class ControladorPresentacion {
         }
     }
 
-    public float evaluateRecomendation(String s) {
+    public void evaluateRecomendation(String s) {
         try {
-            if(s == "Hybrid") return CtrlDom.evaluateRecomendationGeneral();
-            else if(s == "CB") return CtrlDom.evaluateRecomendationKNN();
-            else if(s == "CF") return CtrlDom.evaluateRecomendationSlope();
+            float f = 0;
+            if(s == "Hybrid") f = CtrlDom.evaluateRecomendationGeneral();
+            else if(s == "CB") f = CtrlDom.evaluateRecomendationKNN();
+            else if(s == "CF") f = CtrlDom.evaluateRecomendationSlope();
+            JOptionPane.showMessageDialog(null,f);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"It's impossible to evalute this recomendation","Error ", JOptionPane.ERROR_MESSAGE);
             System.out.println(e);
         }
-        return 0;
     }
 
     public void login(String username, String password) {

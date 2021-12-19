@@ -60,8 +60,8 @@ public class ShowRecomendedItems {
         EvaluateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                float f = CtrlPres.evaluateRecomendation(s);
-                JOptionPane.showMessageDialog(null,f);
+                CtrlPres.evaluateRecomendation(s);
+
 
             }
         });
