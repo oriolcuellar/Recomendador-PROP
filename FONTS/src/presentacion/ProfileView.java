@@ -20,6 +20,7 @@ public class ProfileView {
         Integer userID = CtrlPres.getActualUserId();
         String s = userID.toString();
         id.setText(s);
+        if(CtrlPres.isAdmin()) statsButton.setVisible(false);
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

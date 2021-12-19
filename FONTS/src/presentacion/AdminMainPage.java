@@ -17,6 +17,8 @@ public class AdminMainPage {
     private JButton deleteUserButton;
     private JButton uploadUsersRatingsButton;
     private JButton uploadItemsButton;
+    private JButton uploadRateValorationButton;
+    private JButton DeleteButton;
     private JFileChooser fileChooser = new JFileChooser();
     private boolean items = false;
     private boolean ratings = false;
@@ -61,6 +63,24 @@ public class AdminMainPage {
                 enableButtons();
             }
         });
+        uploadRateValorationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    fileChooser.showOpenDialog(fileChooser);
+                    String path = fileChooser.getSelectedFile().getAbsolutePath();
+                    CtrlPres.loadUnKnown(path);
+                    items = true;
+                } catch (Exception e) {
+                    enableButtons();
+                    items = CtrlPres.getAllItems().size() != 0;
+                    JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
 
         settingsButton.addActionListener(new ActionListener() {
             @Override
@@ -94,6 +114,7 @@ public class AdminMainPage {
         uploadUsersRatingsButton.setEnabled(false);
         deleteItemButton.setEnabled(false);
         deleteUserButton.setEnabled(false);
+        uploadRateValorationButton.setEnabled(false);
     }
 
     public void enableButtons() {
@@ -102,6 +123,8 @@ public class AdminMainPage {
         uploadUsersRatingsButton.setEnabled(true);
         deleteItemButton.setEnabled(true);
         deleteUserButton.setEnabled(true);
+        uploadRateValorationButton.setEnabled(true);
+
     }
     public void setInvisible() {
         frame.dispose();

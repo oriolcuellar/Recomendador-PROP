@@ -40,6 +40,7 @@ public class StatsView {
             public void actionPerformed(ActionEvent actionEvent) {
                 if (favouriteItem.getText() != "You have not valorated item") {
                     String selectedItem = favouriteItem.getText();
+                    CtrlPres.selectItem(selectedItem);
                     int x = frame.getX();
                     int y = frame.getY();
                     CtrlPres.changeShowAtributesView(x,y, selectedItem);

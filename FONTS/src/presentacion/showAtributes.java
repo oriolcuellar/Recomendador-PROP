@@ -17,7 +17,6 @@ public class showAtributes {
     private static JFrame frame;
     private JButton backButton;
     private JPanel panel;
-    private JButton settingsButton;
     private JButton valorate;
     private JList valors;
     private JList atributes;
@@ -91,15 +90,7 @@ public class showAtributes {
                 frame.dispose();
             }
         });
-        settingsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                int x = frame.getX();
-                int y = frame.getY();
-                CtrlPres.changeProfileView(x,y);
-                frame.dispose();
-            }
-        });
+
         valorate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

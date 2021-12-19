@@ -119,7 +119,7 @@ public class ControladorPresentacion {
     public static ArrayList<Integer> getRecomendedItemsCB(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.doKNN(1000000);
+            s = CtrlDom.doKNN(50);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
             System.out.println(s.get(0));
@@ -152,6 +152,25 @@ public class ControladorPresentacion {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    public void loadUnKnown(String path) {
+        try {
+            CtrlDom.loadUnKnown(path);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public float evaluateRecomendation(String s) {
+        try {
+            if(s == "Hybrid") return CtrlDom.evaluateRecomendationGeneral();
+            else if(s == "CB") return CtrlDom.evaluateRecomendationKNN();
+            else if(s == "CF") return CtrlDom.evaluateRecomendationSlope();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return 0;
     }
 
     public void login(String username, String password) {

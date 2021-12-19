@@ -18,9 +18,9 @@ public class ShowRecomendedItems {
     private static JFrame frame;
     private JButton backButton;
     private JPanel panel;
-    private JButton settingsButton;
     private JList list1;
     private JScrollPane scrollPane;
+    private JButton EvaluateButton;
 
     public ShowRecomendedItems(String s) {
 
@@ -40,8 +40,9 @@ public class ShowRecomendedItems {
         if(s == "CF") items = CtrlPres.getRecomendedItemsSlope();
         else if(s == "CB") items = CtrlPres.getRecomendedItemsCB();
         else items = CtrlPres.getRecomendedItemsHybrid();
-
-        for(int i = 0; i < items.size(); ++i) {
+        int n = 50;
+        if(n > items.size()) n = items.size();
+        for(int i = 0; i < n; ++i) {
             demoList.addElement(items.get(i));
         }
         list1.setModel(demoList);
@@ -56,21 +57,20 @@ public class ShowRecomendedItems {
                 frame.dispose();
             }
         });
-
-        settingsButton.addActionListener(new ActionListener() {
+        EvaluateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                int x = frame.getX();
-                int y = frame.getY();
-                CtrlPres.changeProfileView(x,y);
-                frame.dispose();
+                float f = CtrlPres.evaluateRecomendation(s);
+                JOptionPane.showMessageDialog(null,f);
+
             }
         });
 
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    String selectedItem = (String) list1.getSelectedValue();
+                    String selectedItem = String.valueOf(list1.getSelectedValue());
+                    CtrlPres.selectItem(selectedItem);
                     int x = frame.getX();
                     int y = frame.getY();
                     CtrlPres.changeShowAtributesView(x,y, selectedItem);

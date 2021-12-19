@@ -20,24 +20,6 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="1df6f" class="javax.swing.JButton" binding="settingsButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <background color="-7966146"/>
-              <focusable value="false"/>
-              <font name="Noto Sans Mono CJK JP" size="18" style="1"/>
-              <foreground color="-16777216"/>
-              <hideActionText value="false"/>
-              <text value="Settings"/>
-            </properties>
-          </component>
-          <hspacer id="edc12">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </hspacer>
           <component id="d6737" class="javax.swing.JButton" binding="backButton" default-binding="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -50,6 +32,23 @@
               <text value="←"/>
             </properties>
           </component>
+          <component id="7bc8d" class="javax.swing.JButton" binding="EvaluateButton">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-9334892"/>
+              <focusable value="false"/>
+              <font name="Noto Sans Mono CJK KR" size="18" style="1"/>
+              <foreground color="-16777216"/>
+              <text value="Evaluate Recomendation"/>
+            </properties>
+          </component>
+          <hspacer id="ddcad">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
         </children>
       </grid>
       <grid id="ab54a" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

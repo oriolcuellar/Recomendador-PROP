@@ -416,25 +416,25 @@ public class ControladorDomini {
             throw e;
         }
     }
-    public float evaluateRecomendationGeneral(String path) throws Exception{
+    public float evaluateRecomendationGeneral() throws Exception{
         try{
-            return evaluateRecomendation(path, lastRecomendation);
+            return evaluateRecomendation(lastRecomendation);
         }
         catch (Exception e){
             throw e;
         }
     }
-    public float evaluateRecomendationSlope(String path) throws Exception{
+    public float evaluateRecomendationSlope() throws Exception{
         try{
-            return evaluateRecomendation(path, lastRecomendation);
+            return evaluateRecomendation(lastRecomendation);
         }
         catch (Exception e){
             throw e;
         }
     }
-    public float evaluateRecomendationKNN(String path) throws Exception{
+    public float evaluateRecomendationKNN() throws Exception{
         try{
-            return evaluateRecomendation(path, lastRecomendation);
+            return evaluateRecomendation(lastRecomendation);
         }
         catch (Exception e){
             throw e;
@@ -446,7 +446,7 @@ public class ControladorDomini {
      * @param path num_elem path el path al fichero que contiene la recomendación ideal
      * @return float con la calidad de la recomendación
      */
-    private float evaluateRecomendation(String path,  ArrayList<myPair> lastRecomendation1) throws Exception{ //co
+    private float evaluateRecomendation(ArrayList<myPair> lastRecomendation1) throws Exception{ //co
         if (actualUser==null) throw new NoUserLogedInException("evaluateRecomendation");
         else if (lastRecomendation1.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
@@ -1092,7 +1092,7 @@ public class ControladorDomini {
         recomendationChanged=true;
         recomendationChangedSlope=true;
         recomendationChangedKNN=true;
-        ArrayList <Vector<String>> UnKnown = new ArrayList <Vector<String>>();
+        UnKnown = new ArrayList <Vector<String>>();
 
     }
 
