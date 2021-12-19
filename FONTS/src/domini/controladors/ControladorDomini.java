@@ -61,6 +61,16 @@ public class ControladorDomini {
      */
     private static ArrayList<myPair> lastRecomendation;
     /**
+     * ArrayList con todos los items de la ultima valoración
+     * @see myPair
+     */
+    private static ArrayList<myPair> lastRecomendationSlope;
+    /**
+     * ArrayList con todos los items de la ultima valoración
+     * @see myPair
+     */
+    private static ArrayList<myPair> lastRecomendationKNN;
+    /**
      * Booleano que indica si se tiene que volver a calcular una recomendación.
      */
     private static boolean recomendationChanged;
@@ -101,6 +111,8 @@ public class ControladorDomini {
         itemTypeList = new HashMap<String, TipusItem>();
         itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
         lastRecomendation = new ArrayList<myPair>();
+        lastRecomendationSlope = new ArrayList<myPair>();
+        lastRecomendationKNN = new ArrayList<myPair>();
         recomendationChanged=true;
         recomendationChangedSlope=true;
         recomendationChangedKNN=true;
@@ -225,7 +237,7 @@ public class ControladorDomini {
      * @return ArrayList<myPair>con las recomendación generada
      * @see myPair
      */
-    public ArrayList<myPair> showRecommendedItemsSlope(int k, int maxValue) throws Exception{// to do------------------
+    private ArrayList<myPair> showRecommendedItemsSlope(int k, int maxValue) throws Exception{// to do------------------
         try {
             if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
             else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
@@ -258,7 +270,7 @@ public class ControladorDomini {
      * @return ArrayList<myPair> con las recomendación generada
      * @see myPair
      */
-    public ArrayList<myPair> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
+    private ArrayList<myPair> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
         else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
         else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
@@ -317,10 +329,8 @@ public class ControladorDomini {
     public ArrayList<Integer> doSlope(int k_slope, int max_slope) throws Exception{
         try{
             if (recomendationChangedSlope)
-                lastRecomendation = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+                lastRecomendationSlope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
             recomendationChangedSlope=false;
-            recomendationChanged=true;
-            recomendationChangedKNN=true;
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < lastRecomendation.size(); ++i) {
                 r.add(lastRecomendation.get(i).getItemID());
@@ -340,10 +350,8 @@ public class ControladorDomini {
     public ArrayList<Integer> doKNN(int num_elem) throws Exception{
         try{
             if (recomendationChangedKNN)
-                lastRecomendation = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
+                lastRecomendationKNN = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
             recomendationChangedKNN=false;
-            recomendationChangedSlope=true;
-            recomendationChanged=true;
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < lastRecomendation.size(); ++i) {
                 r.add(lastRecomendation.get(i).getItemID());
@@ -365,8 +373,8 @@ public class ControladorDomini {
     public ArrayList<Integer> doRecomendation(int k_slope, int max_slope, int num_elem) throws Exception{
         try{
             if (recomendationChanged) {
-                ArrayList<myPair> slope = lastRecomendation;
-                ArrayList<myPair> knn = lastRecomendation;
+                ArrayList<myPair> slope = lastRecomendationSlope;
+                ArrayList<myPair> knn = lastRecomendationKNN;
                 if (recomendationChangedSlope){
                     slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
                 }
@@ -403,14 +411,39 @@ public class ControladorDomini {
             throw e;
         }
     }
+    public float evaluateRecomendationGeneral(String path) throws Exception{
+        try{
+            return evaluateRecomendation(path, lastRecomendation);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+    public float evaluateRecomendationSlope(String path) throws Exception{
+        try{
+            return evaluateRecomendation(path, lastRecomendation);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+    public float evaluateRecomendationKNN(String path) throws Exception{
+        try{
+            return evaluateRecomendation(path, lastRecomendation);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
     /**
      * El Usuario actual quiere comparar la recomendación que ha obtenido con una ideal utilizando un algoritmo DCG
      * @param path num_elem path el path al fichero que contiene la recomendación ideal
      * @return float con la calidad de la recomendación
      */
-    public float evaluateRecomendation(String path) throws Exception{ //co
+    private float evaluateRecomendation(String path,  ArrayList<myPair> lastRecomendation1) throws Exception{ //co
         if (actualUser==null) throw new NoUserLogedInException("evaluateRecomendation");
-        else if (lastRecomendation.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
+        else if (lastRecomendation1.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
             ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
             ArrayList <Vector<String>> ratings_leidos = ctrRec.Lector_Ratings(path);
@@ -436,7 +469,7 @@ public class ControladorDomini {
             //System.out.println(aux.size());
             //System.out.println(ratingsOrdenados.size());
             ArrayList<myPair> lastRecomendationAuxiliar = new ArrayList<myPair>();
-            for (myPair m: lastRecomendation){//eliminar mis predicciones que no estan en unknown
+            for (myPair m: lastRecomendation1){//eliminar mis predicciones que no estan en unknown
                 for (myPair m2: ratingsOrdenados){
                     if(m2.getItemID()==m.getItemID()){
                         lastRecomendationAuxiliar.add(m);
@@ -1024,6 +1057,11 @@ public class ControladorDomini {
 
     public boolean itemsLoaded(){
         if (itemList.n_Items()==0) return false;
+        return true;
+    }
+
+    public boolean usersLoaded(){
+        if (usersList.size()==0) return false;
         return true;
     }
 
