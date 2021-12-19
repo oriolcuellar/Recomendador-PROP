@@ -443,7 +443,6 @@ public class ControladorDomini {
 
     /**
      * El Usuario actual quiere comparar la recomendación que ha obtenido con una ideal utilizando un algoritmo DCG
-     * @param path num_elem path el path al fichero que contiene la recomendación ideal
      * @return float con la calidad de la recomendación
      */
     private float evaluateRecomendation(ArrayList<myPair> lastRecomendation1) throws Exception{ //co
