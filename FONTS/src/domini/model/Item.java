@@ -103,6 +103,15 @@ public class Item {
         return v;
     }
 
+    public String getAtr(){
+
+        String v = valors.toString();
+        v = v.substring(1, v.length()-1);
+        v = v.replace(" ","") + ","+String.valueOf(ID);
+        //System.out.println(s);
+        return v;
+    }
+
     //Setters
 
     /**

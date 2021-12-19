@@ -52,10 +52,10 @@ public class ControladorPersistenciaItem {
         //if (fichero.exists()) throw new FileExistsException(csvFile);
         //else {
             try{
-                Map <String, ArrayList <String> > todo = new HashMap <String, ArrayList <String> > ();
+               /* Map <String, ArrayList <String> > todo = new HashMap <String, ArrayList <String> > ();
 
                 for (Item i: list_items.getItems()){
-                    /*//String atr=i.getDadesInicials().get(0);
+                    //String atr=i.getDadesInicials().get(0);
                     //String val=i.getDadesInicials().get(1);
                     if (todo.containsKey(atr)){//ya hay items de este tipo
                         todo.get(atr).add(val);
@@ -64,33 +64,17 @@ public class ControladorPersistenciaItem {
                         ArrayList <String> nou = new ArrayList<String>();
                         nou.add(val);
                         todo.put(atr, nou);
-                    }*/
+                    }
 
 
-                }
+                }*/
                 int n=0;
-                for(String s: todo.keySet()){//para cada tipo de item
+                File fichero = new File(csvFile);
+                BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
+                for(Item i: list_items.getItems()){//para cada tipo de item
+                    if(n==0) bw.write(i.getAtr());
                     n++;
-                    String fileName = "";
-                    boolean punto=false;
-                    for (char c: csvFile.toCharArray()){
-                        if (c!='.' && !punto){
-                            fileName+=c;
-                        }
-                        else{
-                            punto=true;
-                        }
-                    }
-                    fileName+=String.valueOf(n) + ".csv";
-                    File fichero = new File(fileName);
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
-                    //String nomFile ="Items tipo "+ String.valueOf(n);
-                    //File fichero = new File(nomFile);
-                    //BufferedWriter bw = new BufferedWriter(new FileWriter(nomFile));
-                    bw.write(s+"\n");
-                    for (String it: todo.get(s)){
-                        bw.write(it+"\n");
-                    }
+                    bw.write(i.getString());
                     bw.close();
                 }
 
