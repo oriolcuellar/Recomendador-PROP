@@ -357,7 +357,7 @@ public class ControladorDomini {
             recomendationChangedKNN=false;
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < lastRecomendationKNN.size(); ++i) {
-                r.add(lastRecomendationSlope.get(i).getItemID());
+                r.add(lastRecomendationKNN.get(i).getItemID());
             }
             return r;
         }
@@ -380,9 +380,11 @@ public class ControladorDomini {
                 ArrayList<myPair> knn = lastRecomendationKNN;
                 if (recomendationChangedSlope){
                     slope = dominiSingelton.showRecommendedItemsSlope(k_slope, max_slope);
+                    lastRecomendationSlope=slope;
                 }
                 if (recomendationChangedKNN){
                     knn = dominiSingelton.showRecommendedItemsKNN(num_elem, ratingPath);
+                    lastRecomendationKNN=knn;
                 }
 
                 ArrayList<myPair> tot = new ArrayList<myPair>();
@@ -401,8 +403,8 @@ public class ControladorDomini {
                 //mix los 2 algoritmos
                 lastRecomendation = tot;
                 recomendationChanged=false;
-                recomendationChangedSlope=true;
-                recomendationChangedKNN=true;
+                recomendationChangedSlope=false;
+                recomendationChangedKNN=false;
             }
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < lastRecomendation.size(); ++i) {
@@ -1071,13 +1073,29 @@ public class ControladorDomini {
     public void loadUnKnown(String path) throws Exception{
         try {
             ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
-            ArrayList<Vector<String>> ratings_leidos = ctrRec.Lector_Ratings(path);
+            UnKnown = ctrRec.Lector_Ratings(path);
         }
         catch (Exception e){
             throw e;
         }
     }
-    public void deleteAllUsers
+    public void deleteAll(){
+        usersList = new HashMap<Integer, User>();
+        actualUser = null;
+        selectedItem = null;
+        itemList = new Conjunt_Items();
+        itemTypeList = new HashMap<String, TipusItem>();
+        itemValoratedBy = new HashMap<Integer,ArrayList<User>>();
+        lastRecomendation = new ArrayList<myPair>();
+        lastRecomendationSlope = new ArrayList<myPair>();
+        lastRecomendationKNN = new ArrayList<myPair>();
+        recomendationChanged=true;
+        recomendationChangedSlope=true;
+        recomendationChangedKNN=true;
+        ArrayList <Vector<String>> UnKnown = new ArrayList <Vector<String>>();
+
+    }
+
 
     /*
      * Se devuelve el un map con todos los usuarios del sistema
