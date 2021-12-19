@@ -120,6 +120,42 @@ public class AdminMainPage {
             }
         });
 
+        deleteItemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    String itemDeleted = JOptionPane.showInputDialog(null,
+                            "Write the id of the item to delete", null);
+                    CtrlPres.deleteItem(itemDeleted);
+                    items = CtrlPres.itemsLoaded();
+                } catch (Exception e) {
+                    enableButtons();
+                    JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+
+        deleteUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    String userDeleted = JOptionPane.showInputDialog(null,
+                            "Write the id of the user to delete", null);
+                    CtrlPres.deleteUser(userDeleted);
+                    ratings = CtrlPres.itemsLoaded();
+                } catch (Exception e) {
+                    enableButtons();
+                    JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+
     }
 
     public void showWindow(int x, int y) {
@@ -140,6 +176,7 @@ public class AdminMainPage {
         deleteItemButton.setEnabled(false);
         deleteUserButton.setEnabled(false);
         uploadRateValorationButton.setEnabled(false);
+        DeleteButton.setEnabled(false);
     }
 
     public void enableButtons() {
@@ -149,6 +186,7 @@ public class AdminMainPage {
         deleteItemButton.setEnabled(true);
         deleteUserButton.setEnabled(true);
         uploadRateValorationButton.setEnabled(true);
+        DeleteButton.setEnabled(true);
 
     }
     public void setInvisible() {

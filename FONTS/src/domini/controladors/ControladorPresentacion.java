@@ -283,6 +283,31 @@ public class ControladorPresentacion {
          CtrlDom.deleteAll();
     }
 
+    public void deleteItem(String id) {
+        try {
+            CtrlDom.deleteItem(id);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void saveAll() {
+        try {
+            CtrlDom.saveRatings("./EXE/Data/ratings.csv");
+            CtrlDom.saveItems("./EXE/Data/items.csv");
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void deleteUser(String id) {
+        try {
+            if(id != "-1") CtrlDom.deleteUser(id);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, "The user does not exist","Error ", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public ArrayList<String> getAtributos() {
 
         ArrayList<String> a = new ArrayList<String> ();

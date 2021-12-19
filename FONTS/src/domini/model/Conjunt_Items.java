@@ -200,7 +200,6 @@ public class Conjunt_Items {
      */
 
     public boolean eliminar_item(Item a)  {
-
         if (existeix_item(a.getID())) {
             int i = binarySearchPosition(Items, 0 ,n_Items()-1, a.getID());
             Items.remove(a);
