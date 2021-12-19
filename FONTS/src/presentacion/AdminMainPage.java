@@ -20,10 +20,16 @@ public class AdminMainPage {
     private JButton uploadRateValorationButton;
     private JButton DeleteButton;
     private JFileChooser fileChooser = new JFileChooser();
-    private boolean items = false;
-    private boolean ratings = false;
+    private boolean items;
+    private boolean ratings;
+    private boolean unkown;
+
 
     public AdminMainPage(){
+        items = CtrlPres.itemsLoaded();
+        ratings = CtrlPres.usersLoaded();
+        unkown = CtrlPres.unknownLoaded();
+
         uploadItemsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -32,10 +38,10 @@ public class AdminMainPage {
                     fileChooser.showOpenDialog(fileChooser);
                     String path = fileChooser.getSelectedFile().getAbsolutePath();
                     CtrlPres.loadItems(path);
-                    items = true;
+                    items = CtrlPres.itemsLoaded();
                 } catch (Exception e) {
                     enableButtons();
-                    items = CtrlPres.getAllItems().size() != 0;
+                    items = CtrlPres.itemsLoaded();
                     JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
                     e.printStackTrace();
                 }
@@ -51,18 +57,19 @@ public class AdminMainPage {
                         fileChooser.showOpenDialog(fileChooser);
                         String path = fileChooser.getSelectedFile().getAbsolutePath();
                         CtrlPres.loadRates(path);
-                        ratings = true;
+                        ratings = CtrlPres.usersLoaded();
                     } else JOptionPane.showMessageDialog(null,"You have to load items before doing anything else");
 
                 } catch (Exception e) {
                     enableButtons();
-                    ratings = false;
+                    ratings = CtrlPres.usersLoaded();
                     JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
                     e.printStackTrace();
                 }
                 enableButtons();
             }
         });
+
         uploadRateValorationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -71,10 +78,10 @@ public class AdminMainPage {
                     fileChooser.showOpenDialog(fileChooser);
                     String path = fileChooser.getSelectedFile().getAbsolutePath();
                     CtrlPres.loadUnKnown(path);
-                    items = true;
+                    unkown = CtrlPres.unknownLoaded();
                 } catch (Exception e) {
                     enableButtons();
-                    items = CtrlPres.getAllItems().size() != 0;
+                    unkown = CtrlPres.unknownLoaded();
                     JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
                     e.printStackTrace();
                 }
@@ -87,11 +94,29 @@ public class AdminMainPage {
             public void actionPerformed(ActionEvent actionEvent) {
                 int x = frame.getX();
                 int y = frame.getY();
-                if(items && ratings) {
+                if(items && ratings && unkown) {
                     CtrlPres.changeProfileView(x, y);
                     frame.dispose();
                 } else if(items) JOptionPane.showMessageDialog(null,"You have to load ratings before doing anything else");
                 else JOptionPane.showMessageDialog(null,"You have to load items and ratings before doing anything else");
+            }
+        });
+
+        DeleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    CtrlPres.deleteAllData();
+                    items = CtrlPres.itemsLoaded();
+                    ratings = CtrlPres.usersLoaded();
+                    unkown = CtrlPres.unknownLoaded();
+                } catch (Exception e) {
+                    enableButtons();
+                    JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
+                    e.printStackTrace();
+                }
+                enableButtons();
             }
         });
 

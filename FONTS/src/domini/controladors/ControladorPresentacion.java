@@ -119,7 +119,7 @@ public class ControladorPresentacion {
     public static ArrayList<Integer> getRecomendedItemsCB(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.doKNN(50);
+            s = CtrlDom.doKNN();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
             System.out.println(s.get(0));
@@ -130,7 +130,7 @@ public class ControladorPresentacion {
     public static ArrayList<Integer> getRecomendedItemsHybrid(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
-            s = CtrlDom.doRecomendation(4,10, 50);
+            s = CtrlDom.doRecomendation(4,10);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
             System.out.println(s.get(0));
@@ -265,6 +265,22 @@ public class ControladorPresentacion {
             s = "No té valoració";
         }
         return s;
+    }
+
+    public boolean itemsLoaded() {
+        return CtrlDom.itemsLoaded();
+    }
+
+    public boolean usersLoaded() {
+        return CtrlDom.usersLoaded();
+    }
+
+    public boolean unknownLoaded() {
+        return CtrlDom.unknownLoaded();
+    }
+
+    public void deleteAllData() {
+         CtrlDom.deleteAll();
     }
 
     public ArrayList<String> getAtributos() {

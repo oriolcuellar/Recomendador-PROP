@@ -89,7 +89,7 @@
             <properties>
               <font name="Noto Sans Mono CJK SC" size="48" style="1"/>
               <foreground color="-16777216"/>
-              <text value="Log In"/>
+              <text value="Sign Up"/>
             </properties>
           </component>
           <hspacer id="7d52e">
