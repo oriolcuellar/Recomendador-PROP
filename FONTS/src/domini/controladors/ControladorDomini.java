@@ -7,6 +7,9 @@ import FONTS.src.persistencia.ControladorPersistenciaRatings;
 import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
 
 import javax.swing.*;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 /** \brief Clase que implementa el controlador de dominio.
@@ -647,6 +650,27 @@ public class ControladorDomini {
         }
         catch (Exception e){
             throw e;
+        }
+    }
+
+    public void crearCarpeta(){
+        Path path = Paths.get("");
+        String directoryName = path.toAbsolutePath().toString();
+        File directorio = new File(directoryName+"/SaveData");
+        if (!directorio.exists()) {
+            if (directorio.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+            }
+        }
+        directorio = new File(directoryName+"/SaveData"+"/Recomendations");
+        if (!directorio.exists()) {
+            if (directorio.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+            }
         }
     }
     /**
