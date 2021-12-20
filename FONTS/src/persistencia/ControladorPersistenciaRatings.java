@@ -112,8 +112,11 @@ public class ControladorPersistenciaRatings {
             bw.write(s);
             for(Vector <String> v: UnKnown){
                 String linea="";
+                boolean b=true;
                 for(String a: v){
-                    linea+=a;
+                    if (b) linea=linea+a;
+                    else linea=linea+","+a;
+                    b=false;
                 }
                 bw.write(linea+"\n");
             }
