@@ -646,6 +646,7 @@ public class ControladorDomini {
         }
     }
 
+
     public void saveUnkown() throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
