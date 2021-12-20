@@ -3,6 +3,10 @@ package FONTS.src.domini.controladors;
 import FONTS.src.domini.model.Item;
 import FONTS.src.presentacion.*;
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -21,6 +25,7 @@ public class ControladorPresentacion {
     }
 
     public static void inicializePresentation(int x, int y) {
+        CtrlDom.crearCarpeta();
         principalView.showWindow(x,y);
     }
 
@@ -40,8 +45,12 @@ public class ControladorPresentacion {
     }
 
     public static void changeShowAtributesView(int x, int y, String id)  {
-        showAtributes showAtributes = new showAtributes(id);
-        showAtributes.showWindow(x,y);
+        try {
+            showAtributes showAtributes = new showAtributes(id);
+            showAtributes.showWindow(x,y);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void changeAdminMainView(int x, int y){
@@ -187,7 +196,10 @@ public class ControladorPresentacion {
      */
     public ArrayList loadRecomendation(String s) {
         try {
-            return CtrlDom.loadRecomendation(s,"./EXE/Data/Recomendations/recomentation" + s + CtrlDom.getActualUserID() + ".csv");
+            Path path = Paths.get("");
+            String directoryName = path.toAbsolutePath().toString();
+            directoryName += "/SaveData";
+            return CtrlDom.loadRecomendation(s,"./SaveData/Recomendations/recomentation" + s + CtrlDom.getActualUserID() + ".csv");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -363,19 +375,17 @@ public class ControladorPresentacion {
 
     public void saveAll() {
         try {
-            CtrlDom.saveRatings("./EXE/Data/ratings.csv");
-            CtrlDom.saveItems("./EXE/Data/items.csv");
-            CtrlDom.saveUnkown("./EXE/Data/unkown.csv");
+            CtrlDom.saveRatings();
+            CtrlDom.saveItems();
+            CtrlDom.saveUnkown();
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void saveRecomendation(String s) {
-        String c = "./EXE/Data/Recomendations/recomendation" + s + CtrlDom.getActualUserID() + ".csv";
-        System.out.println(c);
         try {
-            CtrlDom.saveRecomendation(s, c);
+            CtrlDom.saveRecomendation(s);
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
         }

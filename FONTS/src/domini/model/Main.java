@@ -43,7 +43,6 @@ public class Main {
      * @see K_Neareast_Neightbour
      */
     public static void main(String[] args) {
-
         ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
         CtrlPres.changeLogInView(0,0);
 
