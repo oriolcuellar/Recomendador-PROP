@@ -43,12 +43,10 @@ public class Main {
      * @see K_Neareast_Neightbour
      */
     public static void main(String[] args) {
-        ControladorDomini c = ControladorDomini.getInstance();
-        c.crearCarpeta();
-        /*
+
         ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
         CtrlPres.changeLogInView(0,0);
-        */
+
 
         /*printInfo();
         Scanner s = new Scanner(System.in);
