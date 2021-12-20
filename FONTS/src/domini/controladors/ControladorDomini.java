@@ -449,6 +449,10 @@ public class ControladorDomini {
         else if (lastRecomendation1.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
             ArrayList <Vector<String>> ratings_leidos = UnKnown;
+            for(Vector<String> v : ratings_leidos) {
+                for (String s : v) System.out.println(s);
+                System.out.println("===================");
+            }
             ArrayList <myPair> ratingsOrdenados = new ArrayList<myPair>();
             for (Vector<String> v: ratings_leidos){//ordenar y eliminar valoraciones que no son mias
                 if (String.valueOf(actualUser.getUserID()).equals(v.get(0))){
@@ -637,7 +641,7 @@ public class ControladorDomini {
     public void saveUnkown(String path) throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
-            ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
+            ControladorPersistenciaRatings ctrlRating = new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Unknown(path,UnKnown);
         }
         catch (Exception e){
@@ -682,7 +686,7 @@ public class ControladorDomini {
      * @param valors valors es el string de valores
      */
     public void createItem(String atributs, String valors) throws Exception{
-        if (actualUser==null) throw new NoUserLogedInException("createItem");
+        //if (actualUser==null) throw new NoUserLogedInException("createItem");
         try {
             createItemPath(atributs, valors, itemList, itemTypeList);
             recomendationChanged=true;
