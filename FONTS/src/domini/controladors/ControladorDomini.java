@@ -643,6 +643,7 @@ public class ControladorDomini {
         try{
             ControladorPersistenciaRatings ctrlRating = new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Unknown(path,UnKnown);
+            System.out.println("llego aqui");
         }
         catch (Exception e){
             throw e;
