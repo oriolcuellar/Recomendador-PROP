@@ -1228,4 +1228,15 @@ public class ControladorDomini {
             System.out.println(m.getString());
         }
     }
+
+    public void enseñaItemTypeAtr(){
+        for (String s: itemTypeList.keySet()){
+            for (Atribute a: itemTypeList.get(s).getAtributes()){
+                System.out.println(a.getName()+":  "+a.getType()+" | ");
+                if (a.getType().equals("Rang")){
+                    System.out.println(a.getLower()+" | "+a.getUpper());
+                }
+            }
+        }
+    }
 }
