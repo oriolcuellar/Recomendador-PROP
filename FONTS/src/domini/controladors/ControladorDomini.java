@@ -115,11 +115,9 @@ public class ControladorDomini {
         lastRecomendationSlope = new ArrayList<myPair>();
         lastRecomendationKNN = new ArrayList<ArrayList>();
         UnKnown = new ArrayList<>();
-        UnKnown = new ArrayList<>();
         recomendationChanged=true;
         recomendationChangedSlope=true;
         recomendationChangedKNN=true;
-        ArrayList <Vector<String>> UnKnown = new ArrayList <Vector<String>>();
         admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
     }
@@ -623,6 +621,17 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /*
+    public void saveUnkown(String path) throws Exception{
+        //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
+        try{
+            ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
+            ctrlRating.Escritor_Ratings(path,UnKnown);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }*/
     /**
      * Se quieren guardar los cambios de las recomendaciones en el sistema
      * @param path path es el documento donde se quiere guardar
@@ -864,8 +873,8 @@ public class ControladorDomini {
     public void loadItems(String path) throws Exception{//"Entradas_CSV/items.csv"
         //pre: actualUser es admin
         try {
-            if (actualUser == null) throw new NoUserLogedInException("loadItems");
-            else if (actualUser.getRol().equals(TipusRol.Administrador)) {
+            //if (actualUser == null) throw new NoUserLogedInException("loadItems");
+            if (actualUser.getRol().equals(TipusRol.Administrador)) {
                 Vector<String> mat_items = new Vector<String>();
                 ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
                 mat_items = reader.Lector_Items(path);
@@ -891,8 +900,8 @@ public class ControladorDomini {
     public void loadRates(String path) throws Exception{//falta añadir item usado a la lista de items usados
         //pre: actualUser es admin
         try {
-            if (actualUser==null) throw new NoUserLogedInException("loadRates");
-            else if(!actualUser.getRol().equals(TipusRol.Administrador))
+            //if (actualUser==null) throw new NoUserLogedInException("loadRates");
+            if(!actualUser.getRol().equals(TipusRol.Administrador))
                 throw new NotAnAdministratorException((String.valueOf(actualUser.getUserID())));
             else{
                 ratingPath = path;
@@ -1093,7 +1102,7 @@ public class ControladorDomini {
             ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
             UnKnown = ctrRec.Lector_Ratings(path);
         }
-        catch (Exception e){
+        catch (Exception e) {
             throw e;
         }
     }

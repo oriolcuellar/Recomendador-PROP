@@ -362,14 +362,14 @@ public class ControladorPresentacion {
         try {
             CtrlDom.saveRatings("./EXE/Data/ratings.csv");
             CtrlDom.saveItems("./EXE/Data/items.csv");
-            CtrlDom.saveItems("./EXE/Data/unkown.csv");
+            CtrlDom.saveUnkown("./EXE/Data/unkown.csv");
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void saveRecomendation(String s) {
-        String c = "./EXE/Data/ratings" + s + CtrlDom.getActualUser() + ".csv";
+        String c = "./EXE/Data/recomendation" + s + CtrlDom.getActualUserID() + ".csv";
         System.out.println(c);
         try {
             CtrlDom.saveRecomendation(s, c);
@@ -380,9 +380,9 @@ public class ControladorPresentacion {
 
     public void deleteUser(String id) {
         try {
-            if(id != "-1") CtrlDom.deleteProfile(id);
+            CtrlDom.deleteUser(id);
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "The user does not exist","Error ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e + "The user does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
 
