@@ -406,8 +406,9 @@ public class ControladorDomini {
     public float evaluateRecomendationGeneral() throws Exception{
         try{
             ArrayList <myPair> nou = new ArrayList<myPair>();
-            for (Object m: lastRecomendation.get(0)){
-                myPair my = new myPair((Integer) m, 0);
+            ArrayList<Item> a = lastRecomendation.get(0);
+            for (Item m: a){
+                myPair my = new myPair(m.getID(), 0);
                 nou.add(my);
             }
             return evaluateRecomendation(nou);
@@ -427,8 +428,9 @@ public class ControladorDomini {
     public float evaluateRecomendationKNN() throws Exception{
         try{
             ArrayList <myPair> nou = new ArrayList<myPair>();
-            for (Object m: lastRecomendationKNN.get(0)){
-                myPair my = new myPair((Integer) m, 0);
+            ArrayList<Item> a = lastRecomendationKNN.get(0);
+            for (Item m: a){
+                myPair my = new myPair(m.getID(), 0);
                 nou.add(my);
             }
             return evaluateRecomendation(nou);
@@ -631,17 +633,17 @@ public class ControladorDomini {
             throw e;
         }
     }
-    /*
+
     public void saveUnkown(String path) throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
             ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
-            ctrlRating.Escritor_Ratings(path,UnKnown);
+            ctrlRating.Escritor_Unknown(path,UnKnown);
         }
         catch (Exception e){
             throw e;
         }
-    }*/
+    }
     /**
      * Se quieren guardar los cambios de las recomendaciones en el sistema
      * @param path path es el documento donde se quiere guardar
@@ -650,8 +652,24 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
             ControladorPersistenciaRecomendation ctrlRecomendation= new ControladorPersistenciaRecomendation();
-            if(s == "Hybrid") ctrlRecomendation.Escritor_Recomendation(path, lastRecomendation.get(0));
-            if(s == "CB") ctrlRecomendation.Escritor_Recomendation(path, lastRecomendationKNN.get(0));
+            if(s == "Hybrid")  {
+                ArrayList <myPair> nou = new ArrayList<myPair>();
+                ArrayList<Item> a = lastRecomendation.get(0);
+                for (Item m: a){
+                    myPair my = new myPair(m.getID(), 0);
+                    nou.add(my);
+                }
+                ctrlRecomendation.Escritor_Recomendation(path, nou);
+            }
+            if(s == "CB") {
+                ArrayList <myPair> nou = new ArrayList<myPair>();
+                ArrayList<Item> a = lastRecomendationKNN.get(0);
+                for (Item m: a){
+                    myPair my = new myPair(m.getID(), 0);
+                    nou.add(my);
+                }
+                ctrlRecomendation.Escritor_Recomendation(path, nou);
+            }
             if(s == "CF") ctrlRecomendation.Escritor_Recomendation(path, lastRecomendationSlope);
         }
         catch (Exception e){
@@ -886,19 +904,18 @@ public class ControladorDomini {
         //pre: actualUser es admin
         try {
             //if (actualUser == null) throw new NoUserLogedInException("loadItems");
-            if (actualUser.getRol().equals(TipusRol.Administrador)) {
-                Vector<String> mat_items = new Vector<String>();
-                ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
-                mat_items = reader.Lector_Items(path);
 
-                for (int i = 1; i < mat_items.size(); ++i) {
-                    dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
-                }
-                recomendationChanged=true;
-                recomendationChangedSlope=true;
-                recomendationChangedKNN=true;
+            Vector<String> mat_items = new Vector<String>();
+            ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
+            mat_items = reader.Lector_Items(path);
 
-            } else throw new NotAnAdministratorException("loadItems");
+            for (int i = 1; i < mat_items.size(); ++i) {
+                dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
+            }
+            selectedItem = itemList.getItems().get(0);
+            recomendationChanged=true;
+            recomendationChangedSlope=true;
+            recomendationChangedKNN=true;
         }
         catch (Exception e){
             //JOptionPane.showMessageDialog(null,"El fichero introducido no tiene el formato válido");
@@ -913,43 +930,42 @@ public class ControladorDomini {
         //pre: actualUser es admin
         try {
             //if (actualUser==null) throw new NoUserLogedInException("loadRates");
-            if(!actualUser.getRol().equals(TipusRol.Administrador))
-                throw new NotAnAdministratorException((String.valueOf(actualUser.getUserID())));
-            else{
-                ratingPath = path;
-                recomendationChanged=true;
-                recomendationChangedSlope=true;
-                recomendationChangedKNN=true;
-                ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
+            //if(!actualUser.getRol().equals(TipusRol.Administrador))
 
-                ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
-                readed_ratings = reader.Lector_Ratings(path);
+            ratingPath = path;
+            recomendationChanged=true;
+            recomendationChangedSlope=true;
+            recomendationChangedKNN=true;
+            ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 
-                TipusRol t = TipusRol.Usuari;
-                for (Vector<String> vs : readed_ratings) {
-                    if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
-                        User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                        if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
-                            usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+            ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
+            readed_ratings = reader.Lector_Ratings(path);
 
-                        }
-                    } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
-                        User usuari = new User(Integer.valueOf(vs.get(0)));
+            TipusRol t = TipusRol.Usuari;
+            for (Vector<String> vs : readed_ratings) {
+                if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
+                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                    if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
                         usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
-                        usersList.put(Integer.valueOf(vs.get(0)), usuari);
+
                     }
-                    //parte del item
-                    if (itemValoratedBy.containsKey(Integer.valueOf(vs.get(1)))) {//existeix item al map
-                        User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                        itemValoratedBy.get(Integer.valueOf(vs.get(1))).add(usuari);
-                    } else {//NO existeix item al map
-                        User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                        ArrayList<User> au = new ArrayList<User>();
-                        au.add(usuari);
-                        itemValoratedBy.put(Integer.valueOf(vs.get(1)), au);
-                    }
+                } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
+                    User usuari = new User(Integer.valueOf(vs.get(0)));
+                    usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+                    usersList.put(Integer.valueOf(vs.get(0)), usuari);
+                }
+                //parte del item
+                if (itemValoratedBy.containsKey(Integer.valueOf(vs.get(1)))) {//existeix item al map
+                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                    itemValoratedBy.get(Integer.valueOf(vs.get(1))).add(usuari);
+                } else {//NO existeix item al map
+                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                    ArrayList<User> au = new ArrayList<User>();
+                    au.add(usuari);
+                    itemValoratedBy.put(Integer.valueOf(vs.get(1)), au);
                 }
             }
+
         }
         catch (Exception e){
             throw e;

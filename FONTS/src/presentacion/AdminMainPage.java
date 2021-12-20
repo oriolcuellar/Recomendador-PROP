@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class AdminMainPage {
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
@@ -186,6 +187,29 @@ public class AdminMainPage {
                             "Write the id of the user to delete", null);
                     CtrlPres.deleteUser(userDeleted);
                     ratings = CtrlPres.itemsLoaded();
+                } catch (Exception e) {
+                    enableButtons();
+                    JOptionPane.showMessageDialog(null,e);
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+        createItemButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    ArrayList<String> atributes = CtrlPres.getAtributos();
+                    String valors = "";
+                    String atribut = "";
+                    for(String s : atributes) {
+                        String val = JOptionPane.showInputDialog(null,
+                                "Write the id of the user to delete", null);
+                        atribut = atribut + "," + s;
+                        valors =  valors + "," + val;
+                    }
+                    CtrlPres.createItem(atribut,valors);
                 } catch (Exception e) {
                     enableButtons();
                     JOptionPane.showMessageDialog(null,e);

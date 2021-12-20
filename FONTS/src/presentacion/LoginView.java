@@ -66,10 +66,6 @@ public class LoginView {
                     CtrlPres.loadItems("./EXE/Data/items.csv");
                     CtrlPres.loadRates("./EXE/Data/ratings.csv");
                     CtrlPres.loadUnKnown("./EXE/Data/unkown.csv");
-
-
-
-
                 } catch (Exception e) {
                     enableButtons();
                     e.printStackTrace();

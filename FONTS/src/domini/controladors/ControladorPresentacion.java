@@ -187,7 +187,7 @@ public class ControladorPresentacion {
      */
     public ArrayList loadRecomendation(String s) {
         try {
-            return CtrlDom.loadRecomendation(s,"./EXE/Data/ratings" + s + CtrlDom.getActualUser() + ".csv");
+            return CtrlDom.loadRecomendation(s,"./EXE/Data/Recomendations/recomentation" + s + CtrlDom.getActualUserID() + ".csv");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -289,7 +289,10 @@ public class ControladorPresentacion {
         }
         return d;
     }
-
+    /**
+     * Funcion para saber la media de valoraciones del usuario actual
+     * @return devuelve el item favorito del usuario actual
+     */
     public int avgRating() {
         int d = 0;
         try {
@@ -369,10 +372,18 @@ public class ControladorPresentacion {
     }
 
     public void saveRecomendation(String s) {
-        String c = "./EXE/Data/recomendation" + s + CtrlDom.getActualUserID() + ".csv";
+        String c = "./EXE/Data/Recomendations/recomendation" + s + CtrlDom.getActualUserID() + ".csv";
         System.out.println(c);
         try {
             CtrlDom.saveRecomendation(s, c);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void createItem(String atributes, String valors) {
+        try {
+            CtrlDom.createItem(atributes,valors);
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
         }
