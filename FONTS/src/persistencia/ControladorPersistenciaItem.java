@@ -46,17 +46,17 @@ public class ControladorPersistenciaItem {
         return items;
     }
 
-    public void Escritor_Items(String csvFile, Conjunt_Items list_items) throws Exception{
+    public void Escritor_Items(String csvFile, Conjunt_Items list_items) throws Exception {
         File fichero = new File(csvFile);
 
         //if (fichero.exists()) throw new FileExistsException(csvFile);
 
-        try{
+        try {
            /* Map <String, ArrayList <String> > todo = new HashMap <String, ArrayList <String> > ();
 
             for (Item i: list_items.getItems()){
-                //String atr=i.getDadesInicials().get(0);
-                //String val=i.getDadesInicials().get(1);
+                String atr=i.getAtr();
+                String val=i.getString();
                 if (todo.containsKey(atr)){//ya hay items de este tipo
                     todo.get(atr).add(val);
                 }
@@ -68,19 +68,19 @@ public class ControladorPersistenciaItem {
 
 
             }*/
-            int n=0;
+            int n = 0;
             BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
-            for(Item i: list_items.getItems()){//para cada tipo de item
-                if(n==0) bw.write(i.getAtr());
+            for (Item i : list_items.getItems()) {//para cada tipo de item
+                if (n == 0) bw.write(i.getAtr());
                 n++;
-                bw.write(i.getString()+"\n");
+                bw.write(i.getString() + "\n");
                 bw.close();
             }
 
-        } catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
-    //}
+        //}
 
-
+    }
 }

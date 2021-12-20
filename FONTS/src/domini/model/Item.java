@@ -30,6 +30,11 @@ public class Item {
      */
     private ArrayList<String> valors;
 
+    //para comprobar que se crean bien de momento (necesito escribirlos)
+
+    private String ValI;
+    private String AtrI;
+
     //Constructors
 
     /**
@@ -90,26 +95,25 @@ public class Item {
         return valors;
     }
 
+
     /**
      * Devuelve el String resultado de combinar los valores del atributo en el Item i su id.
      */
 
     public String getString(){
-
-        String v = valors.toString();
-        v = v.substring(1, v.length()-1);
-        v = v.replace(" ","") + ","+String.valueOf(ID);
-        //System.out.println(s);
-        return v;
+        return ValI;
     }
 
     public String getAtr(){
+        return AtrI;
+    }
 
-        String v = valors.toString();
-        v = v.substring(1, v.length()-1);
-        v = v.replace(" ","") + ","+String.valueOf(ID);
-        //System.out.println(s);
-        return v;
+    public String setString(String val){
+        this.ValI=val;
+    }
+
+    public String setAtr(String val){
+        this.AtrI=val;
     }
 
     //Setters

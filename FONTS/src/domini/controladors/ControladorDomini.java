@@ -840,6 +840,8 @@ public class ControladorDomini {
         //creamos item
         int id = Integer.valueOf(datos_valors.get(pos_id));
         Item i =new Item(id, ti, vsv);
+        i.setAtr(atributs);
+        i.setString(valors);
         //i.setDadesInicials(atributs, valors);
         if (!(ListaItems.existeix_item(id))){
             ListaItems.anyadir_item(i);
