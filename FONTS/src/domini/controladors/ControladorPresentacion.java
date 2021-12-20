@@ -25,6 +25,7 @@ public class ControladorPresentacion {
     }
 
     public static void inicializePresentation(int x, int y) {
+        CtrlDom.crearCarpeta();
         principalView.showWindow(x,y);
     }
 

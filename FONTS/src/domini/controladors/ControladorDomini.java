@@ -618,13 +618,11 @@ public class ControladorDomini {
     }
     /**
      * Se quieren guardar los cambios de los items en el sistema
-     * @param path path es el documento donde se quiere guardar
      */
   public void saveItems() throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
-            Path dir = Paths.get("");
-            String path = dir.toAbsolutePath().toString()+"/SaveData/";
+            String path = "./SaveData/items.csv";
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
             ctrlItem.Escritor_Items(path, itemList);
         }
@@ -636,8 +634,7 @@ public class ControladorDomini {
     public void saveRatings() throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
-            Path dir = Paths.get("");
-            String path = dir.toAbsolutePath().toString()+"/SaveData/";
+            String path = "./SaveData/ratings.csv";
             ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Ratings(path,usersList);
         }
@@ -650,8 +647,7 @@ public class ControladorDomini {
     public void saveUnkown() throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
-            Path dir = Paths.get("");
-            String path = dir.toAbsolutePath().toString()+"/SaveData/";
+            String path = "./SaveData/unknown.csv";
             ControladorPersistenciaRatings ctrlRating = new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Unknown(path,UnKnown);
             System.out.println("llego aqui");
@@ -662,8 +658,7 @@ public class ControladorDomini {
     }
 
     public void crearCarpeta(){
-        Path path = Paths.get("");
-        String directoryName = path.toAbsolutePath().toString();
+        String directoryName = ".";
         File directorio = new File(directoryName+"/SaveData");
         if (!directorio.exists()) {
             if (directorio.mkdirs()) {

@@ -111,9 +111,14 @@ public class showAtributes {
                 }
             }
         });
-        URL url = new URL(path);
-        BufferedImage image = ImageIO.read(url);
-        label.setIcon(new ImageIcon(image));
+        try {
+            URL url = new URL(path);
+            BufferedImage image = ImageIO.read(url);
+            label.setIcon(new ImageIcon(image));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
     public void showWindow(int x, int y) {
