@@ -25,7 +25,7 @@ public class RateRecomendation {
      *              - Logaritmo base 2 de (la posicion - 1)
      * @see myPair
      */
-    public float execute(ArrayList<myPair> arr, ArrayList<myPair> u ) throws Exception{
+    public float execute(ArrayList<myPair> arr, ArrayList<myPair> u) throws Exception{
         //System.out.println(arr.size());
         //System.out.println(u.size());
         //IDCG
