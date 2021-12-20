@@ -152,8 +152,6 @@ public class Item {
             if(ID == 1 && b.getID() == 21)
                 n_dimensions = V_A.size();
             Double Distancia = comparador_tipus_iguals(V_A, V_B, Valors_A, Valors_B, n_dimensions);
-            if (Distancia > 1E6)
-                n_dimensions = 1;
             return Distancia;
         }
         return 0.0;
@@ -247,8 +245,12 @@ public class Item {
                         Double dividend = max - min;
                         Double coeficient;
 
-                        if (dividend != 0.0)
-                            coeficient = 1.0 - ((Math.max(valor_a, valor_b) - Math.min(valor_a, valor_b)) / (max - min));
+                        if (dividend != 0.0){
+
+                            Double aux = (Math.max(valor_a, valor_b) - Math.min(valor_a, valor_b)) / (max - min);
+                            coeficient = 1 - aux;
+                        }
+
                         else
                             coeficient = 1.0;
                         distance += Math.pow(coeficient, 2);
