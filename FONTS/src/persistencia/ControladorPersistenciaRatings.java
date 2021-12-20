@@ -102,18 +102,17 @@ public class ControladorPersistenciaRatings {
 
     public void Escritor_Unknown(String csvFile, ArrayList <Vector<String>> UnKnown) throws Exception{
         File fichero = new File(csvFile);
-        for (Vector<String> v: UnKnown){
-            for(String s: v) System.out.println(s);
-            System.out.println("=================");
-        }
         try{
             BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
             String s ="userId,itemId,rating\n";
             bw.write(s);
             for(Vector <String> v: UnKnown){
                 String linea="";
+                boolean b=true;
                 for(String a: v){
-                    linea+=a;
+                    if (b) linea=linea+a;
+                    else linea=linea+","+a;
+                    b=false;
                 }
                 bw.write(linea+"\n");
             }
