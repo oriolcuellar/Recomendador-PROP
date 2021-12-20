@@ -1001,7 +1001,7 @@ public class ControladorDomini {
      * @param delete_me delete_me es el usuario  que se quiere eliminar
      */
     public void deleteUser(String delete_me) throws Exception{
-        if(actualUser==null || actualUser.getRol().equals(TipusRol.Usuari) || delete_me.equals("-1")) throw new ImpossibleStateException("deleteUser");
+        if(actualUser==null || delete_me.equals("-1")) throw new ImpossibleStateException("deleteUser");
         boolean trobat=false;
         User delete=usersList.get(Integer.valueOf(delete_me));
         if (delete==null) throw new UserNotExistsException("deleteUser");
