@@ -709,18 +709,33 @@ public class ControladorDomini {
             throw e;
         }
     }
+    private Item createItemLocal(String atributs, String valors) throws Exception{
+        try {
+            recomendationChanged=true;
+            recomendationChangedSlope=true;
+            recomendationChangedKNN=true;
+            return createItemPath(atributs, valors, itemList, itemTypeList);
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
     /**
      * El administrador quiere crear un item nuevo
      * @param atributs atributs es el string de atributos
      * @param valors valors es el string de valores
      */
-    public void createItem(String atributs, String valors) throws Exception{
+    public Item createItem(String atributs, String valors) throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("createItem");
         try {
-            createItemPath(atributs, valors, itemList, itemTypeList);
+
             recomendationChanged=true;
             recomendationChangedSlope=true;
             recomendationChangedKNN=true;
+            Item i= createItemPath(atributs, valors, itemList, itemTypeList);
+            itemList.anyadir_item(i);
+            return i;
         }
         catch (Exception e){
             throw e;
@@ -743,7 +758,7 @@ public class ControladorDomini {
      * @param atributs atributs es el string de atributos
      * @param valors valors es el string de valores
      */
-    private void createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
+    private Item createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
         //dado una lista de items lo mete ahi si no existe
 
         //string to arraylist de valors
@@ -894,10 +909,10 @@ public class ControladorDomini {
         i.setAtr(atributs);
         i.setString(valors);
         //i.setDadesInicials(atributs, valors);
-        if (!(ListaItems.existeix_item(id))){
+        /*if (!(ListaItems.existeix_item(id))){
             ListaItems.anyadir_item(i);
-        }
-
+        }*/
+        return i;
 
     }
     /**
@@ -941,10 +956,11 @@ public class ControladorDomini {
             Vector<String> mat_items = new Vector<String>();
             ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
             mat_items = reader.Lector_Items(path);
-
+            ArrayList <Item> aux = new ArrayList<Item>();
             for (int i = 1; i < mat_items.size(); ++i) {
-                dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
+                aux.add(dominiSingelton.createItemLocal(mat_items.get(0), mat_items.get(i)));
             }
+            itemList.setItems(aux);
             selectedItem = itemList.getItems().get(0);
             recomendationChanged=true;
             recomendationChangedSlope=true;
