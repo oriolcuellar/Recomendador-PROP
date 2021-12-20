@@ -3,6 +3,10 @@ package FONTS.src.domini.controladors;
 import FONTS.src.domini.model.Item;
 import FONTS.src.presentacion.*;
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -40,8 +44,12 @@ public class ControladorPresentacion {
     }
 
     public static void changeShowAtributesView(int x, int y, String id)  {
-        showAtributes showAtributes = new showAtributes(id);
-        showAtributes.showWindow(x,y);
+        try {
+            showAtributes showAtributes = new showAtributes(id);
+            showAtributes.showWindow(x,y);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void changeAdminMainView(int x, int y){
@@ -187,7 +195,10 @@ public class ControladorPresentacion {
      */
     public ArrayList loadRecomendation(String s) {
         try {
-            return CtrlDom.loadRecomendation(s,"./EXE/Data/Recomendations/recomentation" + s + CtrlDom.getActualUserID() + ".csv");
+            Path path = Paths.get("");
+            String directoryName = path.toAbsolutePath().toString();
+            directoryName += "/SavedData";
+            return CtrlDom.loadRecomendation(s,"./SavedData/Recomendations/recomentation" + s + CtrlDom.getActualUserID() + ".csv");
         } catch (Exception e) {
             System.out.println(e);
         }
