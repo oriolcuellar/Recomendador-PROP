@@ -43,9 +43,9 @@ public class Main {
      * @see K_Neareast_Neightbour
      */
     public static void main(String[] args) {
-        //ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
-        //CtrlPres.changeLogInView(0,0);
-        try {
+        ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
+        CtrlPres.changeLogInView(0,0);
+        /*try {
             ControladorDomini c = ControladorDomini.getInstance();
             c.login("-1", "-1");
             c.loadItems("./EXE/Entradas_CSV/items.csv");
@@ -56,7 +56,7 @@ public class Main {
 
         } catch (Exception e){
             System.out.println(e);
-        }
+        }*/
 
 
         /*printInfo();
