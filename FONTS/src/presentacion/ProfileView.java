@@ -12,15 +12,19 @@ public class ProfileView {
     private JPanel panel;
     private JButton logoutButton;
     private JLabel id;
-    private JLabel username;
     private JButton backButton;
     private JButton statsButton;
+    private JButton changePasswordButton;
+    private JButton deleteProfileButton;
 
     public ProfileView(){
         Integer userID = CtrlPres.getActualUserId();
         String s = userID.toString();
         id.setText(s);
-        if(CtrlPres.isAdmin()) statsButton.setVisible(false);
+        if(CtrlPres.isAdmin()){
+            statsButton.setVisible(false);
+            deleteProfileButton.setVisible(false);
+        }
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -45,6 +49,53 @@ public class ProfileView {
                 enableButtons();
             }
         });
+
+        changePasswordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    String password1 = JOptionPane.showInputDialog(null,
+                            "Write the password", null);
+                    String password2 = JOptionPane.showInputDialog(null,
+                            "Repeat the password", null);
+                    if(password1.equals(password2)) CtrlPres.editProfile(password1);
+                    else JOptionPane.showMessageDialog(null, "The password does not match");
+                } catch (Exception e) {
+                    enableButtons();
+                    JOptionPane.showMessageDialog(null,"Error: Repeat the process");
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+
+        deleteProfileButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    String userDeleted = JOptionPane.showInputDialog(null,
+                            "Write CONFIRM to delete the profile\n Be sure all your data will be deleted", null);
+                   System.out.println(userDeleted);
+                    if(userDeleted.endsWith("CONFIRM")) {
+                        CtrlPres.deleteUser(userDeleted);
+                        CtrlPres.logout();
+                        int x = frame.getX();
+                        int y = frame.getY();
+                        CtrlPres.changeLogInView(x,y);
+                        frame.dispose();
+                    }
+                    else JOptionPane.showMessageDialog(null,"The profile was not deleted");
+                } catch (Exception e) {
+                    enableButtons();
+                    JOptionPane.showMessageDialog(null, e);
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+
         statsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -87,7 +138,7 @@ public class ProfileView {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setBounds(x,y,600,600);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 

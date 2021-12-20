@@ -19,6 +19,8 @@ public class AdminMainPage {
     private JButton uploadItemsButton;
     private JButton uploadRateValorationButton;
     private JButton DeleteButton;
+    private JButton createItemButton;
+    private JButton createUserButton;
     private JFileChooser fileChooser = new JFileChooser();
     private boolean items;
     private boolean ratings;
@@ -35,6 +37,7 @@ public class AdminMainPage {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
+                    JOptionPane.showMessageDialog(null,"Load item.csv file");
                     fileChooser.showOpenDialog(fileChooser);
                     String path = fileChooser.getSelectedFile().getAbsolutePath();
                     CtrlPres.loadItems(path);
@@ -53,13 +56,17 @@ public class AdminMainPage {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
-                    if(items) {
-                        fileChooser.showOpenDialog(fileChooser);
-                        String path = fileChooser.getSelectedFile().getAbsolutePath();
-                        CtrlPres.loadRates(path);
-                        ratings = CtrlPres.usersLoaded();
-                    } else JOptionPane.showMessageDialog(null,"You have to load items before doing anything else");
+                    JOptionPane.showMessageDialog(null,"Load ratings.db.csv file");
+                    fileChooser.showOpenDialog(fileChooser);
+                    String path = fileChooser.getSelectedFile().getAbsolutePath();
+                    CtrlPres.loadRates(path);
 
+                    JOptionPane.showMessageDialog(null,"Load ratings.test.known.csv file");
+                    fileChooser.showOpenDialog(fileChooser);
+                    String path2 = fileChooser.getSelectedFile().getAbsolutePath();
+                    CtrlPres.loadRates(path2);
+
+                    ratings = CtrlPres.usersLoaded();
                 } catch (Exception e) {
                     enableButtons();
                     ratings = CtrlPres.usersLoaded();
@@ -75,6 +82,7 @@ public class AdminMainPage {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
+                    JOptionPane.showMessageDialog(null,"Load ratings.test.unknown.csv file");
                     fileChooser.showOpenDialog(fileChooser);
                     String path = fileChooser.getSelectedFile().getAbsolutePath();
                     CtrlPres.loadUnKnown(path);
@@ -97,8 +105,15 @@ public class AdminMainPage {
                 if(items && ratings && unkown) {
                     CtrlPres.changeProfileView(x, y);
                     frame.dispose();
-                } else if(items) JOptionPane.showMessageDialog(null,"You have to load ratings before doing anything else");
-                else JOptionPane.showMessageDialog(null,"You have to load items and ratings before doing anything else");
+                }
+                else if(items && ratings) JOptionPane.showMessageDialog(null,"You have to load the evaluate recomendation file before doing anything else");
+                else if(items && unkown) JOptionPane.showMessageDialog(null,"You have to load ratings before doing anything else");
+                else if(ratings && unkown) JOptionPane.showMessageDialog(null,"You have to load items before doing anything else");
+                else if(items) JOptionPane.showMessageDialog(null,"You have to load ratings and evaluate recomendation file before doing anything else");
+                else if(ratings) JOptionPane.showMessageDialog(null,"You have to load items and evaluate recomendation file before doing anything else");
+                else if(unkown) JOptionPane.showMessageDialog(null,"You have to load items and ratings before doing anything else");
+
+                else JOptionPane.showMessageDialog(null,"You have to load items, ratings and evaluate recomendation file before doing anything else");
             }
         });
 
@@ -107,10 +122,14 @@ public class AdminMainPage {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
-                    CtrlPres.deleteAllData();
-                    items = CtrlPres.itemsLoaded();
-                    ratings = CtrlPres.usersLoaded();
-                    unkown = CtrlPres.unknownLoaded();
+                    int input = JOptionPane.showConfirmDialog(null, "Are you sure that you want to delete all the loaded data?", "Choose",
+                            JOptionPane.OK_CANCEL_OPTION);
+                    if (input == 0) {
+                        CtrlPres.deleteAllData();
+                        items = CtrlPres.itemsLoaded();
+                        ratings = CtrlPres.usersLoaded();
+                        unkown = CtrlPres.unknownLoaded();
+                    }
                 } catch (Exception e) {
                     enableButtons();
                     JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
@@ -138,6 +157,26 @@ public class AdminMainPage {
             }
         });
 
+        createUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    String userCreate = JOptionPane.showInputDialog(null,
+                            "Write the id of the user to create", null);
+                    String password = JOptionPane.showInputDialog(null,
+                            "Write the password", null);
+                    CtrlPres.singUp(userCreate,password);
+                    ratings = CtrlPres.usersLoaded();
+                } catch (Exception e) {
+                    enableButtons();
+                    JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
+
         deleteUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -149,7 +188,7 @@ public class AdminMainPage {
                     ratings = CtrlPres.itemsLoaded();
                 } catch (Exception e) {
                     enableButtons();
-                    JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
+                    JOptionPane.showMessageDialog(null,e);
                     e.printStackTrace();
                 }
                 enableButtons();
@@ -177,6 +216,8 @@ public class AdminMainPage {
         deleteUserButton.setEnabled(false);
         uploadRateValorationButton.setEnabled(false);
         DeleteButton.setEnabled(false);
+        createItemButton.setEnabled(false);
+        createUserButton.setEnabled(false);
     }
 
     public void enableButtons() {
@@ -187,6 +228,8 @@ public class AdminMainPage {
         deleteUserButton.setEnabled(true);
         uploadRateValorationButton.setEnabled(true);
         DeleteButton.setEnabled(true);
+        createItemButton.setEnabled(true);
+        createUserButton.setEnabled(true);
 
     }
     public void setInvisible() {

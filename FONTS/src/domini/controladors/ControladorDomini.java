@@ -142,7 +142,7 @@ public class ControladorDomini {
         try {
             int userId = Integer.valueOf(struserId);
             if (usersList.containsKey(userId) || String.valueOf(admin.getUserID()).equals(struserId)) throw new UserExistsException(struserId);
-            else if (actualUser != null) throw new ImpossibleStateException("register");
+            //else if (actualUser != null) throw new ImpossibleStateException("register");
             else if (struserId.equals("") || password.equals("")) {
                 throw new NotValidUserorPasswException(struserId +" "+ password);
             } else {
@@ -630,11 +630,13 @@ public class ControladorDomini {
      * Se quieren guardar los cambios de las recomendaciones en el sistema
      * @param path path es el documento donde se quiere guardar
      */
-    public void saveRecomendation(String path) throws Exception{
+    public void saveRecomendation(String s, String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
             ControladorPersistenciaRecomendation ctrlRecomendation= new ControladorPersistenciaRecomendation();
-            ctrlRecomendation.Escritor_Recomendation(path, lastRecomendation.get(0));
+            if(s == "Hybrid") ctrlRecomendation.Escritor_Recomendation(path, lastRecomendation.get(0));
+            if(s == "CB") ctrlRecomendation.Escritor_Recomendation(path, lastRecomendationKNN.get(0));
+            if(s == "CF") ctrlRecomendation.Escritor_Recomendation(path, lastRecomendationSlope);
         }
         catch (Exception e){
             throw e;
@@ -836,7 +838,7 @@ public class ControladorDomini {
     public void deleteItem(String deleteme) throws Exception{
         if (!actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnAdministratorException(String.valueOf(actualUser.getUserID()));
         else if (!itemList.existeix_item(Integer.parseInt(deleteme))) throw new ItemNotExistsException(deleteme);
-        Item it = itemList.getItems().get(Integer.parseInt(deleteme));
+        Item it = itemList.get_item(Integer.parseInt(deleteme));
         for (Item m: itemList.getItems()){
             if(String.valueOf(m.getID()).equals(deleteme)) it=m;
         }
@@ -939,7 +941,7 @@ public class ControladorDomini {
      * El administrador quiere cargar una recomendación
      * @param path path es la direccion al fichero que se quiere cargar
      */
-    public void loadRecomendation(String path) throws Exception{
+    public ArrayList loadRecomendation(String s, String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("loadRecomendation");
         try {
             recomendationChanged = true;
@@ -978,12 +980,23 @@ public class ControladorDomini {
             }
             creado.add(i_Aux);
             creado.add(v_Aux);
-            lastRecomendation=creado;
+            if(s == "Hybrid") {
+                lastRecomendation = creado;
+                return lastRecomendation;
+            }
+            if(s == "CB") {
+                lastRecomendationKNN = creado;
+                return lastRecomendationKNN;
+            }
+            if(s == "CF") {
+                lastRecomendationSlope = creado.get(0);
+                return lastRecomendationSlope;
+            }
         }
         catch (Exception e){
             throw e;
         }
-
+    return null;
     }
 
     /**

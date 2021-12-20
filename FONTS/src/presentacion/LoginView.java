@@ -16,6 +16,7 @@ public class LoginView {
     private JLabel username;
     private JLabel password;
     private JButton signinButton;
+    private JButton loadSavedDataButton;
 
     public LoginView(){
         signinButton.addActionListener(new ActionListener() {
@@ -56,6 +57,26 @@ public class LoginView {
                 enableButtons();
             }
         });
+
+        loadSavedDataButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    disableButtons();
+                    CtrlPres.loadItems("./EXE/Data/items.csv");
+                    CtrlPres.loadRates("./EXE/Data/ratings.csv");
+                    CtrlPres.loadUnKnown("./EXE/Data/unkown.csv");
+
+
+
+
+                } catch (Exception e) {
+                    enableButtons();
+                    e.printStackTrace();
+                }
+                enableButtons();
+            }
+        });
     }
 
     public void showWindow(int x, int y) {
@@ -65,7 +86,7 @@ public class LoginView {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setBounds(x,y,600,600);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 

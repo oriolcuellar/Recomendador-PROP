@@ -62,13 +62,19 @@ public class MainMenu {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
+                    int input = JOptionPane.showConfirmDialog(null, "Do you want to load the recomendation?", "Choose",
+                            JOptionPane.OK_CANCEL_OPTION);
+                    String numRec = JOptionPane.showInputDialog(null, "Enter the number of items to be recomended", 50);
+                    int n = Integer.parseInt(numRec);
+                    boolean b = input != 0;
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.changeShowRecomendedItemsView(x,y,"CF");
+                    CtrlPres.changeShowRecomendedItemsView(x,y,"CF", b, n);
                     frame.dispose();
                     showRatedItemsButton.setEnabled(true);
                 } catch (Exception e) {
                     enableButtons();
+                    JOptionPane.showMessageDialog(null, "You have not save any recomendation");
                     e.printStackTrace();
                 }
             }
@@ -80,7 +86,7 @@ public class MainMenu {
                     disableButtons();
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.changeShowRecomendedItemsView(x,y,"CB");
+                    CtrlPres.changeShowRecomendedItemsView(x,y,"CB", true, 50);
                     frame.dispose();
                     showRatedItemsButton.setEnabled(true);
                 } catch (Exception e) {
@@ -97,7 +103,7 @@ public class MainMenu {
                     disableButtons();
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.changeShowRecomendedItemsView(x,y,"Hybrid");
+                    CtrlPres.changeShowRecomendedItemsView(x,y,"Hybrid", true, 50);
                     frame.dispose();
                     showRatedItemsButton.setEnabled(true);
                 } catch (Exception e) {
@@ -130,7 +136,7 @@ public class MainMenu {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setBounds(x,y,600,600);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.setVisible(true);
     }
 
@@ -139,6 +145,8 @@ public class MainMenu {
         settingsButton.setEnabled(false);
         showAllItemsButton.setEnabled(false);
         showRatedItemsButton.setEnabled(false);
+        showRecomendedItemsByCBButton.setEnabled(false);
+        ShowRecomendedItemsByHybridButton.setEnabled(false);
     }
 
     public void enableButtons() {
@@ -146,5 +154,7 @@ public class MainMenu {
         showRatedItemsButton.setEnabled(true);
         showAllItemsButton.setEnabled(true);
         showRecomendedItemsByCFButton.setEnabled(true);
+        showRecomendedItemsByCBButton.setEnabled(true);
+        ShowRecomendedItemsByHybridButton.setEnabled(true);
     }
 }

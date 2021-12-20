@@ -1,15 +1,11 @@
 package FONTS.src.presentacion;
 import FONTS.src.domini.controladors.ControladorPresentacion;
-import FONTS.src.domini.model.myPair;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Vector;
 
 public class ShowRecomendedItems {
 
@@ -21,8 +17,9 @@ public class ShowRecomendedItems {
     private JList list1;
     private JScrollPane scrollPane;
     private JButton EvaluateButton;
+    private JButton saveRecomendationButton;
 
-    public ShowRecomendedItems(String s) {
+    public ShowRecomendedItems(String s, boolean execute, int n) {
 
         scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
@@ -37,10 +34,12 @@ public class ShowRecomendedItems {
         scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
         DefaultListModel demoList = new DefaultListModel();
         ArrayList<Integer> items;
-        if(s == "CF") items = CtrlPres.getRecomendedItemsSlope();
-        else if(s == "CB") items = CtrlPres.getRecomendedItemsCB();
-        else items = CtrlPres.getRecomendedItemsHybrid();
-        int n = 50;
+        if(execute) {
+            if (s == "CF") items = CtrlPres.getRecomendedItemsSlope();
+            else if (s == "CB") items = CtrlPres.getRecomendedItemsCB();
+            else items = CtrlPres.getRecomendedItemsHybrid();
+        }
+        else items = CtrlPres.loadRecomendation(s);
         if(n > items.size()) n = items.size();
         for(int i = 0; i < n; ++i) {
             demoList.addElement(items.get(i));
@@ -63,6 +62,13 @@ public class ShowRecomendedItems {
                 CtrlPres.evaluateRecomendation(s);
 
 
+            }
+        });
+
+        saveRecomendationButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                CtrlPres.saveRecomendation(s);
             }
         });
 

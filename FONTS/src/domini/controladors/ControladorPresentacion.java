@@ -29,8 +29,8 @@ public class ControladorPresentacion {
         showAllItems.showWindow(x,y);
     }
 
-    public static void changeShowRecomendedItemsView(int x, int y,String s) {
-        ShowRecomendedItems showRecomendedItems = new ShowRecomendedItems(s);
+    public static void changeShowRecomendedItemsView(int x, int y,String s, boolean b, int n) {
+        ShowRecomendedItems showRecomendedItems = new ShowRecomendedItems(s, b, n);
         showRecomendedItems.showWindow(x,y);
     }
 
@@ -162,6 +162,15 @@ public class ControladorPresentacion {
         }
     }
 
+    public ArrayList loadRecomendation(String s) {
+        try {
+            return CtrlDom.loadRecomendation(s,"./EXE/Data/ratings" + s + CtrlDom.getActualUser() + ".csv");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public void evaluateRecomendation(String s) {
         try {
             float f = 0;
@@ -188,6 +197,14 @@ public class ControladorPresentacion {
         } catch (Exception e) {
             System.out.println(e);
             CtrlDom.getActualUser().getUserID();
+        }
+    }
+
+    public void editProfile(String password) {
+        try {
+            CtrlDom.editProfile(password);
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
@@ -300,9 +317,19 @@ public class ControladorPresentacion {
         }
     }
 
+    public void saveRecomendation(String s) {
+        String c = "./EXE/Data/ratings" + s + CtrlDom.getActualUser() + ".csv";
+        System.out.println(c);
+        try {
+            CtrlDom.saveRecomendation(s, c);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public void deleteUser(String id) {
         try {
-            if(id != "-1") CtrlDom.deleteUser(id);
+            if(id != "-1") CtrlDom.deleteProfile(id);
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, "The user does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
