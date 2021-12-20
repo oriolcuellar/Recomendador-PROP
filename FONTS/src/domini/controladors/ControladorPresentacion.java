@@ -374,19 +374,17 @@ public class ControladorPresentacion {
 
     public void saveAll() {
         try {
-            CtrlDom.saveRatings("./EXE/Data/ratings.csv");
-            CtrlDom.saveItems("./EXE/Data/items.csv");
-            CtrlDom.saveUnkown("./EXE/Data/unkown.csv");
+            CtrlDom.saveRatings();
+            CtrlDom.saveItems();
+            CtrlDom.saveUnkown();
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void saveRecomendation(String s) {
-        String c = "./EXE/Data/Recomendations/recomendation" + s + CtrlDom.getActualUserID() + ".csv";
-        System.out.println(c);
         try {
-            CtrlDom.saveRecomendation(s, c);
+            CtrlDom.saveRecomendation(s);
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
         }
