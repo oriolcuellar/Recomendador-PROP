@@ -385,18 +385,16 @@ public class ControladorDomini {
                     lastRecomendationKNN=knn;
                 }
 
-                ArrayList<ArrayList> tot = new ArrayList<ArrayList>();
-                //mix los 2 algoritmos
-                lastRecomendation = tot;
+                HybridApproach h = new HybridApproach();
+                ArrayList<ArrayList> Aux = h.Algoritmo(lastRecomendationSlope, lastRecomendationKNN, itemList.n_Items(), actualUser.getValoratedItems().size());
+
+                lastRecomendation = Aux;
                 recomendationChanged=false;
                 recomendationChangedSlope=false;
                 recomendationChangedKNN=false;
             }
+            ArrayList<Item> aux = lastRecomendation.get(0);
 
-            HybridApproach h = new HybridApproach();
-            ArrayList<ArrayList> Aux = h.Algoritmo(lastRecomendationSlope, lastRecomendationKNN, itemList.n_Items(), actualUser.getValoratedItems().size());
-            ArrayList<Item> aux = Aux.get(0);
-            lastRecomendation = Aux;
             ArrayList<Integer> r = new ArrayList<>();
             for(int i = 0; i < aux.size(); ++i) {
                 r.add(aux.get(i).getID());

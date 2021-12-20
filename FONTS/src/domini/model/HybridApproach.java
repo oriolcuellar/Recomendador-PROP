@@ -46,7 +46,7 @@ public class HybridApproach {
             K.get(1).set(i, val_final);
         }
 
-        ordenar_simplificado(K.get(0), K.get(1), 0, n_items-1);
+        ordenar_simplificado(K.get(0), K.get(1), 0, K.get(0).size()-1);
 
         return K;
     }
