@@ -29,6 +29,7 @@ public class showAtributes {
     private JScrollPane scrollPane;
     private JTable tabla;
     private JLabel label;
+    private String path;
 
     public showAtributes(String id) throws IOException {
 
@@ -76,7 +77,7 @@ public class showAtributes {
 
         TableColumnModel columnModel = tabla.getColumnModel();
         for (int i = 0; i < valores.size(); i++){
-
+            if(atributos.get(i).equals("img_url")) path = valores.get(i);
             columnModel.getColumn(i).setPreferredWidth(100);
         }
         int width = 100 * valores.size();
@@ -110,7 +111,6 @@ public class showAtributes {
                 }
             }
         });
-        String path = "https://cdn.myanimelist.net/images/anime/4/19644.jpg";
         URL url = new URL(path);
         BufferedImage image = ImageIO.read(url);
         label.setIcon(new ImageIcon(image));
