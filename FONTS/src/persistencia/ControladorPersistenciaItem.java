@@ -71,11 +71,11 @@ public class ControladorPersistenciaItem {
             int n = 0;
             BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
             for (Item i : list_items.getItems()) {//para cada tipo de item
-                if (n == 0) bw.write(i.getAtr());
+                if (n == 0) bw.write(i.getAtr()+ "\n");
                 n++;
                 bw.write(i.getString() + "\n");
-                bw.close();
             }
+            bw.close();
 
         } catch (Exception e) {
             throw e;
