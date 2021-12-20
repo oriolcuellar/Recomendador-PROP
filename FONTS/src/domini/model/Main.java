@@ -44,7 +44,8 @@ public class Main {
      */
     public static void main(String[] args) {
         ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
-        printInfo();
+        CtrlPres.changeLogInView(2500,100);
+        /*printInfo();
         Scanner s = new Scanner(System.in);
         boolean escogido=false;
         String op = "";
@@ -83,7 +84,7 @@ public class Main {
         }
         catch (Exception e){
             System.out.println(e);
-        }
+        }*/
     }
 
     /** Función que imprime informacion de la clase main.
