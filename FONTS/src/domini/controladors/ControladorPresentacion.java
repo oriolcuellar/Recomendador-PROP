@@ -198,8 +198,8 @@ public class ControladorPresentacion {
         try {
             Path path = Paths.get("");
             String directoryName = path.toAbsolutePath().toString();
-            directoryName += "/SavedData";
-            return CtrlDom.loadRecomendation(s,"./SavedData/Recomendations/recomentation" + s + CtrlDom.getActualUserID() + ".csv");
+            directoryName += "/SaveData";
+            return CtrlDom.loadRecomendation(s,"./SaveData/Recomendations/recomentation" + s + CtrlDom.getActualUserID() + ".csv");
         } catch (Exception e) {
             System.out.println(e);
         }

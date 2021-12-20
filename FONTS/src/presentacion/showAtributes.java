@@ -126,7 +126,7 @@ public class showAtributes {
         frame.setContentPane(this.panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setBounds(x,y,900,900);
+        frame.setBounds(x,y,750,750);
         frame.setResizable(false);
         frame.setVisible(true);
     }
