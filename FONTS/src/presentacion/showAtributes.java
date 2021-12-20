@@ -9,7 +9,11 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.net.URL;
+import javax.imageio.ImageIO;
 
 public class showAtributes {
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
@@ -24,8 +28,9 @@ public class showAtributes {
     private JLabel item;
     private JScrollPane scrollPane;
     private JTable tabla;
+    private JLabel label;
 
-    public showAtributes(String id) {
+    public showAtributes(String id) throws IOException {
 
         item.setText("ID: " + id);
 
@@ -105,20 +110,10 @@ public class showAtributes {
                 }
             }
         });
-
-
-            /*
-                String path = "http://chart.finance.yahoo.com/z?s=GOOG&t=6m&q=l";
-                URL url = new URL(path);
-                BufferedImage image = ImageIO.read(url);
-                JLabel label = new JLabel(new ImageIcon(image));
-                JFrame f = new JFrame();
-                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                f.getContentPane().add(label);
-                f.pack();
-                f.setLocation(200,200);
-                f.setVisible(true);*/
-
+        String path = "https://cdn.myanimelist.net/images/anime/4/19644.jpg";
+        URL url = new URL(path);
+        BufferedImage image = ImageIO.read(url);
+        label.setIcon(new ImageIcon(image));
     }
 
     public void showWindow(int x, int y) {
@@ -126,7 +121,7 @@ public class showAtributes {
         frame.setContentPane(this.panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setBounds(x,y,600,600);
+        frame.setBounds(x,y,900,900);
         frame.setResizable(false);
         frame.setVisible(true);
     }
