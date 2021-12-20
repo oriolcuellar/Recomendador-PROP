@@ -47,41 +47,40 @@ public class ControladorPersistenciaItem {
     }
 
     public void Escritor_Items(String csvFile, Conjunt_Items list_items) throws Exception{
-        //File fichero = new File(csvFile);
+        File fichero = new File(csvFile);
 
         //if (fichero.exists()) throw new FileExistsException(csvFile);
-        //else {
-            try{
-               /* Map <String, ArrayList <String> > todo = new HashMap <String, ArrayList <String> > ();
 
-                for (Item i: list_items.getItems()){
-                    //String atr=i.getDadesInicials().get(0);
-                    //String val=i.getDadesInicials().get(1);
-                    if (todo.containsKey(atr)){//ya hay items de este tipo
-                        todo.get(atr).add(val);
-                    }
-                    else{// este tipo de item es el primero del map
-                        ArrayList <String> nou = new ArrayList<String>();
-                        nou.add(val);
-                        todo.put(atr, nou);
-                    }
+        try{
+           /* Map <String, ArrayList <String> > todo = new HashMap <String, ArrayList <String> > ();
 
-
-                }*/
-                int n=0;
-                File fichero = new File(csvFile);
-                BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
-                for(Item i: list_items.getItems()){//para cada tipo de item
-                    if(n==0) bw.write(i.getAtr());
-                    n++;
-                    bw.write(i.getString());
-                    bw.close();
+            for (Item i: list_items.getItems()){
+                //String atr=i.getDadesInicials().get(0);
+                //String val=i.getDadesInicials().get(1);
+                if (todo.containsKey(atr)){//ya hay items de este tipo
+                    todo.get(atr).add(val);
+                }
+                else{// este tipo de item es el primero del map
+                    ArrayList <String> nou = new ArrayList<String>();
+                    nou.add(val);
+                    todo.put(atr, nou);
                 }
 
-            } catch (Exception e){
-                throw e;
+
+            }*/
+            int n=0;
+            BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
+            for(Item i: list_items.getItems()){//para cada tipo de item
+                if(n==0) bw.write(i.getAtr());
+                n++;
+                bw.write(i.getString()+"\n");
+                bw.close();
             }
-        //}
-    }
+
+        } catch (Exception e){
+            throw e;
+        }
+    //}
+
 
 }

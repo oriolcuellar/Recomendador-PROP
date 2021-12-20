@@ -405,7 +405,12 @@ public class ControladorDomini {
     }
     public float evaluateRecomendationGeneral() throws Exception{
         try{
-            return evaluateRecomendation(lastRecomendation.get(0));
+            ArrayList <myPair> nou = new ArrayList<myPair>();
+            for (Object m: lastRecomendation.get(0)){
+                myPair my = new myPair((Integer) m, 0);
+                nou.add(my);
+            }
+            return evaluateRecomendation(nou);
         }
         catch (Exception e){
             throw e;
@@ -421,7 +426,12 @@ public class ControladorDomini {
     }
     public float evaluateRecomendationKNN() throws Exception{
         try{
-            return evaluateRecomendation(lastRecomendationKNN.get(0));
+            ArrayList <myPair> nou = new ArrayList<myPair>();
+            for (Object m: lastRecomendationKNN.get(0)){
+                myPair my = new myPair((Integer) m, 0);
+                nou.add(my);
+            }
+            return evaluateRecomendation(nou);
         }
         catch (Exception e){
             throw e;
