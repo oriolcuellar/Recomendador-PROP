@@ -88,7 +88,9 @@ public class ControladorDomini {
      * String que indica el path al fichero de ratings para su posterior utilización eln algoritmos
      */
     private static String ratingPath;
-
+    /**
+     * Valoraciones ideales de Items por parte de Usuarios
+     */
     private static ArrayList <Vector<String>> UnKnown;
 
     //CtrlDomini control= CtrlDomini.getInstance();

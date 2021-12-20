@@ -312,33 +312,7 @@ public class Main {
     static void programa_oriol(){
         ControladorDomini dom = ControladorDomini.getInstance();
         try {
-            dom.login("-1", "-1");
-            dom.loadItems("EXE/Entradas_CSV/items.csv");
-            dom.loadRates("EXE/Entradas_CSV/ratings.oriol.csv");
-            dom.logout();
-            dom.login("1", "1");
 
-            //dom.saveItems("EXE/Entradas_CSV/itemsoriol.csv");
-            dom.aux();
-            dom.logout();
-            /*for (String u: dom.showAllUsers()){
-                dom.login(u, u);
-                dom.doSlope(5, 10);
-                //dom.doKNN(10, "EXE/Entradas_CSV/ratings.test.known.csv");
-                //dom.doRecomendation(5, 10, 20, "EXE/Entradas_CSV/ratings.test.known.csv");
-                System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
-                dom.logout();
-            }*/
-            //System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
-            //dom.saveRecomendation("EXE/Entradas_CSV/recom.csv");
-            //dom.loadRecomendation("EXE/Entradas_CSV/recom.csv");
-            //dom.doRecomendation(5, 10, 20, "EXE/Entradas_CSV/ratings.test.known.csv");
-            //dom.doKNN(10, "EXE/Entradas_CSV/ratings.test.known.csv");
-            //dom.saveRecomendation("EXE/Entradas_CSV/recom5.csv");
-            //dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv");
-            //System.out.println(dom.evaluateRecomendation("EXE/Entradas_CSV/ratings.test.unknown.csv"));
-            //dom.login("-1", "-1");
-            //dom.showAllItems();
         }
         catch (Exception e){
             System.out.println(e);
