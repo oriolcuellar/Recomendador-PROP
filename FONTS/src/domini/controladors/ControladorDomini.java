@@ -676,7 +676,7 @@ public class ControladorDomini {
     }
     /**
      * Se quieren guardar los cambios de las recomendaciones en el sistema
-     * @param path path es el documento donde se quiere guardar
+     * @param s es el documento donde se quiere guardar
      */
     public void saveRecomendation(String s ) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
