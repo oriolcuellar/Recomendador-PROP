@@ -620,9 +620,11 @@ public class ControladorDomini {
      * Se quieren guardar los cambios de los items en el sistema
      * @param path path es el documento donde se quiere guardar
      */
-  public void saveItems(String path) throws Exception{
+  public void saveItems() throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
+            Path dir = Paths.get("");
+            String path = dir.toAbsolutePath().toString()+"/SaveData/";
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
             ctrlItem.Escritor_Items(path, itemList);
         }
@@ -631,9 +633,11 @@ public class ControladorDomini {
         }
     }
 
-    public void saveRatings(String path) throws Exception{
+    public void saveRatings() throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
+            Path dir = Paths.get("");
+            String path = dir.toAbsolutePath().toString()+"/SaveData/";
             ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Ratings(path,usersList);
         }
@@ -642,9 +646,11 @@ public class ControladorDomini {
         }
     }
 
-    public void saveUnkown(String path) throws Exception{
+    public void saveUnkown() throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
+            Path dir = Paths.get("");
+            String path = dir.toAbsolutePath().toString()+"/SaveData/";
             ControladorPersistenciaRatings ctrlRating = new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Unknown(path,UnKnown);
             System.out.println("llego aqui");
@@ -678,9 +684,12 @@ public class ControladorDomini {
      * Se quieren guardar los cambios de las recomendaciones en el sistema
      * @param path path es el documento donde se quiere guardar
      */
-    public void saveRecomendation(String s, String path) throws Exception{
+    public void saveRecomendation(String s ) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
+
+            Path dir = Paths.get("");
+            String path = dir.toAbsolutePath().toString()+"/SaveData/Recomendation/";
             ControladorPersistenciaRecomendation ctrlRecomendation= new ControladorPersistenciaRecomendation();
             if(s == "Hybrid")  {
                 ArrayList <myPair> nou = new ArrayList<myPair>();
