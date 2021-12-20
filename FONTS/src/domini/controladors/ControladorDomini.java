@@ -1003,18 +1003,24 @@ public class ControladorDomini {
      * El administrador quiere eliminar un usuario
      * @param delete_me delete_me es el usuario  que se quiere eliminar
      */
-    public void deleteUser(String delete_me){
-        //pre: actualUser admin
-        if(actualUser!=null && actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1")){//no esborres l'admin
+    public void deleteUser(String delete_me) throws Exception{
+        if(actualUser==null || actualUser.getRol().equals(TipusRol.Usuari) || delete_me.equals("-1")) throw new ImpossibleStateException("deleteUser");
+        boolean trobat=false;
+        User delete=usersList.get(Integer.valueOf(delete_me));
+        if (delete==null) throw new UserNotExistsException("deleteUser");
+        //eliminar item valorated by usuari
+        for (valoratedItem v: delete.getValoratedItems()){
+            Item m=v.getItem();
+            ArrayList <User> usuaris = itemValoratedBy.get(m.getID());
+            usuaris.remove(delete);
+        }
+        usersList.remove(delete.getUserID());
 /*
             for (ItemUsat i: ratesList){
                 if ( delete_me.equals(StringValueOf(i.getUsuari().getUserID())) ratesList.delete(i);
             }
             usersList.delete(delete_me);
 */
-
-
-        }
     }
 
     /**
