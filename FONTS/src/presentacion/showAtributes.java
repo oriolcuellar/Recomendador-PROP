@@ -7,8 +7,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,8 +15,8 @@ import java.net.URL;
 import javax.imageio.ImageIO;
 
 public class showAtributes {
-    ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
 
+    ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
     private static JFrame frame;
     private JButton backButton;
     private JPanel panel;
@@ -30,6 +29,31 @@ public class showAtributes {
     private JTable tabla;
     private JLabel label;
     private String path;
+
+    private class MiModelo extends DefaultTableModel
+    {
+        public MiModelo(Object[][] o, Object[] toArray) {
+            super(o, toArray);
+        }
+
+        public boolean isCellEditable (int row, int column)
+        {
+            // Aquí devolvemos true o false según queramos que una celda
+            // identificada por fila,columna (row,column), sea o no editable
+            return false;
+        }
+    }
+
+    private static String getMessage(String message, int maxDialogWidth) {
+        String string;
+        JLabel label = new JLabel(message);
+        if (label.getPreferredSize().width > maxDialogWidth) {
+            string = "<html><body><p style='width:" + maxDialogWidth + "px;'>"+message+"</p></body></html>";
+        } else {
+            string = "<html><body><p>" + message+ "</p></body></html>";
+        }
+        return string;
+    }
 
     public showAtributes(String id) throws IOException {
 
@@ -69,7 +93,7 @@ public class showAtributes {
         scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
         scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
 
-        DefaultTableModel model = new DefaultTableModel(null, atributos.toArray());
+        MiModelo model = new MiModelo(null, atributos.toArray());
         model.addRow(valores.stream().toArray());
         tabla = new JTable(model);
 
@@ -111,6 +135,26 @@ public class showAtributes {
                 }
             }
         });
+
+        MouseListener mouseListener = new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int fila = tabla.rowAtPoint(e.getPoint());
+                    int columna = tabla.columnAtPoint(e.getPoint());
+                    if (fila == 0){
+
+                        String text = valores.get(columna);
+                        text = getMessage(text, 600);
+                        JOptionPane.showMessageDialog(null, text);
+                    }
+                }
+            }
+        };
+
+
+
+        tabla.addMouseListener(mouseListener);
+
         try {
             URL url = new URL(path);
             BufferedImage image = ImageIO.read(url);

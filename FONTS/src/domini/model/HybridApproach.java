@@ -26,8 +26,8 @@ public class HybridApproach {
 
         Double percentantge_Knn = 0.30;
 
-        if (percentatge_recomanats < 0.70)
-            percentantge_Knn = 1 - percentatge_valorats;
+        if (percentatge_recomanats < 0.70 && percentatge_recomanats + percentantge_Knn < 0.5 )
+            percentantge_Knn +=  percentatge_valorats;
 
         if (percentatge_valorats > percentantge_Knn)
             percentantge_Knn = percentatge_recomanats;
@@ -42,7 +42,6 @@ public class HybridApproach {
             Double val_Slope = valoracion_item(S, i_aux.get(i).getID());
             Double val_Knn = v_aux.get(i);
             Double val_final = val_Knn * percentantge_Knn + val_Slope * percentarge_Slope;
-
             K.get(1).set(i, val_final);
         }
 
@@ -92,7 +91,7 @@ public class HybridApproach {
     }
     private Double valoracion_item(ArrayList <myPair> Slope, int ID){
 
-        Double valoracio = 0.0;
+        Double valoracio = -1.0;
         for(int i = 0; i < Slope.size(); ++i)
             if (Slope.get(i).getItemID() == ID) valoracio = Double.valueOf(Slope.get(i).getValoration());
 
