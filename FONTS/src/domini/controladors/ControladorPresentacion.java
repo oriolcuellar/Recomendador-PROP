@@ -80,7 +80,6 @@ public class ControladorPresentacion {
     /**
      * Función obtener todos los items que hay cargados
      * @return Vector<Integer> son los id de todos los items
-     * @see Item
      */
     public static Vector<Integer> getAllItems(){
         Vector<Integer> s = new Vector<>();
@@ -92,7 +91,10 @@ public class ControladorPresentacion {
         }
         return s;
     }
-
+    /**
+     * Función obtener todos los items valorados por el usuario actual
+     * @return ArrayList<Integer> son los id de todos los items valorados por el usuario actual
+     */
     public static ArrayList<Integer> getRatedItems(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
@@ -104,7 +106,10 @@ public class ControladorPresentacion {
         }
         return s;
     }
-
+    /**
+     * Función obtener una recomendacion de items mediante el algoritmo de collaborative filtering
+     * @return ArrayList<Integer> son los id de todos los items que se le van a recomendar al usuario ordenados de mejor a peor
+     */
     public static ArrayList<Integer> getRecomendedItemsSlope(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
@@ -115,7 +120,10 @@ public class ControladorPresentacion {
         }
         return s;
     }
-
+    /**
+     * Función obtener una recomendacion de items mediante el algoritmo de content based
+     * @return ArrayList<Integer> son los id de todos los items que se le van a recomendar al usuario ordenados de mejor a peor
+     */
     public static ArrayList<Integer> getRecomendedItemsCB(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
@@ -126,7 +134,10 @@ public class ControladorPresentacion {
         }
         return s;
     }
-
+    /**
+     * Función obtener una recomendacion de items mediante el algoritmo hibrido
+     * @return ArrayList<Integer> son los id de todos los items que se le van a recomendar al usuario ordenados de mejor a peor
+     */
     public static ArrayList<Integer> getRecomendedItemsHybrid(){
         ArrayList<Integer> s = new ArrayList<>();
         try {
@@ -137,7 +148,10 @@ public class ControladorPresentacion {
         }
         return s;
     }
-
+    /**
+     * Carga un conjunto de items al sistema
+     * @param path es el documento de donde se quiere leer
+     */
     public void loadItems(String path) {
        try {
            CtrlDom.loadItems(path);
@@ -145,7 +159,10 @@ public class ControladorPresentacion {
            System.out.println(e);
        }
     }
-
+    /**
+     * Carga un conjunto de usuarios y las valoraciones que le han dado a los items
+     * @param path es el documento de donde se quiere leer
+     */
     public void loadRates(String path) {
         try {
             CtrlDom.loadRates(path);
@@ -153,7 +170,10 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
     }
-
+    /**
+     * Carga un conjunto de usuarios con valoraciones ficticias que sirve para poder evaluar recomendaciones
+     * @param path es el documento de donde se quiere leer
+     */
     public void loadUnKnown(String path) {
         try {
             CtrlDom.loadUnKnown(path);
@@ -161,16 +181,22 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
     }
-
+    /**
+     * Carga la recomendacion del usuario actual
+     * @param s es el tipo de algoritmo de recomendacion ("Hybrid", "CF", "CB")
+     */
     public ArrayList loadRecomendation(String s) {
         try {
-            return CtrlDom.loadRecomendation(s,"./EXE/Data/ratings" + s + CtrlDom.getActualUser() + ".csv");
+            return CtrlDom.loadRecomendation(s,"./EXE/Data/Recomendations/recomentation" + s + CtrlDom.getActualUserID() + ".csv");
         } catch (Exception e) {
             System.out.println(e);
         }
         return null;
     }
-
+    /**
+     * Evalua la recomendacion que se le ha dado al usuario actual
+     * @param s es el tipo de algoritmo de recomendacion ("Hybrid", "CF", "CB")
+     */
     public void evaluateRecomendation(String s) {
         try {
             float f = 0;
@@ -183,7 +209,11 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
     }
-
+    /**
+     * Se inicia la session un usuario
+     * @param username id del usuario que quiere iniciar sesion
+     * @param password contraseña del usuario que quiere iniciar sesion
+     */
     public void login(String username, String password) {
         try {
             CtrlDom.login(username,password);
@@ -191,6 +221,11 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
     }
+    /**
+     * Secrea la cuenta de un usuario
+     * @param username id del usuario que quiere crearse la cuenta
+     * @param password contraseña del usuario que quiere crearse la cuenta
+     */
     public void singUp(String username, String password) {
         try {
             CtrlDom.register(username,password);
@@ -199,7 +234,10 @@ public class ControladorPresentacion {
             CtrlDom.getActualUser().getUserID();
         }
     }
-
+    /**
+     * Se modifica la contraseña del usuario que esta actualmente en el sistema
+     * @param password contraseña nueva que ha introducido el usuario
+     */
     public void editProfile(String password) {
         try {
             CtrlDom.editProfile(password);
@@ -207,11 +245,16 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
     }
-
+    /**
+     * Indica si el usuario que ha iniciado sesion es admin o no
+     * @return devuelve cierto si el usuario es admin
+     */
     public boolean isAdmin() {
         return CtrlDom.getTypeActualUser() == "admin";
     }
-
+    /**
+     * Se cierra la sesion del usuario actual
+     */
     public void logout() {
         try {
             CtrlDom.logout();
@@ -220,6 +263,10 @@ public class ControladorPresentacion {
         }
     }
 
+    /**
+     * Funcion para saber el tamaño de usuarios que hay cargados en el sistema
+     * @return numero de usuarios cargados en el sistema
+     */
     public int getUsersSize() {
         int d = 0;
         try {
@@ -229,7 +276,10 @@ public class ControladorPresentacion {
         }
         return d;
     }
-
+    /**
+     * Funcion para saber el item favorito del usuario actual
+     * @return devuelve el item favorito del usuario actual
+     */
     public int itemFavourite() {
         int d = 0;
         try {
@@ -239,7 +289,10 @@ public class ControladorPresentacion {
         }
         return d;
     }
-
+    /**
+     * Funcion para saber la media de valoraciones del usuario actual
+     * @return devuelve el item favorito del usuario actual
+     */
     public int avgRating() {
         int d = 0;
         try {
@@ -312,13 +365,14 @@ public class ControladorPresentacion {
         try {
             CtrlDom.saveRatings("./EXE/Data/ratings.csv");
             CtrlDom.saveItems("./EXE/Data/items.csv");
+            CtrlDom.saveUnkown("./EXE/Data/unkown.csv");
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     public void saveRecomendation(String s) {
-        String c = "./EXE/Data/ratings" + s + CtrlDom.getActualUser() + ".csv";
+        String c = "./EXE/Data/Recomendations/recomendation" + s + CtrlDom.getActualUserID() + ".csv";
         System.out.println(c);
         try {
             CtrlDom.saveRecomendation(s, c);
@@ -327,11 +381,19 @@ public class ControladorPresentacion {
         }
     }
 
+    public void createItem(String atributes, String valors) {
+        try {
+            CtrlDom.createItem(atributes,valors);
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public void deleteUser(String id) {
         try {
-            if(id != "-1") CtrlDom.deleteProfile(id);
+            CtrlDom.deleteUser(id);
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, "The user does not exist","Error ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e + "The user does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
 

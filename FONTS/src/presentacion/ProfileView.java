@@ -78,8 +78,8 @@ public class ProfileView {
                     String userDeleted = JOptionPane.showInputDialog(null,
                             "Write CONFIRM to delete the profile\n Be sure all your data will be deleted", null);
                    System.out.println(userDeleted);
-                    if(userDeleted.endsWith("CONFIRM")) {
-                        CtrlPres.deleteUser(userDeleted);
+                    if(userDeleted.equals("CONFIRM")) {
+                        CtrlPres.deleteUser(CtrlPres.getActualUserId().toString());
                         CtrlPres.logout();
                         int x = frame.getX();
                         int y = frame.getY();

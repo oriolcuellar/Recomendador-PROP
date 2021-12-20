@@ -7,6 +7,9 @@ import FONTS.src.persistencia.ControladorPersistenciaRatings;
 import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
 
 import javax.swing.*;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 /** \brief Clase que implementa el controlador de dominio.
@@ -115,11 +118,9 @@ public class ControladorDomini {
         lastRecomendationSlope = new ArrayList<myPair>();
         lastRecomendationKNN = new ArrayList<ArrayList>();
         UnKnown = new ArrayList<>();
-        UnKnown = new ArrayList<>();
         recomendationChanged=true;
         recomendationChangedSlope=true;
         recomendationChangedKNN=true;
-        ArrayList <Vector<String>> UnKnown = new ArrayList <Vector<String>>();
         admin= new User(-1);
         admin.setRol(TipusRol.Administrador);
     }
@@ -407,7 +408,13 @@ public class ControladorDomini {
     }
     public float evaluateRecomendationGeneral() throws Exception{
         try{
-            return evaluateRecomendation(lastRecomendation.get(0));
+            ArrayList <myPair> nou = new ArrayList<myPair>();
+            ArrayList<Item> a = lastRecomendation.get(0);
+            for (Item m: a){
+                myPair my = new myPair(m.getID(), 0);
+                nou.add(my);
+            }
+            return evaluateRecomendation(nou);
         }
         catch (Exception e){
             throw e;
@@ -423,7 +430,13 @@ public class ControladorDomini {
     }
     public float evaluateRecomendationKNN() throws Exception{
         try{
-            return evaluateRecomendation(lastRecomendationKNN.get(0));
+            ArrayList <myPair> nou = new ArrayList<myPair>();
+            ArrayList<Item> a = lastRecomendationKNN.get(0);
+            for (Item m: a){
+                myPair my = new myPair(m.getID(), 0);
+                nou.add(my);
+            }
+            return evaluateRecomendation(nou);
         }
         catch (Exception e){
             throw e;
@@ -439,6 +452,10 @@ public class ControladorDomini {
         else if (lastRecomendation1.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
             ArrayList <Vector<String>> ratings_leidos = UnKnown;
+            for(Vector<String> v : ratings_leidos) {
+                for (String s : v) System.out.println(s);
+                System.out.println("===================");
+            }
             ArrayList <myPair> ratingsOrdenados = new ArrayList<myPair>();
             for (Vector<String> v: ratings_leidos){//ordenar y eliminar valoraciones que no son mias
                 if (String.valueOf(actualUser.getUserID()).equals(v.get(0))){
@@ -603,7 +620,7 @@ public class ControladorDomini {
      * @param path path es el documento donde se quiere guardar
      */
   public void saveItems(String path) throws Exception{
-        if (actualUser==null) throw new NoUserLogedInException("saveItems");
+        //if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
             ctrlItem.Escritor_Items(path, itemList);
@@ -612,18 +629,48 @@ public class ControladorDomini {
             throw e;
         }
     }
-    /**
-     * Se quieren guardar los cambios de los ratings en el sistema
-     * @param path path es el documento donde se quiere guardar
-     */
+
     public void saveRatings(String path) throws Exception{
-        if (actualUser==null) throw new NoUserLogedInException("saveRatings");
+        //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
             ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Ratings(path,usersList);
         }
         catch (Exception e){
             throw e;
+        }
+    }
+
+    public void saveUnkown(String path) throws Exception{
+        //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
+        try{
+            ControladorPersistenciaRatings ctrlRating = new ControladorPersistenciaRatings();
+            ctrlRating.Escritor_Unknown(path,UnKnown);
+            System.out.println("llego aqui");
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
+    public void crearCarpeta(){
+        Path path = Paths.get("");
+        String directoryName = path.toAbsolutePath().toString();
+        File directorio = new File(directoryName+"/SaveData");
+        if (!directorio.exists()) {
+            if (directorio.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+            }
+        }
+        directorio = new File(directoryName+"/SaveData"+"/Recomendations");
+        if (!directorio.exists()) {
+            if (directorio.mkdirs()) {
+                System.out.println("Directorio creado");
+            } else {
+                System.out.println("Error al crear directorio");
+            }
         }
     }
     /**
@@ -634,8 +681,24 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
             ControladorPersistenciaRecomendation ctrlRecomendation= new ControladorPersistenciaRecomendation();
-            if(s == "Hybrid") ctrlRecomendation.Escritor_Recomendation(path, lastRecomendation.get(0));
-            if(s == "CB") ctrlRecomendation.Escritor_Recomendation(path, lastRecomendationKNN.get(0));
+            if(s == "Hybrid")  {
+                ArrayList <myPair> nou = new ArrayList<myPair>();
+                ArrayList<Item> a = lastRecomendation.get(0);
+                for (Item m: a){
+                    myPair my = new myPair(m.getID(), 0);
+                    nou.add(my);
+                }
+                ctrlRecomendation.Escritor_Recomendation(path, nou);
+            }
+            if(s == "CB") {
+                ArrayList <myPair> nou = new ArrayList<myPair>();
+                ArrayList<Item> a = lastRecomendationKNN.get(0);
+                for (Item m: a){
+                    myPair my = new myPair(m.getID(), 0);
+                    nou.add(my);
+                }
+                ctrlRecomendation.Escritor_Recomendation(path, nou);
+            }
             if(s == "CF") ctrlRecomendation.Escritor_Recomendation(path, lastRecomendationSlope);
         }
         catch (Exception e){
@@ -648,7 +711,7 @@ public class ControladorDomini {
      * @param valors valors es el string de valores
      */
     public void createItem(String atributs, String valors) throws Exception{
-        if (actualUser==null) throw new NoUserLogedInException("createItem");
+        //if (actualUser==null) throw new NoUserLogedInException("createItem");
         try {
             createItemPath(atributs, valors, itemList, itemTypeList);
             recomendationChanged=true;
@@ -824,6 +887,8 @@ public class ControladorDomini {
         //creamos item
         int id = Integer.valueOf(datos_valors.get(pos_id));
         Item i =new Item(id, ti, vsv);
+        i.setAtr(atributs);
+        i.setString(valors);
         //i.setDadesInicials(atributs, valors);
         if (!(ListaItems.existeix_item(id))){
             ListaItems.anyadir_item(i);
@@ -867,20 +932,19 @@ public class ControladorDomini {
     public void loadItems(String path) throws Exception{//"Entradas_CSV/items.csv"
         //pre: actualUser es admin
         try {
-            if (actualUser == null) throw new NoUserLogedInException("loadItems");
-            else if (actualUser.getRol().equals(TipusRol.Administrador)) {
-                Vector<String> mat_items = new Vector<String>();
-                ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
-                mat_items = reader.Lector_Items(path);
+            //if (actualUser == null) throw new NoUserLogedInException("loadItems");
 
-                for (int i = 1; i < mat_items.size(); ++i) {
-                    dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
-                }
-                recomendationChanged=true;
-                recomendationChangedSlope=true;
-                recomendationChangedKNN=true;
+            Vector<String> mat_items = new Vector<String>();
+            ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
+            mat_items = reader.Lector_Items(path);
 
-            } else throw new NotAnAdministratorException("loadItems");
+            for (int i = 1; i < mat_items.size(); ++i) {
+                dominiSingelton.createItem(mat_items.get(0), mat_items.get(i));
+            }
+            selectedItem = itemList.getItems().get(0);
+            recomendationChanged=true;
+            recomendationChangedSlope=true;
+            recomendationChangedKNN=true;
         }
         catch (Exception e){
             //JOptionPane.showMessageDialog(null,"El fichero introducido no tiene el formato válido");
@@ -894,44 +958,43 @@ public class ControladorDomini {
     public void loadRates(String path) throws Exception{//falta añadir item usado a la lista de items usados
         //pre: actualUser es admin
         try {
-            if (actualUser==null) throw new NoUserLogedInException("loadRates");
-            else if(!actualUser.getRol().equals(TipusRol.Administrador))
-                throw new NotAnAdministratorException((String.valueOf(actualUser.getUserID())));
-            else{
-                ratingPath = path;
-                recomendationChanged=true;
-                recomendationChangedSlope=true;
-                recomendationChangedKNN=true;
-                ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
+            //if (actualUser==null) throw new NoUserLogedInException("loadRates");
+            //if(!actualUser.getRol().equals(TipusRol.Administrador))
 
-                ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
-                readed_ratings = reader.Lector_Ratings(path);
+            ratingPath = path;
+            recomendationChanged=true;
+            recomendationChangedSlope=true;
+            recomendationChangedKNN=true;
+            ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
 
-                TipusRol t = TipusRol.Usuari;
-                for (Vector<String> vs : readed_ratings) {
-                    if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
-                        User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                        if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
-                            usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+            ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
+            readed_ratings = reader.Lector_Ratings(path);
 
-                        }
-                    } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
-                        User usuari = new User(Integer.valueOf(vs.get(0)));
+            TipusRol t = TipusRol.Usuari;
+            for (Vector<String> vs : readed_ratings) {
+                if (usersList.containsKey(Integer.valueOf(vs.get(0)))) {//existeix
+                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                    if (usuari.searchUsedItem(Integer.valueOf(vs.get(1))) == null) {//no existe el item en sus valoraciones
                         usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
-                        usersList.put(Integer.valueOf(vs.get(0)), usuari);
+
                     }
-                    //parte del item
-                    if (itemValoratedBy.containsKey(Integer.valueOf(vs.get(1)))) {//existeix item al map
-                        User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                        itemValoratedBy.get(Integer.valueOf(vs.get(1))).add(usuari);
-                    } else {//NO existeix item al map
-                        User usuari = usersList.get(Integer.valueOf(vs.get(0)));
-                        ArrayList<User> au = new ArrayList<User>();
-                        au.add(usuari);
-                        itemValoratedBy.put(Integer.valueOf(vs.get(1)), au);
-                    }
+                } else {//no existeix, es crea, afegim valoracio a la seva llista, afegim valoracio allista itemUsatList
+                    User usuari = new User(Integer.valueOf(vs.get(0)));
+                    usuari.addvaloratedItem(Integer.valueOf(vs.get(1)), Float.valueOf(vs.get(2)));
+                    usersList.put(Integer.valueOf(vs.get(0)), usuari);
+                }
+                //parte del item
+                if (itemValoratedBy.containsKey(Integer.valueOf(vs.get(1)))) {//existeix item al map
+                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                    itemValoratedBy.get(Integer.valueOf(vs.get(1))).add(usuari);
+                } else {//NO existeix item al map
+                    User usuari = usersList.get(Integer.valueOf(vs.get(0)));
+                    ArrayList<User> au = new ArrayList<User>();
+                    au.add(usuari);
+                    itemValoratedBy.put(Integer.valueOf(vs.get(1)), au);
                 }
             }
+
         }
         catch (Exception e){
             throw e;
@@ -1003,18 +1066,24 @@ public class ControladorDomini {
      * El administrador quiere eliminar un usuario
      * @param delete_me delete_me es el usuario  que se quiere eliminar
      */
-    public void deleteUser(String delete_me){
-        //pre: actualUser admin
-        if(actualUser!=null && actualUser.getRol().equals(TipusRol.Administrador) && !delete_me.equals("-1")){//no esborres l'admin
+    public void deleteUser(String delete_me) throws Exception{
+        if(actualUser==null || delete_me.equals("-1")) throw new ImpossibleStateException("deleteUser");
+        boolean trobat=false;
+        User delete=usersList.get(Integer.valueOf(delete_me));
+        if (delete==null) throw new UserNotExistsException("deleteUser");
+        //eliminar item valorated by usuari
+        for (valoratedItem v: delete.getValoratedItems()){
+            Item m=v.getItem();
+            ArrayList <User> usuaris = itemValoratedBy.get(m.getID());
+            usuaris.remove(delete);
+        }
+        usersList.remove(delete.getUserID());
 /*
             for (ItemUsat i: ratesList){
                 if ( delete_me.equals(StringValueOf(i.getUsuari().getUserID())) ratesList.delete(i);
             }
             usersList.delete(delete_me);
 */
-
-
-        }
     }
 
     /**
@@ -1090,7 +1159,7 @@ public class ControladorDomini {
             ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
             UnKnown = ctrRec.Lector_Ratings(path);
         }
-        catch (Exception e){
+        catch (Exception e) {
             throw e;
         }
     }
