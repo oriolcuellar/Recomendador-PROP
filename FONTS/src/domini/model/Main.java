@@ -43,8 +43,20 @@ public class Main {
      * @see K_Neareast_Neightbour
      */
     public static void main(String[] args) {
-        ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
-        CtrlPres.changeLogInView(0,0);
+        //ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
+        //CtrlPres.changeLogInView(0,0);
+        try {
+            ControladorDomini c = ControladorDomini.getInstance();
+            c.login("-1", "-1");
+            c.loadItems("./EXE/Entradas_CSV/items.csv");
+            c.loadRates("./EXE/Entradas_CSV/ratings.db.csv");
+            c.crearCarpeta();
+            c.saveItems();
+            c.enseñaItemTypeAtr();
+
+        } catch (Exception e){
+            System.out.println(e);
+        }
 
 
         /*printInfo();
