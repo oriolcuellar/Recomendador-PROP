@@ -108,11 +108,11 @@ public class Item {
         return AtrI;
     }
 
-    public String setString(String val){
+    public void setString(String val){
         this.ValI=val;
     }
 
-    public String setAtr(String val){
+    public void setAtr(String val){
         this.AtrI=val;
     }
 
