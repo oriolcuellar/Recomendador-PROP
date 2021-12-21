@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/** \brief Clase que implementa la vista del menu principal del Administrador.
+ *  @author Marc Camarillas
+ */
 public class AdminMainPage {
     /**
      * Instancia del controlador de Presentacion
