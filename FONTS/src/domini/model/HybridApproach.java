@@ -17,7 +17,7 @@ public class HybridApproach {
         clonador_ArrayList_Knn(K, Knn);
 
         Float max_Slope = S.get(0).getValoration();
-        Double max_Knn = (Double) K.get(1).get(0);
+        Double max_Knn = (Double) K.get(1).get(K.size() -1);
         normalizar_val_Slope(S, max_Slope);
         normalizar_val_Knn(K, max_Knn);
 

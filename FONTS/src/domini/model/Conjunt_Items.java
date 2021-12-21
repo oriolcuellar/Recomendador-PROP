@@ -21,6 +21,10 @@ public class Conjunt_Items {
      */
     private ArrayList<ArrayList<Double> > Distances;
 
+    private ArrayList<Double> maxims;
+
+    private ArrayList<Double> minims;
+
     //Creadora
 
     /** Creadora de la classe. Crea un Conjunt_Item con la Array ordenada crecientemente por ID de Item.
@@ -39,6 +43,23 @@ public class Conjunt_Items {
             }
         });
         Distances = new ArrayList<ArrayList<Double>>();
+        maxims = new ArrayList<Double>();
+        minims = new ArrayList<Double>();
+
+        Item aux = Items.get(0);
+        for (int i = 0; i < aux.getValors().size(); ++i){
+
+            if (aux.getTipus().getAtributes().get(i).getType() == "Rang") {
+
+                maxims.set(i, aux.getTipus().getAtributes().get(i).getUpper());
+                minims.set(i, aux.getTipus().getAtributes().get(i).getLower());
+            }
+            else {
+                maxims.set(i, -1.0);
+                minims.set(i, -1.0);
+            }
+        }
+
         initzialitzar_matriu();
     }
 
@@ -50,6 +71,8 @@ public class Conjunt_Items {
 
         Items = new ArrayList<Item> ();
         Distances = new ArrayList<ArrayList<Double> >();
+        maxims = new ArrayList<Double>();
+        minims = new ArrayList<Double>();
     }
 
     //Getters
@@ -61,6 +84,7 @@ public class Conjunt_Items {
 
     public  boolean existeix_item(int id) {
 
+        if (n_Items() == 0) return false;
         return binarySearch(Items, 0, Items.size()-1, id);
     }
 
@@ -156,6 +180,7 @@ public class Conjunt_Items {
      */
 
     public boolean setItems(ArrayList<Item> items) {
+
         Items = items;
         Collections.sort(Items, new Comparator<Item> () {
 
@@ -165,6 +190,49 @@ public class Conjunt_Items {
                 return a.getID() - b.getID();
             }
         });
+
+        Boolean nuevo = false;
+        if (n_Items() > 0) nuevo = true;
+
+        if(nuevo) {
+
+            Item aux = items.get(0);
+            for (int i = 0; i < aux.getValors().size(); ++i){
+
+                if (aux.getTipus().getAtributes().get(i).getType() == "Rang") {
+
+                    maxims.add(i, aux.getTipus().getAtributes().get(i).getUpper());
+                    minims.add(i, aux.getTipus().getAtributes().get(i).getLower());
+                }
+                else {
+                    maxims.add(i, -1.0);
+                    minims.add(i, -1.0);
+                }
+            }
+        }
+
+        else {
+
+            Item aux = Items.get(0);
+            ArrayList<String> valors = aux.getValors();
+            for (int i = 0; i < maxims.size(); ++i) {
+
+                if (maxims.get(i) != -1.0) {
+
+                    Double v_aux = Double.valueOf(valors.get(i));
+                    if (v_aux > maxims.get(i) * 1.20) {
+
+                        re_calcul_atriu();
+                        maxims.set(i, v_aux);
+                    } else if (v_aux < minims.get(i) * 0.80) {
+
+                        re_calcul_atriu();
+                        minims.set(i, v_aux);
+                    }
+                }
+            }
+        }
+
         initzialitzar_matriu();
         return true;
     }
@@ -200,7 +268,48 @@ public class Conjunt_Items {
     public boolean anyadir_item(Item a)  {
 
         if (!existeix_item(a.getID())) {
-            int i = BinaryInsertionPos(Items, 0, Items.size()-1, a.getID());
+
+            int i;
+            if(n_Items() > 0) {
+                i = BinaryInsertionPos(Items, 0, Items.size()-1, a.getID());
+                Item aux = Items.get(0);
+                ArrayList<String> valors = aux.getValors();
+                for (int j = 0; j < maxims.size(); ++j) {
+
+                    if (maxims.get(j) != -1.0) {
+
+                        Double v_aux = Double.valueOf(valors.get(j));
+                        if (v_aux > maxims.get(j) * 1.20) {
+
+                            re_calcul_atriu();
+                            maxims.set(j, v_aux);
+                        } else if (v_aux < minims.get(j) * 0.80) {
+
+                            re_calcul_atriu();
+                            minims.set(j, v_aux);
+                        }
+                    }
+                }
+            }
+            else {
+
+                i = -1;
+                for (int j = 0; j < a.getValors().size(); ++j){
+
+                    if (a.getTipus().getAtributes().get(j).getType() == "Rang") {
+
+                        maxims.add(j, a.getTipus().getAtributes().get(j).getUpper());
+                        minims.add(j, a.getTipus().getAtributes().get(j).getLower());
+                    }
+                    else {
+                        maxims.add(j, -1.0);
+                        minims.add(j, -1.0);
+                    }
+                }
+            }
+
+
+
             Items.add(i+1, a);
             anyadir_elements( i+1, a);
             return true;
@@ -224,6 +333,14 @@ public class Conjunt_Items {
     }
 
     //Operacions Auxiliars
+
+    private void re_calcul_atriu() {
+
+        for (int i = 0; i < n_Items(); ++i)
+            for (int j = n_Items(); j > i; --j)
+                     Distance(Items.get(i), Items.get(j));
+
+    }
 
     /** Inicializa la matriz Distance con sus respectivas distancias con todos los items.
      */
