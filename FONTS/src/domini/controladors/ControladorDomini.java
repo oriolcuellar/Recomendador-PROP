@@ -683,9 +683,9 @@ public class ControladorDomini {
     public void saveRecomendation(String s ) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
-
-            Path dir = Paths.get("");
-            String path = dir.toAbsolutePath().toString()+"/SaveData/Recomendation/";
+            String extension = ".csv";
+            String path = "./SaveData/Recomendations/recomendation";
+            path += s + actualUser.getUserID() + extension;
             ControladorPersistenciaRecomendation ctrlRecomendation= new ControladorPersistenciaRecomendation();
             if(s == "Hybrid")  {
                 ArrayList <myPair> nou = new ArrayList<myPair>();
@@ -1032,7 +1032,7 @@ public class ControladorDomini {
      * El administrador quiere cargar una recomendación
      * @param path path es la direccion al fichero que se quiere cargar
      */
-    public ArrayList loadRecomendation(String s, String path) throws Exception{
+    public ArrayList<Integer> loadRecomendation(String s, String path) throws Exception{
         if (actualUser==null) throw new NoUserLogedInException("loadRecomendation");
         try {
             recomendationChanged = true;
@@ -1073,15 +1073,24 @@ public class ControladorDomini {
             creado.add(v_Aux);
             if(s == "Hybrid") {
                 lastRecomendation = creado;
-                return lastRecomendation;
+                ArrayList<Integer> r = new ArrayList<Integer>();
+                ArrayList<Integer> a = lastRecomendation.get(0);
+                for(Integer item : a) r.add(item);
+                return r;
             }
             if(s == "CB") {
                 lastRecomendationKNN = creado;
-                return lastRecomendationKNN;
+                ArrayList<Integer> r = new ArrayList<Integer>();
+                ArrayList<Integer> a = lastRecomendationKNN.get(0);
+                for(Integer item : a) r.add(item);
+                return r;
             }
             if(s == "CF") {
                 lastRecomendationSlope = creado.get(0);
-                return lastRecomendationSlope;
+                ArrayList<Integer> r = new ArrayList<Integer>();
+                ArrayList<Integer> a = creado.get(0);
+                for(Integer item : a) r.add(item);
+                return r;
             }
         }
         catch (Exception e){

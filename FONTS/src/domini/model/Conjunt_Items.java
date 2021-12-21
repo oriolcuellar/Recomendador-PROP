@@ -64,7 +64,7 @@ public class Conjunt_Items {
         return binarySearch(Items, 0, Items.size()-1, id);
     }
 
-    /** Devuel el item con el id especificado.
+    /** Devuelve el item con el id especificado.
      * @see Item
      * @param id identificador del Item que se quiere obtener.
      */

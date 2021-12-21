@@ -6,18 +6,54 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/** \brief Clase que implementa la vista Inicio de sesion.
+ *  @author Marc Camarillas
+ */
 public class LoginView {
+    /**
+     * Instancia del controlador de Presentacion
+     */
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
+    /**
+     * frame principal de la vista
+     */
     private static JFrame frame;
+    /**
+     * panel principal de la vista
+     */
     private JPanel panel;
+    /**
+     * Entrada de texto que te permite escribir la contraseña
+     */
     private JPasswordField passwordPasswordField;
+    /**
+     * Entrada de texto que te permite escribir el username
+     */
     private JTextField usernameTextField;
+    /**
+     * Boton que te permite acceder al menu principal
+     */
     private JButton signupButton;
-    private JLabel username;
-    private JLabel password;
+    /**
+     * Boton que te permite acceder a la vista de registro
+     */
     private JButton signinButton;
+    /**
+     * Boton que te permite recuperar los datos que se habian cargado anteriormente en el sistema
+     */
     private JButton loadSavedDataButton;
+    /**
+     * Etiqueta que pone username
+     */
+    private JLabel username;
+    /**
+     * Etiqueta que pone password
+     */
+    private JLabel password;
 
+    /**
+     * Creadora de la clase
+     */
     public LoginView(){
         signinButton.addActionListener(new ActionListener() {
             @Override
@@ -63,9 +99,9 @@ public class LoginView {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
-                    CtrlPres.loadItems("./SavedData/items.csv");
-                    CtrlPres.loadRates("./SavedData/ratings.csv");
-                    CtrlPres.loadUnKnown("./SavedData/unknown.csv");
+                    CtrlPres.loadItems("./SaveData/items.csv");
+                    CtrlPres.loadRates("./SaveData/ratings.csv");
+                    CtrlPres.loadUnKnown("./SaveData/unknown.csv");
                 } catch (Exception e) {
                     enableButtons();
                     e.printStackTrace();
@@ -75,6 +111,11 @@ public class LoginView {
         });
     }
 
+    /**
+     * Te permite mostrar el frame junto con todos los atributos
+     * @param x posicion x donde se inicializa
+     * @param y posicion y donde se inicializa
+     */
     public void showWindow(int x, int y) {
         enableButtons();
         frame = new JFrame("Sistema Recomanador");
@@ -86,14 +127,17 @@ public class LoginView {
         frame.setVisible(true);
     }
 
+    /**
+     * Te permite deshabilitar todos los botones de la vista
+     */
     public void disableButtons() {
         signupButton.setEnabled(false);
     }
 
+    /**
+     * Te permite habilitar todos los botones de la vista
+     */
     public void enableButtons() {
         signupButton.setEnabled(true);
-    }
-    public void setInvisible() {
-        frame.dispose();
     }
 }

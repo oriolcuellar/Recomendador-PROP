@@ -84,9 +84,14 @@ public class MainMenu {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
+                    int input = JOptionPane.showConfirmDialog(null, "Do you want to load the recomendation?", "Choose",
+                            JOptionPane.OK_CANCEL_OPTION);
+                    String numRec = JOptionPane.showInputDialog(null, "Enter the number of items to be recomended", 50);
+                    int n = Integer.parseInt(numRec);
+                    boolean b = input != 0;
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.changeShowRecomendedItemsView(x,y,"CB", true, 50);
+                    CtrlPres.changeShowRecomendedItemsView(x,y,"CB", b, n);
                     frame.dispose();
                     showRatedItemsButton.setEnabled(true);
                 } catch (Exception e) {
@@ -101,9 +106,14 @@ public class MainMenu {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
+                    int input = JOptionPane.showConfirmDialog(null, "Do you want to load the recomendation?", "Choose",
+                            JOptionPane.OK_CANCEL_OPTION);
+                    String numRec = JOptionPane.showInputDialog(null, "Enter the number of items to be recomended", 50);
+                    int n = Integer.parseInt(numRec);
+                    boolean b = input != 0;
                     int x = frame.getX();
                     int y = frame.getY();
-                    CtrlPres.changeShowRecomendedItemsView(x,y,"Hybrid", true, 50);
+                    CtrlPres.changeShowRecomendedItemsView(x,y,"Hybrid", b, n);
                     frame.dispose();
                     showRatedItemsButton.setEnabled(true);
                 } catch (Exception e) {
