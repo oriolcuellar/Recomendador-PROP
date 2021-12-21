@@ -910,6 +910,7 @@ public class ControladorDomini {
         Item i =new Item(id, ti, vsv);
         i.setAtr(atributs);
         i.setString(valors);
+
         //i.setDadesInicials(atributs, valors);
         /*if (!(ListaItems.existeix_item(id))){
             ListaItems.anyadir_item(i);
@@ -960,9 +961,14 @@ public class ControladorDomini {
             mat_items = reader.Lector_Items(path);
             ArrayList <Item> aux = new ArrayList<Item>();
             for (int i = 1; i < mat_items.size(); ++i) {
-                aux.add(dominiSingelton.createItemLocal(mat_items.get(0), mat_items.get(i)));
+                Item a=dominiSingelton.createItemLocal(mat_items.get(0), mat_items.get(i));
+                aux.add(a);
             }
-            itemList.setItems(aux);
+            for (Item i: aux){
+                if ( !itemList.existeix_item(i.getID())){
+                    itemList.anyadir_item(i);
+                }
+            }
             selectedItem = itemList.getItems().get(0);
             recomendationChanged=true;
             recomendationChangedSlope=true;
