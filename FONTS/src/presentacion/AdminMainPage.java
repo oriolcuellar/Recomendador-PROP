@@ -1,33 +1,80 @@
 package FONTS.src.presentacion;
 
-import FONTS.src.domini.controladors.ControladorDomini;
 import FONTS.src.domini.controladors.ControladorPresentacion;
-
 import javax.swing.*;
-import javax.swing.plaf.nimbus.NimbusLookAndFeel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class AdminMainPage {
+    /**
+     * Instancia del controlador de Presentacion
+     */
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
+    /**
+     * frame principal de la vista
+     */
     private static JFrame frame;
+    /**
+     * panel principal de la vista
+     */
     private JPanel panel;
+    /**
+     * Boton para ir a la vista del Perfil
+     */
     private JButton settingsButton;
+    /**
+     * Boton para eliminar item
+     */
     private JButton deleteItemButton;
+    /**
+     * Boton para eliminar usuario
+     */
     private JButton deleteUserButton;
+    /**
+     * Boton para cargar Usuarios y ratings
+     */
     private JButton uploadUsersRatingsButton;
+    /**
+     * Boton para cargar Items
+     */
     private JButton uploadItemsButton;
+    /**
+     * Boton para cargar el fichero Unkown
+     */
     private JButton uploadRateValorationButton;
+    /**
+     * Boton para eliminar todos los dtos cargados en el sistema
+     */
     private JButton DeleteButton;
+    /**
+     * Boton para crear un item
+     */
     private JButton createItemButton;
+    /**
+     * Boton para crear un usuario
+     */
     private JButton createUserButton;
+    /**
+     * Te permite elegir el fichero que quieras de disco
+     */
     private JFileChooser fileChooser = new JFileChooser();
+    /**
+     * Indica si hay items cargados en el sistema
+     */
     private boolean items;
+    /**
+     * Indica si hay ratings cargados en el sistema
+     */
     private boolean ratings;
+    /**
+     * Indica si hay el fichero de unkown cargado en el sistema
+     */
     private boolean unkown;
 
-
+    /**
+     * Creadora de la clase
+     */
     public AdminMainPage(){
         items = CtrlPres.itemsLoaded();
         ratings = CtrlPres.usersLoaded();
@@ -221,6 +268,11 @@ public class AdminMainPage {
 
     }
 
+    /**
+     * Te permite mostrar el frame junto con todos los atributos
+     * @param x posicion x donde se inicializa
+     * @param y posicion y donde se inicializa
+     */
     public void showWindow(int x, int y) {
         enableButtons();
         frame = new JFrame("Sistema Recomanador");
@@ -232,6 +284,9 @@ public class AdminMainPage {
         frame.setVisible(true);
     }
 
+    /**
+     * Te permite deshabilitar todos los botones de la vista
+     */
     public void disableButtons() {
         uploadItemsButton.setEnabled(false);
         settingsButton.setEnabled(false);
@@ -243,7 +298,9 @@ public class AdminMainPage {
         createItemButton.setEnabled(false);
         createUserButton.setEnabled(false);
     }
-
+    /**
+     * Te permite habilitar todos los botones de la vista
+     */
     public void enableButtons() {
         uploadItemsButton.setEnabled(true);
         settingsButton.setEnabled(true);
@@ -255,8 +312,5 @@ public class AdminMainPage {
         createItemButton.setEnabled(true);
         createUserButton.setEnabled(true);
 
-    }
-    public void setInvisible() {
-        frame.dispose();
     }
 }

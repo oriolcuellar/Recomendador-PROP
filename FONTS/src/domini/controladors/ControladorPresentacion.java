@@ -1,49 +1,70 @@
 package FONTS.src.domini.controladors;
 
-import FONTS.src.domini.model.Item;
 import FONTS.src.presentacion.*;
 import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Vector;
 
 public class ControladorPresentacion {
 
+    /**
+     * Instancia singelton del controlador
+     */
     private static ControladorPresentacion CtrlPres;
+    /**
+     * Instancia del controlador del dominio
+     */
     private static ControladorDomini CtrlDom = ControladorDomini.getInstance();
-    static MainMenu principalView = new MainMenu();
-    static UploadItems uploadItems = new UploadItems();
+
+    /**
+     * Inicializa el controlador de dominio
+     */
     private ControladorPresentacion() {
     }
-
+    /**
+     * Devuelve la instancia singelton del controlador
+     */
     public static ControladorPresentacion getInstance() {
         if(CtrlPres == null) CtrlPres = new ControladorPresentacion();
         return CtrlPres;
     }
-
+    /**
+     * Función para canviar a la vista del menu prinicpal del usuario
+     * @see MainMenu
+     */
     public static void inicializePresentation(int x, int y) {
-        CtrlDom.crearCarpeta();
+        MainMenu principalView = new MainMenu();
         principalView.showWindow(x,y);
     }
-
+    /**
+     * Función para canviar a la vista que muestra todos los items
+     * @see ShowAllItems
+     */
     public static void changeShowAllItemsView(int x, int y) {
         ShowAllItems showAllItems = new ShowAllItems();
         showAllItems.showWindow(x,y);
     }
-
+    /**
+     * Función para canviar a la vista que muestra los Items Recomendados
+     * @see ShowRecomendedItems
+     */
     public static void changeShowRecomendedItemsView(int x, int y,String s, boolean b, int n) {
         ShowRecomendedItems showRecomendedItems = new ShowRecomendedItems(s, b, n);
         showRecomendedItems.showWindow(x,y);
     }
-
+    /**
+     * Función para canviar a la vista que muestra los items valorados
+     * @see ShowRatedItems
+     */
     public static void changeShowRatedItemsView(int x, int y) {
         ShowRatedItems showRatedItems = new ShowRatedItems();
         showRatedItems.showWindow(x,y);
     }
-
+    /**
+     * Función para canviar a la vista que muestra los atributos de un item
+     * @see showAtributes
+     */
     public static void changeShowAtributesView(int x, int y, String id)  {
         try {
             showAtributes showAtributes = new showAtributes(id);
@@ -52,13 +73,20 @@ public class ControladorPresentacion {
             e.printStackTrace();
         }
     }
-
+    /**
+     * Función para canviar a la vista principal del administrador
+     * @see AdminMainPage
+     */
     public static void changeAdminMainView(int x, int y){
         AdminMainPage adminMainPage = new AdminMainPage();
         adminMainPage.showWindow(x,y);
     }
-
+    /**
+     * Función para canviar a la vista de registro
+     * @see LoginView
+     */
     public static void changeLogInView(int x, int y){
+        CtrlDom.crearCarpeta();
         LoginView loginView = new LoginView();
         loginView.showWindow(x,y);
     }
@@ -70,21 +98,22 @@ public class ControladorPresentacion {
         ProfileView profileView = new ProfileView();
         profileView.showWindow(x,y);
     }
-
+    /**
+     * Función para canviar a la vista de las Estadicticas
+     * @see StatsView
+     */
     public static void changeStatsView(int x, int y){
         StatsView statsView = new StatsView();
         statsView.showWindow(x,y);
     }
-
+    /**
+     * Función para canviar a la vista de crar usuario
+     * @see SignUp
+     */
     public static void changeSignUpView(int x, int y){
         SignUp signUp = new SignUp();
         signUp.showWindow(x,y);
     }
-
-    public static void changeLoadingView(int x, int y)  {
-        uploadItems.showWindow(x,y);
-    }
-
 
     /**
      * Función obtener todos los items que hay cargados
@@ -218,6 +247,10 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
     }
+    /**
+     * Obtiene el titulo de un item
+     * @param itemID id del item del que queremos obtener su titulo
+     */
     public String getTitle(Integer itemID) {
         try {
             CtrlDom.selectItem(itemID.toString());
@@ -325,7 +358,10 @@ public class ControladorPresentacion {
         }
         return d;
     }
-
+    /**
+     * Funcion para saber el numer de items valorados por usuario actual
+     * @return devuelve numero de items valorados
+     */
     public int numRated() {
         int d = 0;
         try {
@@ -335,7 +371,10 @@ public class ControladorPresentacion {
         }
         return d;
     }
-
+    /**
+     * Funcion para saber el ID del usuario actual
+     * @return devuelve el ID del usuario actual
+     */
     public Integer getActualUserId() {
         try {
             return CtrlDom.getActualUserID();
@@ -344,11 +383,10 @@ public class ControladorPresentacion {
         }
         return 0;
     }
-
-    public void setInvisible() {
-        uploadItems.setInvisible();
-    }
-
+    /**
+     * Funcion para saber la valoracion del item selecionado
+     * @return devuelve la valoracion del item selecionado
+     */
     public String getValoration(String id) {
         String s;
         try {
@@ -359,23 +397,37 @@ public class ControladorPresentacion {
         }
         return s;
     }
-
+    /**
+     * Funcion para saber si hay items cargados en el sistema
+     * @return devuelve cierto si hay items cargados en el sistema
+     */
     public boolean itemsLoaded() {
         return CtrlDom.itemsLoaded();
     }
-
+    /**
+     * Funcion para saber si hay usuarios cargados en el sistema
+     * @return devuelve cierto si hay usuarios cargados en el sistema
+     */
     public boolean usersLoaded() {
         return CtrlDom.usersLoaded();
     }
-
+    /**
+     * Funcion para saber si hay el fichero de unkown cargado en el sistema
+     * @return devuelve cierto si hay el fichero de unkown cargado en el sistema
+     */
     public boolean unknownLoaded() {
         return CtrlDom.unknownLoaded();
     }
-
+    /**
+     * Elimina todos los ficheros que se han cargado al sistema
+     */
     public void deleteAllData() {
          CtrlDom.deleteAll();
     }
-
+    /**
+     * Elimina un item del sistema
+     * @param id id del item que se quiere eliminar
+     */
     public void deleteItem(String id) {
         try {
             CtrlDom.deleteItem(id);
@@ -383,7 +435,9 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Guarda los items, usuarios/ratings y el unkown que esten cargados en este momento
+     */
     public void saveAll() {
         try {
             CtrlDom.saveRatings();
@@ -393,7 +447,10 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Guarda ultima recomendacion que se ha hecho
+     * @param s es el tipo de algoritmo de recomendacion ("Hybrid", "CF", "CB")
+     */
     public void saveRecomendation(String s) {
         try {
             CtrlDom.saveRecomendation(s);
@@ -401,7 +458,9 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Guarda los ratings/usuarios que hayan sido cargados en el sistema
+     */
     public void saveRatings() {
         try {
             CtrlDom.saveRatings();
@@ -409,8 +468,11 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
-
-
+    /**
+     * Crea un item
+     * @param atributes lista de atributos del item que se quiere crear
+     * @param valors lista de valores del item que se quiere crear
+     */
     public void createItem(String atributes, String valors) {
         try {
             CtrlDom.createItem(atributes,valors);
@@ -418,7 +480,10 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Elimina un usuario del sistema
+     * @param id id del usuario que se quiere eliminar
+     */
     public void deleteUser(String id) {
         try {
             CtrlDom.deleteUser(id);
@@ -426,7 +491,9 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null, e + "The user does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Devuelve la lista de atributos del item seleccionado
+     */
     public ArrayList<String> getAtributos() {
 
         ArrayList<String> a = new ArrayList<String> ();
@@ -438,7 +505,9 @@ public class ControladorPresentacion {
         }
         return a;
     }
-
+    /**
+     * Devuelve la lista de valores del item seleccionado
+     */
     public ArrayList<String> getValors() {
 
         ArrayList<String> a = new ArrayList<String> ();
@@ -449,7 +518,10 @@ public class ControladorPresentacion {
         }
         return a;
     }
-
+    /**
+     * Fija un item como item seleccionado
+     * @param id id del item que queremos seleccionar
+     */
     public void selectItem(String id) {
         try {
             CtrlDom.selectItem(id);
@@ -457,7 +529,11 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
     }
-
+    /**
+     * Cambia la valoracion de un item
+     * @param id id del item al que le queremos cambiar la valoracion
+     * @param nv valoracion que queremos ponerle al item
+     */
     public void SetValoration(String id, String nv) {
 
         float new_valoration = Float.valueOf(nv);
