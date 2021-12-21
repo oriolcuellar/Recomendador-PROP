@@ -12,8 +12,11 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Vector;
 
+/** Clase que implementa el controlador de persistencia de Ratings.
+ */
 public class ControladorPersistenciaRatings {
-
+    /** Constructora de la clase.
+     */
     public ControladorPersistenciaRatings(){
     }
 
@@ -71,7 +74,10 @@ public class ControladorPersistenciaRatings {
         return ratings;
 
     }
-
+    /** Función que escribe valoraciones de un fichero CSV.
+     * @param csvFile Path al fichero CSV.
+     * @param list_users es el map de usuarios
+     */
     public void Escritor_Ratings(String csvFile, Map <Integer, User> list_users) throws Exception{
         File fichero = new File(csvFile);
 
@@ -99,7 +105,10 @@ public class ControladorPersistenciaRatings {
             }
         //}
     }
-
+    /** Función que escribe valoraciones del unknown en un fichero CSV.
+     * @param csvFile Path al fichero CSV.
+     * @param UnKnown es la arraylist de valoraciones
+     */
     public void Escritor_Unknown(String csvFile, ArrayList <Vector<String>> UnKnown) throws Exception{
         File fichero = new File(csvFile);
         try{
