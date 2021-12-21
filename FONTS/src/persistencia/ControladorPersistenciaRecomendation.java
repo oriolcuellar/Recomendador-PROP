@@ -10,12 +10,18 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
+/** Clase que implementa el controlador de persistencia de Recomendation.
+ */
 public class ControladorPersistenciaRecomendation {
 
-
+    /** Constructora de la clase.
+     */
     public ControladorPersistenciaRecomendation(){
     }
-
+    /** Función que lee recomendaciones en un fichero CSV.
+     * @param csvFile Path al fichero CSV.
+     * @return recomendaciones leidas
+     */
     public ArrayList <String> Lector_Recomendation(String csvFile) throws Exception{
         ArrayList <String> recomendations=new ArrayList<String>();
         BufferedReader br = null;
@@ -38,7 +44,10 @@ public class ControladorPersistenciaRecomendation {
         if (recomendations.size()==0) throw new EmptyFileException("Lector_Recomendation");
         return recomendations;
     }
-
+    /** Función que escribe recomendaciones en un fichero CSV.
+     * @param csvFile Path al fichero CSV.
+     * @param lista de recomendaciones escritas
+     */
     public void Escritor_Recomendation(String csvFile, ArrayList <myPair> lista)throws Exception{
         File fichero = new File(csvFile);
 

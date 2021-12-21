@@ -9,17 +9,38 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
-
+/** \brief Clase que implementa la vista del menu principal de un usuario.
+ *  @author Roberto Amat
+ */
 public class ShowRatedItems {
+    /**
+     * Instancia del controlador de Presentacion
+     */
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
-
+    /**
+     * frame principal de la vista
+     */
     private static JFrame frame;
+    /**
+     * Boton para ir a la vista del menu principal
+     */
     private JButton backButton;
+    /**
+     * panel principal de la vista
+     */
     private JPanel panel;
-    private JButton settingsButton;
+    /**
+     * Lista que contiene la información resumida (id + nombre) de los items recomendados.
+     */
     private JList list1;
+    /**
+     * ScrollPane que hace la list1 scrolleable.
+     */
     private JScrollPane scrollPane;
 
+    /**
+     * Creadora de la clase
+     */
     public ShowRatedItems () {
 
         scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
@@ -81,6 +102,11 @@ public class ShowRatedItems {
         list1.addMouseListener(mouseListener);
     }
 
+    /**
+     * Te permite mostrar el frame junto con todos los atributos
+     * @param x posicion x donde se inicializa
+     * @param y posicion y donde se inicializa
+     */
     public void showWindow(int x, int y) {
         frame = new JFrame("Sistema Recomanador");
         frame.setContentPane(this.panel);
@@ -91,7 +117,4 @@ public class ShowRatedItems {
         frame.setVisible(true);
     }
 
-    public void setInvisible() {
-        frame.setVisible(false);
-    }
 }
