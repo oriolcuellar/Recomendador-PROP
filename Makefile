@@ -27,9 +27,6 @@ K_Neareast_Neightbour.class: Conjunt_Items.class Item.class
 Kmeans.class: Cluster.class User.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/model/Kmeans.java
 
-LectorCSV2.class:
-	$(JC) $(FLAGS) ./FONTS/src/domini/model/LectorCSV2.java
-
 myPair.class:
 	$(JC) $(FLAGS) ./FONTS/src/domini/model/myPair.java
 
@@ -54,6 +51,25 @@ User.class: TipusRol.class valoratedItem.class
 valoratedItem.class: Item.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/model/valoratedItem.java
 
+HybridApproach.class: myPair.class
+    $(JC) $(FLAGS) ./FONTS/src/domini/model/HybridApproach.java
+
+ControladorDomini.class: Atribute.class Cluster.class Conjunt_Items.class HybridApproach.class Item.class K_Neareast_Neightbour.class Kmeans.class myPair.class Ranged_Atribute.class RateRecomendation.class SlopeOne.class TipusItem.class TipusRol.class User.class valoratedItem.class ControladorPersistenciaItem.class ControladorPersistenciaRatings.class ControladorPersistenciaRecomendation.class
+    $(JC) $(FLAGS) ./FONTS/src/domini/controladors/ControladorDomini.java
+
+ControladorPersistenciaItem.class: Conjunt_Items.class
+    $(JC) $(FLAGS) ./FONTS/src/domini/persistencia/ControladorPersistenciaItem.java
+
+ControladorPersistenciaRatings.class: User.class
+    $(JC) $(FLAGS) ./FONTS/src/domini/persistencia/ControladorPersistenciaRatings.java
+
+ControladorPersistenciaRecomendation.class: myPair.class
+    $(JC) $(FLAGS) ./FONTS/src/domini/persistencia/ControladorPersistenciaRecomendation.java
+
+ControladorPresentacion.class: ControladorDomini.class
+    $(JC) $(FLAGS) ./FONTS/src/domini/persistencia/ControladorPersistenciaRecomendation.java
+
+
 
 drivers: DriverCluster.class DriverKmeans.class DriverKND.class DriverLectorCSV2.class DriverRateRecomendation.class DriverValoratedItem.class DriverSlopeOne.class DriverMyPair.class DriverRanged_Atribute.class DriverConjuntItems.class DriverTipusItem.class DriverAtribute.class DriverRanged_Atribute.class 
 
@@ -65,9 +81,6 @@ DriverKmeans.class: User.class Kmeans.class
 
 DriverKND.class: Atribute.class Ranged_Atribute.class TipusItem.class Conjunt_Items.class K_Neareast_Neightbour.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverKND.java
-
-DriverLectorCSV2.class: LectorCSV2.class
-	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverLectorCSV2.java
 
 DriverMyPair.class: myPair.class
 	$(JC) $(FLAGS) ./FONTS/src/domini/Drivers/DriverMyPair.java
@@ -118,9 +131,6 @@ DriverKmeans:
 
 DriverKND:
 	java -cp ./EXE FONTS.src.domini.drivers.DriverKND
-
-DriverLectorCSV2:
-	java -cp ./EXE FONTS.src.domini.drivers.DriverLectorCSV2
 
 DriverMyPair:
 	java -cp ./EXE FONTS.src.domini.drivers.DriverMyPair
