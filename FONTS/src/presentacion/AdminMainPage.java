@@ -205,7 +205,7 @@ public class AdminMainPage {
                     String atribut = "";
                     for(String s : atributes) {
                         String val = JOptionPane.showInputDialog(null,
-                                "Write the id of the user to delete", null);
+                                s, null);
                         atribut = atribut + "," + s;
                         valors =  valors + "," + val;
                     }

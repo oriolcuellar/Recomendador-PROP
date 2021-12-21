@@ -36,6 +36,8 @@ public class ProfileView {
                         if (input == 0) {
                             CtrlPres.saveAll();
                         }
+                    } else {
+                        CtrlPres.saveRatings();
                     }
                     int x = frame.getX();
                     int y = frame.getY();

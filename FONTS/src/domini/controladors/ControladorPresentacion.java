@@ -398,9 +398,18 @@ public class ControladorPresentacion {
         try {
             CtrlDom.saveRecomendation(s);
         } catch(Exception e) {
-            //JOptionPane.showMessageDialog(null, "","Error ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public void saveRatings() {
+        try {
+            CtrlDom.saveRatings();
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     public void createItem(String atributes, String valors) {
         try {
