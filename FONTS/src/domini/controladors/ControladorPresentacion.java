@@ -194,7 +194,7 @@ public class ControladorPresentacion {
        try {
            CtrlDom.loadItems(path);
        } catch (Exception e) {
-           System.out.println(e);
+           JOptionPane.showMessageDialog(null, e + "\nError while reading the file");
        }
     }
     /**
@@ -205,7 +205,7 @@ public class ControladorPresentacion {
         try {
             CtrlDom.loadRates(path);
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e + "\nError while reading the file");
         }
     }
     /**
@@ -216,7 +216,7 @@ public class ControladorPresentacion {
         try {
             CtrlDom.loadUnKnown(path);
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null, e + "\nError while reading the file");
         }
     }
     /**
