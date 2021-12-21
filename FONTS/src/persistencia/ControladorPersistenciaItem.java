@@ -11,9 +11,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+
+/** Clase que implementa el controlador de persistencia de Items.
+ */
 public class ControladorPersistenciaItem {
 
-
+    /** Constructora de la clase.
+     */
     public ControladorPersistenciaItem(){
     }
 
@@ -45,7 +49,10 @@ public class ControladorPersistenciaItem {
         if (items.size()==0) throw new EmptyFileException("Lector_Items");
         return items;
     }
-
+    /** Función que escribe Items de un fichero CSV.
+     * @param csvFile Path al fichero CSV.
+     * @param list_items es el conjunto de items que hay que escribir.
+     */
     public void Escritor_Items(String csvFile, Conjunt_Items list_items) throws Exception {
         File fichero = new File(csvFile);
 
