@@ -42,7 +42,8 @@ public class SignUp{
      * Campo de texto para introducir la contraseña de nuevo y evitar errores
      */
     private JPasswordField repeatPasswordField;
-
+    private JLabel username;
+    private JLabel password;
     /**
      * Creadora de la clase
      */
