@@ -551,6 +551,7 @@ public class ControladorDomini {
         }
         return lista;
     }
+
     /**
      * El Usuario actual quiere ver los Atributos del item seleccionado en forma de String
      * @return String con los valores

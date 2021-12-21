@@ -46,6 +46,7 @@ public class SignUp{
     private JLabel username;
     private JLabel password;
 
+
     /**
      * Creadora de la clase
      */

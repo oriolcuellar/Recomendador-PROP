@@ -505,6 +505,7 @@ public class ControladorPresentacion {
         }
         return a;
     }
+
     /**
      * Devuelve la lista de atributos del item seleccionado en forma de String
      */
