@@ -26,9 +26,16 @@ public class ShowRecomendedItems {
             protected void configureScrollBarColors() {
                 this.thumbColor = new Color(134,114,62);
                 this.trackColor  = new Color(187,165,107);
-
             }
         });
+        scrollPane.getHorizontalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = new Color(134,114,62);
+                this.trackColor  = new Color(187,165,107);
+            }
+        });
+
 
         scrollPane.getVerticalScrollBar().getComponent(0).setBackground(new Color(134,114,62));
         scrollPane.getVerticalScrollBar().getComponent(1).setBackground(new Color(134,114,62));
@@ -42,7 +49,9 @@ public class ShowRecomendedItems {
         else items = CtrlPres.loadRecomendation(s);
         if(n > items.size()) n = items.size();
         for(int i = 0; i < n; ++i) {
-            demoList.addElement(items.get(i));
+            String l = "";
+            l += items.get(i) + ": " + (CtrlPres.getTitle(items.get(i)));
+            demoList.addElement(l);
         }
         list1.setModel(demoList);
 
@@ -60,22 +69,25 @@ public class ShowRecomendedItems {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 CtrlPres.evaluateRecomendation(s);
-
-
             }
         });
 
         saveRecomendationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                CtrlPres.saveRecomendation(s);
+                if(execute) CtrlPres.saveRecomendation(s);
             }
         });
 
         MouseListener mouseListener = new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    String selectedItem = String.valueOf(list1.getSelectedValue());
+                    String selectedValue = String.valueOf(list1.getSelectedValue());
+                    String selectedItem = "";
+                    for(char c : selectedValue.toCharArray()) {
+                        if(c == ':') break;
+                        else selectedItem += c;
+                    }
                     CtrlPres.selectItem(selectedItem);
                     int x = frame.getX();
                     int y = frame.getY();

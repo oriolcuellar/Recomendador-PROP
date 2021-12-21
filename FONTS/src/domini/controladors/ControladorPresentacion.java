@@ -194,12 +194,9 @@ public class ControladorPresentacion {
      * Carga la recomendacion del usuario actual
      * @param s es el tipo de algoritmo de recomendacion ("Hybrid", "CF", "CB")
      */
-    public ArrayList loadRecomendation(String s) {
+    public ArrayList<Integer> loadRecomendation(String s) {
         try {
-            Path path = Paths.get("");
-            String directoryName = path.toAbsolutePath().toString();
-            directoryName += "/SaveData";
-            return CtrlDom.loadRecomendation(s,"./SaveData/Recomendations/recomentation" + s + CtrlDom.getActualUserID() + ".csv");
+            return CtrlDom.loadRecomendation(s,"./SaveData/Recomendations/recomendation" + s + CtrlDom.getActualUserID() + ".csv");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -221,6 +218,20 @@ public class ControladorPresentacion {
             System.out.println(e);
         }
     }
+    public String getTitle(Integer itemID) {
+        try {
+            CtrlDom.selectItem(itemID.toString());
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        ArrayList<String> val = getValors();
+        ArrayList<String> atributes = getAtributos();
+        for(int i = 0; i < atributes.size(); ++i) {
+            if(atributes.get(i).equals("title")) return val.get(i);
+        }
+        return "Error";
+    }
+
     /**
      * Se inicia la session un usuario
      * @param username id del usuario que quiere iniciar sesion
@@ -387,7 +398,7 @@ public class ControladorPresentacion {
         try {
             CtrlDom.saveRecomendation(s);
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
 

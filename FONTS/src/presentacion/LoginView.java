@@ -63,9 +63,9 @@ public class LoginView {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
-                    CtrlPres.loadItems("./SavedData/items.csv");
-                    CtrlPres.loadRates("./SavedData/ratings.csv");
-                    CtrlPres.loadUnKnown("./SavedData/unknown.csv");
+                    CtrlPres.loadItems("./SaveData/items.csv");
+                    CtrlPres.loadRates("./SaveData/ratings.csv");
+                    CtrlPres.loadUnKnown("./SaveData/unknown.csv");
                 } catch (Exception e) {
                     enableButtons();
                     e.printStackTrace();

@@ -39,7 +39,12 @@ public class StatsView {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (favouriteItem.getText() != "You have not valorated item") {
-                    String selectedItem = favouriteItem.getText();
+                    String selectedValue = favouriteItem.getText();
+                    String selectedItem = "";
+                    for(char c : selectedValue.toCharArray()) {
+                        if(c == ':') break;
+                        else selectedItem += c;
+                    }
                     CtrlPres.selectItem(selectedItem);
                     int x = frame.getX();
                     int y = frame.getY();
