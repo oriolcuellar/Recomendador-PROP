@@ -6,17 +6,47 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/** \brief Clase que implementa la vista del perfil de un usuario o administrador.
+ *  @author Marc Camarillas
+ */
 public class ProfileView {
+    /**
+     * Instancia del controlador de Presentacion
+     */
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
+    /**
+     * frame principal de la vista
+     */
     private static JFrame frame;
+    /**
+     * panel principal de la vista
+     */
     private JPanel panel;
-    private JButton logoutButton;
     private JLabel id;
+    /**
+     * Boton para cerrar session e ir a la vista de inicio de sesion
+     */
+    private JButton logoutButton;
+    /**
+     * Boton para ir a la vista del menu principal
+     */
     private JButton backButton;
+    /**
+     * Boton para ir a la vista de las estadísticas
+     */
     private JButton statsButton;
+    /**
+     * Boton para poder cambiar la contraseña
+     */
     private JButton changePasswordButton;
+    /**
+     * Boton para eliminar el perfil e ir a la vista de inicio de sesion
+     */
     private JButton deleteProfileButton;
 
+    /**
+     * Creadora de la clase
+     */
     public ProfileView(){
         Integer userID = CtrlPres.getActualUserId();
         String s = userID.toString();
@@ -132,7 +162,11 @@ public class ProfileView {
             }
         });
     }
-
+    /**
+     * Te permite mostrar el frame junto con todos los atributos
+     * @param x posicion x donde se inicializa
+     * @param y posicion y donde se inicializa
+     */
     public void showWindow(int x, int y) {
         enableButtons();
         frame = new JFrame("Sistema Recomanador");
@@ -143,19 +177,20 @@ public class ProfileView {
         frame.setResizable(false);
         frame.setVisible(true);
     }
-
+    /**
+     * Te permite deshabilitar todos los botones de la vista
+     */
     public void disableButtons() {
         logoutButton.setEnabled(false);
         backButton.setEnabled(false);
         statsButton.setEnabled(false);
     }
-
+    /**
+     * Te permite habilitar todos los botones de la vista
+     */
     public void enableButtons() {
         logoutButton.setEnabled(true);
         backButton.setEnabled(true);
         statsButton.setEnabled(true);
-    }
-    public void setInvisible() {
-        frame.dispose();
     }
 }

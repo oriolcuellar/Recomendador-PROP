@@ -7,18 +7,49 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
+/** \brief Clase que implementa la DONDE SALEN LOS ITEMS RECOMENDADOS.
+ *  @author Marc Camarillas
+ */
 public class ShowRecomendedItems {
-
+    /**
+     * Instancia del controlador de Presentacion
+     */
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
-
+    /**
+     * frame principal de la vista
+     */
     private static JFrame frame;
-    private JButton backButton;
+    /**
+     * panel principal de la vista
+     */
     private JPanel panel;
+    /**
+     * lista donde aparecen todos los items recomendados
+     */
     private JList list1;
+    /**
+     * Panel que permite poder desplazarte por la lista list1
+     */
     private JScrollPane scrollPane;
+    /**
+     * Boton que te permite ir a la vista del menu principal
+     */
+    private JButton backButton;
+    /**
+     * Boton que te permite evaluar la recomendación que se te ha hecho
+     */
     private JButton EvaluateButton;
+    /**
+     * Boton que te permite guardar la recomendacion que se te ha hecho
+     */
     private JButton saveRecomendationButton;
 
+    /**
+     * Creadora de la clase
+     * @param s es el tipo de algoritmo de recomendacion ("Hybrid", "CF", "CB")
+     * @param execute cierto si hay que volver a ejectuar el algoritmo de recomendacion
+     * @param n numero de items que se quieren recomendar
+     */
     public ShowRecomendedItems(String s, boolean execute, int n) {
 
         scrollPane.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
@@ -99,7 +130,11 @@ public class ShowRecomendedItems {
         };
         list1.addMouseListener(mouseListener);
     }
-
+    /**
+     * Te permite mostrar el frame junto con todos los atributos
+     * @param x posicion x donde se inicializa
+     * @param y posicion y donde se inicializa
+     */
     public void showWindow(int x, int y) {
         frame = new JFrame("Sistema Recomanador");
         frame.setContentPane(this.panel);
