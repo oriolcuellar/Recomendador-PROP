@@ -652,7 +652,9 @@ public class ControladorDomini {
             throw e;
         }
     }
-
+    /**
+     * Se quieren guardar los cambios de los Ratings en el sistema
+     */
     public void saveRatings() throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
@@ -665,7 +667,9 @@ public class ControladorDomini {
         }
     }
 
-
+    /**
+     * Se quieren guardar los UnKnown en el sistema
+     */
     public void saveUnkown() throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
         try{
@@ -678,7 +682,9 @@ public class ControladorDomini {
             throw e;
         }
     }
-
+    /**
+     * Se quieren crear las carpetas
+     */
     public void crearCarpeta(){
         String directoryName = ".";
         File directorio = new File(directoryName+"/SaveData");
@@ -733,6 +739,9 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * Funcion privada que crea items pero no los guarda en el sistema (Los guarda LoadItem)
+     */
     private Item createItemLocal(String atributs, String valors) throws Exception{
         try {
             recomendationChanged=true;
@@ -746,7 +755,7 @@ public class ControladorDomini {
     }
 
     /**
-     * El administrador quiere crear un item nuevo
+     * Se quiere crear un item nuevo
      * @param atributs atributs es el string de atributos
      * @param valors valors es el string de valores
      */
@@ -765,20 +774,9 @@ public class ControladorDomini {
             throw e;
         }
     }
+
     /**
-     * Función privada del algoritmo knn
-     */
-    private void createItemKNN(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
-        if (actualUser==null) throw new NoUserLogedInException("createItemKNN");
-        try {
-            createItemPath(atributs, valors,ListaItems,ListaTiposItems);
-        }
-        catch (Exception e){
-            throw e;
-        }
-    }
-    /**
-     * El administrador quiere crear un item nuevo guardandolo en una lista en concreto
+     * Se quiere crear un item nuevo guardandolo en una lista en concreto
      * @param atributs atributs es el string de atributos
      * @param valors valors es el string de valores
      */
@@ -970,7 +968,7 @@ public class ControladorDomini {
         if (selectedItem==it) selectedItem=null;
     }
     /**
-     * El administrador quiere cargar items
+     * Se quiere cargar items
      * @param path path es la direccion al fichero que se quiere cargar
      */
     public void loadItems(String path) throws Exception{//"Entradas_CSV/items.csv"
@@ -1002,7 +1000,7 @@ public class ControladorDomini {
         }
     }
     /**
-     * El administrador quiere cargar valoraciones
+     * Se quiere cargar valoraciones
      * @param path path es la direccion al fichero que se quiere cargar
      */
     public void loadRates(String path) throws Exception{//falta añadir item usado a la lista de items usados
@@ -1051,7 +1049,7 @@ public class ControladorDomini {
         }
     }
     /**
-     * El administrador quiere cargar una recomendación
+     * Se quiere cargar una recomendación
      * @param path path es la direccion al fichero que se quiere cargar
      */
     public ArrayList<Integer> loadRecomendation(String s, String path) throws Exception{
@@ -1122,7 +1120,7 @@ public class ControladorDomini {
     }
 
     /**
-     * El administrador quiere eliminar un usuario
+     * Se quiere eliminar un usuario
      * @param delete_me delete_me es el usuario  que se quiere eliminar
      */
     public void deleteUser(String delete_me) throws Exception{
@@ -1137,12 +1135,7 @@ public class ControladorDomini {
             usuaris.remove(delete);
         }
         usersList.remove(delete.getUserID());
-/*
-            for (ItemUsat i: ratesList){
-                if ( delete_me.equals(StringValueOf(i.getUsuari().getUserID())) ratesList.delete(i);
-            }
-            usersList.delete(delete_me);
-*/
+
     }
 
     /**
