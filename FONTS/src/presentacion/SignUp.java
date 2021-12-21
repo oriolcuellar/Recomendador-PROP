@@ -6,19 +6,46 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
-
+/** \brief Clase que implementa la vista del menu principal de un usuario.
+ *  @author Roberto Amat
+ */
 public class SignUp{
+    /**
+     * Instancia del controlador de Presentacion
+     */
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
+    /**
+     * frame principal de la vista
+     */
     private static JFrame frame;
+    /**
+     * panel principal de la vista
+     */
     private JPanel panel;
+    /**
+     * Campo de texto para introducir la contraseña
+     */
     private JPasswordField passwordPasswordField;
+    /**
+     * Campo de texto para introducir el usuario
+     */
     private JTextField usernameTextField;
+    /**
+     * Boton para ir a la vista del login
+     */
     private JButton backButton;
-    private JLabel username;
-    private JLabel password;
+    /**
+     * Boton para rear la cuenta con los valores introducidos
+     */
     private JButton SignUpButton;
+    /**
+     * Campo de texto para introducir la contraseña de nuevo y evitar errores
+     */
     private JPasswordField repeatPasswordField;
 
+    /**
+     * Creadora de la clase
+     */
     public SignUp(){
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -54,6 +81,11 @@ public class SignUp{
         });
     }
 
+    /**
+     * Te permite mostrar el frame junto con todos los atributos
+     * @param x posicion x donde se inicializa
+     * @param y posicion y donde se inicializa
+     */
     public void showWindow(int x, int y) {
         enableButtons();
         frame = new JFrame("Sistema Recomanador");
@@ -65,10 +97,16 @@ public class SignUp{
         frame.setVisible(true);
     }
 
+    /**
+     * Te permite deshabilitar todos los botones de la vista
+     */
     public void disableButtons() {
         backButton.setEnabled(false);
     }
 
+    /**
+     * Te permite habilitar todos los botones de la vista
+     */
     public void enableButtons() {
         backButton.setEnabled(true);
     }

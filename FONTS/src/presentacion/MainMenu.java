@@ -6,20 +6,57 @@ import FONTS.src.domini.controladors.ControladorPresentacion;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+/** \brief Clase que implementa la vista del menu principal de un usuario.
+ *  @author Roberto Amat
+ */
 public class MainMenu {
-
+    /**
+     * Instancia del controlador de Presentacion
+     */
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
+    /**
+     * frame principal de la vista
+     */
     private static JFrame frame;
+    /**
+     * frame principal de la vista
+     */
     private JPanel panel;
+    /**
+     * Boton para ir a los ajustes
+     */
     private JButton settingsButton;
+    /**
+     * Boton para ir a la vista ShowRatedItems
+     */
     private JButton showRatedItemsButton;
+    /**
+     * Boton para ir a la vista ShowAllItems
+     */
     private JButton showAllItemsButton;
+    /**
+     * Boton para ir a la vista ShowRecomendedItems con las
+     * recomendiaciones generadas por el Collaboratibe Filtering.
+     */
     private JButton showRecomendedItemsByCFButton;
+    /**
+     * Label que contiene el titulo de la vista.
+     */
     private JLabel Label;
+    /**
+     * Boton para ir a la vista ShowRecomendedItems con las
+     * recomendiaciones generadas por el Hybrid.
+     */
     private JButton ShowRecomendedItemsByHybridButton;
+    /**
+     * Boton para ir a la vista ShowRecomendedItems con las
+     * recomendiaciones generadas por el Conted Based.
+     */
     private JButton showRecomendedItemsByCBButton;
 
+    /**
+     * Creadora de la clase
+     */
     public MainMenu() {
 
 
@@ -139,6 +176,11 @@ public class MainMenu {
             }
         });
     }
+    /**
+     * Te permite mostrar el frame junto con todos los atributos
+     * @param x posicion x donde se inicializa
+     * @param y posicion y donde se inicializa
+     */
     public void showWindow(int x, int y) {
         enableButtons();
         frame = new JFrame("Sistema Recomanador");
@@ -149,7 +191,9 @@ public class MainMenu {
         frame.setResizable(false);
         frame.setVisible(true);
     }
-
+    /**
+     * Te permite deshabilitar todos los botones de la vista
+     */
     public void disableButtons() {
         showRecomendedItemsByCFButton.setEnabled(false);
         settingsButton.setEnabled(false);
@@ -158,7 +202,9 @@ public class MainMenu {
         showRecomendedItemsByCBButton.setEnabled(false);
         ShowRecomendedItemsByHybridButton.setEnabled(false);
     }
-
+    /**
+     * Te permite habilitar todos los botones de la vista
+     */
     public void enableButtons() {
         settingsButton.setEnabled(true);
         showRatedItemsButton.setEnabled(true);
