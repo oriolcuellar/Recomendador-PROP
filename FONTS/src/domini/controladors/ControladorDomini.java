@@ -93,8 +93,6 @@ public class ControladorDomini {
      */
     private static ArrayList <Vector<String>> UnKnown;
 
-    //CtrlDomini control= CtrlDomini.getInstance();
-//control.getAllUsers();
 //constructor
     /**
      * Devuelve la instancia singelton del controlador
@@ -274,8 +272,7 @@ public class ControladorDomini {
      * El Usuario actual quiere una recomendación para el utilizando el algoritmo KNN
      * @param num_elem num_elem es el numero de elementos que se quiere
       * @param path path el el documento donde queremos leer los ratings
-     * @return ArrayList<myPair> con las recomendación generada
-     * @see myPair
+     * @return ArrayList<Integer> con las recomendación generada
      */
     private ArrayList<ArrayList> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
@@ -325,8 +322,7 @@ public class ControladorDomini {
      * El Usuario actual quiere una recomendación para el utilizando el algoritmo Slope
      * @param k_slope num_elem es el número de clusters que se quiere
      * @param max_slope max_slope es el valor maximo de una valoración
-     * @return ArrayList<myPair> con las recomendación generada
-     * @see myPair
+     * @return ArrayList<Integer> con las recomendación generada
      */
     public ArrayList<Integer> doSlope(int k_slope, int max_slope) throws Exception{
         try{
@@ -345,8 +341,7 @@ public class ControladorDomini {
     }
     /**
      * El Usuario actual quiere una recomendación para el utilizando el algoritmo KNN
-     * @return ArrayList<myPair> con las recomendación generada
-     * @see myPair
+     * @return ArrayList<Integer> con las recomendación generada
      */
     public ArrayList<Integer> doKNN() throws Exception{
         try{
@@ -368,8 +363,7 @@ public class ControladorDomini {
      * El Usuario actual quiere una recomendación para el utilizando los dos algoritmos
      * @param k_slope k_slope es el numero de clusters que se quiere para el Slope
      * @param max_slope max_slope es el valor maximo de una recomendación
-     * @return ArrayList<myPair> con las recomendación generada
-     * @see myPair
+     * @return ArrayList<Integer> con las recomendación generada
      */
     public ArrayList<Integer> doRecomendation(int k_slope, int max_slope) throws Exception{
         try{
@@ -407,6 +401,10 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * Se quiere hacer una recomendación con algoritmo hibrid.
+     * @return float con la valoracion de la recomendación
+     */
     public float evaluateRecomendationGeneral() throws Exception{
         try{
             ArrayList <myPair> nou = new ArrayList<myPair>();
@@ -421,6 +419,11 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     /**
+     * Se quiere hacer una recomendación con algoritmo Slope.
+     * @return float con la valoracion de la recomendación
+     */
     public float evaluateRecomendationSlope() throws Exception{
         try{
             return evaluateRecomendation(lastRecomendationSlope);
@@ -429,6 +432,10 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * Se quiere hacer una recomendación con algoritmo KNN.
+     * @return float con la valoracion de la recomendación
+     */
     public float evaluateRecomendationKNN() throws Exception{
         try{
             ArrayList <myPair> nou = new ArrayList<myPair>();
@@ -445,7 +452,7 @@ public class ControladorDomini {
     }
 
     /**
-     * El Usuario actual quiere comparar la recomendación que ha obtenido con una ideal utilizando un algoritmo DCG
+     * Funcion provada que llama al algoritmo de recomendación con la recomendacion pasada por parametros.
      * @return float con la calidad de la recomendación
      */
     private float evaluateRecomendation(ArrayList<myPair> lastRecomendation1) throws Exception{ //co
@@ -544,6 +551,20 @@ public class ControladorDomini {
         }
         return lista;
     }
+    /**
+     * El Usuario actual quiere ver los Atributos del item seleccionado en forma de String
+     * @return String con los valores
+     * @see Item
+     */
+    public String showItemInfoAtributesString()throws Exception{
+        if (selectedItem==null) throw new NoItemSelectedException("showItemInfoAtributes");
+        return selectedItem.getAtr();
+    }
+    /**
+     * El Usuario actual quiere ver la valoracion del item seleccionado.
+     * @return String de la valoración
+     * @see Item
+     */
     public String showItemInfoValoration() throws Exception{
         if (selectedItem==null) throw new NoItemSelectedException("showItemInfoAtributes");
         /*for (Item m: itemList.getItems()){

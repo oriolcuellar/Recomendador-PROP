@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Vector;
 
-/** Clase que implementa el controlador de persistencia de Ratings.
+/** \brief Clase que implementa el controlador de persistencia de Ratings.
+ * @author  Oriol Cuellar
  */
 public class ControladorPersistenciaRatings {
     /** Constructora de la clase.

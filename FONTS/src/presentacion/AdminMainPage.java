@@ -250,16 +250,23 @@ public class AdminMainPage {
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     disableButtons();
-                    ArrayList<String> atributes = CtrlPres.getAtributos();
+                    String str = CtrlPres.getAtributosString();
                     String valors = "";
                     String atribut = "";
+                    String[] atributes=str.split(",");
+                    boolean primer=true;
                     for(String s : atributes) {
                         String val = JOptionPane.showInputDialog(null,
                                 s, null);
-                        atribut = atribut + "," + s;
-                        valors =  valors + "," + val;
+                        if(primer){
+                            valors =  valors + val;
+                            primer=false;
+                        }
+                        else{
+                            valors =  valors+","+ val;
+                        }
                     }
-                    CtrlPres.createItem(atribut,valors);
+                    CtrlPres.createItem(str,valors);
                 } catch (Exception e) {
                     enableButtons();
                     JOptionPane.showMessageDialog(null,e);

@@ -10,7 +10,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Vector;
 
-/** Clase que implementa el controlador de persistencia de Recomendation.
+/** \brief Clase que implementa el controlador de persistencia de Recomendation.
+ *  @author  Oriol Cuellar
  */
 public class ControladorPersistenciaRecomendation {
 

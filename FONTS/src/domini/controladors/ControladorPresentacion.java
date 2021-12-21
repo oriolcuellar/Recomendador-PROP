@@ -506,6 +506,19 @@ public class ControladorPresentacion {
         return a;
     }
     /**
+     * Devuelve la lista de atributos del item seleccionado en forma de String
+     */
+    public String getAtributosString() {
+        String a="";
+        try {
+            a =  CtrlDom.showItemInfoAtributesString();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return a;
+    }
+
+    /**
      * Devuelve la lista de valores del item seleccionado
      */
     public ArrayList<String> getValors() {

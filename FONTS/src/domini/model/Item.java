@@ -30,9 +30,13 @@ public class Item {
      */
     private ArrayList<String> valors;
 
-    //para comprobar que se crean bien de momento (necesito escribirlos)
-
+    /**
+     * Valores iniciales.
+     */
     private String ValI;
+    /**
+     * Atributos iniciales.
+     */
     private String AtrI;
 
     //Constructors
@@ -97,21 +101,26 @@ public class Item {
 
 
     /**
-     * Devuelve el String resultado de combinar los valores del atributo en el Item i su id.
+     * Devuelve los valores iniciales.
      */
-
     public String getString(){
         return ValI;
     }
-
+    /**
+     * Devuelve los atributos iniciales.
+     */
     public String getAtr(){
         return AtrI;
     }
-
+    /**
+     * Establece los valores iniciales.
+     */
     public void setString(String val){
         this.ValI=val;
     }
-
+    /**
+     * Establece los atributos iniciales.
+     */
     public void setAtr(String val){
         this.AtrI=val;
     }

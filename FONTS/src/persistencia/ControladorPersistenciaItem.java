@@ -12,7 +12,8 @@ import java.util.Map;
 import java.util.Vector;
 
 
-/** Clase que implementa el controlador de persistencia de Items.
+/** \brief Clase que implementa el controlador de persistencia de Items.
+ * @author  Oriol Cuellar
  */
 public class ControladorPersistenciaItem {
 

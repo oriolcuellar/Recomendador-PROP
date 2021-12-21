@@ -43,6 +43,9 @@ public class SignUp{
      */
     private JPasswordField repeatPasswordField;
 
+    private JLabel username;
+    private JLabel password;
+
     /**
      * Creadora de la clase
      */
