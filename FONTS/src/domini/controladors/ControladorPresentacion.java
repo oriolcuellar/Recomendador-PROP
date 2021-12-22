@@ -558,7 +558,4 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null,"No s'ha pogut cambiar la valoració","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
-    public void addValorationItem(Float f) {
-        CtrlDom.addValoratedItem(f);
-    }
 }
