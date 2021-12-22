@@ -530,7 +530,7 @@ public class ControladorDomini {
             hay = true;
         }
         if(!hay){
-            addValoratedItem(val);
+            actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
         }
         recomendationChanged=true;
         recomendationChangedSlope=true;
