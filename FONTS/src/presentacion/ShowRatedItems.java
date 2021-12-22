@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Vector;
-/** \brief Clase que implementa la vista del menu principal de un usuario.
+/** \brief Clase que implementa la vista donde salen los items Valorados de un usuario.
  *  @author Roberto Amat
  */
 public class ShowRatedItems {

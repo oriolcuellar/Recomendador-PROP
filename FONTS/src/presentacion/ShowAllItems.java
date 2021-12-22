@@ -11,7 +11,7 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
-/** \brief Clase que implementa la vista del menu principal de un usuario.
+/** \brief Clase que implementa la vista DONDE SALEN TODOS LOS ITEMS.
  *  @author Roberto Amat
  */
 public class ShowAllItems {

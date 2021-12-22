@@ -17,7 +17,6 @@ public class TipusItem {
      */
     private ArrayList<Atribute> atributes;
 
-
     //contructores
 
     /** Constructora de la clase. Copia la ArrayList de atributes,
@@ -27,15 +26,6 @@ public class TipusItem {
     public TipusItem( ArrayList<Atribute> atributes) {
 
         ArrayList <String> v = new ArrayList<String> ();
-
-        /*Collections.sort(atributes, new Comparator<Atribute>() {
-            @Override
-            public int compare(Atribute a, Atribute b) {
-                return a.getName().compareTo(b.getName());
-            }
-
-        });*/
-
         for (int i = 0; i < atributes.size(); ++i) {
 
             v.add(i, atributes.get(i).getName());

@@ -1,17 +1,26 @@
 package FONTS.src.domini.model;
-
-import FONTS.src.domini.controladors.ControladorDomini;
-
 import java.util.ArrayList;
 
+/** \brief Clase que implementa el algoritmo HybridApproach, combinacion de SlopeOne y K-Nearests-Neightbours.
+ *  @author Jordi Olmo
+ */
 public class HybridApproach {
 
-    private static ControladorDomini CtrlDom = ControladorDomini.getInstance();
-
+    /** Constructora de la clase.
+     */
     public HybridApproach() {
     }
+
+    /** Algoritmo de recomendación, devuelve una ArrayList de ArraList, la primera con los k items mas parecidos a itemsUsats y la segunda con los valores assignados.
+     * @param Slope ArrayList de myPair, resultado de aplicar el algoritmo de SlopeOne, ordenada decrecientemente segun prediccion de valoracion.
+     * @see myPair
+     * @param Knn ArrayList de ArrayList, resultado de aplicar el algoritmo de K-Nearests-Neightbours, con la primera siendo los items y la segunda sus valores assignados
+     ordenada decrecientemente segun el valor assignado a cada item.
+     * @param n_items numero de items en el sitema al ejecutar el algoritmo.
+     * @param n_valorats numero de items valorados por el usuario que pide la recomendacion al ejecutar el algoritmo.
+     */
     
-    public ArrayList<ArrayList> Algoritmo(ArrayList<myPair> Slope, ArrayList<ArrayList> Knn, int n_items, int n_valorats) throws Exception {
+    public ArrayList<ArrayList> Algoritmo(ArrayList<myPair> Slope, ArrayList<ArrayList> Knn, int n_items, int n_valorats) {
 
         ArrayList<myPair> S = new ArrayList<myPair>();
         ArrayList<ArrayList> K = new ArrayList<ArrayList>();
@@ -58,6 +67,11 @@ public class HybridApproach {
         return K;
     }
 
+    /** Funcion auxiliar que modifica el tipico clonador de ArrayList, para adaptarlo a la estructura predefinida del resutado de ejecutar Knn.
+     * @param A ArrayList de ArrayList, a la cual se va a copiar los valores de B sin que sea por refecencia.
+     * @param B ArrayList de ArrayList, resultado de aplicar el algoritmo de K-Nearests-Neightbours, con la primera siendo los items y la segunda sus valores assignados
+     */
+
     private void clonador_ArrayList_Knn (ArrayList<ArrayList>  A, ArrayList<ArrayList>  B) {
 
         ArrayList<Item> item_aux = new ArrayList<Item>();
@@ -74,10 +88,11 @@ public class HybridApproach {
         A.add(valoration_aux);
     }
 
-    /** Funcion derivada del algoritmo margeSort que sirve para buscar la posicion de un Item en una ArrayList ordenada crecientemente
-     por ID de Item.
-     * @see Item
-     * @param Slope ArrayList de Item en la que buscar la posicion.
+    /** Funcion derivada del algoritmo margeSort que sirve para buscar la posicion de el ultimo Item que tiene prediccion (valoracion > 0)
+      en una ArrayList de myPair ordenada crecientemente por la valoraciones
+     por Valoraciones.
+     * @see myPair
+     * @param Slope ArrayList de myPair en la que buscar la posicion.
      * @param l Extremo izquierdo de la ArrayList en la que buscar.
      * @param r Extremo derecho de la ArrayList en la que buscar.
      */
@@ -97,6 +112,14 @@ public class HybridApproach {
         }
         else return -1; //en teoria exception
     }
+
+    /** Funcion auxiliar que sirve para buscar secuencialmente la valoracion de el Item que tiene el Id igual al parametro,
+     en una ArrayList de myPair .
+     por Valoraciones.
+     * @see myPair
+     * @param Slope ArrayList de myPair en la que buscar la valoracion.
+     */
+
     private Double valoracion_item(ArrayList <myPair> Slope, int ID){
 
         Double valoracio = -1.0;
@@ -105,6 +128,12 @@ public class HybridApproach {
 
         return  valoracio;
     }
+
+    /** Funcion auxiliar que sirve para normalizar una ArrayList de myPair (que sus valoraciones sean entre 0 y 1).
+     * @see myPair
+     * @param Slope ArrayList de myPair que se va a normalizar.
+     * @param max_val maximo valor que se usarà para divir y asi normalizar la ArrayList
+     */
 
     private void normalizar_val_Slope (ArrayList<myPair> Slope, Float max_val) {
 
@@ -118,6 +147,11 @@ public class HybridApproach {
             }
         }
     }
+
+    /** Funcion auxiliar que sirve para normalizar una ArrayList de ArrayList con su segundo Arraylist siendo de Double (que sus valores sean entre 0 y 1).
+     * @param Knn ArrayList de ArrayList del mismo formato que la del parametro de la funcion del algoritmo, que se va a normalizar.
+     * @param max_val maximo valor que se usarà para divir y asi normalizar la ArrayList.
+     */
 
     private void normalizar_val_Knn (ArrayList<ArrayList> Knn, Double max_val) {
 
@@ -133,13 +167,13 @@ public class HybridApproach {
         }
     }
 
-    /** Version de ordenar_conjuntos simplificada para usar solo 2 Arraylist y ordenar crecientemente según
-     el valor de Val (la valoracion)
+    /** Ordena toda la ArrayList de los parametros, de forma creciente para los items con mayor valor en el parametro
+     Val. El algoritmo es un merge_sort modificado para ordenar las dos ArrayList.
      * @param l extremo izquierda de las ArrayList a ordenar.
      * @param r extremo derecho de las ArrayList a ordenar.
-     * @param Val ArrayList de Double con los valores resultado de aplicar comparar_conjunts, coincidiendo posiciones
+     * @param Val ArrayList de Double con los valores correspondientes a cada Item, coincidiendo posiciones
     con el primer parametro.
-     * @param Items ArrayList de Item, de tamaño igual a k.
+     * @param Items ArrayList de Item.
      */
 
     private void ordenar_simplificado(ArrayList<Item> Items, ArrayList<Double> Val, int l, int r) {
@@ -160,9 +194,9 @@ public class HybridApproach {
     /** Merge simplificado de merge para que funcione con ordenar_simplificacion.
      * @param l extremo izquierda de las ArrayList a ordenar.
      * @param r extremo derecho de las ArrayList a ordenar.
-     * @param Val ArrayList de Double con los valores resultado de aplicar comparar_conjunts, coincidiendo posiciones
+     * @param Val ArrayList de Double con los valores correspondientes a cada Item, coincidiendo posiciones
     con el primer parametro.
-     * @param Items ArrayList de Item, de tamaño igual a k.
+     * @param Items ArrayList de Item
      */
 
     private void merge_simplificado(ArrayList<Item> Items, ArrayList<Double> Val, int l, int m, int r)

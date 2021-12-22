@@ -99,29 +99,34 @@ public class Item {
         return valors;
     }
 
-
-
     /**
      * Devuelve los valores iniciales.
      */
+
     public String getString(){
         return ValI;
     }
+
     /**
      * Devuelve los atributos iniciales.
      */
+
     public String getAtr(){
         return AtrI;
     }
+
     /**
      * Establece los valores iniciales.
      */
+
     public void setString(String val){
         this.ValI=val;
     }
+
     /**
      * Establece los atributos iniciales.
      */
+
     public void setAtr(String val){
         this.AtrI=val;
     }
@@ -137,8 +142,6 @@ public class Item {
     }
 
     //Operacions
-
-    //mirar desacoplament de Atribute
 
     /**
      * Devuelve la distancia del Item implicito y el del parametro. Los dos Item deben ser del mismo tipo
@@ -279,12 +282,10 @@ public class Item {
 
     /**
      * Funcion auxiliar que devuelve el string con la fecha YYYY-MM-DD, en un vector de string (3), donde [0] == YYYY, [1] = MM, [2] = DD.
-     *
      * @param s String con la fecha YYYY-MM-DD.
      * @param c Char que se usa para separar en los String, en el caso de fecha `-`.
      */
 
-    //retorna el string amb la data YYYY-MM-DD , en un vector de string (3), on [0] == YYYY, [1] = MM, [2] = DD
     private Vector<String> Construc_Vector(String s, char c) {
 
         Vector<String> v = new Vector<String>(0);

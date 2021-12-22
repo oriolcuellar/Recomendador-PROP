@@ -14,22 +14,62 @@ import java.util.ArrayList;
 import java.net.URL;
 import javax.imageio.ImageIO;
 
+/** \brief Clase que implementa la vista donde salen los atributos del item seleccionado.
+ *  @author Roberto Amat
+ */
 public class showAtributes {
 
+    /**
+     * Instancia del controlador de Presentacion
+     */
     ControladorPresentacion CtrlPres = ControladorPresentacion.getInstance();
+
+    /**
+     * frame principal de la vista
+     */
     private static JFrame frame;
+
+    /**
+     * Boton para ir a la vista del menu principal
+     */
     private JButton backButton;
+
+    /**
+     * panel principal de la vista
+     */
     private JPanel panel;
+    /**
+     * Boton para cambiar la valoracion del usuario sobre el item
+     */
     private JButton valorate;
-    private JList valors;
-    private JList atributes;
+    /**
+     * Label con la valoracion del usuario del item, si no tiene informa del hecho.
+     */
     private JLabel valoration;
+    /**
+     * Label con el id del item seleccionado
+     */
     private JLabel item;
+    /**
+     * ScrollPane que hace la tabla scrolleable.
+     */
     private JScrollPane scrollPane;
+    /**
+     * Tabla que contiene los atributos y sus valores relacionados
+     */
     private JTable tabla;
+    /**
+     * Label que sirve para mostrar la imagen del item, si tiene
+     */
     private JLabel label;
+    /**
+     * Path que dirige a la imagen del item, si tiene.
+     */
     private String path;
 
+    /**
+     * Classe privada que extiende de la defaulttable para redefinir esta y que no se puedan editar las celdas.
+     */
     private class MiModelo extends DefaultTableModel
     {
         public MiModelo(Object[][] o, Object[] toArray) {
@@ -44,6 +84,11 @@ public class showAtributes {
         }
     }
 
+    /**
+     * Funcion auxiliar que tranforma el String del parametro para que quepa en una ventana de largura maxDialogWidth
+     * @param message mensaje que se quiere transformar
+     *  @param maxDialogWidth maximo tamanyo de la ventana donde se quiere que se ajuste el String message
+     */
     private static String getMessage(String message, int maxDialogWidth) {
         String string;
         JLabel label = new JLabel(message);
@@ -54,6 +99,11 @@ public class showAtributes {
         }
         return string;
     }
+
+    /**
+     * Creadora de la classe segun el item especificado en el parametro
+     * @param id identificador del item seleccionado
+     */
 
     public showAtributes(String id) throws IOException {
 
@@ -67,25 +117,8 @@ public class showAtributes {
             }
         });
 
-       // DefaultListModel atributosList = new DefaultListModel();
         ArrayList<String> atributos = CtrlPres.getAtributos();
-        /*System.out.println(atributos.size());
-        for(int i = 0; i < atributos.size(); ++i) {
-            atributosList.addElement(atributos.get(i));
-        }*/
-
-        //atributes.setModel(atributosList);
-        //atributes.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-
-        //DefaultListModel ValoresList = new DefaultListModel();
         ArrayList<String> valores = CtrlPres.getValors();
-        /*System.out.println(valores.size());
-        for(int i = 0; i < valores.size(); ++i) {
-            atributosList.addElement(valores.get(i));
-        }*/
-
-        //valors.setModel(ValoresList);
-        //valors.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 
         String valoracion = CtrlPres.getValoration(String.valueOf(id));
         valoration.setText("valoration: " + valoracion);
@@ -164,6 +197,12 @@ public class showAtributes {
         }
 
     }
+
+    /**
+     * Te permite mostrar el frame junto con todos los atributos, es de un tamaño ligeramente superior al resto
+     * @param x posicion x donde se inicializa
+     * @param y posicion y donde se inicializa
+     */
 
     public void showWindow(int x, int y) {
         frame = new JFrame("Sistema Recomanador");

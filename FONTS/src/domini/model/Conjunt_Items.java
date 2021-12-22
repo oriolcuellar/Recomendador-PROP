@@ -21,13 +21,21 @@ public class Conjunt_Items {
      */
     private ArrayList<ArrayList<Double> > Distances;
 
+    /** ArrayList que contiene los valores maximos de los actuales ranged_atributes, en las posiciones que no corresponden a un ranged atribute guarda -1.0.
+     * @see Item
+     */
+
     private ArrayList<Double> maxims;
+
+    /** ArrayList que contiene los valores minimos de los actuales ranged_atributes, en las posiciones que no corresponden a un ranged atribute guarda -1.0.
+     * @see Item
+     */
 
     private ArrayList<Double> minims;
 
     //Creadora
 
-    /** Creadora de la classe. Crea un Conjunt_Item con la Array ordenada crecientemente por ID de Item.
+    /** Creadora de la classe. Crea un Conjunt_Item con la Array ordenada crecientemente por ID de Item. Añade sus distancias y rellena los otros atributos adecuadamente
      * @see Item
      * @param items ArrayList de Items con todos los Item del programa.
      */
@@ -88,7 +96,7 @@ public class Conjunt_Items {
         return binarySearch(Items, 0, Items.size()-1, id);
     }
 
-    /** Devuelve el item con el id especificado.
+    /** Devuelve el item con el id especificado. Si no existe devuelve null
      * @see Item
      * @param id identificador del Item que se quiere obtener.
      */
@@ -102,7 +110,7 @@ public class Conjunt_Items {
         else return null;
     }
 
-    /** Devuelve la posicion del Item en la ArrayList del conjunt.
+    /** Devuelve la posicion del Item especificado, en la ArrayList del conjunt.
      * @see Item
      * @param a Item del que se quiere saber la posicion.
      */
@@ -141,7 +149,7 @@ public class Conjunt_Items {
         return Distances.get(pos);
     }
 
-    /** Devuelve la distancia entre dos items. Al finalizar si esta no estaba en la matriz se añade si es que estaban ya inizialidas en la matriz las posiciones correspondientes.
+    /** Devuelve la distancia entre dos items. Al finalizar, si esta no estaba en la matriz se añade si es que estaban ya inizialidas en la matriz las posiciones correspondientes.
      * @param a  Primer Item.
      * @param b  Segundo Item.
      */
@@ -175,7 +183,7 @@ public class Conjunt_Items {
 
     //Setters
 
-    /** Define una ArrayList como los Item del Conjunt y la ordena. También calcula la matriz de distancias.
+    /** Define una ArrayList como los Item del Conjunt y la ordena. También calcula la matriz de distancias y actualiza maximos y minimos.
      * @see Item
      */
 
@@ -240,29 +248,9 @@ public class Conjunt_Items {
     }
 
     //Operacions
-/*
-    /** Rellena la matriz Distances con las respectivas distancias de los items. La matriz ya debe ser del tamaño del
-     conjunt d'Items.
-     */
-/*
-    public void omplir_matriu() {
 
-        for (int i = 0; i < n_Items(); ++i)
-            for(int j = 0; j < n_Items(); ++j){
-
-                if (i == j)
-                    Distances.get(i).set(j, 0.0);
-
-                else if((Distances.get(i).get(j) == -1.) && (Distances.get(i).get(j) == -1.)) {
-
-                    Double aux = Items.get(i).Distance(Items.get(j));
-                    Distances.get(i).set(j, aux);
-                    Distances.get(j).set(i, aux);
-                }
-            }
-    }*/
-
-    /** Añade el item del parametro al Conjunt. También añade las distancias correspondientes a la matriz de distancias Distance.
+    /** Añade el item del parametro al Conjunt. También añade las distancias correspondientes a la matriz de distancias Distance. Ademas actualiza maximos y minimos y
+     recalcula distancias si estos han cambiado significativamente. Si no se ha podido añadir devuelve false.
      * @see Item
      * @param a Item a añadir en el conjunt.
      */
@@ -317,10 +305,10 @@ public class Conjunt_Items {
             anyadir_elements( i+1, a);
             return true;
         }
-        else return false;//falta exception creo
+        else return false;
     }
 
-    /** Elimina el item del parametro del Conjunt, incluidas sus distancias.
+    /** Elimina el item del parametro del Conjunt, incluidas sus distancias. Los maximos y minimos se mantienen, ya que se sabe que pueden tener stos valores.
      * @see Item
      * @param a Item a eliminar en el conjunt.
      */
@@ -337,6 +325,10 @@ public class Conjunt_Items {
 
     //Operacions Auxiliars
 
+    /** Vuelve a calcular la matriz de distancias enteras. Se debe llamar en caso de modificaion de los maximos o minimos.
+
+     */
+
     private void re_calcul_atriu() {
 
         for (int i = 0; i < n_Items()-1; ++i)
@@ -345,7 +337,7 @@ public class Conjunt_Items {
 
     }
 
-    /** Inicializa la matriz Distance con sus respectivas distancias con todos los items.
+    /** Inicializa y añade a la matriz Distance las respectivas distancias con todos los items.
      */
 
     private void initzialitzar_matriu() {
@@ -405,7 +397,7 @@ public class Conjunt_Items {
         }
     }
 
-    /** Añades el Item a Distance con -1.0, si este no pertenecía a Conjunt_Items.
+    /** Elimnas las distancias de la matriz del item de la posicion.
      * @param i pos-1 donde se insertó el Item
      */
 

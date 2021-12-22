@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-/** \brief Clase que implementa la DONDE SALEN LOS ITEMS RECOMENDADOS.
+/** \brief Clase que implementa la vista DONDE SALEN LOS ITEMS RECOMENDADOS.
  *  @author Marc Camarillas
  */
 public class ShowRecomendedItems {

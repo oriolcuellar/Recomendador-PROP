@@ -20,12 +20,11 @@ public class K_Neareast_Neightbour {
 
     //Algorisme
 
-    /** Algoritmo de recomendación, devuelve una ArraList con los k items mas parecidos a itemsUsats.
-     * @param k  Número de items que se devuelven.
+    /** Algoritmo de recomendación, devuelve una ArrayList de ArraList, la primera con los k items mas parecidos a itemsUsats y la segunda con los valores assignados.
+     * @param k  Número de posiciones de las ArrayList que se devuelven.
      * @param itemsUsats  ArrayList de los Items sobre los que se quiere la recomendación.
-     * @param Valoracions  ArrayList con las valoraciones de los itemsUsat, la posicion de la valoración en la ArrayList,
+     * @param Valoracions  ArrayList con las valoraciones de los itemsUsat, la posicion de la valoración en la ArrayList coincide con itemsUsats.
      * @param C_Items Conjunt_Items de todos los items registrados en el sistema.
-    debe coincidir con la posicion del Item en itemsUsats.
      */
 
     public ArrayList<ArrayList> Algorithm(int k,Conjunt_Items C_Items, ArrayList<Item> itemsUsats, ArrayList<Double> Valoracions) {
@@ -60,12 +59,12 @@ public class K_Neareast_Neightbour {
      la siguiente fórmula: Siendo las matrices en orden de los parámetros X,Y y el vector V -> por unos Item i, j cualquiera.
      Valors_i = Sumatorio(Xij * (1 + Vi/Max(V))
      * @param Val ArrayList con las valoraciones de todos los Item de itemsUsats.
-     * @param Result  ArrayList de los Items que se devolverán.
+     * @param Result  ArrayList de ArrayList, con la primera con los Items que se devolverán y la segunda con sus valores assignados.
      * @param Distances Matriz de ArrayList con las distancias de todos los item. Las posiciones de los items coincidira
  con M_de_Items, tanto en filas como en columnas.
      * @param M_de_Items  Matriz con todos los Items ordenados con los que tengan mayor valor de distancia antes en las
-  columnas y solo los items_usats een las filas. Esta ordenación se debe respetar en la otra  matriz de los parametros y en Val.
-     * @param k Número de items que se devuelven.
+  columnas y solo los items_usats en las filas. Esta ordenación se debe respetar en la otra  matriz de los parametros y en Val.
+     * @param k Número de items y valores que se devuelven.
      */
 
     private void comparar_conjunts (ArrayList<Double> Val, ArrayList<ArrayList> Result, ArrayList<ArrayList<Double>> Distances,
@@ -108,11 +107,11 @@ public class K_Neareast_Neightbour {
     }
 
     /** Ordena toda la ArrayList de los parametros, de forma creciente para los items con mayor valor en el parametro,
-     distancies. El algoritmo es un merge_sort modificado para ordenar las tres ArrayList.
+     distancies. El algoritmo es un merge_sort modificado para ordenar las dos ArrayList.
      * @param l extremo izquierda de las ArrayList a ordenar.
      * @param r extremo derecho de las ArrayList a ordenar.
      * @param Items ArrayList de Item.
-     * @param distancies ArrayList de Double con distancies.
+     * @param distancies ArrayList de Double con las distancias correspondientes a Items.
      */
 
     private void ordenar_Items(ArrayList <Double> distancies, ArrayList<Item> Items, int l, int r) {
@@ -136,10 +135,10 @@ public class K_Neareast_Neightbour {
      * @param l extremo izquierda de las ArrayList a ordenar.
      * @param r extremo derecho de las ArrayList a ordenar.
      * @param Items ArrayList de Item.
-     * @param distancies ArrayList de Double con distancies.
+     * @param distancies ArrayList de Double con las distancias correspondientes a Items..
      */
 
-    private void merge (ArrayList <Double> distancies,ArrayList<Item> Items, int l, int m, int r)
+    private void merge (ArrayList <Double> distancies, ArrayList<Item> Items, int l, int m, int r)
     {
         // Find sizes of two subarrays to be merged
         int n1 = m - l + 1;
@@ -203,8 +202,7 @@ public class K_Neareast_Neightbour {
         }
     }
 
-    /** Version de ordenar_conjuntos simplificada para usar solo 2 Arraylist y ordenar crecientemente según
-     el valor de Val (la valoracion)
+    /** Version de ordenar_conjuntos simplificada para usar el valor de Val (la valoracion)
      * @param l extremo izquierda de las ArrayList a ordenar.
      * @param r extremo derecho de las ArrayList a ordenar.
      * @param Val ArrayList de Double con los valores resultado de aplicar comparar_conjunts, coincidiendo posiciones
