@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Vector;
 
+/** \brief Clase que implementa el controlador de presentacion.
+ *  @author  Marc Camarillas
+ */
 public class ControladorPresentacion {
 
     /**

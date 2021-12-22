@@ -688,7 +688,6 @@ public class ControladorDomini {
      */
     public Item createItem(String atributs, String valors) throws Exception{
         try {
-
             recomendationChanged=true;
             recomendationChangedSlope=true;
             recomendationChangedKNN=true;
