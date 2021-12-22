@@ -8,6 +8,5 @@ package FONTS.src.domini.exceptions;
 public class NotRatingsFileException extends Exception{
     public NotRatingsFileException(String message) {
         super (message);
-
     }
 }

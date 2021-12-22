@@ -60,7 +60,6 @@ public class ControladorPersistenciaRecomendation {
                         linea+= i.getValoration()+"\n";
                         bw.write(linea);
                 }
-
                 bw.close();
             } catch (Exception e){
                 throw e;

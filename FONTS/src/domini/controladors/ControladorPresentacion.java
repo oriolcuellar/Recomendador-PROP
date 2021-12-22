@@ -37,6 +37,7 @@ public class ControladorPresentacion {
         MainMenu principalView = new MainMenu();
         principalView.showWindow(x,y);
     }
+
     /**
      * Función para canviar a la vista que muestra todos los items
      * @see ShowAllItems

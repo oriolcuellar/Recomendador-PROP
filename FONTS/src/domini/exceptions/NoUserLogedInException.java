@@ -8,4 +8,5 @@ public class NoUserLogedInException extends Exception{
     public NoUserLogedInException(String message) {
         super (message);
     }
+
 }

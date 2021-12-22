@@ -8,5 +8,4 @@ public class NotAnUserException extends Exception{
     public NotAnUserException(String message) {
         super (message);
     }
-
 }

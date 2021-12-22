@@ -125,6 +125,7 @@ public class ControladorPersistenciaRatings {
             bw.close();
         } catch (Exception e){
             throw e;
+
         }
     }
 }

@@ -14,7 +14,6 @@ public class Item {
      * Identidicador del Item.
      */
     private int ID;
-
     /**
      * Tipus del Item
      *

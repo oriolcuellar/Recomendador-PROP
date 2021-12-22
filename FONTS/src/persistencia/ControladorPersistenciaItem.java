@@ -21,7 +21,6 @@ public class ControladorPersistenciaItem {
      */
     public ControladorPersistenciaItem(){
     }
-
     /** Función que lee Items de un fichero CSV.
      * @param csvFile Path al fichero CSV.
      * @return Vector de Strings que contienen los items leidos.

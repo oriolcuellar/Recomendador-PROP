@@ -880,7 +880,6 @@ public class ControladorDomini {
     public void loadItems(String path) throws Exception{
 
         try {
-
             Vector<String> mat_items = new Vector<String>();
             ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
             mat_items = reader.Lector_Items(path);

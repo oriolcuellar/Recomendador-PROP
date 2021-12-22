@@ -8,5 +8,4 @@ public class NotAnAdministratorException extends Exception{
     public NotAnAdministratorException(String message) {
         super (message);
     }
-
 }
