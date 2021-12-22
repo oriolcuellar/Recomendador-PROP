@@ -515,27 +515,30 @@ public class ControladorDomini {
      */
     public void rateItem(String idItem, float val) throws Exception{
         if(actualUser==null) throw new NoUserLogedInException("rateItem");
-        boolean hay=false;
-        for (Item m: itemList.getItems()){
-            if (String.valueOf(m.getID()).equals(idItem)){
-                hay=true;
+        if (itemValoratedBy.containsKey(Integer.valueOf(selectedItem.getID()))) {
+            boolean hay = false;
+            for (Item m : itemList.getItems()) {
+                if (String.valueOf(m.getID()).equals(idItem)) {
+                    hay = true;
+                }
             }
+            if (!hay) throw new ItemNotExistsException("rateItem," + idItem);
+            hay = false;
+            if (actualUser.searchUsedItem(Integer.valueOf(idItem)) != null) {
+                valoratedItem m = actualUser.searchUsedItem(Integer.valueOf(idItem));
+                actualUser.getValoratedItems().remove(m);
+                actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
+                hay = true;
+            }
+            if (!hay) {
+                actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
+            }
+            recomendationChanged = true;
+            recomendationChangedSlope = true;
+            recomendationChangedKNN = true;
         }
-        if (!hay) throw new ItemNotExistsException("rateItem,"+idItem);
-        hay=false;
-        if(actualUser.searchUsedItem(Integer.valueOf(idItem))!=null){
-            valoratedItem m=actualUser.searchUsedItem(Integer.valueOf(idItem));
-            actualUser.getValoratedItems().remove(m);
-            actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
-            hay = true;
-        }
-        if(!hay){
-            actualUser.addvaloratedItem(Integer.valueOf(idItem), val);
-        }
-        recomendationChanged=true;
-        recomendationChangedSlope=true;
-        recomendationChangedKNN=true;
     }
+
     /**
      * Se quieren ver todos los items del sistema
      * @return Vector<String> son los id de todos los items
@@ -952,14 +955,22 @@ public class ControladorDomini {
      */
     public void addValoratedItem(Float valoration) {
         if(actualUser != null) {
-            if(!itemValoratedBy.containsKey(Integer.valueOf(selectedItem.getID()))) {
+            if (!itemValoratedBy.containsKey(Integer.valueOf(selectedItem.getID()))) {
                 actualUser.addvaloratedItem(selectedItem.getID(), valoration);
-                ArrayList<User> au = new ArrayList<User>();
-                au.add(actualUser);
-                itemValoratedBy.put(Integer.valueOf(selectedItem.getID()), au);
+                if (itemValoratedBy.containsKey(Integer.valueOf(selectedItem.getID()))) {//existeix item al map
+                    itemValoratedBy.get(Integer.valueOf(selectedItem.getID())).add(actualUser);
+                } else {//NO existeix item al map
+                    ArrayList<User> au = new ArrayList<User>();
+                    au.add(actualUser);
+                    itemValoratedBy.put(Integer.valueOf(selectedItem.getID()), au);
+                }
             }
+            recomendationChanged = true;
+            recomendationChangedSlope = true;
+            recomendationChangedKNN = true;
         }
     }
+
     /**
      * Se quiere cargar una recomendación
      * @param path path es la direccion al fichero que se quiere cargar

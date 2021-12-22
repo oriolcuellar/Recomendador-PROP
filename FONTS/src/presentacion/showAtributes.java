@@ -164,6 +164,7 @@ public class showAtributes {
                             "Escriu la nova valoració", null);
                     CtrlPres.SetValoration(String.valueOf(id), new_valoration);
                     valoration.setText("valoration: " + new_valoration);
+                    CtrlPres.addValorationItem(Float.valueOf(new_valoration));
                 }
             }
         });

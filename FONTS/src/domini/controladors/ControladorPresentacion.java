@@ -186,7 +186,6 @@ public class ControladorPresentacion {
             s = CtrlDom.doRecomendation(4,10);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"No items Recomended", "Error ", JOptionPane.ERROR_MESSAGE);
-            System.out.println(s.get(0));
         }
         return s;
     }
@@ -562,4 +561,9 @@ public class ControladorPresentacion {
             JOptionPane.showMessageDialog(null,"No s'ha pogut cambiar la valoració","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    public void addValorationItem(Float f) {
+        CtrlDom.addValoratedItem(f);
+    }
+
 }
