@@ -136,12 +136,9 @@ public class ControladorDomini {
      * @param password  password es la contraseña
      */
     public void register(String struserId, String password) throws Exception {
-        //post: es crea un usuari i es posa d'usuari actiu.
-        //err: Usuari actiu null, userId not exists, id o passw son strings buits
         try {
             int userId = Integer.valueOf(struserId);
             if (usersList.containsKey(userId) || String.valueOf(admin.getUserID()).equals(struserId)) throw new UserExistsException(struserId);
-            //else if (actualUser != null) throw new ImpossibleStateException("register");
             else if (struserId.equals("") || password.equals("")) {
                 throw new NotValidUserorPasswException(struserId +" "+ password);
             } else {
@@ -162,7 +159,6 @@ public class ControladorDomini {
      * @param password  password es la contraseña
      */
     public void login(String struserId, String password) throws Exception{
-        //post: es crea un usuari i es posa d'usuari actiu.
         try {
             recomendationChanged=true;
             recomendationChangedSlope=true;
@@ -173,7 +169,6 @@ public class ControladorDomini {
             } else if (usersList.containsKey(userId)) {
                 if (usersList.get(userId).getPassword().equals(password)) {//logged
                     actualUser = usersList.get(userId);
-                    //System.out.println("Sessió iniciada");
                 } else {
                     throw new WrongDataException("login" + struserId + " "+ password);
                 }
@@ -197,7 +192,6 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("logout");
         else{
             actualUser=null;
-            //System.out.println("Logged Out");
         }
 
     }
@@ -210,31 +204,7 @@ public class ControladorDomini {
         if (actualUser==null) throw new NoUserLogedInException("editProfile");
         else{
             actualUser.setPassword(newPass);
-            System.out.println("Password changed Out");
         }
-    }
-    /**
-     * El administrador elimina al usuario delete_me
-     * @param delete_me  delete_me es el usuario
-     */
-    public void deleteProfile(String delete_me) throws Exception{
-        try {
-            if(actualUser == null) throw new NoUserLogedInException("deleteProfile");
-            else if(delete_me.equals(String.valueOf(admin.getUserID()))) throw new DeleteAdministratorException(delete_me);
-            else if (usersList.containsKey(Integer.valueOf(delete_me))) {
-                User u = usersList.get(delete_me);
-                ArrayList<valoratedItem> lista_valorados = u.getValoratedItems();
-                for(valoratedItem i: lista_valorados){
-                    ArrayList <User> usuarios=itemValoratedBy.get(i.getItem().getID());
-                    usuarios.remove(u);
-                }
-            }
-            else throw new UserNotExistsException(delete_me);
-        }
-        catch (Exception e){
-            throw e;
-        }
-
     }
     /**
      * El Usuario actual quiere una recomendación para el utilizando el algoritmo Slope
@@ -255,11 +225,9 @@ public class ControladorDomini {
 
             Kmeans kmeans = new Kmeans();
             kmeans.run(usersList,k);
-            kmeans.printAllClusters();
 
             //slope one
             SlopeOne slopeOne = new SlopeOne();
-            //cambiar por actual user
             ArrayList<myPair> p = slopeOne.getPredictions(actualUser, itemValoratedBy, maxValue);
             slopeOne.printResults();
             return p;
@@ -439,10 +407,6 @@ public class ControladorDomini {
         else if (lastRecomendation1.size()==0) throw new EmptyLastRecomendationException("evaluateRecomendation");
         try{
             ArrayList <Vector<String>> ratings_leidos = UnKnown;
-            for(Vector<String> v : ratings_leidos) {
-                for (String s : v) System.out.println(s);
-                System.out.println("===================");
-            }
             ArrayList <myPair> ratingsOrdenados = new ArrayList<myPair>();
             for (Vector<String> v: ratings_leidos){//ordenar y eliminar valoraciones que no son mias
                 if (String.valueOf(actualUser.getUserID()).equals(v.get(0))){
@@ -450,7 +414,6 @@ public class ControladorDomini {
                     ratingsOrdenados.add(m);
                 }
             }
-            //Comparator<myPair> comparador = Collections.reverseOrder();
             Collections.sort(ratingsOrdenados, new Comparator<myPair>() {//ordenar las varolaciones en unknown
                 public int compare(myPair p1, myPair p2) {
                     if (p1.getValoration()>p2.getValoration()) return 1;
@@ -461,9 +424,6 @@ public class ControladorDomini {
             Collections.reverse(ratingsOrdenados);//girar
 
 
-            //for (myPair m4: ratingsOrdenados) System.out.println(m4.getItemID()+" "+m4.getValoration());
-            //System.out.println(aux.size());
-            //System.out.println(ratingsOrdenados.size());
             ArrayList<myPair> lastRecomendationAuxiliar = new ArrayList<myPair>();
             for (myPair m: lastRecomendation1){//eliminar mis predicciones que no estan en unknown
                 for (myPair m2: ratingsOrdenados){
@@ -473,7 +433,6 @@ public class ControladorDomini {
                 }
             }
 
-            //for (myPair m: lastRecomendationAuxiliar) System.out.println(m.getItemID()+" "+m.getValoration());
             ArrayList <myPair> ratingsFiltrados = new ArrayList<myPair>();
             for (myPair m2: ratingsOrdenados){//eliminar de known los que no haya prediccion
                 for (myPair m: lastRecomendationAuxiliar){
@@ -482,11 +441,6 @@ public class ControladorDomini {
                     }
                 }
             }
-            //System.out.println(" ");
-            //for (myPair m4: ratingsFiltrados) System.out.println(m4.getItemID()+" "+m4.getValoration());
-            //System.out.println(ratingsFiltrados.size());
-            //System.out.println(lastRecomendation.size());
-            //System.out.println(lastRecomendationAuxiliar.size());
             if(lastRecomendationAuxiliar.size()==0 || ratingsFiltrados.size()==0) throw new UserWithoutRatingsException("evaluateRecomendation");
             RateRecomendation r = new RateRecomendation();
             return r.execute(lastRecomendationAuxiliar, ratingsFiltrados);
@@ -547,9 +501,6 @@ public class ControladorDomini {
      */
     public String showItemInfoValoration() throws Exception{
         if (selectedItem==null) throw new NoItemSelectedException("showItemInfoAtributes");
-        /*for (Item m: itemList.getItems()){
-            if(m.getID()==selectedItem.getID()) return String.valueOf(m.getID());
-        }*/
         for (valoratedItem va: actualUser.getValoratedItems()){
             if(va.getItem().getID()==selectedItem.getID()) return String.valueOf(va.getValoracio());
         }
@@ -594,7 +545,6 @@ public class ControladorDomini {
         if (itemList.n_Items()==0) throw new NoItemsException("AllItems");
         Vector <Integer> totsItems = new Vector<Integer>();
         for(Item i: itemList.getItems()){
-            System.out.println(i.getID());
             totsItems.add(i.getID());
         }
         return totsItems;
@@ -621,7 +571,6 @@ public class ControladorDomini {
      * Se quieren guardar los cambios de los items en el sistema
      */
   public void saveItems() throws Exception{
-        //if (actualUser==null) throw new NoUserLogedInException("saveItems");
         try{
             String path = "./SaveData/items.csv";
             ControladorPersistenciaItem ctrlItem= new ControladorPersistenciaItem();
@@ -635,7 +584,7 @@ public class ControladorDomini {
      * Se quieren guardar los cambios de los Ratings en el sistema
      */
     public void saveRatings() throws Exception{
-        //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
+
         try{
             String path = "./SaveData/ratings.csv";
             ControladorPersistenciaRatings ctrlRating= new ControladorPersistenciaRatings();
@@ -650,12 +599,11 @@ public class ControladorDomini {
      * Se quieren guardar los UnKnown en el sistema
      */
     public void saveUnkown() throws Exception{
-        //if (actualUser==null) throw new NoUserLogedInException("saveRatings");
+
         try{
             String path = "./SaveData/unknown.csv";
             ControladorPersistenciaRatings ctrlRating = new ControladorPersistenciaRatings();
             ctrlRating.Escritor_Unknown(path,UnKnown);
-            System.out.println("llego aqui");
         }
         catch (Exception e){
             throw e;
@@ -739,7 +687,6 @@ public class ControladorDomini {
      * @param valors valors es el string de valores
      */
     public Item createItem(String atributs, String valors) throws Exception{
-        //if (actualUser==null) throw new NoUserLogedInException("createItem");
         try {
             recomendationChanged=true;
             recomendationChangedSlope=true;
@@ -760,9 +707,7 @@ public class ControladorDomini {
      * @param valors valors es el string de valores
      */
     private Item createItemPath(String atributs, String valors, Conjunt_Items ListaItems, Map <String, TipusItem> ListaTiposItems) throws Exception{
-        //dado una lista de items lo mete ahi si no existe
 
-        //string to arraylist de valors
         ArrayList<String> datos_valors = new ArrayList<String>();
         String pal="";
         boolean frase=false;
@@ -776,7 +721,6 @@ public class ControladorDomini {
             if(valors.charAt(iterat)==',' && !frase){
                 if (pal.length()==0) pal="";
                 datos_valors.add(pal);
-                //System.out.println(pal);
                 pal="";
 
             }
@@ -789,7 +733,7 @@ public class ControladorDomini {
         //cremos vector atributos
 
         String[] datos = atributs.split(",");
-        //System.out.println(datos.length);
+
         ArrayList <Atribute> va = new ArrayList<Atribute>();
         ArrayList <String> vsa = new ArrayList<String>();//solo para definir el tipo de item
         int pos_id=-1;
@@ -806,10 +750,6 @@ public class ControladorDomini {
         //miramos si no existe item
         if (pos_id==-1) throw new IsNotItemException("create item");
         int comp = Integer.valueOf(datos_valors.get(pos_id));
-        if (ListaItems.existeix_item(comp)){
-            System.out.println("ja existeix id");
-            //acabar la funcion-----------------------------------------------------------------------------
-        }
         //creamos tipus item si NO EXISTE
         boolean new_type_item=false;
         String ID_ti=vsa.toString();
@@ -825,18 +765,9 @@ public class ControladorDomini {
         }
         else throw new TooManyItemTypeException("create Item");
 
-        //DEFINIR TIPO ATRIBUTO
-        //string de valores to vector
-
-        //if (valors[valors.length()].equals(","))
-        //System.out.println(vsa.size());
-        //System.out.println(datos_valors.size());
         ArrayList <String> vsv= new ArrayList<String>();
         for (int i = 0; i <vsa.size()+1; ++i) {
-            //System.out.println(datos_valors.get(i));
             if(i!=pos_id){
-                //System.out.println(vsa.get(i));
-
                 vsv.add(datos_valors.get(i));
             }
         }
@@ -910,10 +841,6 @@ public class ControladorDomini {
         i.setAtr(atributs);
         i.setString(valors);
 
-        //i.setDadesInicials(atributs, valors);
-        /*if (!(ListaItems.existeix_item(id))){
-            ListaItems.anyadir_item(i);
-        }*/
         return i;
 
     }
@@ -928,7 +855,6 @@ public class ControladorDomini {
         for (Item m: itemList.getItems()){
             if(String.valueOf(m.getID()).equals(deleteme)) it=m;
         }
-        System.out.println(itemList.existeix_item(it.getID()));
         //borrar de cada usuario el item si lo ha valorado
         for (int i: usersList.keySet()){
             User u = usersList.get(i);
@@ -939,7 +865,7 @@ public class ControladorDomini {
         itemValoratedBy.remove(it.getID());
         //borrar de itemList
 
-        System.out.println(itemList.eliminar_item(it));
+        itemList.eliminar_item(it);
         //si es item selected==null
         recomendationChanged=true;
         recomendationChangedSlope=true;
@@ -950,10 +876,9 @@ public class ControladorDomini {
      * Se quiere cargar items
      * @param path path es la direccion al fichero que se quiere cargar
      */
-    public void loadItems(String path) throws Exception{//"Entradas_CSV/items.csv"
-        //pre: actualUser es admin
+    public void loadItems(String path) throws Exception{
+
         try {
-            //if (actualUser == null) throw new NoUserLogedInException("loadItems");
 
             Vector<String> mat_items = new Vector<String>();
             ControladorPersistenciaItem reader = new ControladorPersistenciaItem();
@@ -974,7 +899,6 @@ public class ControladorDomini {
             recomendationChangedKNN=true;
         }
         catch (Exception e){
-            //JOptionPane.showMessageDialog(null,"El fichero introducido no tiene el formato válido");
             throw e;
         }
     }
@@ -983,11 +907,7 @@ public class ControladorDomini {
      * @param path path es la direccion al fichero que se quiere cargar
      */
     public void loadRates(String path) throws Exception{//falta añadir item usado a la lista de items usados
-        //pre: actualUser es admin
         try {
-            //if (actualUser==null) throw new NoUserLogedInException("loadRates");
-            //if(!actualUser.getRol().equals(TipusRol.Administrador))
-
             ratingPath = path;
             recomendationChanged=true;
             recomendationChangedSlope=true;
@@ -1027,11 +947,13 @@ public class ControladorDomini {
             throw e;
         }
     }
-
+    /**
+     * Se quiere valorar el item seleccionado
+     * @param valoration es la valoración
+     */
     public void addValoratedItem(Float valoration) {
         if(actualUser != null) {
             if(!itemValoratedBy.containsKey(Integer.valueOf(selectedItem.getID()))) {
-                System.out.println(actualUser.getValoratedItems().contains(selectedItem));
                 actualUser.addvaloratedItem(selectedItem.getID(), valoration);
                 ArrayList<User> au = new ArrayList<User>();
                 au.add(actualUser);
@@ -1147,19 +1069,6 @@ public class ControladorDomini {
         else throw new NotAnAdministratorException("createUser");
     }
     /**
-     * Se quiere ver todos los usuarios guardados en el sistema
-     * @return Vector <String> con el id de todos los usuarios
-     */
-    public Vector <String> showAllUsers( )throws Exception{
-        if (usersList.size()==0) throw new NoUsersException("showAllUsers");
-        Vector <String> vs = new Vector<String>();
-        for (User u: usersList.values()){
-            System.out.println(u.getUserID());
-            vs.add(String.valueOf(u.getUserID()));
-        }
-        return vs;
-    }
-    /**
      * Se devuelve el usuario actual
      * @return User
      */
@@ -1181,22 +1090,33 @@ public class ControladorDomini {
         if(actualUser.getRol() == TipusRol.Administrador) return "admin";
         else return "user";
     }
-
+    /**
+     * Devuelve true si se ha cargado items
+     * @return boolean
+     */
     public boolean itemsLoaded(){
         if (itemList.n_Items()==0) return false;
         return true;
     }
-
+    /**
+     * Devuelve true si se ha cargado el usuarios
+     * @return boolean
+     */
     public boolean usersLoaded(){
         if (usersList.size()==0) return false;
         return true;
     }
-
+    /**
+     * Devuelve true si se ha cargado el unknown
+     * @return boolean
+     */
     public boolean unknownLoaded(){
         if (UnKnown.size()==0) return false;
         return true;
     }
-
+    /**
+     * Se carga en el sistema el fichero unknown de valoraciones
+     */
     public void loadUnKnown(String path) throws Exception{
         try {
             ControladorPersistenciaRatings ctrRec = new ControladorPersistenciaRatings();
@@ -1206,6 +1126,9 @@ public class ControladorDomini {
             throw e;
         }
     }
+    /**
+     * Se eliminan todos los datos del sistema
+     */
     public void deleteAll(){
         usersList = new HashMap<Integer, User>();
         selectedItem = null;
@@ -1222,12 +1145,15 @@ public class ControladorDomini {
     }
 
 
-    /*
-     * Se devuelve el un map con todos los usuarios del sistema
-     * @return Map<Integer,User> donde el integer es el usuario
+    /**
+     * Devuelve la lista de usuarios
+     * @return Integer
      */
     public Map<Integer,User> getUsersList() { return usersList; }
-
+    /**
+     * Devuelve el item con mejor valoración
+     * @return Integer
+     */
     public Integer itemFavourite() throws Exception{
         int maxID = 0;
         if(actualUser == null) throw new NoUserLogedInException("loadRecomendation");
@@ -1243,6 +1169,10 @@ public class ControladorDomini {
         }
         return maxID;
     }
+    /**
+     * Devuelve la valoración media
+     * @return Integer
+     */
     public Integer avgRating() throws Exception{
         int avg = 0;
         if(actualUser == null) throw new NoUserLogedInException("loadRecomendation");
@@ -1254,7 +1184,10 @@ public class ControladorDomini {
         }
         return avg/numRated();
     }
-
+    /**
+     * El numero de items valorados
+     * @return Integer
+     */
     public Integer numRated() throws Exception{
         if(actualUser == null) throw new NoUserLogedInException("loadRecomendation");
         else {
@@ -1262,20 +1195,6 @@ public class ControladorDomini {
         }
     }
 
-    public void aux(){
-        for (Item m: itemList.getItems()){
-            System.out.println(m.getString());
-        }
-    }
 
-    public void enseñaItemTypeAtr(){
-        for (String s: itemTypeList.keySet()){
-            for (Atribute a: itemTypeList.get(s).getAtributes()){
-                System.out.println(a.getName()+":  "+a.getType()+" | ");
-                if (a.getType().equals("Rang")){
-                    System.out.println(a.getLower()+" | "+a.getUpper());
-                }
-            }
-        }
-    }
+
 }

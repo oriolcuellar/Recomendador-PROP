@@ -1,6 +1,6 @@
 package FONTS.src.domini.exceptions;
 
-/** \brief Clase que implementa exception NoUsersException.
+/** \brief Clase que implementa exception TooManyItemTypeException.
  *  @author Oriol Cuellar
  */
 

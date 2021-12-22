@@ -59,8 +59,6 @@ public class Kmeans {
         for(int i = 0; i < k; ++i) {
             User centroidActual = clusters.get(i).getcentroid();
             float distanciaActual = user.calculateSimilarity(centroidActual);
-            //if(user.getUserID() == clusters.get(i).getCluster().get(0).getUserID()) distanciaActual = 5; // para que el centroide se añada en su propio cluster
-            //System.out.println("Distancia entre " + user.getUserID() + " " + centroidActual.getUserID() + " es " + distanciaActual);
             if(distanciaActual > dMin) {
                 dMin = distanciaActual;
                 iMin = i;
@@ -77,9 +75,6 @@ public class Kmeans {
         this.k = k;
         clusters = new ArrayList<Cluster>();
         this.users = users;
-        if(k > users.size() && users.size() != 0) System.out.println("El numero de clusters tiene que ser menor al numero de usuarios.");
-        else if(k == 0) System.out.println("K tiene que ser un numero mayor que cero.");
-
 
             assignKCentroids();
             // Assignas el resto de usuarios a los clusters correspondientes y recalculamos el centroid
@@ -99,13 +94,11 @@ public class Kmeans {
                     clusters.get(j).getCluster().removeAll(clusters.get(j).getCluster());
                     clusters.get(j).clearSumDistances();
                     centroids.add(clusters.get(j).getcentroid());
-                    //System.out.print(centroids.get(j).getUserID() + " ");
                     if(first) {
                         WCSSold = Float.POSITIVE_INFINITY;
                         first = false;
                     } else WCSSold += clusters.get(j).getWCSS();
                 }
-                //System.out.println();
 
                 for (Map.Entry<Integer, User> entry : users.entrySet()) {
                     asignUserToCluster(entry.getValue());
@@ -114,12 +107,10 @@ public class Kmeans {
                 for(int j = 0; j < k; ++j) {
                     clusters.get(j).recalculateCentroid();
                     if(clusters.get(j).getcentroid().getUserID() != centroids.get(j).getUserID()) equilibrated = false;
-                    //System.out.print(clusters.get(j).getcentroid().getUserID() + " ");
                     clusters.get(j).calculateWCSS();
                     WCSS += clusters.get(j).getWCSS();
                 }
 
-                System.out.println("La iteración es " + ++i + " " + WCSS + " " + WCSSold + " " + WCSSold2);
             }
     }
 

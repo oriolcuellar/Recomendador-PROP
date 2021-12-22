@@ -27,8 +27,6 @@ public class ControladorPersistenciaItem {
      * @return Vector de Strings que contienen los items leidos.
      */
     public Vector <String> Lector_Items(String csvFile) throws Exception{
-        //post: return un vector de les files del csv
-
         Vector <String> items = new Vector<String>();
         BufferedReader br = null;
         String line = "";
@@ -58,25 +56,7 @@ public class ControladorPersistenciaItem {
     public void Escritor_Items(String csvFile, Conjunt_Items list_items) throws Exception {
         File fichero = new File(csvFile);
 
-        //if (fichero.exists()) throw new FileExistsException(csvFile);
-
         try {
-           /* Map <String, ArrayList <String> > todo = new HashMap <String, ArrayList <String> > ();
-
-            for (Item i: list_items.getItems()){
-                String atr=i.getAtr();
-                String val=i.getString();
-                if (todo.containsKey(atr)){//ya hay items de este tipo
-                    todo.get(atr).add(val);
-                }
-                else{// este tipo de item es el primero del map
-                    ArrayList <String> nou = new ArrayList<String>();
-                    nou.add(val);
-                    todo.put(atr, nou);
-                }
-
-
-            }*/
             int n = 0;
             BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
             for (Item i : list_items.getItems()) {//para cada tipo de item
@@ -89,7 +69,6 @@ public class ControladorPersistenciaItem {
         } catch (Exception e) {
             throw e;
         }
-        //}
 
     }
 }
