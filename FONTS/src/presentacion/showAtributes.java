@@ -160,7 +160,6 @@ public class showAtributes {
                 int input = JOptionPane.showConfirmDialog(null, "Vols sobreescriure la valoracio?", "Selecciona una opció...",
                         JOptionPane.OK_CANCEL_OPTION);
                 if (input == 0) {
-
                     String new_valoration = JOptionPane.showInputDialog(null,
                             "Escriu la nova valoració", null);
                     CtrlPres.SetValoration(String.valueOf(id), new_valoration);
