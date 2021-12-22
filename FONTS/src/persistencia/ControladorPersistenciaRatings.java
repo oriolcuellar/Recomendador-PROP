@@ -29,7 +29,6 @@ public class ControladorPersistenciaRatings {
         ArrayList <Vector<String>> ratings=new ArrayList<Vector<String>>();
         BufferedReader br = null;
         String line = "";
-        //Se define separador ","
         String cvsSplitBy = ",";
         int user=0;
         int item=1;
@@ -83,8 +82,6 @@ public class ControladorPersistenciaRatings {
     public void Escritor_Ratings(String csvFile, Map <Integer, User> list_users) throws Exception{
         File fichero = new File(csvFile);
 
-        //if (fichero.exists()) throw new FileExistsException(csvFile);
-        //else {
             try{
                 BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
                 String s ="userId,itemId,rating\n";
@@ -100,12 +97,10 @@ public class ControladorPersistenciaRatings {
                     }
                 }
 
-                // Hay que cerrar el fichero
                 bw.close();
             } catch (Exception e){
                 throw e;
             }
-        //}
     }
     /** Función que escribe valoraciones del unknown en un fichero CSV.
      * @param csvFile Path al fichero CSV.
@@ -127,11 +122,9 @@ public class ControladorPersistenciaRatings {
                 }
                 bw.write(linea+"\n");
             }
-            // Hay que cerrar el fichero
             bw.close();
         } catch (Exception e){
             throw e;
         }
-        //}
     }
 }

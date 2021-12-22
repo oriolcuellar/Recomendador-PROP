@@ -52,9 +52,6 @@ public class ControladorPersistenciaRecomendation {
      */
     public void Escritor_Recomendation(String csvFile, ArrayList <myPair> lista)throws Exception{
         File fichero = new File(csvFile);
-
-        //if (fichero.exists()) throw new FileExistsException(csvFile);
-        //else {
             try{
                 BufferedWriter bw = new BufferedWriter(new FileWriter(csvFile));
                 for (myPair i: lista){
@@ -64,12 +61,10 @@ public class ControladorPersistenciaRecomendation {
                         bw.write(linea);
                 }
 
-                // Hay que cerrar el fichero
                 bw.close();
             } catch (Exception e){
                 throw e;
             }
-        //}
     }
 
 

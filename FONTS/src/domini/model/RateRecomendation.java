@@ -26,8 +26,6 @@ public class RateRecomendation {
      * @see myPair
      */
     public float execute(ArrayList<myPair> arr, ArrayList<myPair> u) throws Exception{
-        //System.out.println(arr.size());
-        //System.out.println(u.size());
         //IDCG
         int dist=arr.size();
         if (dist!=u.size()) throw new CorruptFileException("RateRecomendation");
