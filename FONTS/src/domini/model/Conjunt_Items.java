@@ -215,6 +215,7 @@ public class Conjunt_Items {
 
             Item aux = Items.get(0);
             ArrayList<String> valors = aux.getValors();
+            Boolean re_needed = true;
             for (int i = 0; i < maxims.size(); ++i) {
 
                 if (maxims.get(i) != -1.0) {
@@ -222,15 +223,16 @@ public class Conjunt_Items {
                     Double v_aux = Double.valueOf(valors.get(i));
                     if (v_aux > maxims.get(i) * 1.20) {
 
-                        re_calcul_atriu();
+                        re_needed = true;
                         maxims.set(i, v_aux);
                     } else if (v_aux < minims.get(i) * 0.80) {
 
-                        re_calcul_atriu();
+                        re_needed = true;
                         minims.set(i, v_aux);
                     }
                 }
             }
+            if(re_needed) re_calcul_atriu();
         }
 
         initzialitzar_matriu();
@@ -271,9 +273,9 @@ public class Conjunt_Items {
 
             int i;
             if(n_Items() > 0) {
+                Boolean re_needed = false;
                 i = BinaryInsertionPos(Items, 0, Items.size()-1, a.getID());
-                Item aux = Items.get(0);
-                ArrayList<String> valors = aux.getValors();
+                ArrayList<String> valors = a.getValors();
                 for (int j = 0; j < maxims.size(); ++j) {
 
                     if (maxims.get(j) != -1.0) {
@@ -281,15 +283,16 @@ public class Conjunt_Items {
                         Double v_aux = Double.valueOf(valors.get(j));
                         if (v_aux > maxims.get(j) * 1.20) {
 
-                            re_calcul_atriu();
+                            re_needed = true;
                             maxims.set(j, v_aux);
                         } else if (v_aux < minims.get(j) * 0.80) {
 
-                            re_calcul_atriu();
+                            re_needed = true;
                             minims.set(j, v_aux);
                         }
                     }
                 }
+                if(re_needed) re_calcul_atriu();
             }
             else {
 
@@ -336,8 +339,8 @@ public class Conjunt_Items {
 
     private void re_calcul_atriu() {
 
-        for (int i = 0; i < n_Items(); ++i)
-            for (int j = n_Items(); j > i; --j)
+        for (int i = 0; i < n_Items()-1; ++i)
+            for (int j = n_Items()-1; j > i; --j)
                      Distance(Items.get(i), Items.get(j));
 
     }

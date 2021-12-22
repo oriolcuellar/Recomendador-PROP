@@ -52,7 +52,7 @@ public class K_Neareast_Neightbour {
         comparar_conjunts(Valoracions,Items_a_devolver, Dis, M_de_Items, k);
 
         Double num_atributos = Double.valueOf(C_Items.getItems().get(0).getTipus().num_atributs()) ;
-        Double maxim_valor = 2 * Math.sqrt(num_atributos);
+        Double maxim_valor = (itemsUsats.size()-1) * 2 * Math.sqrt(num_atributos);
         Items_a_devolver.get(1).add(maxim_valor);
 
         return Items_a_devolver;
