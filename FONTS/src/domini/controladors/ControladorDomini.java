@@ -1027,6 +1027,19 @@ public class ControladorDomini {
             throw e;
         }
     }
+
+    public void addValoratedItem(Float valoration) {
+        if(actualUser != null) {
+            actualUser.addvaloratedItem(selectedItem.getID(), valoration);
+            if (itemValoratedBy.containsKey(Integer.valueOf(selectedItem.getID()))) {//existeix item al map
+                itemValoratedBy.get(Integer.valueOf(selectedItem.getID())).add(actualUser);
+            } else {//NO existeix item al map
+                ArrayList<User> au = new ArrayList<User>();
+                au.add(actualUser);
+                itemValoratedBy.put(Integer.valueOf(selectedItem.getID()), au);
+            }
+        }
+    }
     /**
      * Se quiere cargar una recomendación
      * @param path path es la direccion al fichero que se quiere cargar
