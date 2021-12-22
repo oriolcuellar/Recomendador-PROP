@@ -746,6 +746,7 @@ public class ControladorDomini {
             recomendationChangedSlope=true;
             recomendationChangedKNN=true;
             Item i= createItemPath(atributs, valors, itemList, itemTypeList);
+            if(itemList.existeix_item(i.getID())) JOptionPane.showMessageDialog(null, "Exists an item with that ID");
             itemList.anyadir_item(i);
             return i;
         }
@@ -1030,10 +1031,9 @@ public class ControladorDomini {
 
     public void addValoratedItem(Float valoration) {
         if(actualUser != null) {
-            actualUser.addvaloratedItem(selectedItem.getID(), valoration);
-            if (itemValoratedBy.containsKey(Integer.valueOf(selectedItem.getID()))) {//existeix item al map
-                itemValoratedBy.get(Integer.valueOf(selectedItem.getID())).add(actualUser);
-            } else {//NO existeix item al map
+            if(!itemValoratedBy.containsKey(Integer.valueOf(selectedItem.getID()))) {
+                System.out.println(actualUser.getValoratedItems().contains(selectedItem));
+                actualUser.addvaloratedItem(selectedItem.getID(), valoration);
                 ArrayList<User> au = new ArrayList<User>();
                 au.add(actualUser);
                 itemValoratedBy.put(Integer.valueOf(selectedItem.getID()), au);

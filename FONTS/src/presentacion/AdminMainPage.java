@@ -223,7 +223,6 @@ public class AdminMainPage {
                     ratings = CtrlPres.usersLoaded();
                 } catch (Exception e) {
                     enableButtons();
-                    JOptionPane.showMessageDialog(null,"The chosen file does not have the correct format");
                     e.printStackTrace();
                 }
                 enableButtons();
@@ -257,10 +256,17 @@ public class AdminMainPage {
                     String atribut = "";
                     String[] atributes=str.split(",");
                     boolean primer=true;
+                    boolean fail = false;
                     for(String s : atributes) {
                         String val = JOptionPane.showInputDialog(null,
                                 s, null);
+
                         if(primer){
+                            if(val.startsWith("-")) {
+                                JOptionPane.showMessageDialog(null,"The id can't be negative");
+                                fail = true;
+                                break;
+                            }
                             valors =  valors + val;
                             primer=false;
                         }
@@ -268,7 +274,7 @@ public class AdminMainPage {
                             valors =  valors+","+ val;
                         }
                     }
-                    CtrlPres.createItem(str,valors);
+                    if(!fail) CtrlPres.createItem(str,valors);
                 } catch (Exception e) {
                     enableButtons();
                     JOptionPane.showMessageDialog(null,e);

@@ -286,7 +286,7 @@ public class ControladorPresentacion {
         try {
             CtrlDom.register(username,password);
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null,"Error while creating the user");
             CtrlDom.getActualUser().getUserID();
         }
     }
@@ -432,7 +432,7 @@ public class ControladorPresentacion {
         try {
             CtrlDom.deleteItem(id);
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e + "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The item does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
     /**
@@ -475,7 +475,8 @@ public class ControladorPresentacion {
      */
     public void createItem(String atributes, String valors) {
         try {
-            CtrlDom.createItem(atributes,valors);
+            if(itemsLoaded()) CtrlDom.createItem(atributes,valors);
+            else JOptionPane.showMessageDialog(null, "There are no items loaded");
         } catch(Exception e) {
             JOptionPane.showMessageDialog(null, e,"Error ", JOptionPane.ERROR_MESSAGE);
         }
@@ -488,7 +489,7 @@ public class ControladorPresentacion {
         try {
             CtrlDom.deleteUser(id);
         } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e + "The user does not exist","Error ", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The user does not exist","Error ", JOptionPane.ERROR_MESSAGE);
         }
     }
     /**
@@ -501,7 +502,7 @@ public class ControladorPresentacion {
 
             a =  CtrlDom.showItemInfoAtributes();
         } catch (Exception e) {
-            System.out.println(e);
+            JOptionPane.showMessageDialog(null,"the Item does not exists");
         }
         return a;
     }

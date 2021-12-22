@@ -133,6 +133,7 @@ public class MainMenu {
                     showRatedItemsButton.setEnabled(true);
                 } catch (Exception e) {
                     enableButtons();
+                    JOptionPane.showMessageDialog(null, "You have not save any recomendation");
                     e.printStackTrace();
                 }
             }
@@ -141,6 +142,7 @@ public class MainMenu {
         ShowRecomendedItemsByHybridButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
                 try {
                     disableButtons();
                     int input = JOptionPane.showConfirmDialog(null, "Do you want to load the recomendation?", "Choose",
@@ -155,6 +157,7 @@ public class MainMenu {
                     showRatedItemsButton.setEnabled(true);
                 } catch (Exception e) {
                     enableButtons();
+                    JOptionPane.showMessageDialog(null, "You have not save any recomendation");
                     e.printStackTrace();
                 }
             }
