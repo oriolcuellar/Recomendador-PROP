@@ -741,7 +741,6 @@ public class ControladorDomini {
     public Item createItem(String atributs, String valors) throws Exception{
         //if (actualUser==null) throw new NoUserLogedInException("createItem");
         try {
-
             recomendationChanged=true;
             recomendationChangedSlope=true;
             recomendationChangedKNN=true;
