@@ -8,8 +8,6 @@ import FONTS.src.persistencia.ControladorPersistenciaRecomendation;
 
 import javax.swing.*;
 import java.io.File;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 /** \brief Clase que implementa el controlador de dominio.
@@ -157,6 +155,7 @@ public class ControladorDomini {
         }
 
     }
+
     /**
      * Logea en el sistema un usuario
      * @param struserId  struserId es el nombre se usuario
@@ -190,6 +189,7 @@ public class ControladorDomini {
             System.out.println(e);
         }
     }
+
     /**
      * Saca del sistema al usuario activo
      */
@@ -201,6 +201,7 @@ public class ControladorDomini {
         }
 
     }
+
     /**
      * Cambia la contraseña del usuario activo
      * @param newPass  newPass es la nueva contraseña
@@ -271,10 +272,9 @@ public class ControladorDomini {
      /**
      * El Usuario actual quiere una recomendación para el utilizando el algoritmo KNN
      * @param num_elem num_elem es el numero de elementos que se quiere
-      * @param path path el el documento donde queremos leer los ratings
      * @return ArrayList<Integer> con las recomendación generada
      */
-    private ArrayList<ArrayList> showRecommendedItemsKNN(int num_elem,String path ) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
+    private ArrayList<ArrayList> showRecommendedItemsKNN(int num_elem) throws Exception{//"Entradas_CSV/ratings.test.known.csv"
         if (actualUser == null) throw new NoUserLogedInException("showRecommendedItemsSlope");
         else if (actualUser.getRol().equals(TipusRol.Administrador)) throw new NotAnUserException(String.valueOf(actualUser.getUserID()));
         else if (actualUser.getValoratedItems().size()==0)  throw new UserWithoutRatingsException("showRecommendedItemsSlope");
@@ -284,27 +284,6 @@ public class ControladorDomini {
         ArrayList <Item> v_items = new ArrayList<Item>();
         ArrayList <Double> valorations = new ArrayList<Double>();
 
-        /*
-        ArrayList <Double> va = new ArrayList<Double>();
-        ArrayList<Vector<String>> readed_ratings = new ArrayList<Vector<String>>();
-
-        try {
-            ControladorPersistenciaRatings reader = new ControladorPersistenciaRatings();
-            readed_ratings = reader.Lector_Ratings(path);
-        }
-        catch (Exception e){
-            throw e;
-        }
-        ArrayList <String> validador = new ArrayList<String>();
-        for (Vector<String> vs : readed_ratings) {
-            Item nou_it= new Item(Integer.valueOf(vs.get(1)));
-            String aux = String.valueOf(nou_it.getID());
-            if (!validador.contains(aux)) {//No existeix item
-                it.add(nou_it);
-                va.add(Double.valueOf(vs.get(2)));
-                validador.add(aux);
-            }
-        }*/
         ArrayList <valoratedItem> va = actualUser.getValoratedItems();
         for (int i = 0; i < va.size(); i++ ) {
 
@@ -346,7 +325,7 @@ public class ControladorDomini {
     public ArrayList<Integer> doKNN() throws Exception{
         try{
             if (recomendationChangedKNN)
-                lastRecomendationKNN = dominiSingelton.showRecommendedItemsKNN(itemList.n_Items(), ratingPath);
+                lastRecomendationKNN = dominiSingelton.showRecommendedItemsKNN(itemList.n_Items());
             recomendationChangedKNN=false;
             ArrayList<Item> Aux = lastRecomendationKNN.get(0);
             ArrayList<Integer> r = new ArrayList<>();
@@ -377,7 +356,7 @@ public class ControladorDomini {
                 }
 
                 if (recomendationChangedKNN){
-                    knn = dominiSingelton.showRecommendedItemsKNN(itemList.n_Items(), ratingPath);
+                    knn = dominiSingelton.showRecommendedItemsKNN(itemList.n_Items());
                     lastRecomendationKNN=knn;
                 }
 

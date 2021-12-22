@@ -239,7 +239,7 @@ public class ControladorPresentacion {
         try {
             float f = 0;
             if(s == "Hybrid") f = CtrlDom.evaluateRecomendationGeneral();
-            else if(s == "CB") f = CtrlDom.evaluateRecomendationKNN();
+            if(s == "CB") f = CtrlDom.evaluateRecomendationKNN();
             else if(s == "CF") f = CtrlDom.evaluateRecomendationSlope();
             JOptionPane.showMessageDialog(null,f);
         } catch (Exception e) {

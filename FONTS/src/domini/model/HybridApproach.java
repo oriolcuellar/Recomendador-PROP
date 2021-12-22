@@ -11,7 +11,7 @@ public class HybridApproach {
     public HybridApproach() {
     }
     
-    public ArrayList<ArrayList> Algoritmo (ArrayList<myPair> Slope, ArrayList<ArrayList> Knn, int n_items, int n_valorats, Double percentatge_Usuaris) throws Exception {
+    public ArrayList<ArrayList> Algoritmo(ArrayList<myPair> Slope, ArrayList<ArrayList> Knn, int n_items, int n_valorats) throws Exception {
 
         ArrayList<myPair> S = new ArrayList<myPair>();
         ArrayList<ArrayList> K = new ArrayList<ArrayList>();
@@ -21,20 +21,22 @@ public class HybridApproach {
         clonador_ArrayList_Knn(K, Knn);
 
         Float max_Slope = S.get(0).getValoration();
-        Double max_Knn = (Double) Knn.get(1).get(Knn.get(1).size() -1);
+        Double max_Knn = (Double) Knn.get(1).get(0);
         normalizar_val_Slope(S, max_Slope);
         normalizar_val_Knn(K, max_Knn);
 
         Double percentatge_valorats = n_valorats / Double.valueOf(n_items);
         Double percentatge_recomanats = S.size()/ Double.valueOf(n_items);
 
-        Double percentantge_Knn = 0.30;
+        Double percentantge_Knn = 0.80;
 
-        if (percentatge_recomanats < 0.70 && percentatge_recomanats + percentantge_Knn < 0.5 )
-            percentantge_Knn +=  percentatge_valorats;
+        if (percentatge_recomanats < 0.10)
+            percentantge_Knn -=  percentatge_valorats;
+        else
+            percentantge_Knn -= 0.10;
 
         if (percentatge_valorats > percentantge_Knn)
-            percentantge_Knn = percentatge_recomanats;
+            percentantge_Knn = percentatge_valorats;
 
         Double percentarge_Slope = 1 - percentantge_Knn;
 
@@ -42,32 +44,16 @@ public class HybridApproach {
         ArrayList<Double> v_aux = K.get(1);
 
         ordenar_simplificado(K.get(0), K.get(1), 0, K.get(0).size()-1);
-        Float max = Float.valueOf(0);
-        Double max_porcentaje = 0.0;
-        ArrayList<ArrayList> Result = new ArrayList<ArrayList>();
-        clonador_ArrayList_Knn(Result, K);
 
-        for(Double j = 0.0; j <= 1.0; j += 0.01){
+        for (int i = 0; i < K.get(0).size(); ++i){
 
-            percentantge_Knn = j;
-            percentarge_Slope = 1 - j;
-            for (int i = 0; i < K.get(0).size(); ++i){
-
-                Double val_Slope = valoracion_item(S, i_aux.get(i).getID());
-                Double val_Knn = v_aux.get(i);
-                Double val_final = val_Knn * percentantge_Knn + val_Slope * percentarge_Slope;
-                int posicion = posicioncion_item(Result.get(0), i_aux.get(i).getID());
-                Result.get(1).set(posicion, val_final);
-            }
-
-            ordenar_simplificado(Result.get(0), Result.get(1), 0, Result.get(0).size()-1);
-            Float aux = CtrlDom.evaluateRecomendationGeneral(Result);
-            if (aux > max){
-
-                max_porcentaje = j;
-                max = aux;
-            }
+            Double val_Slope = valoracion_item(S, i_aux.get(i).getID());
+            Double val_Knn = v_aux.get(i);
+            Double val_final = val_Knn * percentantge_Knn + val_Slope * percentarge_Slope;
+            K.get(1).set(i, val_final);
         }
+
+        ordenar_simplificado(K.get(0), K.get(1), 0, K.get(0).size()-1);
 
         return K;
     }
@@ -118,15 +104,6 @@ public class HybridApproach {
             if (Slope.get(i).getItemID() == ID) valoracio = Double.valueOf(Slope.get(i).getValoration());
 
         return  valoracio;
-    }
-
-    private int posicioncion_item(ArrayList <Item> Result, int ID){
-
-        int pos = -1;
-        for(int i = 0; i < Result.size(); ++i)
-            if (Result.get(i).getID() == ID) pos = i;
-
-        return  pos;
     }
 
     private void normalizar_val_Slope (ArrayList<myPair> Slope, Float max_val) {
