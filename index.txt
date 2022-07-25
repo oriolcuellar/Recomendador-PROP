@@ -3,7 +3,9 @@
 /FONTS:
     Codigos del proyecto.
 /EXE:
-       Ejecutables del proyecto.
+       Ejecutables del proyecto. (contiene también el ejecutable principal)
 dades:
     Informacion de los autores.
-MakeFile
+MakeFile (drivers de las clases)
+
+SistemaRecomendador.jar (ejecutable del proyecto)

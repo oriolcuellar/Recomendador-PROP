@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SISTEMA RECOMENADOR: Fichero Fuente GITLAB/subgrup-prop6-3/FONTS/src/presentacion/showAtributes.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Captura de pantalla 2021-11-19 083324 (2).png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SISTEMA RECOMENADOR<span id="projectnumber">&#160;0.1</span>
+   </div>
+   <div id="projectbrief">GRUP 6.3:  Roberto Amat, Marc Camarillas, Oriol Cuéllar, Jordi Olmo</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Buscar','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('show_atributes_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">showAtributes.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="show_atributes_8java.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>FONTS.src.presentacion;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> FONTS.src.domini.controladors.ControladorPresentacion;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> javax.swing.*;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> javax.swing.plaf.basic.BasicScrollBarUI;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> javax.swing.table.DefaultTableModel;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">import</span> javax.swing.table.TableColumnModel;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">import</span> java.awt.*;</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">import</span> java.awt.event.*;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">import</span> java.awt.image.BufferedImage;</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">import</span> java.io.IOException;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">import</span> java.util.ArrayList;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">import</span> java.net.URL;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">import</span> javax.imageio.ImageIO;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html">   20</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html">showAtributes</a> {</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    <a class="code hl_class" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html">ControladorPresentacion</a> CtrlPres = <a class="code hl_class" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html">ControladorPresentacion</a>.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ae54204780950bf49e6ee58a584e902d0">getInstance</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">   30</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> JFrame <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a06a29beb5966f022b3f77f81bdaa00b7">   35</a></span>    <span class="keyword">private</span> JButton <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a06a29beb5966f022b3f77f81bdaa00b7">backButton</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a1769b663db8868e6c0f045d06e6272f6">   40</a></span>    <span class="keyword">private</span> JPanel <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a1769b663db8868e6c0f045d06e6272f6">panel</a>;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ab66aee65be26116bb3174a5d8ee01006">   44</a></span>    <span class="keyword">private</span> JButton <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ab66aee65be26116bb3174a5d8ee01006">valorate</a>;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a131c87e4ca0e6d93666c9fd3c7bb4bf1">   48</a></span>    <span class="keyword">private</span> JLabel <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a131c87e4ca0e6d93666c9fd3c7bb4bf1">valoration</a>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a9c4e11f9d752581760f6719fefa479b0">   52</a></span>    <span class="keyword">private</span> JLabel <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a9c4e11f9d752581760f6719fefa479b0">item</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ae6e333496a0469cc47ae526ce73e8b86">   56</a></span>    <span class="keyword">private</span> JScrollPane <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ae6e333496a0469cc47ae526ce73e8b86">scrollPane</a>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">   60</a></span>    <span class="keyword">private</span> JTable <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#aca6699394ec078fe7a9fbb4ee52e3085">   64</a></span>    <span class="keyword">private</span> JLabel <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#aca6699394ec078fe7a9fbb4ee52e3085">label</a>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#adc9b2dc38be695613629946116246252">   68</a></span>    <span class="keyword">private</span> String <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#adc9b2dc38be695613629946116246252">path</a>;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html">   73</a></span>    <span class="keyword">private</span> <span class="keyword">class </span><a class="code hl_class" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html">MiModelo</a> <span class="keyword">extends</span> DefaultTableModel</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    {</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html#a19c917ed6d01e4f6887fa6179620d0cc">   75</a></span>        <span class="keyword">public</span> <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html#a19c917ed6d01e4f6887fa6179620d0cc">MiModelo</a>(Object[][] o, Object[] toArray) {</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            super(o, toArray);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        }</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html#affbaeb1a8da64d4028d324263118a4f6">   79</a></span>        <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html#affbaeb1a8da64d4028d324263118a4f6">isCellEditable</a> (<span class="keywordtype">int</span> row, <span class="keywordtype">int</span> column)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>        {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="comment">// Aquí devolvemos true o false según queramos que una celda</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            <span class="comment">// identificada por fila,columna (row,column), sea o no editable</span></div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a401b83ce29538d6ba93c70378668261c">   92</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> String <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a401b83ce29538d6ba93c70378668261c">getMessage</a>(String message, <span class="keywordtype">int</span> maxDialogWidth) {</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>        String string;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        JLabel <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#aca6699394ec078fe7a9fbb4ee52e3085">label</a> = <span class="keyword">new</span> JLabel(message);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#aca6699394ec078fe7a9fbb4ee52e3085">label</a>.getPreferredSize().width &gt; maxDialogWidth) {</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>            <span class="keywordtype">string</span> = <span class="stringliteral">&quot;&lt;html&gt;&lt;body&gt;&lt;p style=&#39;width:&quot;</span> + maxDialogWidth + <span class="stringliteral">&quot;px;&#39;&gt;&quot;</span>+message+<span class="stringliteral">&quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            <span class="keywordtype">string</span> = <span class="stringliteral">&quot;&lt;html&gt;&lt;body&gt;&lt;p&gt;&quot;</span> + message+ <span class="stringliteral">&quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;&quot;</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>        }</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        <span class="keywordflow">return</span> string;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    }</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a71e9e07cfcd1b7fd0867e4f3af2e172d">  108</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a71e9e07cfcd1b7fd0867e4f3af2e172d">showAtributes</a>(String <span class="keywordtype">id</span>) <span class="keywordflow">throws</span> IOException {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a9c4e11f9d752581760f6719fefa479b0">item</a>.setText(<span class="stringliteral">&quot;ID: &quot;</span> + <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ae6e333496a0469cc47ae526ce73e8b86">scrollPane</a>.getHorizontalScrollBar().setUI(<span class="keyword">new</span> BasicScrollBarUI() {</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            @Override</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <span class="keyword">protected</span> <span class="keywordtype">void</span> configureScrollBarColors() {</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                this.thumbColor = <span class="keyword">new</span> Color(134,114,62);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                this.trackColor  = <span class="keyword">new</span> Color(187,165,107);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        });</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        ArrayList&lt;String&gt; atributos = CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a6415c3e64068380c5fe6ec7c97a1c4da">getAtributos</a>();</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        ArrayList&lt;String&gt; valores = CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#af03a717f2294250f52e2cf7c1ac19649">getValors</a>();</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        String valoracion = CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a4c24481d2982c3725a0c9feced6b3da7">getValoration</a>(String.valueOf(<span class="keywordtype">id</span>));</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a131c87e4ca0e6d93666c9fd3c7bb4bf1">valoration</a>.setText(<span class="stringliteral">&quot;valoration: &quot;</span> + valoracion);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ae6e333496a0469cc47ae526ce73e8b86">scrollPane</a>.getVerticalScrollBar().getComponent(0).setBackground(<span class="keyword">new</span> Color(134,114,62));</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ae6e333496a0469cc47ae526ce73e8b86">scrollPane</a>.getVerticalScrollBar().getComponent(1).setBackground(<span class="keyword">new</span> Color(134,114,62));</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        <a class="code hl_class" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html">MiModelo</a> model = <span class="keyword">new</span> <a class="code hl_class" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html">MiModelo</a>(<span class="keyword">null</span>, atributos.toArray());</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        model.addRow(valores.stream().toArray());</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a> = <span class="keyword">new</span> JTable(model);</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>.setRowHeight(20);</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        TableColumnModel columnModel = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>.getColumnModel();</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; valores.size(); i++){</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>            <span class="keywordflow">if</span>(atributos.get(i).equals(<span class="stringliteral">&quot;img_url&quot;</span>)) <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#adc9b2dc38be695613629946116246252">path</a> = valores.get(i);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            columnModel.getColumn(i).setPreferredWidth(100);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        }</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        <span class="keywordtype">int</span> width = 100 * valores.size();</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        System.out.println(width);</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>.setMinimumSize(<span class="keyword">new</span> Dimension(width, 40));</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>.setMaximumSize(<span class="keyword">new</span> Dimension(width, 40));</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ae6e333496a0469cc47ae526ce73e8b86">scrollPane</a>.setViewportView(<a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>);</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a06a29beb5966f022b3f77f81bdaa00b7">backButton</a>.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            @Override</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent actionEvent) {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                <span class="keywordtype">int</span> x = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>.getX();</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                <span class="keywordtype">int</span> y = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>.getY();</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a9c2d0bdcbf8c0d50e60e5307fe7aeba8">inicializePresentation</a>(x, y);</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>.dispose();</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>            }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        });</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ab66aee65be26116bb3174a5d8ee01006">valorate</a>.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            @Override</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent actionEvent) {</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                <span class="keywordtype">int</span> input = JOptionPane.showConfirmDialog(<span class="keyword">null</span>, <span class="stringliteral">&quot;Vols sobreescriure la valoracio?&quot;</span>, <span class="stringliteral">&quot;Selecciona una opció...&quot;</span>,</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                        JOptionPane.OK_CANCEL_OPTION);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>                <span class="keywordflow">if</span> (input == 0) {</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>                    String new_valoration = JOptionPane.showInputDialog(<span class="keyword">null</span>,</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>                            <span class="stringliteral">&quot;Escriu la nova valoració&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>                    CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a8a4e192022f0711b897fc46cea6711dc">SetValoration</a>(String.valueOf(<span class="keywordtype">id</span>), new_valoration);</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>                    <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a131c87e4ca0e6d93666c9fd3c7bb4bf1">valoration</a>.setText(<span class="stringliteral">&quot;valoration: &quot;</span> + new_valoration);</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>                }</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>            }</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        });</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        MouseListener mouseListener = <span class="keyword">new</span> MouseAdapter() {</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            <span class="keyword">public</span> <span class="keywordtype">void</span> mouseClicked(MouseEvent e) {</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                <span class="keywordflow">if</span> (e.getClickCount() == 2) {</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>                    <span class="keywordtype">int</span> fila = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>.rowAtPoint(e.getPoint());</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                    <span class="keywordtype">int</span> columna = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>.columnAtPoint(e.getPoint());</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                    <span class="keywordflow">if</span> (fila == 0){</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>                        String text = valores.get(columna);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>                        text = <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a401b83ce29538d6ba93c70378668261c">getMessage</a>(text, 600);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>                        JOptionPane.showMessageDialog(<span class="keyword">null</span>, text);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>                    }</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>                }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>            }</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        };</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">tabla</a>.addMouseListener(mouseListener);</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            URL url = <span class="keyword">new</span> URL(<a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#adc9b2dc38be695613629946116246252">path</a>);</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            BufferedImage image = ImageIO.read(url);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>            <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#aca6699394ec078fe7a9fbb4ee52e3085">label</a>.setIcon(<span class="keyword">new</span> ImageIcon(image));</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        } <span class="keywordflow">catch</span> (Exception e) {</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>            System.out.println(e);</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>        }</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    }</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a8acae067db0f2641c5e050a372e731c7">  206</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a8acae067db0f2641c5e050a372e731c7">showWindow</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) {</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a> = <span class="keyword">new</span> JFrame(<span class="stringliteral">&quot;Sistema Recomanador&quot;</span>);</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>.setContentPane(this.panel);</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>.pack();</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>.setBounds(x,y,750,750);</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>.setResizable(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">frame</a>.setVisible(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    }</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>}</div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html">FONTS.src.domini.controladors.ControladorPresentacion</a></div><div class="ttdoc">Clase que implementa el controlador de presentacion.</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00012">ControladorPresentacion.java:12</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a4c24481d2982c3725a0c9feced6b3da7"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a4c24481d2982c3725a0c9feced6b3da7">FONTS.src.domini.controladors.ControladorPresentacion.getValoration</a></div><div class="ttdeci">String getValoration(String id)</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00394">ControladorPresentacion.java:394</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a6415c3e64068380c5fe6ec7c97a1c4da"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a6415c3e64068380c5fe6ec7c97a1c4da">FONTS.src.domini.controladors.ControladorPresentacion.getAtributos</a></div><div class="ttdeci">ArrayList&lt; String &gt; getAtributos()</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00502">ControladorPresentacion.java:502</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a8a4e192022f0711b897fc46cea6711dc"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a8a4e192022f0711b897fc46cea6711dc">FONTS.src.domini.controladors.ControladorPresentacion.SetValoration</a></div><div class="ttdeci">void SetValoration(String id, String nv)</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00556">ControladorPresentacion.java:556</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a9c2d0bdcbf8c0d50e60e5307fe7aeba8"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a9c2d0bdcbf8c0d50e60e5307fe7aeba8">FONTS.src.domini.controladors.ControladorPresentacion.inicializePresentation</a></div><div class="ttdeci">static void inicializePresentation(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00039">ControladorPresentacion.java:39</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_ae54204780950bf49e6ee58a584e902d0"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ae54204780950bf49e6ee58a584e902d0">FONTS.src.domini.controladors.ControladorPresentacion.getInstance</a></div><div class="ttdeci">static ControladorPresentacion getInstance()</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00031">ControladorPresentacion.java:31</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_af03a717f2294250f52e2cf7c1ac19649"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#af03a717f2294250f52e2cf7c1ac19649">FONTS.src.domini.controladors.ControladorPresentacion.getValors</a></div><div class="ttdeci">ArrayList&lt; String &gt; getValors()</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00530">ControladorPresentacion.java:530</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo_html"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html">FONTS.src.presentacion.showAtributes.MiModelo</a></div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00073">showAtributes.java:74</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo_html_a19c917ed6d01e4f6887fa6179620d0cc"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html#a19c917ed6d01e4f6887fa6179620d0cc">FONTS.src.presentacion.showAtributes.MiModelo.MiModelo</a></div><div class="ttdeci">MiModelo(Object[][] o, Object[] toArray)</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00075">showAtributes.java:75</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo_html_affbaeb1a8da64d4028d324263118a4f6"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_1_1_mi_modelo.html#affbaeb1a8da64d4028d324263118a4f6">FONTS.src.presentacion.showAtributes.MiModelo.isCellEditable</a></div><div class="ttdeci">boolean isCellEditable(int row, int column)</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00079">showAtributes.java:79</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html">FONTS.src.presentacion.showAtributes</a></div><div class="ttdoc">Clase que implementa la vista donde salen los atributos del item seleccionado.</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00020">showAtributes.java:20</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_a06a29beb5966f022b3f77f81bdaa00b7"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a06a29beb5966f022b3f77f81bdaa00b7">FONTS.src.presentacion.showAtributes.backButton</a></div><div class="ttdeci">JButton backButton</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00035">showAtributes.java:35</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_a131c87e4ca0e6d93666c9fd3c7bb4bf1"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a131c87e4ca0e6d93666c9fd3c7bb4bf1">FONTS.src.presentacion.showAtributes.valoration</a></div><div class="ttdeci">JLabel valoration</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00048">showAtributes.java:48</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_a1769b663db8868e6c0f045d06e6272f6"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a1769b663db8868e6c0f045d06e6272f6">FONTS.src.presentacion.showAtributes.panel</a></div><div class="ttdeci">JPanel panel</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00040">showAtributes.java:40</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_a401b83ce29538d6ba93c70378668261c"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a401b83ce29538d6ba93c70378668261c">FONTS.src.presentacion.showAtributes.getMessage</a></div><div class="ttdeci">static String getMessage(String message, int maxDialogWidth)</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00092">showAtributes.java:92</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_a6357389519e533ab1e21612c4958dd41"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a6357389519e533ab1e21612c4958dd41">FONTS.src.presentacion.showAtributes.frame</a></div><div class="ttdeci">static JFrame frame</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00030">showAtributes.java:30</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_a71e9e07cfcd1b7fd0867e4f3af2e172d"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a71e9e07cfcd1b7fd0867e4f3af2e172d">FONTS.src.presentacion.showAtributes.showAtributes</a></div><div class="ttdeci">showAtributes(String id)</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00108">showAtributes.java:108</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_a8acae067db0f2641c5e050a372e731c7"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a8acae067db0f2641c5e050a372e731c7">FONTS.src.presentacion.showAtributes.showWindow</a></div><div class="ttdeci">void showWindow(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00206">showAtributes.java:206</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_a9c4e11f9d752581760f6719fefa479b0"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#a9c4e11f9d752581760f6719fefa479b0">FONTS.src.presentacion.showAtributes.item</a></div><div class="ttdeci">JLabel item</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00052">showAtributes.java:52</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_ab66aee65be26116bb3174a5d8ee01006"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ab66aee65be26116bb3174a5d8ee01006">FONTS.src.presentacion.showAtributes.valorate</a></div><div class="ttdeci">JButton valorate</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00044">showAtributes.java:44</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_aca6699394ec078fe7a9fbb4ee52e3085"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#aca6699394ec078fe7a9fbb4ee52e3085">FONTS.src.presentacion.showAtributes.label</a></div><div class="ttdeci">JLabel label</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00064">showAtributes.java:64</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_adc9b2dc38be695613629946116246252"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#adc9b2dc38be695613629946116246252">FONTS.src.presentacion.showAtributes.path</a></div><div class="ttdeci">String path</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00068">showAtributes.java:68</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_ae6e333496a0469cc47ae526ce73e8b86"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#ae6e333496a0469cc47ae526ce73e8b86">FONTS.src.presentacion.showAtributes.scrollPane</a></div><div class="ttdeci">JScrollPane scrollPane</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00056">showAtributes.java:56</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes_html_afccb7b15cd89b7291bf6eeedf2f6e0e6"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1show_atributes.html#afccb7b15cd89b7291bf6eeedf2f6e0e6">FONTS.src.presentacion.showAtributes.tabla</a></div><div class="ttdeci">JTable tabla</div><div class="ttdef"><b>Definition:</b> <a href="show_atributes_8java_source.html#l00060">showAtributes.java:60</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_f7d55145574df07e1e9509e99fbbbacb.html">GITLAB</a></li><li class="navelem"><a class="el" href="dir_bb5ce562aa92ac647a2c4fbed523512b.html">subgrup-prop6-3</a></li><li class="navelem"><a class="el" href="dir_82b84c904ae0922c131f0e0a81ce8f10.html">FONTS</a></li><li class="navelem"><a class="el" href="dir_cf9e26e91ef7fe647034679e37397453.html">src</a></li><li class="navelem"><a class="el" href="dir_8a97b5b6a1099229ba18f93fb7da3d5a.html">presentacion</a></li><li class="navelem"><a class="el" href="show_atributes_8java.html">showAtributes.java</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
+</body>
+</html>

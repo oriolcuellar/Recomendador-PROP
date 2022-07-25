@@ -1,0 +1,4 @@
+var class_f_o_n_t_s_1_1src_1_1domini_1_1exceptions_1_1_empty_last_recomendation_exception =
+[
+    [ "EmptyLastRecomendationException", "class_f_o_n_t_s_1_1src_1_1domini_1_1exceptions_1_1_empty_last_recomendation_exception.html#a51c54bcf1fb6a2eb3da80b52944e2cd7", null ]
+];

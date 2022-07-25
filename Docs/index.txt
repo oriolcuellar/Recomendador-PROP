@@ -1,4 +1,4 @@
 /Doxygen:
-    Documentacion del proyecto (JavaDoc).
+    Documentacion del proyecto (JavaDoc, Abrir index.html para ver la documentacion).
 /Entrega 3:
     Manual de Uso y juegos de pruebas.

@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.9.2"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>SISTEMA RECOMENADOR: Fichero Fuente GITLAB/subgrup-prop6-3/FONTS/src/presentacion/ProfileView.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="Captura de pantalla 2021-11-19 083324 (2).png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">SISTEMA RECOMENADOR<span id="projectnumber">&#160;0.1</span>
+   </div>
+   <div id="projectbrief">GRUP 6.3:  Roberto Amat, Marc Camarillas, Oriol Cuéllar, Jordi Olmo</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.9.2 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search",'Buscar','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('_profile_view_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle"><div class="title">ProfileView.java</div></div>
+</div><!--header-->
+<div class="contents">
+<a href="_profile_view_8java.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">package </span>FONTS.src.presentacion;</div>
+<div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
+<div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">import</span> FONTS.src.domini.controladors.ControladorPresentacion;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">import</span> javax.swing.*;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">import</span> java.awt.event.ActionEvent;</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">import</span> java.awt.event.ActionListener;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html">   12</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html">ProfileView</a> {</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <a class="code hl_class" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html">ControladorPresentacion</a> CtrlPres = <a class="code hl_class" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html">ControladorPresentacion</a>.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ae54204780950bf49e6ee58a584e902d0">getInstance</a>();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">   20</a></span>    <span class="keyword">private</span> <span class="keyword">static</span> JFrame <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a59ab282cf21580aeb716ccc76ca8e88e">   24</a></span>    <span class="keyword">private</span> JPanel <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a59ab282cf21580aeb716ccc76ca8e88e">panel</a>;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#ad762bc6199352b0450966f32276b561b">   25</a></span>    <span class="keyword">private</span> JLabel <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#ad762bc6199352b0450966f32276b561b">id</a>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a1e57d3b4052beb5b273d98482a9c5d6c">   29</a></span>    <span class="keyword">private</span> JButton <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a1e57d3b4052beb5b273d98482a9c5d6c">logoutButton</a>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#acde0221982d7f068b2a1a0a52f261eb0">   33</a></span>    <span class="keyword">private</span> JButton <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#acde0221982d7f068b2a1a0a52f261eb0">backButton</a>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a01012c24b15c0a56299ee3a892af765d">   37</a></span>    <span class="keyword">private</span> JButton <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a01012c24b15c0a56299ee3a892af765d">statsButton</a>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5966a36acf7c01857d70aec5fa04c53e">   41</a></span>    <span class="keyword">private</span> JButton <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5966a36acf7c01857d70aec5fa04c53e">changePasswordButton</a>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7f33d10af547ac193025f8b801883f32">   45</a></span>    <span class="keyword">private</span> JButton <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7f33d10af547ac193025f8b801883f32">deleteProfileButton</a>;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a9f14101952a241ad0478a86f6aa2645d">   50</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a9f14101952a241ad0478a86f6aa2645d">ProfileView</a>(){</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        Integer userID = CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a55223f526ff098427c08db4eee397f9a">getActualUserId</a>();</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        String s = userID.toString();</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>        <span class="keywordtype">id</span>.setText(s);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>        <span class="keywordflow">if</span>(CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ae8b85b7bce292d0b98c5dbbbe0cef7ae">isAdmin</a>()){</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>            <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a01012c24b15c0a56299ee3a892af765d">statsButton</a>.setVisible(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>            <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7f33d10af547ac193025f8b801883f32">deleteProfileButton</a>.setVisible(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        }</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a1e57d3b4052beb5b273d98482a9c5d6c">logoutButton</a>.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            @Override</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent actionEvent) {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7fbf36b099d0cdde7fe6cc24bc3064a9">disableButtons</a>();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                    <span class="keywordflow">if</span>(CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ae8b85b7bce292d0b98c5dbbbe0cef7ae">isAdmin</a>()) {</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                        <span class="keywordtype">int</span> input = JOptionPane.showConfirmDialog(<span class="keyword">null</span>, <span class="stringliteral">&quot;Do you want to save the changes?&quot;</span>, <span class="stringliteral">&quot;Choose&quot;</span>,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                                JOptionPane.OK_CANCEL_OPTION);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                        <span class="keywordflow">if</span> (input == 0) {</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                            CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#aad9c4296a27bc88edb8622c46c2dc873">saveAll</a>();</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                        }</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                        CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ac633c9b9d8e496b68c66f74811406570">saveRatings</a>();</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                    }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                    <span class="keywordtype">int</span> x = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.getX();</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                    <span class="keywordtype">int</span> y = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.getY();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                    CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a80a127b573ef27a4cd849d4e5e218610">logout</a>();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                    CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ab3a07a4856c9bddda4d1b241ed49e1b0">changeLogInView</a>(x,y);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                    <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.dispose();</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                } <span class="keywordflow">catch</span> (Exception e) {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                    e.printStackTrace();</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            }</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>        });</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5966a36acf7c01857d70aec5fa04c53e">changePasswordButton</a>.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            @Override</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent actionEvent) {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>                <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7fbf36b099d0cdde7fe6cc24bc3064a9">disableButtons</a>();</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                    String password1 = JOptionPane.showInputDialog(<span class="keyword">null</span>,</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                            <span class="stringliteral">&quot;Write the password&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                    String password2 = JOptionPane.showInputDialog(<span class="keyword">null</span>,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                            <span class="stringliteral">&quot;Repeat the password&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                    <span class="keywordflow">if</span>(password1.equals(password2)) CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a7b9bf27500054c8fcd5ef67b5fce4a2c">editProfile</a>(password1);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>                    <span class="keywordflow">else</span> JOptionPane.showMessageDialog(<span class="keyword">null</span>, <span class="stringliteral">&quot;The password does not match&quot;</span>);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>                } <span class="keywordflow">catch</span> (Exception e) {</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>                    JOptionPane.showMessageDialog(<span class="keyword">null</span>,<span class="stringliteral">&quot;Error: Repeat the process&quot;</span>);</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>                    e.printStackTrace();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>                }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>                <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            }</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        });</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7f33d10af547ac193025f8b801883f32">deleteProfileButton</a>.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            @Override</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent actionEvent) {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7fbf36b099d0cdde7fe6cc24bc3064a9">disableButtons</a>();</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    String userDeleted = JOptionPane.showInputDialog(<span class="keyword">null</span>,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                            <span class="stringliteral">&quot;Write CONFIRM to delete the profile\n Be sure all your data will be deleted&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                   System.out.println(userDeleted);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                    <span class="keywordflow">if</span>(userDeleted.equals(<span class="stringliteral">&quot;CONFIRM&quot;</span>)) {</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                        CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ab2cd1a697e5757b58f8ff826d84d6c1b">deleteUser</a>(CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a55223f526ff098427c08db4eee397f9a">getActualUserId</a>().toString());</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                        CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a80a127b573ef27a4cd849d4e5e218610">logout</a>();</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                        <span class="keywordtype">int</span> x = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.getX();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                        <span class="keywordtype">int</span> y = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.getY();</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                        CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ab3a07a4856c9bddda4d1b241ed49e1b0">changeLogInView</a>(x,y);</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.dispose();</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                    }</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                    <span class="keywordflow">else</span> JOptionPane.showMessageDialog(<span class="keyword">null</span>,<span class="stringliteral">&quot;The profile was not deleted&quot;</span>);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                } <span class="keywordflow">catch</span> (Exception e) {</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    JOptionPane.showMessageDialog(<span class="keyword">null</span>, e);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                    e.printStackTrace();</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>                }</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>                <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        });</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a01012c24b15c0a56299ee3a892af765d">statsButton</a>.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            @Override</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent actionEvent) {</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>                <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7fbf36b099d0cdde7fe6cc24bc3064a9">disableButtons</a>();</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>                    <span class="keywordtype">int</span> x = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.getX();</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>                    <span class="keywordtype">int</span> y = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.getY();</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>                    CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a83e59b0b1c4109c2ff10a75b571249a7">changeStatsView</a>(x,y);</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>                    <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.dispose();</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>                } <span class="keywordflow">catch</span> (Exception e) {</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>                    e.printStackTrace();</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>                }</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>                <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>            }</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        });</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#acde0221982d7f068b2a1a0a52f261eb0">backButton</a>.addActionListener(<span class="keyword">new</span> ActionListener() {</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            @Override</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keyword">public</span> <span class="keywordtype">void</span> actionPerformed(ActionEvent actionEvent) {</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                <span class="keywordflow">try</span> {</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7fbf36b099d0cdde7fe6cc24bc3064a9">disableButtons</a>();</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                    <span class="keywordtype">int</span> x = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.getX();</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                    <span class="keywordtype">int</span> y = <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.getY();</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                    <span class="keywordflow">if</span>(CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ae8b85b7bce292d0b98c5dbbbe0cef7ae">isAdmin</a>()) CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a41a4ab72585b70d711fd818dc418f198">changeAdminMainView</a>(x,y);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                    <span class="keywordflow">else</span> CtrlPres.<a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a9c2d0bdcbf8c0d50e60e5307fe7aeba8">inicializePresentation</a>(x,y);</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>                    <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.dispose();</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>                } <span class="keywordflow">catch</span> (Exception e) {</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>                    <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>                    e.printStackTrace();</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                }</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            }</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        });</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    }</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a729c1081e66b745cc57a348ceced3303">  170</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a729c1081e66b745cc57a348ceced3303">showWindow</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y) {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>        <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a> = <span class="keyword">new</span> JFrame(<span class="stringliteral">&quot;Sistema Recomanador&quot;</span>);</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.setContentPane(this.panel);</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.pack();</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.setBounds(x,y,600,600);</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.setResizable(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">frame</a>.setVisible(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    }</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7fbf36b099d0cdde7fe6cc24bc3064a9">  183</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7fbf36b099d0cdde7fe6cc24bc3064a9">disableButtons</a>() {</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a1e57d3b4052beb5b273d98482a9c5d6c">logoutButton</a>.setEnabled(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#acde0221982d7f068b2a1a0a52f261eb0">backButton</a>.setEnabled(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a01012c24b15c0a56299ee3a892af765d">statsButton</a>.setEnabled(<span class="keyword">false</span>);</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    }</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">  191</a></span>    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">enableButtons</a>() {</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a1e57d3b4052beb5b273d98482a9c5d6c">logoutButton</a>.setEnabled(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#acde0221982d7f068b2a1a0a52f261eb0">backButton</a>.setEnabled(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        <a class="code hl_variable" href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a01012c24b15c0a56299ee3a892af765d">statsButton</a>.setEnabled(<span class="keyword">true</span>);</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    }</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>}</div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html">FONTS.src.domini.controladors.ControladorPresentacion</a></div><div class="ttdoc">Clase que implementa el controlador de presentacion.</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00012">ControladorPresentacion.java:12</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a41a4ab72585b70d711fd818dc418f198"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a41a4ab72585b70d711fd818dc418f198">FONTS.src.domini.controladors.ControladorPresentacion.changeAdminMainView</a></div><div class="ttdeci">static void changeAdminMainView(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00084">ControladorPresentacion.java:84</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a55223f526ff098427c08db4eee397f9a"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a55223f526ff098427c08db4eee397f9a">FONTS.src.domini.controladors.ControladorPresentacion.getActualUserId</a></div><div class="ttdeci">Integer getActualUserId()</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00382">ControladorPresentacion.java:382</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a7b9bf27500054c8fcd5ef67b5fce4a2c"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a7b9bf27500054c8fcd5ef67b5fce4a2c">FONTS.src.domini.controladors.ControladorPresentacion.editProfile</a></div><div class="ttdeci">void editProfile(String password)</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00301">ControladorPresentacion.java:301</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a80a127b573ef27a4cd849d4e5e218610"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a80a127b573ef27a4cd849d4e5e218610">FONTS.src.domini.controladors.ControladorPresentacion.logout</a></div><div class="ttdeci">void logout()</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00318">ControladorPresentacion.java:318</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a83e59b0b1c4109c2ff10a75b571249a7"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a83e59b0b1c4109c2ff10a75b571249a7">FONTS.src.domini.controladors.ControladorPresentacion.changeStatsView</a></div><div class="ttdeci">static void changeStatsView(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00109">ControladorPresentacion.java:109</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_a9c2d0bdcbf8c0d50e60e5307fe7aeba8"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#a9c2d0bdcbf8c0d50e60e5307fe7aeba8">FONTS.src.domini.controladors.ControladorPresentacion.inicializePresentation</a></div><div class="ttdeci">static void inicializePresentation(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00039">ControladorPresentacion.java:39</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_aad9c4296a27bc88edb8622c46c2dc873"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#aad9c4296a27bc88edb8622c46c2dc873">FONTS.src.domini.controladors.ControladorPresentacion.saveAll</a></div><div class="ttdeci">void saveAll()</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00445">ControladorPresentacion.java:445</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_ab2cd1a697e5757b58f8ff826d84d6c1b"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ab2cd1a697e5757b58f8ff826d84d6c1b">FONTS.src.domini.controladors.ControladorPresentacion.deleteUser</a></div><div class="ttdeci">void deleteUser(String id)</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00492">ControladorPresentacion.java:492</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_ab3a07a4856c9bddda4d1b241ed49e1b0"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ab3a07a4856c9bddda4d1b241ed49e1b0">FONTS.src.domini.controladors.ControladorPresentacion.changeLogInView</a></div><div class="ttdeci">static void changeLogInView(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00092">ControladorPresentacion.java:92</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_ac633c9b9d8e496b68c66f74811406570"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ac633c9b9d8e496b68c66f74811406570">FONTS.src.domini.controladors.ControladorPresentacion.saveRatings</a></div><div class="ttdeci">void saveRatings()</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00468">ControladorPresentacion.java:468</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_ae54204780950bf49e6ee58a584e902d0"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ae54204780950bf49e6ee58a584e902d0">FONTS.src.domini.controladors.ControladorPresentacion.getInstance</a></div><div class="ttdeci">static ControladorPresentacion getInstance()</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00031">ControladorPresentacion.java:31</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion_html_ae8b85b7bce292d0b98c5dbbbe0cef7ae"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1domini_1_1controladors_1_1_controlador_presentacion.html#ae8b85b7bce292d0b98c5dbbbe0cef7ae">FONTS.src.domini.controladors.ControladorPresentacion.isAdmin</a></div><div class="ttdeci">boolean isAdmin()</div><div class="ttdef"><b>Definition:</b> <a href="_controlador_presentacion_8java_source.html#l00312">ControladorPresentacion.java:312</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html">FONTS.src.presentacion.ProfileView</a></div><div class="ttdoc">Clase que implementa la vista del perfil de un usuario o administrador.</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00012">ProfileView.java:12</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a01012c24b15c0a56299ee3a892af765d"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a01012c24b15c0a56299ee3a892af765d">FONTS.src.presentacion.ProfileView.statsButton</a></div><div class="ttdeci">JButton statsButton</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00037">ProfileView.java:37</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a1e57d3b4052beb5b273d98482a9c5d6c"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a1e57d3b4052beb5b273d98482a9c5d6c">FONTS.src.presentacion.ProfileView.logoutButton</a></div><div class="ttdeci">JButton logoutButton</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00029">ProfileView.java:29</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a2195f21f66521e978fa688250ba3b466"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a2195f21f66521e978fa688250ba3b466">FONTS.src.presentacion.ProfileView.enableButtons</a></div><div class="ttdeci">void enableButtons()</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00191">ProfileView.java:191</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a5966a36acf7c01857d70aec5fa04c53e"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5966a36acf7c01857d70aec5fa04c53e">FONTS.src.presentacion.ProfileView.changePasswordButton</a></div><div class="ttdeci">JButton changePasswordButton</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00041">ProfileView.java:41</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a59ab282cf21580aeb716ccc76ca8e88e"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a59ab282cf21580aeb716ccc76ca8e88e">FONTS.src.presentacion.ProfileView.panel</a></div><div class="ttdeci">JPanel panel</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00024">ProfileView.java:24</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a5b083b97c849d77c15c8fd7108d49f41"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a5b083b97c849d77c15c8fd7108d49f41">FONTS.src.presentacion.ProfileView.frame</a></div><div class="ttdeci">static JFrame frame</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00020">ProfileView.java:20</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a729c1081e66b745cc57a348ceced3303"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a729c1081e66b745cc57a348ceced3303">FONTS.src.presentacion.ProfileView.showWindow</a></div><div class="ttdeci">void showWindow(int x, int y)</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00170">ProfileView.java:170</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a7f33d10af547ac193025f8b801883f32"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7f33d10af547ac193025f8b801883f32">FONTS.src.presentacion.ProfileView.deleteProfileButton</a></div><div class="ttdeci">JButton deleteProfileButton</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00045">ProfileView.java:45</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a7fbf36b099d0cdde7fe6cc24bc3064a9"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a7fbf36b099d0cdde7fe6cc24bc3064a9">FONTS.src.presentacion.ProfileView.disableButtons</a></div><div class="ttdeci">void disableButtons()</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00183">ProfileView.java:183</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_a9f14101952a241ad0478a86f6aa2645d"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#a9f14101952a241ad0478a86f6aa2645d">FONTS.src.presentacion.ProfileView.ProfileView</a></div><div class="ttdeci">ProfileView()</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00050">ProfileView.java:50</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_acde0221982d7f068b2a1a0a52f261eb0"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#acde0221982d7f068b2a1a0a52f261eb0">FONTS.src.presentacion.ProfileView.backButton</a></div><div class="ttdeci">JButton backButton</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00033">ProfileView.java:33</a></div></div>
+<div class="ttc" id="aclass_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view_html_ad762bc6199352b0450966f32276b561b"><div class="ttname"><a href="class_f_o_n_t_s_1_1src_1_1presentacion_1_1_profile_view.html#ad762bc6199352b0450966f32276b561b">FONTS.src.presentacion.ProfileView.id</a></div><div class="ttdeci">JLabel id</div><div class="ttdef"><b>Definition:</b> <a href="_profile_view_8java_source.html#l00025">ProfileView.java:25</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_f7d55145574df07e1e9509e99fbbbacb.html">GITLAB</a></li><li class="navelem"><a class="el" href="dir_bb5ce562aa92ac647a2c4fbed523512b.html">subgrup-prop6-3</a></li><li class="navelem"><a class="el" href="dir_82b84c904ae0922c131f0e0a81ce8f10.html">FONTS</a></li><li class="navelem"><a class="el" href="dir_cf9e26e91ef7fe647034679e37397453.html">src</a></li><li class="navelem"><a class="el" href="dir_8a97b5b6a1099229ba18f93fb7da3d5a.html">presentacion</a></li><li class="navelem"><a class="el" href="_profile_view_8java.html">ProfileView.java</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.2 </li>
+  </ul>
+</div>
+</body>
+</html>

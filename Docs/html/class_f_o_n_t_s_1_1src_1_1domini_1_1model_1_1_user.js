@@ -1,0 +1,26 @@
+var class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user =
+[
+    [ "User", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a71dd6fe9e670d059d3ec51554d20e985", null ],
+    [ "User", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#af918899f8caeb6c31c24a05f0c0e8d80", null ],
+    [ "User", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a84fdc4b06f31ca94cf4ccdf505025596", null ],
+    [ "addvaloratedItem", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a8c2459530a5e3f3f2e0975eb5cb81876", null ],
+    [ "calculateSimilarity", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#ae4909215d55b8bde26bbf23b44904d46", null ],
+    [ "getNumCluster", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a14fd0b85555f5c246ae8803966174cab", null ],
+    [ "getPassword", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a860c219902fe595eb888d2b3171a1b94", null ],
+    [ "getRol", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a6954bb02fd63abd2206c9b5cf15e9f95", null ],
+    [ "getUserID", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a26c19b7ebd8d6efa0ea5bfb8345574dd", null ],
+    [ "getValoratedItems", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#ab3c51e67bbb774990a8e9abdf4e9455f", null ],
+    [ "intersection", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#aba841d26117f8ec8fe0af7855cfe0cba", null ],
+    [ "printUsedItems", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#af2a7f751d5299aa4e538c75b4e1254bf", null ],
+    [ "searchUsedItem", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a61d484847c9007f564e70de3e7059dd0", null ],
+    [ "setNumCluster", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#addd523a6532066843f68090f15dbfd6a", null ],
+    [ "setPassword", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a10e5836fb45d17b1a047a2b1113de08d", null ],
+    [ "setRol", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a6d79be9d9b0fdf6a344a63069ccff00d", null ],
+    [ "setUserID", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#aa563c29c17532f8583bd921e5ecf1813", null ],
+    [ "setValoratedItems", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a8709c2341b7cd94c03154eca5e5779ab", null ],
+    [ "numCluster", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a8a3dc5a91fce716b46da795d981dcce0", null ],
+    [ "password", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a4d678dfa879e7597304ba0a40b720bc7", null ],
+    [ "Rol", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#aacf7f5c9f517c29e21824a40c2746744", null ],
+    [ "userID", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#acb93717d8d823d2d7e369f076c74fdff", null ],
+    [ "valoratedItems", "class_f_o_n_t_s_1_1src_1_1domini_1_1model_1_1_user.html#a5b7b6cfbdbf5713bb1f48c6b221c402e", null ]
+];
